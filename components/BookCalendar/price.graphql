@@ -1,0 +1,3 @@
+query Price($from: String, $to: String) {
+  price(from: $from, to: $to)
+}
