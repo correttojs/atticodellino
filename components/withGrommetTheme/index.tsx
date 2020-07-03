@@ -51,6 +51,7 @@ export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
     }
   }, []);
   if (!props.global ?? global) {
+    console.log(props);
     return null;
   }
   return (
