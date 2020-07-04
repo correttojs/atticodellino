@@ -72,7 +72,7 @@ export type MutationBookArgs = {
 
 export type Query = {
    __typename?: 'Query';
-  price?: Maybe<Scalars['Int']>;
+  price?: Maybe<Scalars['Float']>;
   reviews?: Maybe<Array<Maybe<ReviewType>>>;
   calendar?: Maybe<Array<Maybe<Calendar>>>;
 };

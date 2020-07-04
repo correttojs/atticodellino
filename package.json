@@ -8,7 +8,7 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "gen": "graphql-codegen --config codegen.yml"
+    "codegen": "node codegen"
   },
   "keywords": [],
   "author": "",
@@ -53,6 +53,7 @@
   "devDependencies": {
     "@graphql-codegen/introspection": "1.13.1",
     "@graphql-codegen/typescript": "1.13.1",
+    "@graphql-codegen/typescript-graphql-request": "^1.16.0",
     "@graphql-codegen/typescript-operations": "1.13.1",
     "@graphql-codegen/typescript-react-apollo": "1.13.1",
     "@svgr/webpack": "^5.4.0",
@@ -60,6 +61,7 @@
     "@types/react": "^16.9.35",
     "@types/styled-components": "^5.1.0",
     "babel-plugin-styled-components": "^1.10.7",
+    "dotenv": "^8.2.0",
     "prettier": "^2.0.5",
     "typescript": "^3.9.5"
   }

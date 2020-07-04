@@ -1,0 +1,10 @@
+query Faqs {
+  getFaqList {
+    items {
+      repeater {
+        answerEn
+        questionEn
+      }
+    }
+  }
+}
