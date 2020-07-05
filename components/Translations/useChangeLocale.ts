@@ -4,11 +4,15 @@ import { GlobalType } from "../graphql/airbnDetail";
 import { LOCALES, ALL_LOCALES } from "./translations";
 
 export const splitPath = (pathname: string) =>
-  pathname.split("/").filter(i => !!i);
+  pathname.split("/").filter((i) => !!i);
 
 export const getPathLocale = (pathname: string) => {
   const paths = splitPath(pathname);
   return ALL_LOCALES.includes(paths[0]) ? paths[0] : LOCALES.en;
+};
+
+const routeMapper = (url) => {
+  return /garda/.test(url) ? "/[lang]/garda" : "/[lang]";
 };
 
 export const useChangeLocale = () => {
@@ -32,15 +36,18 @@ export const useChangeLocale = () => {
         let newPath = "";
         if (currentLang === LOCALES.en) {
           newPath = `/${paths.slice(1).join("/")}`; // to EN => remove /lang
+          push(newPath);
+          return;
         } else if (lang === LOCALES.en) {
           newPath = `/${[currentLang, ...paths].join("/")}`; // from EN => add /lang
         } else {
           newPath = `/${[currentLang, ...paths.slice(1)].join("/")}`; // other langs
         }
-        push(newPath);
+        console.log(routeMapper(newPath), newPath);
+        push(routeMapper(newPath), newPath);
       }
     },
 
-    apartmentLink: `/${link.join("/")}`
+    apartmentLink: `/${link.join("/")}`,
   };
 };
