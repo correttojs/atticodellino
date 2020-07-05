@@ -1,10 +1,17 @@
-query Faqs {
-  getFaqList {
+query Faqs($apartment: String!, $lang: String!) {
+  getFaqList(
+    where: {
+      AND: [
+        { apartment: { key: { match: $apartment } } }
+        { language: { code: { match: $lang } } }
+      ]
+    }
+  ) {
     items {
-      repeater {
-        answerEn
-        questionEn
-      }
+      answer
+      question
+
+      linkVideo
     }
   }
 }

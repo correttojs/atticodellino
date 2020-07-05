@@ -12,4 +12,4 @@ export async function getStaticPaths() {
   };
 }
 
-export default withGrommetTheme({ apartment: "GARDA", lang: "en" })(Register);
+export default withGrommetTheme({ apartment: "VR", lang: "en" })(Register);

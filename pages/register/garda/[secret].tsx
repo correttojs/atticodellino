@@ -1,5 +1,5 @@
-import { withGrommetTheme } from "../components/withGrommetTheme";
-import { Register } from "../components/Register/Register";
+import { withGrommetTheme } from "../../../components/withGrommetTheme";
+import { Register } from "../../../components/Register/Register";
 
 export async function getStaticProps(ctx) {
   return { props: {} };

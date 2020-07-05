@@ -18,8 +18,7 @@ export async function getStaticProps() {
   );
 
   const sdk = getSdk(graphQLClient);
-  const data = await sdk.Faqs();
-  console.log(data);
+  const data = await sdk.Faqs({ lang: "en", apartment: "VR" });
 
   return {
     props: { global: { apartment: "VR", lang: "en" }, data: data },
@@ -31,7 +30,7 @@ const Faq: NextPage<{ data: FaqsQuery; global: GlobalType }> = ({ data }) => {
 
   return (
     <Box>
-      {data.getFaqList.items[0].repeater.map((item, i) => (
+      {data.getFaqList.items.map((item, i) => (
         <Box
           margin="medium"
           style={{ marginTop: "-80px", paddingTop: "80px" }}
@@ -49,10 +48,10 @@ const Faq: NextPage<{ data: FaqsQuery; global: GlobalType }> = ({ data }) => {
               }, 2000);
             }}
           >
-            {item.questionEn}
+            {item.question}
             {copied[i] && <span style={{ color: "red" }}> copied</span>}
           </h3>
-          <p>{item.answerEn}</p>
+          <p>{item.answer}</p>
         </Box>
       ))}
     </Box>
