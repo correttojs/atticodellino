@@ -1,6 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import queryString from "query-string";
 import { pdp_listing_detail, Review, GlobalType } from "./airbnDetail";
+import { takeShapeGQLClient } from "../takeshape/takeShapeClient";
 
 const BASE_URL = process.env.AIRBNB_BASEURL;
 const LOCALE = "it";
@@ -37,6 +38,15 @@ export const getDetails = async (
   });
   console.log(url);
   const res: pdp_listing_detail = await fetch(url).then((r) => r.json());
-  res.global = { apartment, lang: locale };
+  const apartmentObj = await takeShapeGQLClient.Apartment({ key: apartment });
+
+  res.global = {
+    apartment,
+    lang: locale,
+    map: {
+      lat: apartmentObj.getApartmentList.items[0].latitude,
+      long: apartmentObj.getApartmentList.items[0].longitude,
+    },
+  };
   return res;
 };

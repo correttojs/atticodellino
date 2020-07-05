@@ -2,23 +2,12 @@ import { withGrommetTheme } from "../components/withGrommetTheme";
 import { NextPage } from "next";
 import { useState } from "react";
 import { Box } from "grommet";
-import { getSdk, FaqsQuery } from "../generated/graphql-takeshape";
-import { GraphQLClient } from "graphql-request";
 import { GlobalType } from "../components/graphql/airbnDetail";
+import { takeShapeGQLClient } from "../components/takeshape/takeShapeClient";
+import { FaqsQuery } from "../generated/graphql-takeshape";
 
 export async function getStaticProps() {
-  console.log(process.env.TAKESHAPE_API_KEY);
-  const graphQLClient = new GraphQLClient(
-    `https://api.takeshape.io/project/${process.env.TAKESHAPE_PROJECT}/graphql`,
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.TAKESHAPE_API_KEY}`,
-      },
-    }
-  );
-
-  const sdk = getSdk(graphQLClient);
-  const data = await sdk.Faqs({ lang: "en", apartment: "VR" });
+  const data = await takeShapeGQLClient.Faqs({ lang: "en", apartment: "VR" });
 
   return {
     props: { global: { apartment: "VR", lang: "en" }, data: data },

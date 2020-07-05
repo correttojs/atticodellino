@@ -16,7 +16,11 @@ export type Scalars = {
 export type Apartment = TsSearchable & {
    __typename?: 'Apartment';
   name?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
   _contentTypeId?: Maybe<Scalars['String']>;
@@ -68,7 +72,11 @@ export type ApartmentSearchResult = {
    __typename?: 'ApartmentSearchResult';
   searchSummary?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['String']>;
   _version?: Maybe<Scalars['Int']>;
   _contentTypeId?: Maybe<Scalars['String']>;
@@ -222,7 +230,11 @@ export type ContentStructureInput = {
 
 export type CreateApartmentInput = {
   name?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
   _contentTypeId?: Maybe<Scalars['String']>;
@@ -414,7 +426,11 @@ export type DeleteTsStaticSiteResult = {
 
 export type DuplicateApartmentInput = {
   name?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   _id: Scalars['ID'];
   _version?: Maybe<Scalars['Int']>;
   _contentTypeId?: Maybe<Scalars['String']>;
@@ -1510,13 +1526,20 @@ export type TsAndOperator = {
   answer?: Maybe<TsWhereString>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
 };
 
 export type TsApartmentAndOperator = {
   name?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
   key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _contentTypeId?: Maybe<TsWhereId>;
@@ -1532,7 +1555,11 @@ export type TsApartmentAndOperator = {
 
 export type TsApartmentNotOperator = {
   name?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
   key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _contentTypeId?: Maybe<TsWhereId>;
@@ -1545,7 +1572,11 @@ export type TsApartmentNotOperator = {
 
 export type TsApartmentOrOperator = {
   name?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
   key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _contentTypeId?: Maybe<TsWhereId>;
@@ -1925,8 +1956,11 @@ export type TsNotOperator = {
   answer?: Maybe<TsWhereString>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
 };
 
 export type TsOrOperator = {
@@ -1964,8 +1998,11 @@ export type TsOrOperator = {
   answer?: Maybe<TsWhereString>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
 };
 
 export type TsPathUsage = {
@@ -2441,7 +2478,11 @@ export type TsWebhooksInput = {
 
 export type TsWhereApartmentInput = {
   name?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
   key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _contentTypeId?: Maybe<TsWhereId>;
@@ -2457,7 +2498,11 @@ export type TsWhereApartmentInput = {
 
 export type TsWhereApartmentRelationship = {
   name?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
   key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _contentTypeId?: Maybe<TsWhereId>;
@@ -2570,8 +2615,11 @@ export type TsWhereInput = {
   answer?: Maybe<TsWhereString>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
 };
 
 export type TsWhereInteger = {
@@ -2709,7 +2757,11 @@ export type UndefinedReferencePaginatedList = {
 
 export type UpdateApartmentInput = {
   name?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   _id: Scalars['ID'];
   _version?: Maybe<Scalars['Int']>;
   _contentTypeId?: Maybe<Scalars['String']>;
@@ -3070,6 +3122,22 @@ export type WithContextSearchLanguageIndexArgs = {
   where?: Maybe<TsWhereLanguageInput>;
 };
 
+export type ApartmentQueryVariables = {
+  key: Scalars['String'];
+};
+
+
+export type ApartmentQuery = (
+  { __typename?: 'Root' }
+  & { getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'airBnb' | 'key' | 'latitude' | 'longitude' | 'name'>
+    )>>> }
+  )> }
+);
+
 export type FaqsQueryVariables = {
   apartment: Scalars['String'];
   lang: Scalars['String'];
@@ -3088,6 +3156,19 @@ export type FaqsQuery = (
 );
 
 
+export const ApartmentDocument = gql`
+    query Apartment($key: String!) {
+  getApartmentList(where: {key: {eq: $key}}) {
+    items {
+      airBnb
+      key
+      latitude
+      longitude
+      name
+    }
+  }
+}
+    `;
 export const FaqsDocument = gql`
     query Faqs($apartment: String!, $lang: String!) {
   getFaqList(where: {AND: [{apartment: {key: {match: $apartment}}}, {language: {code: {match: $lang}}}]}) {
@@ -3106,6 +3187,9 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    Apartment(variables: ApartmentQueryVariables): Promise<ApartmentQuery> {
+      return withWrapper(() => client.request<ApartmentQuery>(print(ApartmentDocument), variables));
+    },
     Faqs(variables: FaqsQueryVariables): Promise<FaqsQuery> {
       return withWrapper(() => client.request<FaqsQuery>(print(FaqsDocument), variables));
     }

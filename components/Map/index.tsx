@@ -5,18 +5,12 @@ import { useGlobal } from "../withGrommetTheme";
 import { useInView } from "react-intersection-observer";
 
 export const Map: React.FC<{ title: string }> = ({ title }) => {
-  const { apartment } = useGlobal();
+  const { map } = useGlobal();
   const [ref, inView] = useInView();
-  const { lat, lng } =
-    apartment === "GARDA"
-      ? {
-          lat: parseFloat(process.env.NEXT_PUBLIC_MAP_GARDA_LAT),
-          lng: parseFloat(process.env.NEXT_PUBLIC_MAP_GARDA_LON),
-        }
-      : {
-          lat: parseFloat(process.env.NEXT_PUBLIC_MAP_VR_LAT),
-          lng: parseFloat(process.env.NEXT_PUBLIC_MAP_VR_LON),
-        };
+  const { lat, lng } = {
+    lat: parseFloat(map.lat),
+    lng: parseFloat(map.long),
+  };
   return (
     // Important! Always set the container height explicitly
     <div ref={ref} style={{ height: "100vh", width: "100%" }}>
