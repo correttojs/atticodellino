@@ -1,16 +1,24 @@
-import { withGrommetTheme } from "../components/withGrommetTheme";
+import { withGrommetTheme } from "../../../components/withGrommetTheme";
 import { NextPage } from "next";
 import { useState } from "react";
 import { Box } from "grommet";
-import { GlobalType } from "../components/graphql/airbnDetail";
-import { takeShapeGQLClient } from "../components/takeshape/takeShapeClient";
-import { FaqsQuery } from "../generated/graphql-takeshape";
+import { GlobalType } from "../../../components/graphql/airbnDetail";
+import { takeShapeGQLClient } from "../../../components/takeshape/takeShapeClient";
+import { FaqsQuery } from "../../../generated/graphql-takeshape";
+import { getParams } from ".";
 
-export async function getStaticProps() {
-  const data = await takeShapeGQLClient.Faqs({ lang: "en", apartment: "VR" });
-
+export async function getStaticProps({ params }) {
+  params.apartment = params.apartment.toUpperCase();
+  const data = await takeShapeGQLClient.Faqs(params);
   return {
-    props: { global: { apartment: "VR", lang: "en" }, data: data },
+    props: { global: params, data: data },
+  };
+}
+
+export async function getStaticPaths() {
+  return {
+    paths: getParams({ secret: process.env.REGISTRATION_SUFFIX }),
+    fallback: true, // See the "fallback" section below
   };
 }
 
