@@ -12,15 +12,17 @@ export const getPathLocale = (pathname: string) => {
 };
 
 const routeMapper = (url) => {
-  return /garda/.test(url) ? "/[lang]/garda" : "/[lang]";
+  return url.replace(/garda|vr/, "[apartment]").replace(/en|it|de/, "[lang]");
 };
 
 export const useChangeLocale = () => {
-  const { pathname, push, ...r } = useRouter();
+  const { pathname, asPath, push, ...r } = useRouter();
   const { lang, setLang, apartment } = useGlobal();
-  const link: string[] = lang === LOCALES.en ? [] : [lang];
+  const link: string[] = [lang];
   if (apartment !== "GARDA") {
     link.push("garda");
+  } else {
+    link.push("vr");
   }
 
   return {
@@ -32,18 +34,13 @@ export const useChangeLocale = () => {
       }
 
       if (currentLang !== lang) {
-        const paths = splitPath(pathname);
-        let newPath = "";
-        if (currentLang === LOCALES.en) {
-          newPath = `/${paths.slice(1).join("/")}`; // to EN => remove /lang
-          push(newPath);
+        if (asPath === "/") {
+          const newPath = `/${currentLang}/vr`;
+          push(routeMapper(newPath), newPath);
           return;
-        } else if (lang === LOCALES.en) {
-          newPath = `/${[currentLang, ...paths].join("/")}`; // from EN => add /lang
-        } else {
-          newPath = `/${[currentLang, ...paths.slice(1)].join("/")}`; // other langs
         }
-        console.log(routeMapper(newPath), newPath);
+        const paths = splitPath(asPath);
+        const newPath = `/${[currentLang, ...paths.slice(1)].join("/")}`;
         push(routeMapper(newPath), newPath);
       }
     },
