@@ -45,6 +45,7 @@ export const useChangeLocale = () => {
       }
     },
 
+    homeLink: `/${[lang, apartment.toLowerCase()].join("/")}`,
     apartmentLink: `/${link.join("/")}`,
   };
 };

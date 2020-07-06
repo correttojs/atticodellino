@@ -67,7 +67,7 @@ const TitleStyle = styled.a`
 `;
 export const Header: React.FC = () => {
   const { apartment } = useGlobal();
-  const { changeLocale } = useChangeLocale();
+  const { changeLocale, homeLink } = useChangeLocale();
 
   const tile =
     apartment === "VR" ? "l'attico del Lino" : "l'attico del Lino Garda";
@@ -81,9 +81,7 @@ export const Header: React.FC = () => {
       gridArea="header"
       pad="medium"
     >
-      <TitleStyle href={apartment === "GARDA" ? "/garda" : "/"}>
-        {tile}
-      </TitleStyle>
+      <TitleStyle href={homeLink}>{tile}</TitleStyle>
       <Box direction="row">
         <StyledContacts>
           <Contacts />
