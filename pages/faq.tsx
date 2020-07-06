@@ -40,7 +40,7 @@ const Faq: NextPage<{ data: FaqsQuery; global: GlobalType }> = ({ data }) => {
             {item.question}
             {copied[i] && <span style={{ color: "red" }}> copied</span>}
           </h3>
-          <p>{item.answer}</p>
+          <p>{item.answer?.blocks?.[0]?.text}</p>
         </Box>
       ))}
     </Box>

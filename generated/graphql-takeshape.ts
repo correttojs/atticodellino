@@ -288,8 +288,8 @@ export type CreateAssetResult = {
 export type CreateFaqInput = {
   language?: Maybe<TsRelationshipInput>;
   linkVideo?: Maybe<Scalars['String']>;
-  question?: Maybe<Scalars['String']>;
-  answer?: Maybe<Scalars['String']>;
+  question: Scalars['String'];
+  answer: Scalars['JSON'];
   apartment?: Maybe<TsRelationshipInput>;
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
@@ -485,7 +485,7 @@ export type DuplicateFaqInput = {
   language?: Maybe<TsRelationshipInput>;
   linkVideo?: Maybe<Scalars['String']>;
   question?: Maybe<Scalars['String']>;
-  answer?: Maybe<Scalars['String']>;
+  answer?: Maybe<Scalars['JSON']>;
   apartment?: Maybe<TsRelationshipInput>;
   _id: Scalars['ID'];
   _version?: Maybe<Scalars['Int']>;
@@ -564,8 +564,9 @@ export type Faq = TsSearchable & {
    __typename?: 'Faq';
   language?: Maybe<Language>;
   linkVideo?: Maybe<Scalars['String']>;
-  question?: Maybe<Scalars['String']>;
-  answer?: Maybe<Scalars['String']>;
+  question: Scalars['String'];
+  answer: Scalars['JSON'];
+  answerHtml?: Maybe<Scalars['String']>;
   apartment?: Maybe<Apartment>;
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
@@ -591,6 +592,13 @@ export type FaqLanguageArgs = {
 };
 
 
+export type FaqAnswerHtmlArgs = {
+  imageConfig?: Maybe<Scalars['JSON']>;
+  images?: Maybe<TsImagesConfig>;
+  classPrefix?: Maybe<Scalars['String']>;
+};
+
+
 export type FaqApartmentArgs = {
   locale?: Maybe<Scalars['String']>;
   enableLocaleFallback?: Maybe<Scalars['Boolean']>;
@@ -609,7 +617,6 @@ export type FaqSearchResult = {
   searchSummary?: Maybe<Scalars['String']>;
   linkVideo?: Maybe<Scalars['String']>;
   question?: Maybe<Scalars['String']>;
-  answer?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['String']>;
   _version?: Maybe<Scalars['Int']>;
   _contentTypeId?: Maybe<Scalars['String']>;
@@ -1523,7 +1530,7 @@ export type TsAndOperator = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
@@ -1782,7 +1789,7 @@ export type TsFaqAndOperator = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -1801,7 +1808,7 @@ export type TsFaqNotOperator = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -1817,7 +1824,7 @@ export type TsFaqOrOperator = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -1953,7 +1960,7 @@ export type TsNotOperator = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
@@ -1995,7 +2002,7 @@ export type TsOrOperator = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
@@ -2561,7 +2568,7 @@ export type TsWhereFaqInput = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -2612,7 +2619,7 @@ export type TsWhereInput = {
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
-  answer?: Maybe<TsWhereString>;
+  answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   name?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
@@ -2816,7 +2823,7 @@ export type UpdateFaqInput = {
   language?: Maybe<TsRelationshipInput>;
   linkVideo?: Maybe<Scalars['String']>;
   question?: Maybe<Scalars['String']>;
-  answer?: Maybe<Scalars['String']>;
+  answer?: Maybe<Scalars['JSON']>;
   apartment?: Maybe<TsRelationshipInput>;
   _id: Scalars['ID'];
   _version?: Maybe<Scalars['Int']>;
