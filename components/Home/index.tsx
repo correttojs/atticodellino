@@ -14,7 +14,7 @@ import {
   faBed,
   faPersonBooth,
   faBath,
-  faFemale
+  faFemale,
 } from "@fortawesome/free-solid-svg-icons";
 import { useGlobal } from "../withGrommetTheme";
 import { useChangeLocale } from "../Translations/useChangeLocale";
@@ -40,7 +40,7 @@ const Icon = styled(FontAwesomeIcon)`
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
-  const { lang, apartment } = useGlobal();
+  const { lang, apartment, name } = useGlobal();
   const [readMoreOpen, setReadMoreOpen] = useState(false);
   const { changeLocale, apartmentLink } = useChangeLocale();
 
@@ -59,13 +59,10 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
     }
   }, [lang]);
 
-  const tile =
-    apartment === "VR" ? "l'attico del Lino" : "l'attico del Lino Garda";
-
   return (
     <>
       <Head>
-        <title>{tile}</title>
+        <title>{name}</title>
         <meta
           name="description"
           content={pdp_listing_detail.sectioned_description.summary}
@@ -76,7 +73,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         <Link href={apartmentLink}>
           <StyledLink>
             {translate("ALSO", {
-              c: apartment === "GARDA" ? "Verona" : "Garda"
+              c: apartment === "GARDA" ? "Verona" : "Garda",
             })}
           </StyledLink>
         </Link>

@@ -1,8 +1,6 @@
 query Apartment($key: String!) {
   getApartmentList(where: { key: { eq: $key } }) {
     items {
-      airBnb
-      key
       latitude
       longitude
       name

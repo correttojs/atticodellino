@@ -33,7 +33,7 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
 
   const formik = useFormik({
     initialValues,
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       const { month, day, year, file, ...rest } = values;
 
       sendMail({
@@ -41,13 +41,13 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
           user: {
             ...rest,
             apartment,
-            birthDate: `${day}-${month}-${year}`
+            birthDate: `${day}-${month}-${year}`,
           },
-          file
-        }
+          file,
+        },
       });
     },
-    validationSchema
+    validationSchema,
   });
 
   return (
@@ -58,13 +58,13 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
             <h3>
               {t("THANKYOU", {
                 name: data.sendMail.firstName,
-                lastName: data.sendMail.lastName
+                lastName: data.sendMail.lastName,
               })}
             </h3>
             <Text>
               {t("CODE", {
                 code: data.sendMail.code,
-                lastName: data.sendMail.lastName
+                lastName: data.sendMail.lastName,
               })}
             </Text>
           </Box>
@@ -89,7 +89,7 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
           <>
             <Heading>{t("REGISTER")}</Heading>
             <Form
-              onSubmit={e => {
+              onSubmit={(e) => {
                 e.preventDefault();
                 formik.handleSubmit();
               }}
@@ -102,18 +102,18 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
                 suggestions={[
                   {
                     label: "Passport",
-                    value: "Passport"
+                    value: "Passport",
                   },
 
                   {
                     label: "ID Card",
-                    value: "ID Card"
+                    value: "ID Card",
                   },
 
                   {
                     label: "Driving License",
-                    value: "Driving License"
-                  }
+                    value: "Driving License",
+                  },
                 ]}
               />
               <FormInput formik={formik} field={"documentNumber"} />
@@ -124,6 +124,7 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
               </Box>
               <FormInput formik={formik} field={"nationality"} />
               <FormInput formik={formik} field={"placeOfBirth"} />
+              <FormInput type="email" formik={formik} field={"email"} />
               <Box
                 direction="row"
                 margin={{ vertical: "medium" }}
@@ -137,7 +138,7 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
                     id="file"
                     name="file"
                     type="file"
-                    onChange={event => {
+                    onChange={(event) => {
                       const file = event.currentTarget.files[0];
                       formik.setFieldValue("file", file);
                     }}

@@ -1,3 +1,5 @@
+import { Apartment, ApartmentQuery } from "../../generated/graphql-takeshape";
+
 export type AirBnbUser = {
   deleted: boolean;
   first_name: string;
@@ -73,11 +75,7 @@ export type Photo = {
 export type GlobalType = {
   apartment: "VR" | "GARDA";
   lang: "it" | "en" | "de";
-  map?: {
-    lat: string;
-    long: string;
-  };
-};
+} & ApartmentQuery["getApartmentList"]["items"][0];
 
 export type pdp_listing_detail = {
   global: GlobalType;

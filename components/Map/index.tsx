@@ -5,11 +5,11 @@ import { useGlobal } from "../withGrommetTheme";
 import { useInView } from "react-intersection-observer";
 
 export const Map: React.FC<{ title: string }> = ({ title }) => {
-  const { map } = useGlobal();
+  const { latitude, longitude } = useGlobal();
   const [ref, inView] = useInView();
   const { lat, lng } = {
-    lat: parseFloat(map.lat),
-    lng: parseFloat(map.long),
+    lat: parseFloat(latitude),
+    lng: parseFloat(longitude),
   };
   return (
     // Important! Always set the container height explicitly

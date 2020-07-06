@@ -39,14 +39,11 @@ export const getDetails = async (
   console.log(url);
   const res: pdp_listing_detail = await fetch(url).then((r) => r.json());
   const apartmentObj = await takeShapeGQLClient.Apartment({ key: apartment });
-
+  const currentApartment = apartmentObj.getApartmentList.items[0];
   res.global = {
     apartment,
     lang: locale,
-    map: {
-      lat: apartmentObj.getApartmentList.items[0].latitude,
-      long: apartmentObj.getApartmentList.items[0].longitude,
-    },
-  };
+    ...currentApartment,
+  } as GlobalType;
   return res;
 };

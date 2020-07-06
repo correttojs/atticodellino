@@ -10,8 +10,13 @@ import { getParams } from ".";
 export async function getStaticProps({ params }) {
   params.apartment = params.apartment.toUpperCase();
   const data = await takeShapeGQLClient.Faqs(params);
+
+  const apartmentObj = await takeShapeGQLClient.Apartment({
+    key: params.apartment,
+  });
+  const currentApartment = apartmentObj.getApartmentList.items[0];
   return {
-    props: { global: params, data: data },
+    props: { global: { ...params, ...currentApartment }, data: data },
   };
 }
 

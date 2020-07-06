@@ -12,7 +12,7 @@ export const initialValues = {
   day: null,
   month: null,
   year: null,
-  file: null
+  file: null,
 };
 
 export const validationSchema = Yup.object().shape({
@@ -52,5 +52,6 @@ export const validationSchema = Yup.object().shape({
     .min(1900, "Too Short!")
     .max(new Date().getFullYear() - 18, "Too Long!")
     .required("Required"),
-  file: Yup.mixed().required("A file is required")
+  email: Yup.string().email("Invalid email").required("Required"),
+  file: Yup.mixed().required("A file is required"),
 });
