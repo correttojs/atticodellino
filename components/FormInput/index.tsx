@@ -7,7 +7,7 @@ const formatLabel = (value: string) =>
     // insert a space before all caps
     .replace(/([A-Z])/g, " $1")
     // uppercase the first character
-    .replace(/^./, function(str) {
+    .replace(/^./, function (str) {
       return str.toUpperCase();
     });
 
@@ -15,7 +15,7 @@ type PropType = {
   field: FormValues;
   formik: ReturnType<typeof useFormik>;
   suggestions?: Array<{ label: string; value: string }>;
-  type?: "text" | "number";
+  type?: "text" | "number" | "email";
 };
 
 export const FormInput: React.FC<PropType> = ({

@@ -17,7 +17,10 @@ export const Translations = {
   ),
   REGISTER: t("Register", "Registrazione"),
   REVIEWS: t("Reviews", "Recensioni"),
-  THANKYOU: t("Thank you [name] [lastName]", "Grazie [name] [lastName]"),
+  THANKYOU: t(
+    "Thank you [name] [lastName]. You will receive a confirmation email soon.",
+    "Grazie [name] [lastName]. Riceverai presto un'email di conferma"
+  ),
   CODE: t("The apartment code [code]", "Il codice dell'appartamento è [code]"),
   RERAD_MORE: t("Read more...", "Leggi ancora..."),
   HIDE: t("Hide...", "Nascondi..."),
@@ -29,13 +32,13 @@ export const Translations = {
   BEDROOM: t("[n] bedroom", "[n] stanza"),
   BED: t("[n] bed", "[n] letto"),
   BATH: t("[n] bath", "[n] bagno"),
-  ALSO: t("Also at [c]", "Anche a [c]")
+  ALSO: t("Also at [c]", "Anche a [c]"),
 } as const;
 
 export const LOCALES = {
   en: "en",
   it: "it",
-  de: "de"
+  de: "de",
 };
 
 export const ALL_LOCALES = Object.keys(LOCALES);

@@ -8,21 +8,21 @@ export const typeDefs = gql`
   }
 
   input UserInput {
-    firstName: String
-    lastName: String
-    documentNumber: String
-    documentType: String
-    birthDate: String
-    nationality: String
-    placeOfBirth: String
+    firstName: String!
+    lastName: String!
+    documentNumber: String!
+    documentType: String!
+    birthDate: String!
+    nationality: String!
+    placeOfBirth: String!
     apartment: String
+    email: String!
   }
 
   type MailResponse {
     firstName: String
     lastName: String
-    apartment: String
-    code: String
+    email: String
   }
 
   type ReviewType {
@@ -55,6 +55,7 @@ export const typeDefs = gql`
   type Mutation {
     sendMail(user: UserInput!, file: Upload!): MailResponse
     book(user: BookInput): BookResponse
+    registerUser(user: UserInput!, file: Upload!): MailResponse
   }
   type Query {
     price(from: String, to: String): Float

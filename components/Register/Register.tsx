@@ -7,6 +7,7 @@ import { FormInput } from "../FormInput";
 import styled from "styled-components";
 import { useSendMailMutation } from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
+import { useGlobal } from "../withGrommetTheme";
 
 const UploadStyle = styled.div<{ error: boolean }>`
   position: relative;
@@ -27,9 +28,10 @@ const UploadStyle = styled.div<{ error: boolean }>`
   }
 `;
 
-export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
+export const Register: React.FC = () => {
   const [sendMail, { data, loading, error }] = useSendMailMutation();
   const t = useTranslations();
+  const { apartment } = useGlobal();
 
   const formik = useFormik({
     initialValues,
@@ -61,12 +63,6 @@ export const Register: React.FC<{ apartment: string }> = ({ apartment }) => {
                 lastName: data.sendMail.lastName,
               })}
             </h3>
-            <Text>
-              {t("CODE", {
-                code: data.sendMail.code,
-                lastName: data.sendMail.lastName,
-              })}
-            </Text>
           </Box>
         )}
         {error && (

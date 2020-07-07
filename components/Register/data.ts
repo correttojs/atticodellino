@@ -9,6 +9,7 @@ export const initialValues = {
   documentType: "Passport",
   nationality: "",
   placeOfBirth: "",
+  email: "",
   day: null,
   month: null,
   year: null,

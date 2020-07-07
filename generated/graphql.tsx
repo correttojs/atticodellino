@@ -49,14 +49,14 @@ export type MailResponse = {
    __typename?: 'MailResponse';
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-  apartment?: Maybe<Scalars['String']>;
-  code?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
    __typename?: 'Mutation';
   sendMail?: Maybe<MailResponse>;
   book?: Maybe<BookResponse>;
+  registerUser?: Maybe<MailResponse>;
 };
 
 
@@ -68,6 +68,12 @@ export type MutationSendMailArgs = {
 
 export type MutationBookArgs = {
   user?: Maybe<BookInput>;
+};
+
+
+export type MutationRegisterUserArgs = {
+  user: UserInput;
+  file: Scalars['Upload'];
 };
 
 export type Query = {
@@ -94,14 +100,15 @@ export type ReviewType = {
 
 
 export type UserInput = {
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  documentNumber?: Maybe<Scalars['String']>;
-  documentType?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
-  nationality?: Maybe<Scalars['String']>;
-  placeOfBirth?: Maybe<Scalars['String']>;
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  documentNumber: Scalars['String'];
+  documentType: Scalars['String'];
+  birthDate: Scalars['String'];
+  nationality: Scalars['String'];
+  placeOfBirth: Scalars['String'];
   apartment?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
 };
 
 export type BookNowMutationVariables = {
@@ -149,7 +156,7 @@ export type SendMailMutation = (
   { __typename?: 'Mutation' }
   & { sendMail?: Maybe<(
     { __typename?: 'MailResponse' }
-    & Pick<MailResponse, 'firstName' | 'lastName' | 'apartment' | 'code'>
+    & Pick<MailResponse, 'firstName' | 'lastName' | 'email'>
   )> }
 );
 
@@ -257,8 +264,7 @@ export const SendMailDocument = gql`
   sendMail(user: $user, file: $file) {
     firstName
     lastName
-    apartment
-    code
+    email
   }
 }
     `;

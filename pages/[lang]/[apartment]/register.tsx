@@ -1,8 +1,8 @@
-import { withGrommetTheme } from "../../../../components/withGrommetTheme";
-import { Register } from "../../../../components/Register/Register";
-import { AsyncReturnType, getParams } from "..";
-import { GlobalType } from "../../../../components/graphql/airbnDetail";
-import { takeShapeGQLClient } from "../../../../components/takeshape/takeShapeClient";
+import { withGrommetTheme } from "../../../components/withGrommetTheme";
+import { Register } from "../../../components/Register/Register";
+import { AsyncReturnType, getParams } from ".";
+import { GlobalType } from "../../../components/graphql/airbnDetail";
+import { takeShapeGQLClient } from "../../../components/takeshape/takeShapeClient";
 
 export async function getStaticProps({
   params,

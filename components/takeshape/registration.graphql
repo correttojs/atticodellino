@@ -1,0 +1,24 @@
+mutation sendRegistration($input: CreateRegistrationsInput!) {
+  createRegistrations(input: $input) {
+    result {
+      firstName
+      lastName
+      email
+    }
+  }
+}
+
+query getRegistration($id: ID!) {
+  getRegistrations(_id: $id) {
+    _id
+    apartmentKey
+    birthDate
+    documentNumber
+    documentType
+    email
+    firstName
+    lastName
+    nationality
+    placeOfBirth
+  }
+}
