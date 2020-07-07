@@ -37,8 +37,7 @@ export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
     ],
   };
 
-  const meContent = { ...content, to: process.env.FIRST_EMAIL };
-  await sgMail.send([content, meContent]);
+  await sgMail.send([content]);
   const { apartment, ...input } = user;
 
   const data = await takeShapeGQLClient.sendRegistration({
@@ -89,8 +88,7 @@ export const sendBookMail = async ({ user }: MutationBookArgs) => {
     `,
   };
 
-  const meContent = { ...content, to: process.env.FIRST_EMAIL };
-  await sgMail.send([content, meContent]);
+  await sgMail.send([content]);
 
   return {
     firstName: user.firstName,
