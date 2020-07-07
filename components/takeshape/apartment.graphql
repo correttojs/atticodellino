@@ -4,6 +4,39 @@ query Apartment($key: String!) {
       latitude
       longitude
       name
+      brandColor {
+        hex
+      }
+      lightColor {
+        rgb {
+          a
+          b
+          g
+          r
+        }
+      }
+      lighterColor {
+        rgb {
+          a
+          b
+          g
+          r
+        }
+      }
+      coverJpg {
+        path
+      }
+      coverWebp {
+        path
+      }
+    }
+  }
+}
+
+query getApartmentsKey {
+  getApartmentList {
+    items {
+      key
     }
   }
 }

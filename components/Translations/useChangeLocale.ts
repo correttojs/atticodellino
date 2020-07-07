@@ -17,7 +17,7 @@ const routeMapper = (url) => {
 
 export const useChangeLocale = () => {
   const { pathname, asPath, push, ...r } = useRouter();
-  const { lang, setLang, apartment } = useGlobal();
+  const { lang, apartment } = useGlobal();
   const link: string[] = [lang];
   if (apartment !== "GARDA") {
     link.push("garda");
@@ -28,10 +28,6 @@ export const useChangeLocale = () => {
   return {
     changeLocale: (currentLang: GlobalType["lang"]) => {
       localStorage.setItem("lang", currentLang);
-      if (setLang) {
-        setLang(currentLang);
-        return;
-      }
 
       if (currentLang !== lang) {
         if (asPath === "/") {

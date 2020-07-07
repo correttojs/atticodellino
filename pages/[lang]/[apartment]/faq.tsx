@@ -5,27 +5,21 @@ import { Box } from "grommet";
 import { GlobalType } from "../../../components/graphql/airbnDetail";
 import { takeShapeGQLClient } from "../../../components/takeshape/takeShapeClient";
 import { FaqsQuery } from "../../../generated/graphql-takeshape";
-import { getParams } from ".";
+import {
+  getGlobalPaths,
+  getGlobalProps,
+} from "../../../components/takeshape/getGlobal";
 
 export async function getStaticProps({ params }) {
-  params.apartment = params.apartment.toUpperCase();
-  const data = await takeShapeGQLClient.Faqs(params);
+  const globalProps = await getGlobalProps({ params });
+  const data = await takeShapeGQLClient.Faqs(globalProps.props.global);
 
-  const apartmentObj = await takeShapeGQLClient.Apartment({
-    key: params.apartment,
-  });
-  const currentApartment = apartmentObj.getApartmentList.items[0];
   return {
-    props: { global: { ...params, ...currentApartment }, data: data },
+    props: { ...globalProps.props, data: data },
   };
 }
 
-export async function getStaticPaths() {
-  return {
-    paths: getParams(),
-    fallback: true, // See the "fallback" section below
-  };
-}
+export const getStaticPaths = getGlobalPaths;
 
 const Faq: NextPage<{ data: FaqsQuery; global: GlobalType }> = ({ data }) => {
   const [copied, setCopied] = useState<{ [key: string]: boolean }>({});

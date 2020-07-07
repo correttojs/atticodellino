@@ -26,18 +26,16 @@ const Container = styled(Box)`
   }
 `;
 
-export const Host: React.FC<pdp_listing_detail["pdp_listing_detail"]["primary_host"]> = ({
-  profile_pic_path,
-  about,
-  badges,
-}) => {
+export const Host: React.FC<
+  pdp_listing_detail["pdp_listing_detail"]["primary_host"]
+> = ({ profile_pic_path, about, badges }) => {
   const translate = useTranslations();
-  const { apartment } = useGlobal();
+  const global = useGlobal();
   return (
     <Container
       pad="large"
       direction="row"
-      background={theme(apartment).global.colors.lighter}
+      background={theme(global).global.colors.lighter}
     >
       <Box>
         <Heading level="2">{translate("HOST")}</Heading>

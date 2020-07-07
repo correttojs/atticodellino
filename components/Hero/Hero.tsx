@@ -15,9 +15,9 @@ export const Hero: React.FC<{
   photos: { id; picture: string; x_large_cover: string; caption: string }[];
 }> = ({ photos }) => {
   const [show, setShow] = useState(-1);
-  const { apartment } = useGlobal();
+  const global = useGlobal();
 
-  if (apartment === "VR") {
+  if (global.apartment === "VR") {
     photos = [
       photos.find((p) => p.id === 406200537),
       photos.find((p) => p.id === 406200123),
@@ -29,7 +29,7 @@ export const Hero: React.FC<{
 
   return (
     <>
-      <HeroStyle apartment={apartment} direction="row" align="center">
+      <HeroStyle apartment={global} direction="row" align="center">
         <StyledContacts>
           <Contacts direction="row" margin="5px" />
         </StyledContacts>

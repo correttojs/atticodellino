@@ -2,15 +2,16 @@ import styled, { keyframes } from "styled-components";
 import { Box, ThemeType } from "grommet";
 import { MQ_MOBILE, MQ_NOT_MOBILE, MQ_DESKTOP } from "../CssVar/MediaQueries";
 import IntersectionImage from "react-intersection-image";
+import { GlobalType } from "../graphql/airbnDetail";
 
 // prettier-ignore
-export const HeroStyle = styled(Box)<{ apartment: "GARDA" | "VR" }>`
+export const HeroStyle = styled(Box)<{ apartment: GlobalType}>`
  
 
-  background: url(${({ apartment }) => apartment === "VR" ? "/images/cover.jpg" : "/images/cover-garda.jpg"})  center / cover;
+  background: url(https://images.takeshape.io/${({ apartment }) => apartment.coverJpg.path})  center / cover;
   
   @supports (background-image: url("image.webp")) {
-     background: url(${({ apartment }) => apartment === "VR" ? "/images/cover.webp" : "/images/cover-garda.webp"})  center / cover;
+     background: url(https://images.takeshape.io/${({ apartment }) => apartment.coverWebp.path})  center / cover;
   }
   align-items: top;
   justify-content: center;

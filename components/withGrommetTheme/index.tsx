@@ -29,7 +29,7 @@ export const useGlobal = () => {
 const GrommetComp: React.FC = ({ children }) => {
   const global = useGlobal();
   return (
-    <Grommet theme={theme(global.apartment)}>
+    <Grommet theme={theme(global)}>
       <ApolloProvider client={gqlClient}>
         <Layout>{children}</Layout>
       </ApolloProvider>
@@ -54,6 +54,7 @@ export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
     console.log(props);
     return null;
   }
+
   return (
     <>
       <GlobalStyle />

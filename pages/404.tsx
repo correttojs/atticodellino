@@ -1,5 +1,6 @@
 import { withGrommetTheme } from "../components/withGrommetTheme";
 import { Box } from "grommet";
+import { getGlobalProps } from "../components/takeshape/getGlobal";
 
 const PageError = () => (
   <Box height="medium" justify="center">
@@ -8,9 +9,8 @@ const PageError = () => (
 );
 
 export async function getStaticProps() {
-  return {
-    props: { global: { apartment: "VR", lang: "en" } },
-  };
+  const params = { lang: "en", apartment: "VR" };
+  return getGlobalProps({ params });
 }
 
 export default withGrommetTheme()(PageError);

@@ -73,8 +73,8 @@ export type Photo = {
 };
 
 export type GlobalType = {
-  apartment: "VR" | "GARDA";
-  lang: "it" | "en" | "de";
+  apartment: string;
+  lang: string;
 } & ApartmentQuery["getApartmentList"]["items"][0];
 
 export type pdp_listing_detail = {
