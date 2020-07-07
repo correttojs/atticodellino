@@ -20,8 +20,5 @@
         }
       ]
     }
-  ],
-   "redirects": [
-    { "source": "/", "destination": "/en", "permanent": true }
   ]
 }
