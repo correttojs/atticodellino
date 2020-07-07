@@ -36,7 +36,7 @@ const Faq: NextPage<{ data: FaqsQuery; global: GlobalType }> = ({ data }) => {
           <h3
             onClick={() => {
               navigator.clipboard.writeText(
-                "https://www.atticodellino.com/faq#faq" + i
+                `${window.location.href.split("#")[0]}#faq` + i
               );
               setCopied({ [i]: true });
               setTimeout(() => {

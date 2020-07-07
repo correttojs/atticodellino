@@ -8,15 +8,6 @@ import { FacebookOption, Indicator } from "grommet-icons";
 import { useGlobal } from "../withGrommetTheme";
 import { Contacts } from "../Header/Contact";
 
-const EMAIL = "info@atticodellino.it";
-const TEL = "+393477594144";
-const Link = styled(Text)`
-  a {
-    color: #fff !important;
-    text-decoration: none;
-  }
-`;
-
 export const Footer: React.FC = () => {
   const { address, airbnbLink } = useGlobal();
   return (
