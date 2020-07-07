@@ -5,9 +5,12 @@ import SvgAirbnb1 from "../Icons/Airbnb";
 import { FacebookOption, Indicator } from "grommet-icons";
 import { useGlobal } from "../withGrommetTheme";
 import { Contacts } from "../Header/Contact";
+import Link from "next/link";
+import { useTranslations } from "../Translations/useTranslations";
 
 export const Footer: React.FC = () => {
-  const { address, airbnbLink, facebookLink } = useGlobal();
+  const { address, airbnbLink, facebookLink, lang, apartment } = useGlobal();
+  const t = useTranslations();
   return (
     <Box
       align="center"
@@ -42,6 +45,18 @@ export const Footer: React.FC = () => {
         >
           Airbnb
         </Anchor>
+      </Box>
+      <Box direction="row" justify="center" align="center" margin="5px">
+        <Link href="/[lang]/[apartment]/faq" as={`/${lang}/${apartment}/faq`}>
+          <Anchor>FAQ</Anchor>
+        </Link>
+
+        <Link
+          href="/[lang]/[apartment]/register"
+          as={`/${lang}/${apartment}/register`}
+        >
+          <Anchor margin={{ left: "5px" }}>{t("REGISTER")}</Anchor>
+        </Link>
       </Box>
       <Box width="100%" align="end">
         <Text textAlign="end">© correttoweb 2020 </Text>
