@@ -10,23 +10,22 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
 
+const FROM = `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`;
+
 export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
   const { createReadStream, filename, mimetype } = await file;
   const b64 = await streamTo64(createReadStream());
   const content = {
-    to:
-      process.env.NODE_ENV === "development"
-        ? process.env.FIRST_EMAIL
-        : process.env.NEXT_PUBLIC_FROM_EMAIL,
-    from: `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`, // sender address
+    to: process.env.NEXT_PUBLIC_FROM_EMAIL,
+    from: FROM, // sender address
     subject: `Registration request from L'attico del Lino`, // Subject line
     html: `
-                <h1>Registration Request</h1>
-                <p>User: ${user.firstName} ${user.lastName}</p>
-                <p>Document: ${user.documentType} - ${user.documentNumber}</p>
-                <p>Birth: ${user.birthDate} - ${user.nationality} - ${user.placeOfBirth}</p>
-                <p>Apartment: ${user.apartment}</p>
-            `,
+        <h1>Registration Request</h1>
+        <p>User: ${user.firstName} ${user.lastName}</p>
+        <p>Document: ${user.documentType} - ${user.documentNumber}</p>
+        <p>Birth: ${user.birthDate} - ${user.nationality} - ${user.placeOfBirth}</p>
+        <p>Apartment: ${user.apartment}</p>
+    `,
     attachments: [
       {
         filename,
@@ -64,15 +63,15 @@ export const confirmEmail = async (
   const user = result?.getRegistrations;
   const content = {
     to: user.email,
-    from: `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`, // sender address
+    from: FROM, // sender address
     subject: `Registration request from L'attico del Lino`, // Subject line
     html: `
-                <h1>Registration Confirmation</h1>
-                <p>User: ${user.firstName} ${user.lastName}</p>
-                <p>Document: ${user.documentType} - ${user.documentNumber}</p>
-                <p>Birth: ${user.birthDate} - ${user.nationality} - ${user.placeOfBirth}</p>
-                <p>Apartment code: ${code}</p>
-            `,
+        <h1>Registration Confirmation</h1>
+        <p>User: ${user.firstName} ${user.lastName}</p>
+        <p>Document: ${user.documentType} - ${user.documentNumber}</p>
+        <p>Birth: ${user.birthDate} - ${user.nationality} - ${user.placeOfBirth}</p>
+        <p>Apartment code: ${code}</p>
+    `,
   };
   await sgMail.send([content]);
   return result;
@@ -80,17 +79,14 @@ export const confirmEmail = async (
 
 export const sendBookMail = async ({ user }: MutationBookArgs) => {
   const content = {
-    to:
-      process.env.NODE_ENV === "development"
-        ? process.env.FIRST_EMAIL
-        : process.env.NEXT_PUBLIC_FROM_EMAIL,
-    from: `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`, // sender address
+    to: process.env.NEXT_PUBLIC_FROM_EMAIL,
+    from: FROM, // sender address
     subject: `Booking request from L'attico del Lino`, // Subject line
     html: `
-                <h1>Registration Request</h1>
-                <p>User: ${user.firstName} ${user.lastName}</p>
-                <p>Document: ${user.email} </p>
-            `,
+        <h1>Registration Request</h1>
+        <p>User: ${user.firstName} ${user.lastName}</p>
+        <p>Document: ${user.email} </p>
+    `,
   };
 
   const meContent = { ...content, to: process.env.FIRST_EMAIL };

@@ -1,15 +1,13 @@
 import React from "react";
 import { Box, Text, Anchor } from "grommet";
 
-import { Phone, MailOption } from "grommet-icons";
-import styled from "styled-components";
 import SvgAirbnb1 from "../Icons/Airbnb";
 import { FacebookOption, Indicator } from "grommet-icons";
 import { useGlobal } from "../withGrommetTheme";
 import { Contacts } from "../Header/Contact";
 
 export const Footer: React.FC = () => {
-  const { address, airbnbLink } = useGlobal();
+  const { address, airbnbLink, facebookLink } = useGlobal();
   return (
     <Box
       align="center"
@@ -26,7 +24,7 @@ export const Footer: React.FC = () => {
       <Box direction="row" justify="center" align="center" margin="5px">
         <FacebookOption />{" "}
         <Anchor
-          href="https://www.facebook.com/atticodellino"
+          href={facebookLink}
           target="_blank"
           alignSelf="center"
           margin={{ right: "20px" }}
