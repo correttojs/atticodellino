@@ -7,7 +7,10 @@ export default async (req, res) => {
   const data = await takeShapeGQLClient.getRegistration({
     id: req.body.data.contentId,
   });
-  await confirmEmail(data);
+  const code = await takeShapeGQLClient.ApartmentCode({
+    key: data.getRegistrations.apartmentKey,
+  });
+  await confirmEmail(data, code.getApartmentList.items[0].code);
 
   res.end(JSON.stringify(data));
 };

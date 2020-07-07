@@ -3967,6 +3967,22 @@ export type ApartmentQuery = (
   )> }
 );
 
+export type ApartmentCodeQueryVariables = {
+  key: Scalars['String'];
+};
+
+
+export type ApartmentCodeQuery = (
+  { __typename?: 'Root' }
+  & { getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'code'>
+    )>>> }
+  )> }
+);
+
 export type FaqsQueryVariables = {
   apartment: Scalars['String'];
   lang: Scalars['String'];
@@ -4025,6 +4041,15 @@ export const ApartmentDocument = gql`
   }
 }
     `;
+export const ApartmentCodeDocument = gql`
+    query ApartmentCode($key: String!) {
+  getApartmentList(where: {key: {eq: $key}}) {
+    items {
+      code
+    }
+  }
+}
+    `;
 export const FaqsDocument = gql`
     query Faqs($apartment: String!, $lang: String!) {
   getFaqList(where: {AND: [{apartment: {key: {match: $apartment}}}, {language: {code: {match: $lang}}}]}) {
@@ -4072,6 +4097,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     Apartment(variables: ApartmentQueryVariables): Promise<ApartmentQuery> {
       return withWrapper(() => client.request<ApartmentQuery>(print(ApartmentDocument), variables));
+    },
+    ApartmentCode(variables: ApartmentCodeQueryVariables): Promise<ApartmentCodeQuery> {
+      return withWrapper(() => client.request<ApartmentCodeQuery>(print(ApartmentCodeDocument), variables));
     },
     Faqs(variables: FaqsQueryVariables): Promise<FaqsQuery> {
       return withWrapper(() => client.request<FaqsQuery>(print(FaqsDocument), variables));

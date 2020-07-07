@@ -17,7 +17,7 @@ export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
     to:
       process.env.NODE_ENV === "development"
         ? process.env.FIRST_EMAIL
-        : process.env.SECOND_EMAIL,
+        : process.env.NEXT_PUBLIC_FROM_EMAIL,
     from: `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`, // sender address
     subject: `Registration request from L'attico del Lino`, // Subject line
     html: `
@@ -57,7 +57,10 @@ export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
   };
 };
 
-export const confirmEmail = async (result: GetRegistrationQuery) => {
+export const confirmEmail = async (
+  result: GetRegistrationQuery,
+  code: string
+) => {
   const user = result?.getRegistrations;
   const content = {
     to: user.email,
@@ -67,14 +70,8 @@ export const confirmEmail = async (result: GetRegistrationQuery) => {
                 <h1>Registration Confirmation</h1>
                 <p>User: ${user.firstName} ${user.lastName}</p>
                 <p>Document: ${user.documentType} - ${user.documentNumber}</p>
-                <p>Birth: ${user.birthDate} - ${user.nationality} - ${
-      user.placeOfBirth
-    }</p>
-                <p>Apartment code: ${
-                  user.apartmentKey === "GARDA"
-                    ? process.env.CODE_GARDA
-                    : process.env.CODE_VR
-                }</p>
+                <p>Birth: ${user.birthDate} - ${user.nationality} - ${user.placeOfBirth}</p>
+                <p>Apartment code: ${code}</p>
             `,
   };
   await sgMail.send([content]);
@@ -86,7 +83,7 @@ export const sendBookMail = async ({ user }: MutationBookArgs) => {
     to:
       process.env.NODE_ENV === "development"
         ? process.env.FIRST_EMAIL
-        : process.env.SECOND_EMAIL,
+        : process.env.NEXT_PUBLIC_FROM_EMAIL,
     from: `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`, // sender address
     subject: `Booking request from L'attico del Lino`, // Subject line
     html: `

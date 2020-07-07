@@ -1,0 +1,7 @@
+query ApartmentCode($key: String!) {
+  getApartmentList(where: { key: { eq: $key } }) {
+    items {
+      code
+    }
+  }
+}

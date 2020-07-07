@@ -25,7 +25,7 @@ export async function getStaticProps({
 
 export async function getStaticPaths() {
   return {
-    paths: getParams({ secret: process.env.REGISTRATION_SUFFIX }),
+    paths: getParams(),
     fallback: true, // See the "fallback" section below
   };
 }
