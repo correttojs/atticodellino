@@ -13,19 +13,10 @@ export const theme = (apartment: GlobalType) => {
         brand: apartment.brandColor.hex,
         focus: apartment.brandColor.hex,
         active: "#290012e8",
-        //`rgba(${r},${g},${b},${a})`,
         light: `rgba(${r},${g},${b},${a})`,
-        // apartment.apartment === "VR"
-        //   ? "rgba(41,0,18,0.2)"
-        //   : "rgba(58, 179, 216, 0.32)",
-        // `rgba(${r2},${g2},${b2},${a2})`,
         lighter: `rgba(${r2},${g2},${b2},${a2})`,
-        // apartment.apartment === "VR"
-        //   ? "rgba(41,0,18,0.1)"
-        //   : "rgba(9,54,76,0.1)",
       },
       font: {
-        // family: 'Gotu',
         family: "Raleway",
         size: "14px",
         height: "20px",

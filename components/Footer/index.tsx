@@ -18,15 +18,7 @@ const Link = styled(Text)`
 `;
 
 export const Footer: React.FC = () => {
-  const { apartment } = useGlobal();
-  const address =
-    apartment === "VR"
-      ? "San Nazaro st., 60, 4th floor, 37129, Verona - Italy"
-      : "Via Guglielmo Marconi, 22, 37016 Garda VR, Italy";
-  const airbnbLink =
-    apartment === "VR"
-      ? "https://www.airbnb.com/rooms/17443763?source_impression_id=p3_1585488245_Ei%2B%2FxYw7wViISchp"
-      : "https://www.airbnb.com/rooms/38696794?source_impression_id=p3_1585675864_NaxMK%2FnDj%2FoESRY%2F";
+  const { address, airbnbLink } = useGlobal();
   return (
     <Box
       align="center"

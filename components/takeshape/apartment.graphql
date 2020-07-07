@@ -29,6 +29,8 @@ query Apartment($key: String!) {
       coverWebp {
         path
       }
+      address
+      airbnbLink
     }
   }
 }
