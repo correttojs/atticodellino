@@ -26,6 +26,12 @@ export const Cap = styled(IntersectionImage)`
   object-fit: cover;
   width: 36rem;
   height: 20rem;
+  border-radius: 5px;
+  border: 1px solid
+    ${({ theme }: { theme: ThemeType }) => `  ${theme.global.colors.brand};`};
+  /* box-shadow: ${({ theme }: { theme: ThemeType }) =>
+    ` 3px 5px ${theme.global.colors.brand};`}; */
+
   @media ${MQ_DESKTOP} {
     :hover {
       transform: scale(1.05);
@@ -56,8 +62,10 @@ export const HeroCarousel = styled.div`
   position: absolute;
   left: 0;
   top: calc(100vw * 0.1);
-  background-color: ${({ theme }: { theme: ThemeType }) =>
-    theme.global.colors.light};
+  /* background-color: ${({ theme }: { theme: ThemeType }) =>
+    theme.global.colors.light}; */
+  background-image: ${({ theme }: { theme: ThemeType }) =>
+    `linear-gradient(0deg, rgba(225,223,255,0) 0%, ${theme.global.colors.light} 10%, ${theme.global.colors.light} 90%, rgba(255,255,255,0) 100%);`};
   animation: ${slidein} 1s ease-in;
   div {
     border-radius: 20px;
