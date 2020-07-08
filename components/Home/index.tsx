@@ -23,13 +23,23 @@ import styled from "styled-components";
 import { MQ_MOBILE } from "../CssVar/MediaQueries";
 import Head from "next/head";
 
-const StyledLink = styled.a`
-  color: #000 !important;
+const ApartmentLink = styled.a<{ backgroundColor: string }>`
+  position: absolute;
+  padding: 0 20px;
+  right: 0px;
+  height: 0;
+  border-bottom: 30px solid ${({ backgroundColor }) => backgroundColor};
+  border-top: 30px solid ${({ backgroundColor }) => backgroundColor};
+  border-left: 20px solid transparent;
   cursor: pointer;
   font-size: 1.5em;
-  text-decoration: underline;
+  line-height: 0px;
+  text-decoration: none;
   @media ${MQ_MOBILE} {
     font-size: 1.2em;
+    border-bottom: 20px solid ${({ backgroundColor }) => backgroundColor};
+    border-top: 20px solid ${({ backgroundColor }) => backgroundColor};
+    border-left: 10px solid transparent;
   }
 `;
 
@@ -40,7 +50,7 @@ const Icon = styled(FontAwesomeIcon)`
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
-  const { lang, apartment, name } = useGlobal();
+  const { lang, apartment, name, sponsor } = useGlobal();
   const [readMoreOpen, setReadMoreOpen] = useState(false);
   const { changeLocale, apartmentLink } = useChangeLocale();
 
@@ -69,13 +79,17 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         />
       </Head>
       <Hero photos={pdp_listing_detail.photos} />
-      <Box pad={{ horizontal: "large", vertical: "small" }} align="end">
-        <Link href={apartmentLink}>
-          <StyledLink>
+      <Box
+        pad={{ horizontal: "large", vertical: "small" }}
+        margin={{ bottom: "medium" }}
+        align="end"
+      >
+        <Link href={apartmentLink(sponsor?.[0]?.key)} passHref={true}>
+          <ApartmentLink backgroundColor={sponsor?.[0]?.brandColor.hex}>
             {translate("ALSO", {
-              c: apartment === "GARDA" ? "Verona" : "Garda",
+              c: sponsor?.[0]?.location,
             })}
-          </StyledLink>
+          </ApartmentLink>
         </Link>
       </Box>
       <Box

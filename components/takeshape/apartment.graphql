@@ -32,6 +32,13 @@ query Apartment($key: String!) {
       address
       airbnbLink
       facebookLink
+      sponsor {
+        brandColor {
+          hex
+        }
+        location
+        key
+      }
     }
   }
 }

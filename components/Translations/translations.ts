@@ -32,7 +32,7 @@ export const Translations = {
   BEDROOM: t("[n] bedroom", "[n] stanza"),
   BED: t("[n] bed", "[n] letto"),
   BATH: t("[n] bath", "[n] bagno"),
-  ALSO: t("Also at [c]", "Anche a [c]"),
+  ALSO: t("Have a look @[c]", "Dai un'occhiata @[c]"),
 } as const;
 
 export const LOCALES = {
