@@ -32,6 +32,10 @@ export default class MyDocument extends Document<{
           <>
             {this.props.apartment === "GARDA" ? (
               <>
+                <meta
+                  name="viewport"
+                  content="initial-scale=1.0, width=device-width"
+                ></meta>
                 <meta name="theme-color" content="#290012" />
                 <link
                   rel="preload"

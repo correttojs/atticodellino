@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Text } from "grommet";
 import { Phone, MailOption } from "grommet-icons";
 import styled from "styled-components";
+import { MQ_MOBILE } from "../CssVar/MediaQueries";
 
 const EMAIL = process.env.NEXT_PUBLIC_FROM_EMAIL;
 const TEL = process.env.NEXT_PUBLIC_PHONE;
@@ -10,6 +11,9 @@ const Link = styled(Text)`
   a {
     color: #fff !important;
     text-decoration: none;
+  }
+  @media ${MQ_MOBILE} {
+    font-size: 0.9rem;
   }
 `;
 

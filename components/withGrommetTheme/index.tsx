@@ -9,6 +9,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalType } from "../graphql/airbnDetail";
 
 const GlobalStyle = createGlobalStyle`
+    html, body {
+      overflow-x:hidden ;
+    } 
     body {
         margin: 0;
     }
