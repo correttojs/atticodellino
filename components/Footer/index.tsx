@@ -16,6 +16,7 @@ const FooterLink = styled(Anchor)`
 export const Footer: React.FC = () => {
   const { address, airbnbLink, facebookLink, lang, apartment } = useGlobal();
   const t = useTranslations();
+
   return (
     <Box
       align="center"

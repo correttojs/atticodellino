@@ -38,7 +38,9 @@ export const Layout: React.FC = ({ children }) => {
         expires={150}
       >
         {t("COOKIES")}{" "}
-        <Link href={`/${lang}/${apartment}/privacy`}>{t("PRIVACY")}</Link>
+        <Link href={`/${lang}/${apartment}/privacy`} passHref>
+          <a>{t("PRIVACY")}</a>
+        </Link>
       </CookieConsent>
     </Container>
   );

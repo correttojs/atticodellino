@@ -8,7 +8,7 @@ query Faqs($apartment: String!, $lang: String!) {
     }
   ) {
     items {
-      answer
+      answerHtml
       question
 
       linkVideo

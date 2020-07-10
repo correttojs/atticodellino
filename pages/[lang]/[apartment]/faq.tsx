@@ -21,7 +21,7 @@ export async function getStaticProps({ params }) {
 
 export const getStaticPaths = getGlobalPaths;
 
-const Faq: NextPage<{ data: FaqsQuery; global: GlobalType }> = ({ data }) => {
+const Faq: NextPage<{ data: FaqsQuery }> = ({ data }) => {
   const [copied, setCopied] = useState<{ [key: string]: boolean }>({});
 
   return (
@@ -47,7 +47,7 @@ const Faq: NextPage<{ data: FaqsQuery; global: GlobalType }> = ({ data }) => {
             {item.question}
             {copied[i] && <span style={{ color: "red" }}> copied</span>}
           </h3>
-          <p>{item.answer?.blocks?.[0]?.text}</p>
+          <p dangerouslySetInnerHTML={{ __html: item.answerHtml }} />
         </Box>
       ))}
     </Box>
