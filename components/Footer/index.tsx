@@ -7,6 +7,11 @@ import { useGlobal } from "../withGrommetTheme";
 import { Contacts } from "../Header/Contact";
 import Link from "next/link";
 import { useTranslations } from "../Translations/useTranslations";
+import styled from "styled-components";
+
+const FooterLink = styled(Anchor)`
+  margin: 0 5px;
+`;
 
 export const Footer: React.FC = () => {
   const { address, airbnbLink, facebookLink, lang, apartment } = useGlobal();
@@ -26,7 +31,7 @@ export const Footer: React.FC = () => {
       </Text>
       <Box direction="row" justify="center" align="center" margin="5px">
         <FacebookOption />{" "}
-        <Anchor
+        <FooterLink
           href={facebookLink}
           target="_blank"
           alignSelf="center"
@@ -34,28 +39,34 @@ export const Footer: React.FC = () => {
           rel="noopener"
         >
           Facebook
-        </Anchor>
+        </FooterLink>
         <SvgAirbnb1 style={{ color: "#fff", stroke: "#fff" }} />
-        <Anchor
-          margin={{ left: "5px" }}
+        <FooterLink
           href={airbnbLink}
           target="_blank"
           alignSelf="center"
           rel="noopener"
         >
           Airbnb
-        </Anchor>
+        </FooterLink>
       </Box>
       <Box direction="row" justify="center" align="center" margin="5px">
         <Link href="/[lang]/[apartment]/faq" as={`/${lang}/${apartment}/faq`}>
-          <Anchor>FAQ</Anchor>
+          <FooterLink>FAQ</FooterLink>
         </Link>
-
+        -
         <Link
           href="/[lang]/[apartment]/register"
           as={`/${lang}/${apartment}/register`}
         >
-          <Anchor margin={{ left: "5px" }}>{t("REGISTER")}</Anchor>
+          <FooterLink>{t("REGISTER")}</FooterLink>
+        </Link>
+        -
+        <Link
+          href="/[lang]/[apartment]/privacy"
+          as={`/${lang}/${apartment}/privacy`}
+        >
+          <FooterLink>{t("PRIVACY")}</FooterLink>
         </Link>
       </Box>
       <Box width="100%" align="end">

@@ -33,6 +33,11 @@ export const Translations = {
   BED: t("[n] bed", "[n] letto"),
   BATH: t("[n] bath", "[n] bagno"),
   ALSO: t("Have a look @[c]", "Dai un'occhiata @[c]"),
+  PRIVACY: t("Privacy policy", "Informativa Privacy"),
+  COOKIES: t(
+    "This website uses cookies to enhance the user experience.",
+    "Questo sito utilizza i cookies per migliorare l'esperienza dell'utente"
+  ),
 } as const;
 
 export const LOCALES = {
