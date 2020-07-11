@@ -105,7 +105,7 @@ export default class MyDocument extends Document<{
   var element = document.createElement('script');
   var firstScript = document.getElementsByTagName('script')[0];
   var url = 'https://quantcast.mgr.consensu.org'
-    .concat('/choice/', 'CbrJARwmBxYCJ', '/', host, '/choice.js')
+    .concat('/choice/', '${process.env.NEXT_PUBLIC_QUANTCAST}', '/', host, '/choice.js')
   var uspTries = 0;
   var uspTriesLimit = 3;
   element.async = true;
