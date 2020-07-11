@@ -1,13 +1,13 @@
 import React from "react";
 
-import CookieConsent, { Cookies } from "react-cookie-consent";
+// import CookieConsent, { Cookies } from "react-cookie-consent";
 import styled from "styled-components";
 import { Header } from "../Header";
 import { Box } from "grommet";
 import { Footer } from "../Footer";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from ".";
-import Link from "next/link";
+// import Link from "next/link";
 
 const Content = styled(Box)`
   margin-top: 80px;
@@ -26,7 +26,7 @@ export const Layout: React.FC = ({ children }) => {
       <Content>{children}</Content>
 
       <Footer />
-      <CookieConsent
+      {/* <CookieConsent
         location="bottom"
         buttonText="Ok"
         style={{ background: brandColor.hex }}
@@ -41,7 +41,7 @@ export const Layout: React.FC = ({ children }) => {
         <Link href={`/${lang}/${apartment}/privacy`} passHref>
           <a>{t("PRIVACY")}</a>
         </Link>
-      </CookieConsent>
+      </CookieConsent> */}
     </Container>
   );
 };
