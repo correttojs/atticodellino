@@ -95,7 +95,9 @@ export default class MyDocument extends Document<{
           <Main />
           <NextScript />
 
-          <script src="https://cmp.osano.com/16BZCiS4QtXL717Ae/62f1f5dd-b4cc-492e-814a-53bf3ccb31fd/osano.js"></script>
+          <script
+            src={`https://cmp.osano.com/${process.env.NEXT_PUBLIC_OSANO}/osano.js`}
+          ></script>
         </body>
       </html>
     );
