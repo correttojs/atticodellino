@@ -20,6 +20,7 @@ export const HeroStyle = styled(Box)<{ apartment: GlobalType}>`
   position: relative;
   overflow-x: auto;
   overflow-y: hidden;
+  min-height: 20rem;
 `;
 
 export const Cap = styled(IntersectionImage)`
