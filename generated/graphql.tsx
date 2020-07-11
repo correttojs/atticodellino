@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
+export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -9,7 +10,50 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** The `Upload` scalar type represents a file upload. */
   Upload: any;
+};
+
+export type File = {
+  __typename?: 'File';
+  filename: Scalars['String'];
+  mimetype: Scalars['String'];
+  encoding: Scalars['String'];
+};
+
+export type UserInput = {
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  documentNumber: Scalars['String'];
+  documentType: Scalars['String'];
+  birthDate: Scalars['String'];
+  nationality: Scalars['String'];
+  placeOfBirth: Scalars['String'];
+  apartment?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+};
+
+export type MailResponse = {
+  __typename?: 'MailResponse';
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+};
+
+export type ReviewType = {
+  __typename?: 'ReviewType';
+  comments?: Maybe<Scalars['String']>;
+  date?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
+  reviewer?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+};
+
+export type Calendar = {
+  __typename?: 'Calendar';
+  start?: Maybe<Scalars['String']>;
+  end?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
 };
 
 export type BookInput = {
@@ -21,39 +65,13 @@ export type BookInput = {
 };
 
 export type BookResponse = {
-   __typename?: 'BookResponse';
+  __typename?: 'BookResponse';
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
-};
-
-export enum CacheControlScope {
-  Public = 'PUBLIC',
-  Private = 'PRIVATE'
-}
-
-export type Calendar = {
-   __typename?: 'Calendar';
-  start?: Maybe<Scalars['String']>;
-  end?: Maybe<Scalars['String']>;
-  summary?: Maybe<Scalars['String']>;
-};
-
-export type File = {
-   __typename?: 'File';
-  filename: Scalars['String'];
-  mimetype: Scalars['String'];
-  encoding: Scalars['String'];
-};
-
-export type MailResponse = {
-   __typename?: 'MailResponse';
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
-   __typename?: 'Mutation';
+  __typename?: 'Mutation';
   sendMail?: Maybe<MailResponse>;
   book?: Maybe<BookResponse>;
   registerUser?: Maybe<MailResponse>;
@@ -77,7 +95,7 @@ export type MutationRegisterUserArgs = {
 };
 
 export type Query = {
-   __typename?: 'Query';
+  __typename?: 'Query';
   price?: Maybe<Scalars['Float']>;
   reviews?: Maybe<Array<Maybe<ReviewType>>>;
   calendar?: Maybe<Array<Maybe<Calendar>>>;
@@ -89,31 +107,15 @@ export type QueryPriceArgs = {
   to?: Maybe<Scalars['String']>;
 };
 
-export type ReviewType = {
-   __typename?: 'ReviewType';
-  comments?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['String']>;
-  language?: Maybe<Scalars['String']>;
-  reviewer?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
-};
+export enum CacheControlScope {
+  Public = 'PUBLIC',
+  Private = 'PRIVATE'
+}
 
 
-export type UserInput = {
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  documentNumber: Scalars['String'];
-  documentType: Scalars['String'];
-  birthDate: Scalars['String'];
-  nationality: Scalars['String'];
-  placeOfBirth: Scalars['String'];
-  apartment?: Maybe<Scalars['String']>;
-  email: Scalars['String'];
-};
-
-export type BookNowMutationVariables = {
+export type BookNowMutationVariables = Exact<{
   user: BookInput;
-};
+}>;
 
 
 export type BookNowMutation = (
@@ -124,7 +126,7 @@ export type BookNowMutation = (
   )> }
 );
 
-export type CalendarQueryVariables = {};
+export type CalendarQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type CalendarQuery = (
@@ -135,10 +137,10 @@ export type CalendarQuery = (
   )>>> }
 );
 
-export type PriceQueryVariables = {
+export type PriceQueryVariables = Exact<{
   from?: Maybe<Scalars['String']>;
   to?: Maybe<Scalars['String']>;
-};
+}>;
 
 
 export type PriceQuery = (
@@ -146,10 +148,10 @@ export type PriceQuery = (
   & Pick<Query, 'price'>
 );
 
-export type SendMailMutationVariables = {
+export type SendMailMutationVariables = Exact<{
   user: UserInput;
   file: Scalars['Upload'];
-};
+}>;
 
 
 export type SendMailMutation = (
@@ -207,7 +209,7 @@ export const CalendarDocument = gql`
  * __useCalendarQuery__
  *
  * To run a query within a React component, call `useCalendarQuery` and pass it any options that fit your needs.
- * When your component renders, `useCalendarQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `useCalendarQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -237,7 +239,7 @@ export const PriceDocument = gql`
  * __usePriceQuery__
  *
  * To run a query within a React component, call `usePriceQuery` and pass it any options that fit your needs.
- * When your component renders, `usePriceQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * When your component renders, `usePriceQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
