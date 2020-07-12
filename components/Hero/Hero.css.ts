@@ -8,10 +8,10 @@ import { GlobalType } from "../graphql/airbnDetail";
 export const HeroStyle = styled(Box)<{ apartment: GlobalType}>`
  
 
-  background: url(https://images.takeshape.io/${({ apartment }) => apartment.coverJpg.path})  center / cover;
+   background: url(${({ apartment }) => apartment.apartment === "VR" ? "/images/cover.jpg" : "/images/cover-garda.jpg"})  center / cover;
   
   @supports (background-image: url("image.webp")) {
-     background: url(https://images.takeshape.io/${({ apartment }) => apartment.coverWebp.path})  center / cover;
+     background: url(${({ apartment }) => apartment.apartment === "VR" ? "/images/cover.webp" : "/images/cover-garda.webp"})  center / cover;
   }
   align-items: top;
   justify-content: center;
