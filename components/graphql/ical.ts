@@ -5,6 +5,7 @@ import * as ical from "ical";
 const fetchIcal = async (icalUrl) => {
   let data = await fetch(icalUrl).then((r) => r.text());
   data = ical.parseICS(data);
+
   return Object.keys(data).map((item) => ({
     start: moment(data[item].start).toISOString(),
     end: moment(data[item].end).toISOString(),

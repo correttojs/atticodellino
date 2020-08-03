@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Heading, Menu } from "grommet";
+import { Box, Menu } from "grommet";
 
 import styled from "styled-components";
 import { useGlobal } from "../withGrommetTheme";

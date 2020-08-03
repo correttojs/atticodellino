@@ -11,15 +11,28 @@ export type AsyncReturnType<T extends (...args: any) => any> = T extends (
 type ParamType = AsyncReturnType<typeof getGlobalPaths>["paths"][0];
 
 export async function getGlobalProps({ params }: ParamType) {
+  if (!params.apartment) {
+    return null;
+  }
   params.apartment = params.apartment.toUpperCase();
 
   const apartmentObj = await takeShapeGQLClient.Apartment({
     key: params.apartment,
   });
 
+  const dataLang = await takeShapeGQLClient.getLangs();
+  const dataApartment = await takeShapeGQLClient.getApartmentsKey();
+
   const currentApartment = apartmentObj.getApartmentList.items[0];
   return {
-    props: { global: { ...params, ...currentApartment } },
+    props: {
+      global: {
+        ...params,
+        ...currentApartment,
+        langs: dataLang.getLanguageList.items.map((l) => l.code),
+        apartments: dataApartment.getApartmentList.items.map((a) => a.key),
+      },
+    },
   };
 }
 
@@ -34,8 +47,8 @@ export const getGlobalPaths = async () => {
           ...dataApartment.getApartmentList.items.map((a) => {
             return {
               params: {
-                lang: current.code,
-                apartment: a.key,
+                lang: current.code.toLowerCase(),
+                apartment: a.key.toLowerCase(),
               },
             };
           }),
@@ -48,6 +61,6 @@ export const getGlobalPaths = async () => {
         };
       }[]
     ),
-    fallback: true, // See the "fallback" section below
+    fallback: false, // See the "fallback" section below
   };
 };

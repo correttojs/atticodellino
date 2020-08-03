@@ -10,7 +10,6 @@ import { Box } from "grommet";
 export const getStaticProps = async ({ params }) => {
   const globalProps = await getGlobalProps({ params });
   const data = await takeShapeGQLClient.getArticleByPath({ path: "/privacy" });
-
   return {
     props: { ...globalProps.props, data: data },
   };

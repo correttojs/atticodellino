@@ -75,6 +75,8 @@ export type Photo = {
 export type GlobalType = {
   apartment: string;
   lang: string;
+  langs: string[];
+  apartments: string[];
 } & ApartmentQuery["getApartmentList"]["items"][0];
 
 export type pdp_listing_detail = {

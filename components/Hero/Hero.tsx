@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import {
   HeroStyle,
   HeroCarousel,
@@ -6,7 +6,7 @@ import {
   Cap,
   StyledContacts,
 } from "./Hero.css";
-import { Box, Layer, Image, Carousel } from "grommet";
+import { Box, Layer, Image } from "grommet";
 import { CaretNext, CaretPrevious, Close } from "grommet-icons";
 import { useGlobal } from "../withGrommetTheme";
 import { Contacts } from "../Header/Contact";

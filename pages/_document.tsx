@@ -1,14 +1,16 @@
 import Document, { Head, Main, NextScript } from "next/document";
 // Import styled components ServerStyleSheet
 import { ServerStyleSheet } from "styled-components";
-import { getPathLocale } from "../components/Translations/useChangeLocale";
+import { getGlobalProps } from "../components/takeshape/getGlobal";
 
 export default class MyDocument extends Document<{
   styleTags;
   lang;
   apartment;
+  cover: string;
+  color: string;
 }> {
-  static getInitialProps(ctx) {
+  static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
 
     const page = ctx.renderPage((App) => (props) =>
@@ -16,12 +18,15 @@ export default class MyDocument extends Document<{
     );
 
     const styleTags = sheet.getStyleElement();
+    const global = await getGlobalProps({ params: ctx.query });
 
     return {
       ...page,
       styleTags,
-      lang: getPathLocale(ctx?.req?.url ?? window.location.pathname),
-      apartment: /garda/.test(ctx?.req?.url) ? "GARDA" : "VR",
+      lang: ctx.query.lang ?? "en",
+      apartment: global?.props?.global?.apartment,
+      cover: global?.props?.global?.coverWebp,
+      color: global?.props?.global?.brandColor,
     };
   }
 
@@ -30,31 +35,17 @@ export default class MyDocument extends Document<{
       <html lang={this.props.lang}>
         <Head>
           <>
-            {this.props.apartment === "GARDA" ? (
-              <>
-                <meta
-                  name="viewport"
-                  content="initial-scale=1.0, width=device-width"
-                ></meta>
-                <meta name="theme-color" content="#290012" />
-                <link
-                  rel="preload"
-                  href="/images/cover-garda.webp"
-                  as="image"
-                  type="image/webp"
-                ></link>
-              </>
-            ) : (
-              <>
-                <meta name="theme-color" content="#09364c" />
-                <link
-                  rel="preload"
-                  href="/images/cover.webp"
-                  as="image"
-                  type="image/webp"
-                ></link>
-              </>
-            )}
+            <meta
+              name="viewport"
+              content="initial-scale=1.0, width=device-width"
+            ></meta>
+            <meta name="theme-color" content={this.props.color} />
+            <link
+              rel="preload"
+              href={this.props.cover}
+              as="image"
+              type="image/webp"
+            ></link>
 
             <link
               href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Raleway&display=swap"

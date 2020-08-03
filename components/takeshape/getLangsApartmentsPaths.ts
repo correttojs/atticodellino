@@ -25,6 +25,6 @@ export const getLangsApartmentsPaths = async () => {
         };
       }[]
     ),
-    fallback: true, // See the "fallback" section below
+    fallback: false, // See the "fallback" section below
   };
 };

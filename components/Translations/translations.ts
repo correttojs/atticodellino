@@ -39,11 +39,3 @@ export const Translations = {
     "Questo sito utilizza i cookies per migliorare l'esperienza dell'utente"
   ),
 } as const;
-
-export const LOCALES = {
-  en: "en",
-  it: "it",
-  de: "de",
-};
-
-export const ALL_LOCALES = Object.keys(LOCALES);
