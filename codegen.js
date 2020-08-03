@@ -17,6 +17,7 @@ async function run() {
             withHooks: true,
             withHOC: false,
             withComponent: false,
+            gqlImport: "graphql-tag",
           },
         },
         [process.cwd() + "/graphql.schema.json"]: {
@@ -47,6 +48,8 @@ async function run() {
             withHooks: true,
             withHOC: false,
             withComponent: false,
+            reactApolloVersion: 3,
+            // gqlImport: "@apollo/client",
           },
         },
       },

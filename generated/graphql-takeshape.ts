@@ -2,7 +2,7 @@ import { GraphQLClient } from 'graphql-request';
 import { print } from 'graphql';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -60,6 +60,8 @@ export type Root = {
   tsGetUsage?: Maybe<TsUsageType>;
   /** Retrieve a project export. If the export is completed, you'll be provided with a path to it. */
   tsGetProjectExport?: Maybe<TsProjectExport>;
+  /** Retrieve a project import. */
+  tsGetProjectImport?: Maybe<TsProjectImport>;
   /** Get a Project by id */
   tsGetProject?: Maybe<TsProject>;
   /** List of Project Members */
@@ -189,6 +191,12 @@ export type RootTsGetStatusUpdateListArgs = {
 
 /** Root of the Schema */
 export type RootTsGetProjectExportArgs = {
+  id: Scalars['String'];
+};
+
+
+/** Root of the Schema */
+export type RootTsGetProjectImportArgs = {
   id: Scalars['String'];
 };
 
@@ -807,8 +815,12 @@ export type TsStatusUpdate = {
 
 export type TsUsageType = {
   __typename?: 'TSUsageType';
+  /** The usage period start time */
+  startTime?: Maybe<Scalars['String']>;
+  /** The usage period end time */
+  endTime?: Maybe<Scalars['String']>;
   /** Get members for project */
-  members?: Maybe<Scalars['Int']>;
+  users?: Maybe<Scalars['Int']>;
   /** Get user bandwidth */
   bandwidth?: Maybe<Scalars['Int']>;
   /** Get user roles */
@@ -816,11 +828,11 @@ export type TsUsageType = {
   /** Get user workflows */
   workflows?: Maybe<Scalars['Int']>;
   /** Get user sites */
-  sites?: Maybe<Scalars['Int']>;
+  deployTargets?: Maybe<Scalars['Int']>;
   /** Get user locales */
   locales?: Maybe<Scalars['Int']>;
   /** Get user api calls */
-  apiCalls?: Maybe<Scalars['Int']>;
+  apiRequests?: Maybe<Scalars['Int']>;
   /** Get user content entries */
   contentEntries?: Maybe<Scalars['Int']>;
 };
@@ -831,6 +843,14 @@ export type TsProjectExport = {
   id?: Maybe<Scalars['String']>;
   status?: Maybe<Scalars['String']>;
   file?: Maybe<Scalars['String']>;
+};
+
+export type TsProjectImport = {
+  __typename?: 'TSProjectImport';
+  id?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['String']>;
 };
 
 /** A Project is you main workspace it stores the content that powers your API */
@@ -892,6 +912,7 @@ export type TsBillingEntitlements = {
   apiRequests?: Maybe<Scalars['Int']>;
   apiRateLimit?: Maybe<Scalars['Int']>;
   contentEntries?: Maybe<Scalars['Int']>;
+  bandwidth?: Maybe<Scalars['Int']>;
   deployTargets?: Maybe<Scalars['Int']>;
   webhooks?: Maybe<Scalars['Boolean']>;
   locales?: Maybe<Scalars['Int']>;
@@ -1025,6 +1046,8 @@ export type TsWhereDraftjs = {
 export type TsWhereId = {
   /** Exact match */
   eq?: Maybe<Scalars['ID']>;
+  /** Array of possible exact match values. */
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type TsWhereInteger = {
@@ -3220,6 +3243,8 @@ export type Mutations = {
   tsCancelStatusUpdate?: Maybe<Scalars['Boolean']>;
   /** Exports your project to a ZIP file, which you can then download */
   tsExportProject?: Maybe<Scalars['String']>;
+  /** Imports a project from a specified project pattern URI. */
+  tsImportProject?: Maybe<Scalars['String']>;
   /** Update Project */
   tsUpdateProject?: Maybe<TsProject>;
   /** Update Project Billing */
@@ -3443,6 +3468,13 @@ export type MutationsTsCancelStatusUpdateArgs = {
 
 export type MutationsTsExportProjectArgs = {
   empty?: Maybe<Scalars['Boolean']>;
+  origin?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationsTsImportProjectArgs = {
+  uri: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
   origin?: Maybe<Scalars['String']>;
 };
 

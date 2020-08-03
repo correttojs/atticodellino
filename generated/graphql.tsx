@@ -1,8 +1,9 @@
-import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import gql from "graphql-tag";
+import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+export type Exact<T extends { [key: string]: unknown }> = {
+  [K in keyof T]: T[K];
+};
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -15,163 +16,153 @@ export type Scalars = {
 };
 
 export type File = {
-  __typename?: 'File';
-  filename: Scalars['String'];
-  mimetype: Scalars['String'];
-  encoding: Scalars['String'];
+  __typename?: "File";
+  filename: Scalars["String"];
+  mimetype: Scalars["String"];
+  encoding: Scalars["String"];
 };
 
 export type UserInput = {
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  documentNumber: Scalars['String'];
-  documentType: Scalars['String'];
-  birthDate: Scalars['String'];
-  nationality: Scalars['String'];
-  placeOfBirth: Scalars['String'];
-  apartment?: Maybe<Scalars['String']>;
-  email: Scalars['String'];
+  firstName: Scalars["String"];
+  lastName: Scalars["String"];
+  documentNumber: Scalars["String"];
+  documentType: Scalars["String"];
+  birthDate: Scalars["String"];
+  nationality: Scalars["String"];
+  placeOfBirth: Scalars["String"];
+  apartment?: Maybe<Scalars["String"]>;
+  email: Scalars["String"];
 };
 
 export type MailResponse = {
-  __typename?: 'MailResponse';
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
+  __typename?: "MailResponse";
+  firstName?: Maybe<Scalars["String"]>;
+  lastName?: Maybe<Scalars["String"]>;
+  email?: Maybe<Scalars["String"]>;
 };
 
 export type ReviewType = {
-  __typename?: 'ReviewType';
-  comments?: Maybe<Scalars['String']>;
-  date?: Maybe<Scalars['String']>;
-  language?: Maybe<Scalars['String']>;
-  reviewer?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['Int']>;
+  __typename?: "ReviewType";
+  comments?: Maybe<Scalars["String"]>;
+  date?: Maybe<Scalars["String"]>;
+  language?: Maybe<Scalars["String"]>;
+  reviewer?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars["Int"]>;
 };
 
 export type Calendar = {
-  __typename?: 'Calendar';
-  start?: Maybe<Scalars['String']>;
-  end?: Maybe<Scalars['String']>;
-  summary?: Maybe<Scalars['String']>;
+  __typename?: "Calendar";
+  start?: Maybe<Scalars["String"]>;
+  end?: Maybe<Scalars["String"]>;
+  summary?: Maybe<Scalars["String"]>;
 };
 
 export type BookInput = {
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['String']>;
-  to?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars["String"]>;
+  lastName?: Maybe<Scalars["String"]>;
+  email?: Maybe<Scalars["String"]>;
+  from?: Maybe<Scalars["String"]>;
+  to?: Maybe<Scalars["String"]>;
 };
 
 export type BookResponse = {
-  __typename?: 'BookResponse';
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
+  __typename?: "BookResponse";
+  firstName?: Maybe<Scalars["String"]>;
+  lastName?: Maybe<Scalars["String"]>;
 };
 
 export type Mutation = {
-  __typename?: 'Mutation';
+  __typename?: "Mutation";
   sendMail?: Maybe<MailResponse>;
   book?: Maybe<BookResponse>;
   registerUser?: Maybe<MailResponse>;
 };
 
-
 export type MutationSendMailArgs = {
   user: UserInput;
-  file: Scalars['Upload'];
+  file: Scalars["Upload"];
 };
-
 
 export type MutationBookArgs = {
   user?: Maybe<BookInput>;
 };
 
-
 export type MutationRegisterUserArgs = {
   user: UserInput;
-  file: Scalars['Upload'];
+  file: Scalars["Upload"];
 };
 
 export type Query = {
-  __typename?: 'Query';
-  price?: Maybe<Scalars['Float']>;
+  __typename?: "Query";
+  price?: Maybe<Scalars["Float"]>;
   reviews?: Maybe<Array<Maybe<ReviewType>>>;
   calendar?: Maybe<Array<Maybe<Calendar>>>;
 };
 
-
 export type QueryPriceArgs = {
-  from?: Maybe<Scalars['String']>;
-  to?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars["String"]>;
+  to?: Maybe<Scalars["String"]>;
 };
 
 export enum CacheControlScope {
-  Public = 'PUBLIC',
-  Private = 'PRIVATE'
+  Public = "PUBLIC",
+  Private = "PRIVATE",
 }
-
 
 export type BookNowMutationVariables = Exact<{
   user: BookInput;
 }>;
 
+export type BookNowMutation = { __typename?: "Mutation" } & {
+  book?: Maybe<
+    { __typename?: "BookResponse" } & Pick<
+      BookResponse,
+      "firstName" | "lastName"
+    >
+  >;
+};
 
-export type BookNowMutation = (
-  { __typename?: 'Mutation' }
-  & { book?: Maybe<(
-    { __typename?: 'BookResponse' }
-    & Pick<BookResponse, 'firstName' | 'lastName'>
-  )> }
-);
+export type CalendarQueryVariables = Exact<{ [key: string]: never }>;
 
-export type CalendarQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CalendarQuery = (
-  { __typename?: 'Query' }
-  & { calendar?: Maybe<Array<Maybe<(
-    { __typename?: 'Calendar' }
-    & Pick<Calendar, 'start' | 'end'>
-  )>>> }
-);
+export type CalendarQuery = { __typename?: "Query" } & {
+  calendar?: Maybe<
+    Array<Maybe<{ __typename?: "Calendar" } & Pick<Calendar, "start" | "end">>>
+  >;
+};
 
 export type PriceQueryVariables = Exact<{
-  from?: Maybe<Scalars['String']>;
-  to?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars["String"]>;
+  to?: Maybe<Scalars["String"]>;
 }>;
 
-
-export type PriceQuery = (
-  { __typename?: 'Query' }
-  & Pick<Query, 'price'>
-);
+export type PriceQuery = { __typename?: "Query" } & Pick<Query, "price">;
 
 export type SendMailMutationVariables = Exact<{
   user: UserInput;
-  file: Scalars['Upload'];
+  file: Scalars["Upload"];
 }>;
 
-
-export type SendMailMutation = (
-  { __typename?: 'Mutation' }
-  & { sendMail?: Maybe<(
-    { __typename?: 'MailResponse' }
-    & Pick<MailResponse, 'firstName' | 'lastName' | 'email'>
-  )> }
-);
-
+export type SendMailMutation = { __typename?: "Mutation" } & {
+  sendMail?: Maybe<
+    { __typename?: "MailResponse" } & Pick<
+      MailResponse,
+      "firstName" | "lastName" | "email"
+    >
+  >;
+};
 
 export const BookNowDocument = gql`
-    mutation bookNow($user: BookInput!) {
-  book(user: $user) {
-    firstName
-    lastName
+  mutation bookNow($user: BookInput!) {
+    book(user: $user) {
+      firstName
+      lastName
+    }
   }
-}
-    `;
-export type BookNowMutationFn = ApolloReactCommon.MutationFunction<BookNowMutation, BookNowMutationVariables>;
+`;
+export type BookNowMutationFn = Apollo.MutationFunction<
+  BookNowMutation,
+  BookNowMutationVariables
+>;
 
 /**
  * __useBookNowMutation__
@@ -190,20 +181,31 @@ export type BookNowMutationFn = ApolloReactCommon.MutationFunction<BookNowMutati
  *   },
  * });
  */
-export function useBookNowMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<BookNowMutation, BookNowMutationVariables>) {
-        return ApolloReactHooks.useMutation<BookNowMutation, BookNowMutationVariables>(BookNowDocument, baseOptions);
-      }
-export type BookNowMutationHookResult = ReturnType<typeof useBookNowMutation>;
-export type BookNowMutationResult = ApolloReactCommon.MutationResult<BookNowMutation>;
-export type BookNowMutationOptions = ApolloReactCommon.BaseMutationOptions<BookNowMutation, BookNowMutationVariables>;
-export const CalendarDocument = gql`
-    query Calendar {
-  calendar {
-    start
-    end
-  }
+export function useBookNowMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    BookNowMutation,
+    BookNowMutationVariables
+  >
+) {
+  return Apollo.useMutation<BookNowMutation, BookNowMutationVariables>(
+    BookNowDocument,
+    baseOptions
+  );
 }
-    `;
+export type BookNowMutationHookResult = ReturnType<typeof useBookNowMutation>;
+export type BookNowMutationResult = Apollo.MutationResult<BookNowMutation>;
+export type BookNowMutationOptions = Apollo.BaseMutationOptions<
+  BookNowMutation,
+  BookNowMutationVariables
+>;
+export const CalendarDocument = gql`
+  query Calendar {
+    calendar {
+      start
+      end
+    }
+  }
+`;
 
 /**
  * __useCalendarQuery__
@@ -220,20 +222,38 @@ export const CalendarDocument = gql`
  *   },
  * });
  */
-export function useCalendarQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CalendarQuery, CalendarQueryVariables>) {
-        return ApolloReactHooks.useQuery<CalendarQuery, CalendarQueryVariables>(CalendarDocument, baseOptions);
-      }
-export function useCalendarLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CalendarQuery, CalendarQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<CalendarQuery, CalendarQueryVariables>(CalendarDocument, baseOptions);
-        }
-export type CalendarQueryHookResult = ReturnType<typeof useCalendarQuery>;
-export type CalendarLazyQueryHookResult = ReturnType<typeof useCalendarLazyQuery>;
-export type CalendarQueryResult = ApolloReactCommon.QueryResult<CalendarQuery, CalendarQueryVariables>;
-export const PriceDocument = gql`
-    query Price($from: String, $to: String) {
-  price(from: $from, to: $to)
+export function useCalendarQuery(
+  baseOptions?: Apollo.QueryHookOptions<CalendarQuery, CalendarQueryVariables>
+) {
+  return Apollo.useQuery<CalendarQuery, CalendarQueryVariables>(
+    CalendarDocument,
+    baseOptions
+  );
 }
-    `;
+export function useCalendarLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    CalendarQuery,
+    CalendarQueryVariables
+  >
+) {
+  return Apollo.useLazyQuery<CalendarQuery, CalendarQueryVariables>(
+    CalendarDocument,
+    baseOptions
+  );
+}
+export type CalendarQueryHookResult = ReturnType<typeof useCalendarQuery>;
+export type CalendarLazyQueryHookResult = ReturnType<
+  typeof useCalendarLazyQuery
+>;
+export type CalendarQueryResult = Apollo.QueryResult<
+  CalendarQuery,
+  CalendarQueryVariables
+>;
+export const PriceDocument = gql`
+  query Price($from: String, $to: String) {
+    price(from: $from, to: $to)
+  }
+`;
 
 /**
  * __usePriceQuery__
@@ -252,25 +272,41 @@ export const PriceDocument = gql`
  *   },
  * });
  */
-export function usePriceQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PriceQuery, PriceQueryVariables>) {
-        return ApolloReactHooks.useQuery<PriceQuery, PriceQueryVariables>(PriceDocument, baseOptions);
-      }
-export function usePriceLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PriceQuery, PriceQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<PriceQuery, PriceQueryVariables>(PriceDocument, baseOptions);
-        }
+export function usePriceQuery(
+  baseOptions?: Apollo.QueryHookOptions<PriceQuery, PriceQueryVariables>
+) {
+  return Apollo.useQuery<PriceQuery, PriceQueryVariables>(
+    PriceDocument,
+    baseOptions
+  );
+}
+export function usePriceLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<PriceQuery, PriceQueryVariables>
+) {
+  return Apollo.useLazyQuery<PriceQuery, PriceQueryVariables>(
+    PriceDocument,
+    baseOptions
+  );
+}
 export type PriceQueryHookResult = ReturnType<typeof usePriceQuery>;
 export type PriceLazyQueryHookResult = ReturnType<typeof usePriceLazyQuery>;
-export type PriceQueryResult = ApolloReactCommon.QueryResult<PriceQuery, PriceQueryVariables>;
+export type PriceQueryResult = Apollo.QueryResult<
+  PriceQuery,
+  PriceQueryVariables
+>;
 export const SendMailDocument = gql`
-    mutation sendMail($user: UserInput!, $file: Upload!) {
-  sendMail(user: $user, file: $file) {
-    firstName
-    lastName
-    email
+  mutation sendMail($user: UserInput!, $file: Upload!) {
+    sendMail(user: $user, file: $file) {
+      firstName
+      lastName
+      email
+    }
   }
-}
-    `;
-export type SendMailMutationFn = ApolloReactCommon.MutationFunction<SendMailMutation, SendMailMutationVariables>;
+`;
+export type SendMailMutationFn = Apollo.MutationFunction<
+  SendMailMutation,
+  SendMailMutationVariables
+>;
 
 /**
  * __useSendMailMutation__
@@ -290,9 +326,20 @@ export type SendMailMutationFn = ApolloReactCommon.MutationFunction<SendMailMuta
  *   },
  * });
  */
-export function useSendMailMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<SendMailMutation, SendMailMutationVariables>) {
-        return ApolloReactHooks.useMutation<SendMailMutation, SendMailMutationVariables>(SendMailDocument, baseOptions);
-      }
+export function useSendMailMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    SendMailMutation,
+    SendMailMutationVariables
+  >
+) {
+  return Apollo.useMutation<SendMailMutation, SendMailMutationVariables>(
+    SendMailDocument,
+    baseOptions
+  );
+}
 export type SendMailMutationHookResult = ReturnType<typeof useSendMailMutation>;
-export type SendMailMutationResult = ApolloReactCommon.MutationResult<SendMailMutation>;
-export type SendMailMutationOptions = ApolloReactCommon.BaseMutationOptions<SendMailMutation, SendMailMutationVariables>;
+export type SendMailMutationResult = Apollo.MutationResult<SendMailMutation>;
+export type SendMailMutationOptions = Apollo.BaseMutationOptions<
+  SendMailMutation,
+  SendMailMutationVariables
+>;

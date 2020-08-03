@@ -1,6 +1,6 @@
 import { Grommet } from "grommet";
 import { createGlobalStyle } from "styled-components";
-import { ApolloProvider } from "@apollo/react-hooks";
+import { ApolloProvider } from "@apollo/client";
 import { gqlClient } from "./gqlClient";
 import { Layout } from "./Layout";
 import { theme } from "../CssVar/theme";
