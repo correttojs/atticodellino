@@ -7,8 +7,8 @@ const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
 export const config = {
   api: {
-    bodyParser: false
-  }
+    bodyParser: false,
+  },
 };
 
 const graphqlHandler = apolloServer.createHandler({ path: "/api/graphql" });

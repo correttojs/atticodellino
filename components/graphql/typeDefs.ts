@@ -58,8 +58,8 @@ export const typeDefs = gql`
     registerUser(user: UserInput!, file: Upload!): MailResponse
   }
   type Query {
-    price(from: String, to: String): Float
-    reviews: [ReviewType]
-    calendar: [Calendar]
+    price(from: String!, to: String!, airBnb: String!): Float
+    reviews(airBnb: String!): [ReviewType]
+    calendar(apartment: String!): [Calendar]
   }
 `;

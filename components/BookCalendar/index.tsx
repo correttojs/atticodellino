@@ -7,6 +7,7 @@ import { Box, Heading, ThemeType } from "grommet";
 import { MQ_MOBILE } from "../CssVar/MediaQueries";
 import { theme } from "../CssVar/theme";
 import { useTranslations } from "../Translations/useTranslations";
+import { useGlobal } from "../withGrommetTheme";
 
 const StyledCalendar = styled(ReactCalendar)`
   .react-calendar__tile--now {
@@ -43,7 +44,8 @@ const formatDate = (date: Date) => {
 };
 
 export const BookingCalendar = () => {
-  const { data } = useCalendarQuery();
+  const { apartment, airBnb } = useGlobal();
+  const { data } = useCalendarQuery({ variables: { apartment } });
   const [calcPrice, { data: price }] = usePriceLazyQuery();
   const t = useTranslations();
 
@@ -74,7 +76,11 @@ export const BookingCalendar = () => {
           onChange={(e) => {
             setSelection(e);
             calcPrice({
-              variables: { from: formatDate(e[0]), to: formatDate(e[1]) },
+              variables: {
+                from: formatDate(e[0]),
+                to: formatDate(e[1]),
+                airBnb,
+              },
             });
           }}
         />

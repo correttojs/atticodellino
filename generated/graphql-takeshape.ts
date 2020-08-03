@@ -90,6 +90,18 @@ export type Root = {
   getTsStaticSite?: Maybe<TsStaticSite>;
   /** Search the tsStaticSite index by keyword */
   searchTsStaticSiteIndex?: Maybe<TsStaticSiteSearchResults>;
+  /** Returns a list apartment in natural order. */
+  getApartmentList?: Maybe<ApartmentPaginatedList>;
+  /** Get a apartment by ID */
+  getApartment?: Maybe<Apartment>;
+  /** Search the apartment index by keyword */
+  searchApartmentIndex?: Maybe<ApartmentSearchResults>;
+  /** Returns a list article in natural order. */
+  getArticleList?: Maybe<ArticlePaginatedList>;
+  /** Get a article by ID */
+  getArticle?: Maybe<Article>;
+  /** Search the article index by keyword */
+  searchArticleIndex?: Maybe<ArticleSearchResults>;
   /** Returns a list faq in natural order. */
   getFaqList?: Maybe<FaqPaginatedList>;
   /** Get a faq by ID */
@@ -102,18 +114,6 @@ export type Root = {
   getRegistrations?: Maybe<Registrations>;
   /** Search the registrations index by keyword */
   searchRegistrationsIndex?: Maybe<RegistrationsSearchResults>;
-  /** Returns a list article in natural order. */
-  getArticleList?: Maybe<ArticlePaginatedList>;
-  /** Get a article by ID */
-  getArticle?: Maybe<Article>;
-  /** Search the article index by keyword */
-  searchArticleIndex?: Maybe<ArticleSearchResults>;
-  /** Returns a list apartment in natural order. */
-  getApartmentList?: Maybe<ApartmentPaginatedList>;
-  /** Get a apartment by ID */
-  getApartment?: Maybe<Apartment>;
-  /** Search the apartment index by keyword */
-  searchApartmentIndex?: Maybe<ApartmentSearchResults>;
   /** Returns a list language in natural order. */
   getLanguageList?: Maybe<LanguagePaginatedList>;
   /** Get a language by ID */
@@ -336,6 +336,76 @@ export type RootSearchTsStaticSiteIndexArgs = {
 
 
 /** Root of the Schema */
+export type RootGetApartmentListArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereApartmentInput>;
+};
+
+
+/** Root of the Schema */
+export type RootGetApartmentArgs = {
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** Root of the Schema */
+export type RootSearchApartmentIndexArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereApartmentInput>;
+};
+
+
+/** Root of the Schema */
+export type RootGetArticleListArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereArticleInput>;
+};
+
+
+/** Root of the Schema */
+export type RootGetArticleArgs = {
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** Root of the Schema */
+export type RootSearchArticleIndexArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereArticleInput>;
+};
+
+
+/** Root of the Schema */
 export type RootGetFaqListArgs = {
   locale?: Maybe<Scalars['String']>;
   enableLocaleFallback?: Maybe<Scalars['Boolean']>;
@@ -402,76 +472,6 @@ export type RootSearchRegistrationsIndexArgs = {
   filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereRegistrationsInput>;
-};
-
-
-/** Root of the Schema */
-export type RootGetArticleListArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  onlyEnabled?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereArticleInput>;
-};
-
-
-/** Root of the Schema */
-export type RootGetArticleArgs = {
-  _id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-/** Root of the Schema */
-export type RootSearchArticleIndexArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereArticleInput>;
-};
-
-
-/** Root of the Schema */
-export type RootGetApartmentListArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  onlyEnabled?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereApartmentInput>;
-};
-
-
-/** Root of the Schema */
-export type RootGetApartmentArgs = {
-  _id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-/** Root of the Schema */
-export type RootSearchApartmentIndexArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereApartmentInput>;
 };
 
 
@@ -993,6 +993,26 @@ export type TsWhereInput = {
   environmentVariables?: Maybe<TsWhereEnvironmentVariables>;
   triggers?: Maybe<TsWhereTriggers>;
   templateHash?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
@@ -1007,24 +1027,6 @@ export type TsWhereInput = {
   documentNumber?: Maybe<TsWhereString>;
   birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
 };
 
 export type TsWhereString = {
@@ -1138,6 +1140,26 @@ export type TsAndOperator = {
   environmentVariables?: Maybe<TsWhereEnvironmentVariables>;
   triggers?: Maybe<TsWhereTriggers>;
   templateHash?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
@@ -1152,24 +1174,6 @@ export type TsAndOperator = {
   documentNumber?: Maybe<TsWhereString>;
   birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
 };
 
 /** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
@@ -1202,6 +1206,26 @@ export type TsOrOperator = {
   environmentVariables?: Maybe<TsWhereEnvironmentVariables>;
   triggers?: Maybe<TsWhereTriggers>;
   templateHash?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
@@ -1216,24 +1240,6 @@ export type TsOrOperator = {
   documentNumber?: Maybe<TsWhereString>;
   birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
 };
 
 /** NOT takes a single condition that must not appear in the matching results. */
@@ -1266,6 +1272,26 @@ export type TsNotOperator = {
   environmentVariables?: Maybe<TsWhereEnvironmentVariables>;
   triggers?: Maybe<TsWhereTriggers>;
   templateHash?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
   language?: Maybe<TsWhereLanguageRelationship>;
   linkVideo?: Maybe<TsWhereString>;
   question?: Maybe<TsWhereString>;
@@ -1280,24 +1306,6 @@ export type TsNotOperator = {
   documentNumber?: Maybe<TsWhereString>;
   birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
 };
 
 /** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
@@ -1360,19 +1368,8 @@ export type TsWhereTriggers = {
   status?: Maybe<TsWhereString>;
 };
 
-export type TsWhereLanguageRelationship = {
-  code?: Maybe<TsWhereString>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-};
-
 export type TsWhereApartmentRelationship = {
+  bookingIcal?: Maybe<TsWhereString>;
   brandColor?: Maybe<TsWhereBrandColor>;
   code?: Maybe<TsWhereString>;
   lighterColor?: Maybe<TsWhereLighterColor>;
@@ -1384,6 +1381,7 @@ export type TsWhereApartmentRelationship = {
   facebookLink?: Maybe<TsWhereString>;
   name?: Maybe<TsWhereString>;
   location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
   key?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
@@ -1490,6 +1488,18 @@ export type TsWhereAssetRelationship = {
   mimeType?: Maybe<TsWhereString>;
   title?: Maybe<TsWhereString>;
   credit?: Maybe<TsWhereDraftjs>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+};
+
+export type TsWhereLanguageRelationship = {
+  code?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _contentTypeId?: Maybe<TsWhereId>;
@@ -1740,6 +1750,7 @@ export type UndefinedReference = Apartment;
 export type Apartment = TsSearchable & {
   __typename?: 'Apartment';
   sponsor?: Maybe<Array<Maybe<Apartment>>>;
+  bookingIcal?: Maybe<Scalars['String']>;
   coverJpg?: Maybe<Asset>;
   brandColor?: Maybe<ApartmentBrandColor>;
   code?: Maybe<Scalars['String']>;
@@ -1753,6 +1764,7 @@ export type Apartment = TsSearchable & {
   coverWebp?: Maybe<Asset>;
   name?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
+  airbnbIcal?: Maybe<Scalars['String']>;
   key?: Maybe<Scalars['String']>;
   longitude?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['ID']>;
@@ -1770,8 +1782,8 @@ export type Apartment = TsSearchable & {
   _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
   _references?: Maybe<UndefinedReferencePaginatedList>;
-  faqSet?: Maybe<FaqPaginatedList>;
   apartmentSet?: Maybe<ApartmentPaginatedList>;
+  faqSet?: Maybe<FaqPaginatedList>;
   searchSummary?: Maybe<Scalars['String']>;
 };
 
@@ -1804,7 +1816,7 @@ export type Apartment_ReferencesArgs = {
 };
 
 
-export type ApartmentFaqSetArgs = {
+export type ApartmentApartmentSetArgs = {
   filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   from?: Maybe<Scalars['Int']>;
@@ -1814,7 +1826,7 @@ export type ApartmentFaqSetArgs = {
 };
 
 
-export type ApartmentApartmentSetArgs = {
+export type ApartmentFaqSetArgs = {
   filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   from?: Maybe<Scalars['Int']>;
@@ -1919,6 +1931,14 @@ export type ApartmentLightColorRgb = {
   g?: Maybe<Scalars['Float']>;
 };
 
+export type ApartmentPaginatedList = {
+  __typename?: 'ApartmentPaginatedList';
+  /** @deprecated Use items instead */
+  results?: Maybe<Array<Maybe<Apartment>>>;
+  items?: Maybe<Array<Maybe<Apartment>>>;
+  total?: Maybe<Scalars['Int']>;
+};
+
 export type FaqPaginatedList = {
   __typename?: 'FaqPaginatedList';
   /** @deprecated Use items instead */
@@ -1989,8 +2009,8 @@ export type Language = TsSearchable & {
   _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
   _references?: Maybe<UndefinedReferencePaginatedList>;
-  faqSet?: Maybe<FaqPaginatedList>;
   articleSet?: Maybe<ArticlePaginatedList>;
+  faqSet?: Maybe<FaqPaginatedList>;
   searchSummary?: Maybe<Scalars['String']>;
 };
 
@@ -2005,7 +2025,7 @@ export type Language_ReferencesArgs = {
 };
 
 
-export type LanguageFaqSetArgs = {
+export type LanguageArticleSetArgs = {
   filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   from?: Maybe<Scalars['Int']>;
@@ -2015,7 +2035,7 @@ export type LanguageFaqSetArgs = {
 };
 
 
-export type LanguageArticleSetArgs = {
+export type LanguageFaqSetArgs = {
   filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   from?: Maybe<Scalars['Int']>;
@@ -2067,14 +2087,6 @@ export type ArticleContentHtmlArgs = {
   imageConfig?: Maybe<Scalars['JSON']>;
   images?: Maybe<TsImagesConfig>;
   classPrefix?: Maybe<Scalars['String']>;
-};
-
-export type ApartmentPaginatedList = {
-  __typename?: 'ApartmentPaginatedList';
-  /** @deprecated Use items instead */
-  results?: Maybe<Array<Maybe<Apartment>>>;
-  items?: Maybe<Array<Maybe<Apartment>>>;
-  total?: Maybe<Scalars['Int']>;
 };
 
 /** Asset search results */
@@ -2269,6 +2281,270 @@ export type TsStaticSiteSearchResult = {
   destination?: Maybe<Scalars['String']>;
   privateAcl?: Maybe<Scalars['Boolean']>;
   templateHash?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<Scalars['String']>;
+};
+
+export type TsWhereApartmentInput = {
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+  AND?: Maybe<Array<Maybe<TsApartmentAndOperator>>>;
+  OR?: Maybe<Array<Maybe<TsApartmentOrOperator>>>;
+  NOT?: Maybe<TsApartmentNotOperator>;
+};
+
+/** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
+export type TsApartmentAndOperator = {
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+  AND?: Maybe<Array<Maybe<TsApartmentAndOperator>>>;
+  OR?: Maybe<Array<Maybe<TsApartmentOrOperator>>>;
+  NOT?: Maybe<TsApartmentNotOperator>;
+};
+
+/** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
+export type TsApartmentOrOperator = {
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+  AND?: Maybe<Array<Maybe<TsApartmentAndOperator>>>;
+  OR?: Maybe<Array<Maybe<TsApartmentOrOperator>>>;
+  NOT?: Maybe<TsApartmentNotOperator>;
+};
+
+/** NOT takes a single condition that must not appear in the matching results. */
+export type TsApartmentNotOperator = {
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  bookingIcal?: Maybe<TsWhereString>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  brandColor?: Maybe<TsWhereBrandColor>;
+  code?: Maybe<TsWhereString>;
+  lighterColor?: Maybe<TsWhereLighterColor>;
+  address?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereLightColor>;
+  airbnbLink?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  name?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  key?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+};
+
+/** Apartment search results */
+export type ApartmentSearchResults = {
+  __typename?: 'ApartmentSearchResults';
+  results?: Maybe<Array<Maybe<ApartmentSearchResult>>>;
+  total?: Maybe<Scalars['Int']>;
+};
+
+/** A Apartment search result */
+export type ApartmentSearchResult = {
+  __typename?: 'ApartmentSearchResult';
+  searchSummary?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  address?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<Scalars['String']>;
+};
+
+export type TsWhereArticleInput = {
+  path?: Maybe<TsWhereString>;
+  title?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+  AND?: Maybe<Array<Maybe<TsArticleAndOperator>>>;
+  OR?: Maybe<Array<Maybe<TsArticleOrOperator>>>;
+  NOT?: Maybe<TsArticleNotOperator>;
+};
+
+/** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
+export type TsArticleAndOperator = {
+  path?: Maybe<TsWhereString>;
+  title?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+  AND?: Maybe<Array<Maybe<TsArticleAndOperator>>>;
+  OR?: Maybe<Array<Maybe<TsArticleOrOperator>>>;
+  NOT?: Maybe<TsArticleNotOperator>;
+};
+
+/** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
+export type TsArticleOrOperator = {
+  path?: Maybe<TsWhereString>;
+  title?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+  AND?: Maybe<Array<Maybe<TsArticleAndOperator>>>;
+  OR?: Maybe<Array<Maybe<TsArticleOrOperator>>>;
+  NOT?: Maybe<TsArticleNotOperator>;
+};
+
+/** NOT takes a single condition that must not appear in the matching results. */
+export type TsArticleNotOperator = {
+  path?: Maybe<TsWhereString>;
+  title?: Maybe<TsWhereString>;
+  relationship?: Maybe<TsWhereLanguageRelationship>;
+  content?: Maybe<TsWhereDraftjs>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+};
+
+/** Article search results */
+export type ArticleSearchResults = {
+  __typename?: 'ArticleSearchResults';
+  results?: Maybe<Array<Maybe<ArticleSearchResult>>>;
+  total?: Maybe<Scalars['Int']>;
+};
+
+/** A Article search result */
+export type ArticleSearchResult = {
+  __typename?: 'ArticleSearchResult';
+  searchSummary?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['String']>;
   _version?: Maybe<Scalars['Int']>;
   _contentTypeId?: Maybe<Scalars['String']>;
@@ -2548,260 +2824,6 @@ export type RegistrationsSearchResult = {
   _status?: Maybe<Scalars['String']>;
 };
 
-export type TsWhereArticleInput = {
-  path?: Maybe<TsWhereString>;
-  title?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-  AND?: Maybe<Array<Maybe<TsArticleAndOperator>>>;
-  OR?: Maybe<Array<Maybe<TsArticleOrOperator>>>;
-  NOT?: Maybe<TsArticleNotOperator>;
-};
-
-/** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
-export type TsArticleAndOperator = {
-  path?: Maybe<TsWhereString>;
-  title?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-  AND?: Maybe<Array<Maybe<TsArticleAndOperator>>>;
-  OR?: Maybe<Array<Maybe<TsArticleOrOperator>>>;
-  NOT?: Maybe<TsArticleNotOperator>;
-};
-
-/** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
-export type TsArticleOrOperator = {
-  path?: Maybe<TsWhereString>;
-  title?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-  AND?: Maybe<Array<Maybe<TsArticleAndOperator>>>;
-  OR?: Maybe<Array<Maybe<TsArticleOrOperator>>>;
-  NOT?: Maybe<TsArticleNotOperator>;
-};
-
-/** NOT takes a single condition that must not appear in the matching results. */
-export type TsArticleNotOperator = {
-  path?: Maybe<TsWhereString>;
-  title?: Maybe<TsWhereString>;
-  relationship?: Maybe<TsWhereLanguageRelationship>;
-  content?: Maybe<TsWhereDraftjs>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-};
-
-/** Article search results */
-export type ArticleSearchResults = {
-  __typename?: 'ArticleSearchResults';
-  results?: Maybe<Array<Maybe<ArticleSearchResult>>>;
-  total?: Maybe<Scalars['Int']>;
-};
-
-/** A Article search result */
-export type ArticleSearchResult = {
-  __typename?: 'ArticleSearchResult';
-  searchSummary?: Maybe<Scalars['String']>;
-  path?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  _id?: Maybe<Scalars['String']>;
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _contentTypeName?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<Scalars['String']>;
-};
-
-export type TsWhereApartmentInput = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-  AND?: Maybe<Array<Maybe<TsApartmentAndOperator>>>;
-  OR?: Maybe<Array<Maybe<TsApartmentOrOperator>>>;
-  NOT?: Maybe<TsApartmentNotOperator>;
-};
-
-/** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
-export type TsApartmentAndOperator = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-  AND?: Maybe<Array<Maybe<TsApartmentAndOperator>>>;
-  OR?: Maybe<Array<Maybe<TsApartmentOrOperator>>>;
-  NOT?: Maybe<TsApartmentNotOperator>;
-};
-
-/** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
-export type TsApartmentOrOperator = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-  AND?: Maybe<Array<Maybe<TsApartmentAndOperator>>>;
-  OR?: Maybe<Array<Maybe<TsApartmentOrOperator>>>;
-  NOT?: Maybe<TsApartmentNotOperator>;
-};
-
-/** NOT takes a single condition that must not appear in the matching results. */
-export type TsApartmentNotOperator = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereBrandColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereLighterColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereLightColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-};
-
-/** Apartment search results */
-export type ApartmentSearchResults = {
-  __typename?: 'ApartmentSearchResults';
-  results?: Maybe<Array<Maybe<ApartmentSearchResult>>>;
-  total?: Maybe<Scalars['Int']>;
-};
-
-/** A Apartment search result */
-export type ApartmentSearchResult = {
-  __typename?: 'ApartmentSearchResult';
-  searchSummary?: Maybe<Scalars['String']>;
-  code?: Maybe<Scalars['String']>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  key?: Maybe<Scalars['String']>;
-  longitude?: Maybe<Scalars['String']>;
-  _id?: Maybe<Scalars['String']>;
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _contentTypeName?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<Scalars['String']>;
-};
-
 export type TsWhereLanguageInput = {
   code?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
@@ -2872,6 +2894,18 @@ export type WithContext = {
   getTsStaticSite?: Maybe<TsStaticSite>;
   /** Search the tsStaticSite index by keyword */
   searchTsStaticSiteIndex?: Maybe<TsStaticSiteSearchResults>;
+  /** Returns a list apartment in natural order. */
+  getApartmentList?: Maybe<ApartmentPaginatedList>;
+  /** Get a apartment by ID */
+  getApartment?: Maybe<Apartment>;
+  /** Search the apartment index by keyword */
+  searchApartmentIndex?: Maybe<ApartmentSearchResults>;
+  /** Returns a list article in natural order. */
+  getArticleList?: Maybe<ArticlePaginatedList>;
+  /** Get a article by ID */
+  getArticle?: Maybe<Article>;
+  /** Search the article index by keyword */
+  searchArticleIndex?: Maybe<ArticleSearchResults>;
   /** Returns a list faq in natural order. */
   getFaqList?: Maybe<FaqPaginatedList>;
   /** Get a faq by ID */
@@ -2884,18 +2918,6 @@ export type WithContext = {
   getRegistrations?: Maybe<Registrations>;
   /** Search the registrations index by keyword */
   searchRegistrationsIndex?: Maybe<RegistrationsSearchResults>;
-  /** Returns a list article in natural order. */
-  getArticleList?: Maybe<ArticlePaginatedList>;
-  /** Get a article by ID */
-  getArticle?: Maybe<Article>;
-  /** Search the article index by keyword */
-  searchArticleIndex?: Maybe<ArticleSearchResults>;
-  /** Returns a list apartment in natural order. */
-  getApartmentList?: Maybe<ApartmentPaginatedList>;
-  /** Get a apartment by ID */
-  getApartment?: Maybe<Apartment>;
-  /** Search the apartment index by keyword */
-  searchApartmentIndex?: Maybe<ApartmentSearchResults>;
   /** Returns a list language in natural order. */
   getLanguageList?: Maybe<LanguagePaginatedList>;
   /** Get a language by ID */
@@ -3022,6 +3044,76 @@ export type WithContextSearchTsStaticSiteIndexArgs = {
 
 
 /** This query allow you to pass context to your queries */
+export type WithContextGetApartmentListArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereApartmentInput>;
+};
+
+
+/** This query allow you to pass context to your queries */
+export type WithContextGetApartmentArgs = {
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** This query allow you to pass context to your queries */
+export type WithContextSearchApartmentIndexArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereApartmentInput>;
+};
+
+
+/** This query allow you to pass context to your queries */
+export type WithContextGetArticleListArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereArticleInput>;
+};
+
+
+/** This query allow you to pass context to your queries */
+export type WithContextGetArticleArgs = {
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** This query allow you to pass context to your queries */
+export type WithContextSearchArticleIndexArgs = {
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
+  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
+  where?: Maybe<TsWhereArticleInput>;
+};
+
+
+/** This query allow you to pass context to your queries */
 export type WithContextGetFaqListArgs = {
   locale?: Maybe<Scalars['String']>;
   enableLocaleFallback?: Maybe<Scalars['Boolean']>;
@@ -3088,76 +3180,6 @@ export type WithContextSearchRegistrationsIndexArgs = {
   filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereRegistrationsInput>;
-};
-
-
-/** This query allow you to pass context to your queries */
-export type WithContextGetArticleListArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  onlyEnabled?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereArticleInput>;
-};
-
-
-/** This query allow you to pass context to your queries */
-export type WithContextGetArticleArgs = {
-  _id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-/** This query allow you to pass context to your queries */
-export type WithContextSearchArticleIndexArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereArticleInput>;
-};
-
-
-/** This query allow you to pass context to your queries */
-export type WithContextGetApartmentListArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  onlyEnabled?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereApartmentInput>;
-};
-
-
-/** This query allow you to pass context to your queries */
-export type WithContextGetApartmentArgs = {
-  _id: Scalars['ID'];
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-/** This query allow you to pass context to your queries */
-export type WithContextSearchApartmentIndexArgs = {
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-  terms?: Maybe<Scalars['String']>;
-  from?: Maybe<Scalars['Int']>;
-  size?: Maybe<Scalars['Int']>;
-  filter?: Maybe<Scalars['JSON']>;
-  sort?: Maybe<Array<Maybe<TsSearchSort>>>;
-  where?: Maybe<TsWhereApartmentInput>;
 };
 
 
@@ -3285,6 +3307,26 @@ export type Mutations = {
   deleteTsStaticSite?: Maybe<DeleteTsStaticSiteResult>;
   /** Duplicate TsStaticSite including locales. Additional properties will override field values. */
   duplicateTsStaticSite?: Maybe<DuplicateTsStaticSiteResult>;
+  /** Create Apartment */
+  createApartment?: Maybe<CreateApartmentResult>;
+  /** Update Apartment */
+  updateApartment?: Maybe<UpdateApartmentResult>;
+  /** Delete Apartment */
+  deleteApartment?: Maybe<DeleteApartmentResult>;
+  /** Duplicate Apartment including locales. Additional properties will override field values. */
+  duplicateApartment?: Maybe<DuplicateApartmentResult>;
+  /** Create Apartment items from Asset csv, only single layer string fields are supported. */
+  importApartmentListFromCSV?: Maybe<ImportResultType>;
+  /** Create Article */
+  createArticle?: Maybe<CreateArticleResult>;
+  /** Update Article */
+  updateArticle?: Maybe<UpdateArticleResult>;
+  /** Delete Article */
+  deleteArticle?: Maybe<DeleteArticleResult>;
+  /** Duplicate Article including locales. Additional properties will override field values. */
+  duplicateArticle?: Maybe<DuplicateArticleResult>;
+  /** Create Article items from Asset csv, only single layer string fields are supported. */
+  importArticleListFromCSV?: Maybe<ImportResultType>;
   /** Create Faq */
   createFaq?: Maybe<CreateFaqResult>;
   /** Update Faq */
@@ -3305,26 +3347,6 @@ export type Mutations = {
   duplicateRegistrations?: Maybe<DuplicateRegistrationsResult>;
   /** Create Registrations items from Asset csv, only single layer string fields are supported. */
   importRegistrationsListFromCSV?: Maybe<ImportResultType>;
-  /** Create Article */
-  createArticle?: Maybe<CreateArticleResult>;
-  /** Update Article */
-  updateArticle?: Maybe<UpdateArticleResult>;
-  /** Delete Article */
-  deleteArticle?: Maybe<DeleteArticleResult>;
-  /** Duplicate Article including locales. Additional properties will override field values. */
-  duplicateArticle?: Maybe<DuplicateArticleResult>;
-  /** Create Article items from Asset csv, only single layer string fields are supported. */
-  importArticleListFromCSV?: Maybe<ImportResultType>;
-  /** Create Apartment */
-  createApartment?: Maybe<CreateApartmentResult>;
-  /** Update Apartment */
-  updateApartment?: Maybe<UpdateApartmentResult>;
-  /** Delete Apartment */
-  deleteApartment?: Maybe<DeleteApartmentResult>;
-  /** Duplicate Apartment including locales. Additional properties will override field values. */
-  duplicateApartment?: Maybe<DuplicateApartmentResult>;
-  /** Create Apartment items from Asset csv, only single layer string fields are supported. */
-  importApartmentListFromCSV?: Maybe<ImportResultType>;
   /** Create Language */
   createLanguage?: Maybe<CreateLanguageResult>;
   /** Update Language */
@@ -3604,6 +3626,68 @@ export type MutationsDuplicateTsStaticSiteArgs = {
 };
 
 
+export type MutationsCreateApartmentArgs = {
+  input: CreateApartmentInput;
+};
+
+
+export type MutationsUpdateApartmentArgs = {
+  input: UpdateApartmentInput;
+  structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationsDeleteApartmentArgs = {
+  input: DeleteApartmentInput;
+};
+
+
+export type MutationsDuplicateApartmentArgs = {
+  input: DuplicateApartmentInput;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationsImportApartmentListFromCsvArgs = {
+  assetId: Scalars['ID'];
+  importColumns?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type MutationsCreateArticleArgs = {
+  input: CreateArticleInput;
+};
+
+
+export type MutationsUpdateArticleArgs = {
+  input: UpdateArticleInput;
+  structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationsDeleteArticleArgs = {
+  input: DeleteArticleInput;
+};
+
+
+export type MutationsDuplicateArticleArgs = {
+  input: DuplicateArticleInput;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationsImportArticleListFromCsvArgs = {
+  assetId: Scalars['ID'];
+  importColumns?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
 export type MutationsCreateFaqArgs = {
   input: CreateFaqInput;
 };
@@ -3661,68 +3745,6 @@ export type MutationsDuplicateRegistrationsArgs = {
 
 
 export type MutationsImportRegistrationsListFromCsvArgs = {
-  assetId: Scalars['ID'];
-  importColumns?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type MutationsCreateArticleArgs = {
-  input: CreateArticleInput;
-};
-
-
-export type MutationsUpdateArticleArgs = {
-  input: UpdateArticleInput;
-  structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationsDeleteArticleArgs = {
-  input: DeleteArticleInput;
-};
-
-
-export type MutationsDuplicateArticleArgs = {
-  input: DuplicateArticleInput;
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationsImportArticleListFromCsvArgs = {
-  assetId: Scalars['ID'];
-  importColumns?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type MutationsCreateApartmentArgs = {
-  input: CreateApartmentInput;
-};
-
-
-export type MutationsUpdateApartmentArgs = {
-  input: UpdateApartmentInput;
-  structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationsDeleteApartmentArgs = {
-  input: DeleteApartmentInput;
-};
-
-
-export type MutationsDuplicateApartmentArgs = {
-  input: DuplicateApartmentInput;
-  locale?: Maybe<Scalars['String']>;
-  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationsImportApartmentListFromCsvArgs = {
   assetId: Scalars['ID'];
   importColumns?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
@@ -4141,6 +4163,317 @@ export type DuplicateTsStaticSiteResult = {
   result?: Maybe<TsStaticSite>;
 };
 
+/** create Apartment input */
+export type CreateApartmentInput = {
+  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  coverJpg?: Maybe<TsRelationshipInput>;
+  brandColor?: Maybe<ApartmentBrandColorInput>;
+  code?: Maybe<Scalars['String']>;
+  lighterColor?: Maybe<ApartmentLighterColorInput>;
+  address?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  lightColor?: Maybe<ApartmentLightColorInput>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  coverWebp?: Maybe<TsRelationshipInput>;
+  name?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<DefaultWorkflow>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type TsRelationshipInput = {
+  contentTypeId: Scalars['String'];
+  id: Scalars['String'];
+};
+
+export type ApartmentBrandColorInput = {
+  hsl?: Maybe<ApartmentBrandColorHslInput>;
+  hex?: Maybe<Scalars['String']>;
+  hsv?: Maybe<ApartmentBrandColorHsvInput>;
+  rgb?: Maybe<ApartmentBrandColorRgbInput>;
+};
+
+export type ApartmentBrandColorHslInput = {
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  l?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentBrandColorHsvInput = {
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  v?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentBrandColorRgbInput = {
+  a?: Maybe<Scalars['Float']>;
+  r?: Maybe<Scalars['Float']>;
+  b?: Maybe<Scalars['Float']>;
+  g?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentLighterColorInput = {
+  hsl?: Maybe<ApartmentLighterColorHslInput>;
+  hex?: Maybe<Scalars['String']>;
+  hsv?: Maybe<ApartmentLighterColorHsvInput>;
+  rgb?: Maybe<ApartmentLighterColorRgbInput>;
+};
+
+export type ApartmentLighterColorHslInput = {
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  l?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentLighterColorHsvInput = {
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  v?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentLighterColorRgbInput = {
+  a?: Maybe<Scalars['Float']>;
+  r?: Maybe<Scalars['Float']>;
+  b?: Maybe<Scalars['Float']>;
+  g?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentLightColorInput = {
+  hsl?: Maybe<ApartmentLightColorHslInput>;
+  hex?: Maybe<Scalars['String']>;
+  hsv?: Maybe<ApartmentLightColorHsvInput>;
+  rgb?: Maybe<ApartmentLightColorRgbInput>;
+};
+
+export type ApartmentLightColorHslInput = {
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  l?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentLightColorHsvInput = {
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  v?: Maybe<Scalars['Float']>;
+};
+
+export type ApartmentLightColorRgbInput = {
+  a?: Maybe<Scalars['Float']>;
+  r?: Maybe<Scalars['Float']>;
+  b?: Maybe<Scalars['Float']>;
+  g?: Maybe<Scalars['Float']>;
+};
+
+export type CreateApartmentResult = {
+  __typename?: 'CreateApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Apartment>;
+};
+
+/** update Apartment input */
+export type UpdateApartmentInput = {
+  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  coverJpg?: Maybe<TsRelationshipInput>;
+  brandColor?: Maybe<ApartmentBrandColorInput>;
+  code?: Maybe<Scalars['String']>;
+  lighterColor?: Maybe<ApartmentLighterColorInput>;
+  address?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  lightColor?: Maybe<ApartmentLightColorInput>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  coverWebp?: Maybe<TsRelationshipInput>;
+  name?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  _id: Scalars['ID'];
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<DefaultWorkflow>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateApartmentResult = {
+  __typename?: 'UpdateApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Apartment>;
+};
+
+/** delete Apartment input */
+export type DeleteApartmentInput = {
+  clientMutationId?: Maybe<Scalars['String']>;
+  _id: Scalars['ID'];
+};
+
+export type DeleteApartmentResult = {
+  __typename?: 'DeleteApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
+};
+
+/** duplicate Apartment input */
+export type DuplicateApartmentInput = {
+  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  coverJpg?: Maybe<TsRelationshipInput>;
+  brandColor?: Maybe<ApartmentBrandColorInput>;
+  code?: Maybe<Scalars['String']>;
+  lighterColor?: Maybe<ApartmentLighterColorInput>;
+  address?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  lightColor?: Maybe<ApartmentLightColorInput>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  coverWebp?: Maybe<TsRelationshipInput>;
+  name?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  key?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  _id: Scalars['ID'];
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<DefaultWorkflow>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DuplicateApartmentResult = {
+  __typename?: 'DuplicateApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Apartment>;
+};
+
+/** create Article input */
+export type CreateArticleInput = {
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  relationship?: Maybe<TsRelationshipInput>;
+  content?: Maybe<Scalars['JSON']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<DefaultWorkflow>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type CreateArticleResult = {
+  __typename?: 'CreateArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Article>;
+};
+
+/** update Article input */
+export type UpdateArticleInput = {
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  relationship?: Maybe<TsRelationshipInput>;
+  content?: Maybe<Scalars['JSON']>;
+  _id: Scalars['ID'];
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<DefaultWorkflow>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateArticleResult = {
+  __typename?: 'UpdateArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Article>;
+};
+
+/** delete Article input */
+export type DeleteArticleInput = {
+  clientMutationId?: Maybe<Scalars['String']>;
+  _id: Scalars['ID'];
+};
+
+export type DeleteArticleResult = {
+  __typename?: 'DeleteArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
+};
+
+/** duplicate Article input */
+export type DuplicateArticleInput = {
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  relationship?: Maybe<TsRelationshipInput>;
+  content?: Maybe<Scalars['JSON']>;
+  _id: Scalars['ID'];
+  _version?: Maybe<Scalars['Int']>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
+  _status?: Maybe<DefaultWorkflow>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DuplicateArticleResult = {
+  __typename?: 'DuplicateArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Article>;
+};
+
 /** create Faq input */
 export type CreateFaqInput = {
   language?: Maybe<TsRelationshipInput>;
@@ -4160,11 +4493,6 @@ export type CreateFaqInput = {
   _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
   clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type TsRelationshipInput = {
-  contentTypeId: Scalars['String'];
-  id: Scalars['String'];
 };
 
 export type CreateFaqResult = {
@@ -4344,306 +4672,6 @@ export type DuplicateRegistrationsResult = {
   result?: Maybe<Registrations>;
 };
 
-/** create Article input */
-export type CreateArticleInput = {
-  path?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  relationship?: Maybe<TsRelationshipInput>;
-  content?: Maybe<Scalars['JSON']>;
-  _id?: Maybe<Scalars['ID']>;
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<DefaultWorkflow>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type CreateArticleResult = {
-  __typename?: 'CreateArticleResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Article>;
-};
-
-/** update Article input */
-export type UpdateArticleInput = {
-  path?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  relationship?: Maybe<TsRelationshipInput>;
-  content?: Maybe<Scalars['JSON']>;
-  _id: Scalars['ID'];
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<DefaultWorkflow>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdateArticleResult = {
-  __typename?: 'UpdateArticleResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Article>;
-};
-
-/** delete Article input */
-export type DeleteArticleInput = {
-  clientMutationId?: Maybe<Scalars['String']>;
-  _id: Scalars['ID'];
-};
-
-export type DeleteArticleResult = {
-  __typename?: 'DeleteArticleResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Scalars['Boolean']>;
-};
-
-/** duplicate Article input */
-export type DuplicateArticleInput = {
-  path?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  relationship?: Maybe<TsRelationshipInput>;
-  content?: Maybe<Scalars['JSON']>;
-  _id: Scalars['ID'];
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<DefaultWorkflow>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type DuplicateArticleResult = {
-  __typename?: 'DuplicateArticleResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Article>;
-};
-
-/** create Apartment input */
-export type CreateApartmentInput = {
-  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  coverJpg?: Maybe<TsRelationshipInput>;
-  brandColor?: Maybe<ApartmentBrandColorInput>;
-  code?: Maybe<Scalars['String']>;
-  lighterColor?: Maybe<ApartmentLighterColorInput>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  lightColor?: Maybe<ApartmentLightColorInput>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  coverWebp?: Maybe<TsRelationshipInput>;
-  name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  key?: Maybe<Scalars['String']>;
-  longitude?: Maybe<Scalars['String']>;
-  _id?: Maybe<Scalars['ID']>;
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<DefaultWorkflow>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type ApartmentBrandColorInput = {
-  hsl?: Maybe<ApartmentBrandColorHslInput>;
-  hex?: Maybe<Scalars['String']>;
-  hsv?: Maybe<ApartmentBrandColorHsvInput>;
-  rgb?: Maybe<ApartmentBrandColorRgbInput>;
-};
-
-export type ApartmentBrandColorHslInput = {
-  h?: Maybe<Scalars['Float']>;
-  a?: Maybe<Scalars['Float']>;
-  s?: Maybe<Scalars['Float']>;
-  l?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentBrandColorHsvInput = {
-  h?: Maybe<Scalars['Float']>;
-  a?: Maybe<Scalars['Float']>;
-  s?: Maybe<Scalars['Float']>;
-  v?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentBrandColorRgbInput = {
-  a?: Maybe<Scalars['Float']>;
-  r?: Maybe<Scalars['Float']>;
-  b?: Maybe<Scalars['Float']>;
-  g?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentLighterColorInput = {
-  hsl?: Maybe<ApartmentLighterColorHslInput>;
-  hex?: Maybe<Scalars['String']>;
-  hsv?: Maybe<ApartmentLighterColorHsvInput>;
-  rgb?: Maybe<ApartmentLighterColorRgbInput>;
-};
-
-export type ApartmentLighterColorHslInput = {
-  h?: Maybe<Scalars['Float']>;
-  a?: Maybe<Scalars['Float']>;
-  s?: Maybe<Scalars['Float']>;
-  l?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentLighterColorHsvInput = {
-  h?: Maybe<Scalars['Float']>;
-  a?: Maybe<Scalars['Float']>;
-  s?: Maybe<Scalars['Float']>;
-  v?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentLighterColorRgbInput = {
-  a?: Maybe<Scalars['Float']>;
-  r?: Maybe<Scalars['Float']>;
-  b?: Maybe<Scalars['Float']>;
-  g?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentLightColorInput = {
-  hsl?: Maybe<ApartmentLightColorHslInput>;
-  hex?: Maybe<Scalars['String']>;
-  hsv?: Maybe<ApartmentLightColorHsvInput>;
-  rgb?: Maybe<ApartmentLightColorRgbInput>;
-};
-
-export type ApartmentLightColorHslInput = {
-  h?: Maybe<Scalars['Float']>;
-  a?: Maybe<Scalars['Float']>;
-  s?: Maybe<Scalars['Float']>;
-  l?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentLightColorHsvInput = {
-  h?: Maybe<Scalars['Float']>;
-  a?: Maybe<Scalars['Float']>;
-  s?: Maybe<Scalars['Float']>;
-  v?: Maybe<Scalars['Float']>;
-};
-
-export type ApartmentLightColorRgbInput = {
-  a?: Maybe<Scalars['Float']>;
-  r?: Maybe<Scalars['Float']>;
-  b?: Maybe<Scalars['Float']>;
-  g?: Maybe<Scalars['Float']>;
-};
-
-export type CreateApartmentResult = {
-  __typename?: 'CreateApartmentResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Apartment>;
-};
-
-/** update Apartment input */
-export type UpdateApartmentInput = {
-  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  coverJpg?: Maybe<TsRelationshipInput>;
-  brandColor?: Maybe<ApartmentBrandColorInput>;
-  code?: Maybe<Scalars['String']>;
-  lighterColor?: Maybe<ApartmentLighterColorInput>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  lightColor?: Maybe<ApartmentLightColorInput>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  coverWebp?: Maybe<TsRelationshipInput>;
-  name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  key?: Maybe<Scalars['String']>;
-  longitude?: Maybe<Scalars['String']>;
-  _id: Scalars['ID'];
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<DefaultWorkflow>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type UpdateApartmentResult = {
-  __typename?: 'UpdateApartmentResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Apartment>;
-};
-
-/** delete Apartment input */
-export type DeleteApartmentInput = {
-  clientMutationId?: Maybe<Scalars['String']>;
-  _id: Scalars['ID'];
-};
-
-export type DeleteApartmentResult = {
-  __typename?: 'DeleteApartmentResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Scalars['Boolean']>;
-};
-
-/** duplicate Apartment input */
-export type DuplicateApartmentInput = {
-  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  coverJpg?: Maybe<TsRelationshipInput>;
-  brandColor?: Maybe<ApartmentBrandColorInput>;
-  code?: Maybe<Scalars['String']>;
-  lighterColor?: Maybe<ApartmentLighterColorInput>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  lightColor?: Maybe<ApartmentLightColorInput>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  coverWebp?: Maybe<TsRelationshipInput>;
-  name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  key?: Maybe<Scalars['String']>;
-  longitude?: Maybe<Scalars['String']>;
-  _id: Scalars['ID'];
-  _version?: Maybe<Scalars['Int']>;
-  _contentTypeId?: Maybe<Scalars['String']>;
-  _createdAt?: Maybe<Scalars['String']>;
-  _createdBy?: Maybe<Scalars['String']>;
-  _updatedAt?: Maybe<Scalars['String']>;
-  _updatedBy?: Maybe<Scalars['String']>;
-  _schemaVersion?: Maybe<Scalars['Float']>;
-  _enabled?: Maybe<Scalars['Boolean']>;
-  _enabledAt?: Maybe<Scalars['String']>;
-  _status?: Maybe<DefaultWorkflow>;
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type DuplicateApartmentResult = {
-  __typename?: 'DuplicateApartmentResult';
-  clientMutationId?: Maybe<Scalars['String']>;
-  result?: Maybe<Apartment>;
-};
-
 /** create Language input */
 export type CreateLanguageInput = {
   code?: Maybe<Scalars['String']>;
@@ -4736,7 +4764,7 @@ export type ApartmentQuery = (
     { __typename?: 'ApartmentPaginatedList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
-      & Pick<Apartment, 'latitude' | 'longitude' | 'name' | 'address' | 'airbnbLink' | 'facebookLink'>
+      & Pick<Apartment, 'airBnb' | 'latitude' | 'longitude' | 'name' | 'address' | 'airbnbLink' | 'facebookLink'>
       & { brandColor?: Maybe<(
         { __typename?: 'ApartmentBrandColor' }
         & Pick<ApartmentBrandColor, 'hex'>
@@ -4796,6 +4824,22 @@ export type ApartmentCodeQuery = (
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
       & Pick<Apartment, 'code'>
+    )>>> }
+  )> }
+);
+
+export type ApartmentSecretQueryVariables = Exact<{
+  key: Scalars['String'];
+}>;
+
+
+export type ApartmentSecretQuery = (
+  { __typename?: 'Root' }
+  & { getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'airbnbIcal' | 'bookingIcal'>
     )>>> }
   )> }
 );
@@ -4881,6 +4925,7 @@ export const ApartmentDocument = gql`
     query Apartment($key: String!) {
   getApartmentList(where: {key: {eq: $key}}) {
     items {
+      airBnb
       latitude
       longitude
       name
@@ -4937,6 +4982,16 @@ export const ApartmentCodeDocument = gql`
   getApartmentList(where: {key: {eq: $key}}) {
     items {
       code
+    }
+  }
+}
+    `;
+export const ApartmentSecretDocument = gql`
+    query ApartmentSecret($key: String!) {
+  getApartmentList(where: {key: {eq: $key}}) {
+    items {
+      airbnbIcal
+      bookingIcal
     }
   }
 }
@@ -5013,6 +5068,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ApartmentCode(variables: ApartmentCodeQueryVariables): Promise<ApartmentCodeQuery> {
       return withWrapper(() => client.request<ApartmentCodeQuery>(print(ApartmentCodeDocument), variables));
+    },
+    ApartmentSecret(variables: ApartmentSecretQueryVariables): Promise<ApartmentSecretQuery> {
+      return withWrapper(() => client.request<ApartmentSecretQuery>(print(ApartmentSecretDocument), variables));
     },
     getArticleByPath(variables: GetArticleByPathQueryVariables): Promise<GetArticleByPathQuery> {
       return withWrapper(() => client.request<GetArticleByPathQuery>(print(GetArticleByPathDocument), variables));

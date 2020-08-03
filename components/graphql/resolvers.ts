@@ -13,9 +13,9 @@ export const resolvers = {
     book: async (_, { user }: MutationBookArgs) => sendBookMail({ user }),
   },
   Query: {
-    price: async (_, { from, to }) => calculatePrice(from, to),
-    reviews: async () => {
-      const res = await getReviews();
+    price: async (_, { from, to, airBnb }) => calculatePrice(from, to, airBnb),
+    reviews: async (_, { airBnb }) => {
+      const res = await getReviews(airBnb);
       return res.reviews.map((r) => ({
         comments: r.comments,
         date: r.localized_date,

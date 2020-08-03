@@ -11,7 +11,8 @@ export async function getStaticProps({ params }) {
 
   const res = await getDetails(
     globalProps.props.global.apartment,
-    globalProps.props.global.lang
+    globalProps.props.global.lang,
+    globalProps.props.global.airBnb
   );
   return {
     props: { ...res, ...globalProps.props },
