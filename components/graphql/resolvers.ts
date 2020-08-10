@@ -5,6 +5,7 @@ import {
 import { sendGridMail, sendBookMail } from "./sendGridMail";
 import { getReviews, calculatePrice } from "./airbnb";
 import { fetchPublicIcal } from "./ical";
+import { registrationList } from "./registrationList";
 
 export const resolvers = {
   Mutation: {
@@ -25,5 +26,6 @@ export const resolvers = {
       }));
     },
     calendar: fetchPublicIcal,
+    registrationList,
   },
 };

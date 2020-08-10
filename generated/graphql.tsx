@@ -20,7 +20,7 @@ export type File = {
   encoding: Scalars['String'];
 };
 
-export type UserInput = {
+export type Guest = {
   firstName: Scalars['String'];
   lastName: Scalars['String'];
   documentNumber: Scalars['String'];
@@ -28,14 +28,23 @@ export type UserInput = {
   birthDate: Scalars['String'];
   nationality: Scalars['String'];
   placeOfBirth: Scalars['String'];
+};
+
+export type UserInput = {
+  guests?: Maybe<Array<Maybe<Guest>>>;
   apartment?: Maybe<Scalars['String']>;
   email: Scalars['String'];
 };
 
-export type MailResponse = {
-  __typename?: 'MailResponse';
+export type GuestMail = {
+  __typename?: 'GuestMail';
   firstName?: Maybe<Scalars['String']>;
   lastName?: Maybe<Scalars['String']>;
+};
+
+export type MailResponse = {
+  __typename?: 'MailResponse';
+  guests?: Maybe<Array<Maybe<GuestMail>>>;
   email?: Maybe<Scalars['String']>;
 };
 
@@ -69,6 +78,30 @@ export type BookResponse = {
   lastName?: Maybe<Scalars['String']>;
 };
 
+export type GuestRegistration = {
+  __typename?: 'GuestRegistration';
+  birthDate: Scalars['String'];
+  documentNumber: Scalars['String'];
+  documentType: Scalars['String'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  nationality: Scalars['String'];
+  placeOfBirth: Scalars['String'];
+};
+
+export type Registration = {
+  __typename?: 'Registration';
+  _id: Scalars['ID'];
+  apartmentKey: Scalars['String'];
+  email: Scalars['String'];
+  guests?: Maybe<Array<Maybe<GuestRegistration>>>;
+};
+
+export type RegistrationList = {
+  __typename?: 'RegistrationList';
+  items?: Maybe<Array<Maybe<Registration>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   sendMail?: Maybe<MailResponse>;
@@ -98,6 +131,7 @@ export type Query = {
   price?: Maybe<Scalars['Float']>;
   reviews?: Maybe<Array<Maybe<ReviewType>>>;
   calendar?: Maybe<Array<Maybe<Calendar>>>;
+  registrationList?: Maybe<RegistrationList>;
 };
 
 
@@ -109,7 +143,7 @@ export type QueryPriceArgs = {
 
 
 export type QueryReviewsArgs = {
-  apartment: Scalars['String'];
+  airBnb: Scalars['String'];
 };
 
 
@@ -122,6 +156,24 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+
+export type RegistrationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type RegistrationsQuery = (
+  { __typename?: 'Query' }
+  & { registrationList?: Maybe<(
+    { __typename?: 'RegistrationList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Registration' }
+      & Pick<Registration, '_id' | 'apartmentKey' | 'email'>
+      & { guests?: Maybe<Array<Maybe<(
+        { __typename?: 'GuestRegistration' }
+        & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
+      )>>> }
+    )>>> }
+  )> }
+);
 
 export type BookNowMutationVariables = Exact<{
   user: BookInput;
@@ -171,11 +223,60 @@ export type SendMailMutation = (
   { __typename?: 'Mutation' }
   & { sendMail?: Maybe<(
     { __typename?: 'MailResponse' }
-    & Pick<MailResponse, 'firstName' | 'lastName' | 'email'>
+    & Pick<MailResponse, 'email'>
+    & { guests?: Maybe<Array<Maybe<(
+      { __typename?: 'GuestMail' }
+      & Pick<GuestMail, 'firstName' | 'lastName'>
+    )>>> }
   )> }
 );
 
 
+export const RegistrationsDocument = gql`
+    query Registrations {
+  registrationList {
+    items {
+      _id
+      apartmentKey
+      email
+      guests {
+        birthDate
+        documentNumber
+        documentType
+        firstName
+        lastName
+        nationality
+        placeOfBirth
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useRegistrationsQuery__
+ *
+ * To run a query within a React component, call `useRegistrationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useRegistrationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useRegistrationsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useRegistrationsQuery(baseOptions?: Apollo.QueryHookOptions<RegistrationsQuery, RegistrationsQueryVariables>) {
+        return Apollo.useQuery<RegistrationsQuery, RegistrationsQueryVariables>(RegistrationsDocument, baseOptions);
+      }
+export function useRegistrationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RegistrationsQuery, RegistrationsQueryVariables>) {
+          return Apollo.useLazyQuery<RegistrationsQuery, RegistrationsQueryVariables>(RegistrationsDocument, baseOptions);
+        }
+export type RegistrationsQueryHookResult = ReturnType<typeof useRegistrationsQuery>;
+export type RegistrationsLazyQueryHookResult = ReturnType<typeof useRegistrationsLazyQuery>;
+export type RegistrationsQueryResult = Apollo.QueryResult<RegistrationsQuery, RegistrationsQueryVariables>;
 export const BookNowDocument = gql`
     mutation bookNow($user: BookInput!) {
   book(user: $user) {
@@ -279,8 +380,10 @@ export type PriceQueryResult = Apollo.QueryResult<PriceQuery, PriceQueryVariable
 export const SendMailDocument = gql`
     mutation sendMail($user: UserInput!, $file: Upload!) {
   sendMail(user: $user, file: $file) {
-    firstName
-    lastName
+    guests {
+      firstName
+      lastName
+    }
     email
   }
 }

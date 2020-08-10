@@ -1,0 +1,19 @@
+query Registrations {
+  registrationList {
+    items {
+      _id
+      apartmentKey
+      email
+      guests {
+        birthDate
+        documentNumber
+        documentType
+
+        firstName
+        lastName
+        nationality
+        placeOfBirth
+      }
+    }
+  }
+}

@@ -1,7 +1,7 @@
 // Render Prop
 import React from "react";
 import { useFormik } from "formik";
-import { Form, Button, Box, Heading, Text } from "grommet";
+import { Form, Button, Box, Heading, Text, Select } from "grommet";
 import { initialValues, validationSchema } from "./data";
 import { FormInput } from "../FormInput";
 import styled from "styled-components";
@@ -36,14 +36,19 @@ export const Register: React.FC = () => {
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      const { month, day, year, file, ...rest } = values;
+      const { month, day, year, file, email, ...rest } = values;
 
       sendMail({
         variables: {
           user: {
-            ...rest,
             apartment,
-            birthDate: `${day}-${month}-${year}`,
+            email: email,
+            guests: [
+              {
+                ...rest,
+                birthDate: `${day}-${month}-${year}`,
+              },
+            ],
           },
           file,
         },
@@ -51,7 +56,7 @@ export const Register: React.FC = () => {
     },
     validationSchema,
   });
-
+  console.log(formik.values["documentType"], 'formik.values["documentType"]');
   return (
     <Box align="center" gridArea="main" pad="medium">
       <Box width="medium" margin="large">
@@ -59,8 +64,8 @@ export const Register: React.FC = () => {
           <Box>
             <h3>
               {t("THANKYOU", {
-                name: data.sendMail.firstName,
-                lastName: data.sendMail.lastName,
+                name: data.sendMail?.guests?.[0].firstName,
+                lastName: data.sendMail?.guests?.[0].lastName,
               })}
             </h3>
           </Box>
@@ -92,26 +97,16 @@ export const Register: React.FC = () => {
             >
               <FormInput formik={formik} field={"firstName"} />
               <FormInput formik={formik} field={"lastName"} />
-              <FormInput
-                formik={formik}
-                field={"documentType"}
-                suggestions={[
-                  {
-                    label: "Passport",
-                    value: "Passport",
-                  },
-
-                  {
-                    label: "ID Card",
-                    value: "ID Card",
-                  },
-
-                  {
-                    label: "Driving License",
-                    value: "Driving License",
-                  },
-                ]}
+              <Select
+                options={["Passport", "ID Card", "Driving License"]}
+                value={formik.values["documentType"]}
+                id={"documentType"}
+                name={"documentType"}
+                onChange={(e) => {
+                  formik.setFieldValue("documentType", e.value);
+                }}
               />
+
               <FormInput formik={formik} field={"documentNumber"} />
               <Box direction="row">
                 <FormInput type="number" formik={formik} field={"day"} />

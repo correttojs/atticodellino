@@ -1,7 +1,9 @@
 mutation sendMail($user: UserInput!, $file: Upload!) {
   sendMail(user: $user, file: $file) {
-    firstName
-    lastName
+    guests {
+      firstName
+      lastName
+    }
     email
   }
 }

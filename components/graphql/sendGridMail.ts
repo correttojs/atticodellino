@@ -21,9 +21,13 @@ export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
     subject: `Registration request from L'attico del Lino`, // Subject line
     html: `
         <h1>Registration Request</h1>
-        <p>User: ${user.firstName} ${user.lastName}</p>
-        <p>Document: ${user.documentType} - ${user.documentNumber}</p>
-        <p>Birth: ${user.birthDate} - ${user.nationality} - ${user.placeOfBirth}</p>
+        ${user.guests.map((item) => {
+          return `
+             <p>User: ${item.firstName} ${item.lastName}</p>
+            <p>Document: ${item.documentType} - ${item.documentNumber}</p>
+            <p>Birth: ${item.birthDate} - ${item.nationality} - ${item.placeOfBirth}</p>`;
+        })}
+       
         <p>Apartment: ${user.apartment}</p>
     `,
     attachments: [
@@ -49,9 +53,11 @@ export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
   });
 
   return {
-    firstName: data?.createRegistrations?.result?.firstName,
-    lastName: data?.createRegistrations?.result?.lastName,
     email: data?.createRegistrations?.result?.email,
+    guests: data?.createRegistrations?.result?.guests.map((item) => ({
+      firstName: item?.firstName,
+      lastName: item?.lastName,
+    })),
   };
 };
 
@@ -66,9 +72,14 @@ export const confirmEmail = async (
     subject: `Registration request from L'attico del Lino`, // Subject line
     html: `
         <h1>Registration Confirmation</h1>
-        <p>User: ${user.firstName} ${user.lastName}</p>
-        <p>Document: ${user.documentType} - ${user.documentNumber}</p>
-        <p>Birth: ${user.birthDate} - ${user.nationality} - ${user.placeOfBirth}</p>
+        ${user.guests.map((item) => {
+          return `
+             <p>User: ${item.firstName} ${item.lastName}</p>
+            <p>Document: ${item.documentType} - ${item.documentNumber}</p>
+            <p>Birth: ${item.birthDate} - ${item.nationality} - ${item.placeOfBirth}</p>`;
+        })}
+       
+        
         <p>Apartment code: ${code}</p>
     `,
   };

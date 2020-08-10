@@ -1,9 +1,11 @@
 mutation sendRegistration($input: CreateRegistrationsInput!) {
   createRegistrations(input: $input) {
     result {
-      firstName
-      lastName
       email
+      guests {
+        firstName
+        lastName
+      }
     }
   }
 }
@@ -12,13 +14,34 @@ query getRegistration($id: ID!) {
   getRegistrations(_id: $id) {
     _id
     apartmentKey
-    birthDate
-    documentNumber
-    documentType
     email
-    firstName
-    lastName
-    nationality
-    placeOfBirth
+    guests {
+      birthDate
+      documentNumber
+      documentType
+      firstName
+      lastName
+      nationality
+      placeOfBirth
+    }
+  }
+}
+
+query getRegistrations {
+  getRegistrationsList(onlyEnabled: false) {
+    items {
+      _id
+      apartmentKey
+      email
+      guests {
+        birthDate
+        documentNumber
+        documentType
+        firstName
+        lastName
+        nationality
+        placeOfBirth
+      }
+    }
   }
 }

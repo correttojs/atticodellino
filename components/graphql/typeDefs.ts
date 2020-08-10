@@ -7,7 +7,7 @@ export const typeDefs = gql`
     encoding: String!
   }
 
-  input UserInput {
+  input Guest {
     firstName: String!
     lastName: String!
     documentNumber: String!
@@ -15,13 +15,20 @@ export const typeDefs = gql`
     birthDate: String!
     nationality: String!
     placeOfBirth: String!
+  }
+  input UserInput {
+    guests: [Guest]
     apartment: String
     email: String!
   }
 
-  type MailResponse {
+  type GuestMail {
     firstName: String
     lastName: String
+  }
+
+  type MailResponse {
+    guests: [GuestMail]
     email: String
   }
 
@@ -52,6 +59,26 @@ export const typeDefs = gql`
     lastName: String
   }
 
+  type GuestRegistration {
+    birthDate: String!
+    documentNumber: String!
+    documentType: String!
+    firstName: String!
+    lastName: String!
+    nationality: String!
+    placeOfBirth: String!
+  }
+  type Registration {
+    _id: ID!
+    apartmentKey: String!
+    email: String!
+    guests: [GuestRegistration]
+  }
+
+  type RegistrationList {
+    items: [Registration]
+  }
+
   type Mutation {
     sendMail(user: UserInput!, file: Upload!): MailResponse
     book(user: BookInput): BookResponse
@@ -61,5 +88,6 @@ export const typeDefs = gql`
     price(from: String!, to: String!, airBnb: String!): Float
     reviews(airBnb: String!): [ReviewType]
     calendar(apartment: String!): [Calendar]
+    registrationList: RegistrationList
   }
 `;

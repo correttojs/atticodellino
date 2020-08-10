@@ -14,7 +14,10 @@ const FooterLink = styled(Anchor)`
 `;
 
 export const Footer: React.FC = () => {
-  const { address, airbnbLink, facebookLink, lang, apartment } = useGlobal();
+  const { address, airbnbLink, facebookLink } = useGlobal();
+  let { lang, apartment } = useGlobal();
+  lang = lang.toLowerCase();
+  apartment = apartment.toLowerCase();
   const t = useTranslations();
 
   return (

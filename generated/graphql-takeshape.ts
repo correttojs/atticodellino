@@ -1018,14 +1018,8 @@ export type TsWhereInput = {
   question?: Maybe<TsWhereString>;
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
 
@@ -1165,14 +1159,8 @@ export type TsAndOperator = {
   question?: Maybe<TsWhereString>;
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
 
@@ -1231,14 +1219,8 @@ export type TsOrOperator = {
   question?: Maybe<TsWhereString>;
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
 
@@ -1297,14 +1279,8 @@ export type TsNotOperator = {
   question?: Maybe<TsWhereString>;
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
 
@@ -1508,6 +1484,16 @@ export type TsWhereLanguageRelationship = {
   _updatedAt?: Maybe<TsWhereDate>;
   _schemaVersion?: Maybe<TsWhereNumber>;
   _status?: Maybe<TsWhereWorkflow>;
+};
+
+export type TsWhereGuests = {
+  lastName?: Maybe<TsWhereString>;
+  firstName?: Maybe<TsWhereString>;
+  placeOfBirth?: Maybe<TsWhereString>;
+  nationality?: Maybe<TsWhereString>;
+  documentType?: Maybe<TsWhereString>;
+  documentNumber?: Maybe<TsWhereString>;
+  birthDate?: Maybe<TsWhereString>;
 };
 
 /** TS search results */
@@ -2663,14 +2649,8 @@ export type FaqSearchResult = {
 };
 
 export type TsWhereRegistrationsInput = {
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -2687,14 +2667,8 @@ export type TsWhereRegistrationsInput = {
 
 /** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
 export type TsRegistrationsAndOperator = {
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -2711,14 +2685,8 @@ export type TsRegistrationsAndOperator = {
 
 /** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
 export type TsRegistrationsOrOperator = {
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -2735,14 +2703,8 @@ export type TsRegistrationsOrOperator = {
 
 /** NOT takes a single condition that must not appear in the matching results. */
 export type TsRegistrationsNotOperator = {
-  lastName?: Maybe<TsWhereString>;
-  firstName?: Maybe<TsWhereString>;
-  placeOfBirth?: Maybe<TsWhereString>;
-  nationality?: Maybe<TsWhereString>;
-  documentType?: Maybe<TsWhereString>;
+  guests?: Maybe<TsWhereGuests>;
   apartmentKey?: Maybe<TsWhereString>;
-  documentNumber?: Maybe<TsWhereString>;
-  birthDate?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
@@ -2764,14 +2726,8 @@ export type RegistrationsPaginatedList = {
 
 export type Registrations = TsSearchable & {
   __typename?: 'Registrations';
-  lastName: Scalars['String'];
-  firstName: Scalars['String'];
-  placeOfBirth: Scalars['String'];
-  nationality: Scalars['String'];
-  documentType: Scalars['String'];
+  guests?: Maybe<Array<Maybe<RegistrationsGuests>>>;
   apartmentKey: Scalars['String'];
-  documentNumber: Scalars['String'];
-  birthDate: Scalars['String'];
   email: Scalars['String'];
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
@@ -2790,6 +2746,17 @@ export type Registrations = TsSearchable & {
   searchSummary?: Maybe<Scalars['String']>;
 };
 
+export type RegistrationsGuests = {
+  __typename?: 'RegistrationsGuests';
+  lastName: Scalars['String'];
+  firstName: Scalars['String'];
+  placeOfBirth: Scalars['String'];
+  nationality: Scalars['String'];
+  documentType: Scalars['String'];
+  documentNumber: Scalars['String'];
+  birthDate: Scalars['String'];
+};
+
 /** Registrations search results */
 export type RegistrationsSearchResults = {
   __typename?: 'RegistrationsSearchResults';
@@ -2801,14 +2768,7 @@ export type RegistrationsSearchResults = {
 export type RegistrationsSearchResult = {
   __typename?: 'RegistrationsSearchResult';
   searchSummary?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  placeOfBirth?: Maybe<Scalars['String']>;
-  nationality?: Maybe<Scalars['String']>;
-  documentType?: Maybe<Scalars['String']>;
   apartmentKey?: Maybe<Scalars['String']>;
-  documentNumber?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['String']>;
   _version?: Maybe<Scalars['Int']>;
@@ -4569,14 +4529,8 @@ export type DuplicateFaqResult = {
 
 /** create Registrations input */
 export type CreateRegistrationsInput = {
-  lastName: Scalars['String'];
-  firstName: Scalars['String'];
-  placeOfBirth: Scalars['String'];
-  nationality: Scalars['String'];
-  documentType: Scalars['String'];
+  guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
   apartmentKey: Scalars['String'];
-  documentNumber: Scalars['String'];
-  birthDate: Scalars['String'];
   email: Scalars['String'];
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
@@ -4592,6 +4546,16 @@ export type CreateRegistrationsInput = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type RegistrationsGuestsInput = {
+  lastName?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  placeOfBirth?: Maybe<Scalars['String']>;
+  nationality?: Maybe<Scalars['String']>;
+  documentType?: Maybe<Scalars['String']>;
+  documentNumber?: Maybe<Scalars['String']>;
+  birthDate?: Maybe<Scalars['String']>;
+};
+
 export type CreateRegistrationsResult = {
   __typename?: 'CreateRegistrationsResult';
   clientMutationId?: Maybe<Scalars['String']>;
@@ -4600,14 +4564,8 @@ export type CreateRegistrationsResult = {
 
 /** update Registrations input */
 export type UpdateRegistrationsInput = {
-  lastName?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  placeOfBirth?: Maybe<Scalars['String']>;
-  nationality?: Maybe<Scalars['String']>;
-  documentType?: Maybe<Scalars['String']>;
+  guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
   apartmentKey?: Maybe<Scalars['String']>;
-  documentNumber?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   _id: Scalars['ID'];
   _version?: Maybe<Scalars['Int']>;
@@ -4643,14 +4601,8 @@ export type DeleteRegistrationsResult = {
 
 /** duplicate Registrations input */
 export type DuplicateRegistrationsInput = {
-  lastName?: Maybe<Scalars['String']>;
-  firstName?: Maybe<Scalars['String']>;
-  placeOfBirth?: Maybe<Scalars['String']>;
-  nationality?: Maybe<Scalars['String']>;
-  documentType?: Maybe<Scalars['String']>;
+  guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
   apartmentKey?: Maybe<Scalars['String']>;
-  documentNumber?: Maybe<Scalars['String']>;
-  birthDate?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   _id: Scalars['ID'];
   _version?: Maybe<Scalars['Int']>;
@@ -4902,7 +4854,11 @@ export type SendRegistrationMutation = (
     { __typename?: 'CreateRegistrationsResult' }
     & { result?: Maybe<(
       { __typename?: 'Registrations' }
-      & Pick<Registrations, 'firstName' | 'lastName' | 'email'>
+      & Pick<Registrations, 'email'>
+      & { guests?: Maybe<Array<Maybe<(
+        { __typename?: 'RegistrationsGuests' }
+        & Pick<RegistrationsGuests, 'firstName' | 'lastName'>
+      )>>> }
     )> }
   )> }
 );
@@ -4916,7 +4872,29 @@ export type GetRegistrationQuery = (
   { __typename?: 'Root' }
   & { getRegistrations?: Maybe<(
     { __typename?: 'Registrations' }
-    & Pick<Registrations, '_id' | 'apartmentKey' | 'birthDate' | 'documentNumber' | 'documentType' | 'email' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
+    & Pick<Registrations, '_id' | 'apartmentKey' | 'email'>
+    & { guests?: Maybe<Array<Maybe<(
+      { __typename?: 'RegistrationsGuests' }
+      & Pick<RegistrationsGuests, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
+    )>>> }
+  )> }
+);
+
+export type GetRegistrationsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRegistrationsQuery = (
+  { __typename?: 'Root' }
+  & { getRegistrationsList?: Maybe<(
+    { __typename?: 'RegistrationsPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Registrations' }
+      & Pick<Registrations, '_id' | 'apartmentKey' | 'email'>
+      & { guests?: Maybe<Array<Maybe<(
+        { __typename?: 'RegistrationsGuests' }
+        & Pick<RegistrationsGuests, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
+      )>>> }
+    )>>> }
   )> }
 );
 
@@ -5030,9 +5008,11 @@ export const SendRegistrationDocument = gql`
     mutation sendRegistration($input: CreateRegistrationsInput!) {
   createRegistrations(input: $input) {
     result {
-      firstName
-      lastName
       email
+      guests {
+        firstName
+        lastName
+      }
     }
   }
 }
@@ -5042,14 +5022,36 @@ export const GetRegistrationDocument = gql`
   getRegistrations(_id: $id) {
     _id
     apartmentKey
-    birthDate
-    documentNumber
-    documentType
     email
-    firstName
-    lastName
-    nationality
-    placeOfBirth
+    guests {
+      birthDate
+      documentNumber
+      documentType
+      firstName
+      lastName
+      nationality
+      placeOfBirth
+    }
+  }
+}
+    `;
+export const GetRegistrationsDocument = gql`
+    query getRegistrations {
+  getRegistrationsList(onlyEnabled: false) {
+    items {
+      _id
+      apartmentKey
+      email
+      guests {
+        birthDate
+        documentNumber
+        documentType
+        firstName
+        lastName
+        nationality
+        placeOfBirth
+      }
+    }
   }
 }
     `;
@@ -5086,6 +5088,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getRegistration(variables: GetRegistrationQueryVariables): Promise<GetRegistrationQuery> {
       return withWrapper(() => client.request<GetRegistrationQuery>(print(GetRegistrationDocument), variables));
+    },
+    getRegistrations(variables?: GetRegistrationsQueryVariables): Promise<GetRegistrationsQuery> {
+      return withWrapper(() => client.request<GetRegistrationsQuery>(print(GetRegistrationsDocument), variables));
     }
   };
 }
