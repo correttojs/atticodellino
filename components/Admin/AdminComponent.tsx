@@ -11,7 +11,7 @@ import {
   TableBody,
 } from "grommet";
 
-import { StatusGood } from "grommet-icons";
+import { StatusGood, Login } from "grommet-icons";
 import styled from "styled-components";
 
 const BodyStyle = styled(TableBody)`
@@ -24,11 +24,10 @@ export const AdminComponent: React.FC = () => {
 
   return (
     <>
-      {!session && (
-        <>
-          Not signed in <br />
-          <button onClick={signIn}>Sign in</button>
-        </>
+      {!loading && !session && (
+        <Box pad="large">
+          <Button icon={<Login />} label="Sign in" onClick={signIn}></Button>
+        </Box>
       )}
       {loading && <p>Loading...</p>}
       {session && data && (
