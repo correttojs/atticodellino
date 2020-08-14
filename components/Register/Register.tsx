@@ -9,6 +9,7 @@ import { useSendMailMutation } from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../withGrommetTheme";
 import { FormTrash, UserAdd } from "grommet-icons";
+
 const UploadStyle = styled.div<{ error: boolean }>`
   position: relative;
   overflow: hidden;
