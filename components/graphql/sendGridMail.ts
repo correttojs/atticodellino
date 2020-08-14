@@ -13,8 +13,22 @@ sgMail.setApiKey(process.env.SEND_GRID_API);
 const FROM = `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`;
 
 export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
-  const { createReadStream, filename, mimetype } = await file;
-  const b64 = await streamTo64(createReadStream());
+  const files = await Promise.all(file);
+  const streams = await Promise.all(
+    files.map(({ createReadStream }) => {
+      return streamTo64(createReadStream());
+    })
+  );
+  const attachments = files.map(({ filename, mimetype }, i) => {
+    return {
+      filename,
+      content: streams[i],
+      type: mimetype,
+      disposition: "attachment",
+      contentId: filename,
+    };
+  });
+
   const content = {
     to: process.env.NEXT_PUBLIC_FROM_EMAIL,
     from: FROM, // sender address
@@ -30,15 +44,7 @@ export const sendGridMail = async ({ file, user }: MutationSendMailArgs) => {
        
         <p>Apartment: ${user.apartment}</p>
     `,
-    attachments: [
-      {
-        filename,
-        content: b64,
-        type: mimetype,
-        disposition: "attachment",
-        contentId: filename,
-      },
-    ],
+    attachments,
   };
 
   await sgMail.send([content]);

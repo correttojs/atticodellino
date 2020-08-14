@@ -1,5 +1,5 @@
 import { FormValues } from "../Register/data";
-import { useFormik } from "formik";
+import { useFormik, getIn } from "formik";
 import { FormField, TextInput } from "grommet";
 
 const formatLabel = (value: string) =>
@@ -12,10 +12,11 @@ const formatLabel = (value: string) =>
     });
 
 type PropType = {
-  field: FormValues;
+  field: string;
   formik: ReturnType<typeof useFormik>;
   suggestions?: Array<{ label: string; value: string }>;
   type?: "text" | "number" | "email";
+  label?: string;
 };
 
 export const FormInput: React.FC<PropType> = ({
@@ -23,19 +24,20 @@ export const FormInput: React.FC<PropType> = ({
   formik,
   suggestions,
   type = "text",
+  label,
 }) => {
-  const label = formatLabel(field);
+  const labelValue = label ?? formatLabel(field);
   return (
     <FormField
       htmlFor={field}
-      label={label}
-      error={formik.errors[field] && formik.touched[field]}
+      label={labelValue}
+      error={getIn(formik.errors, field) && getIn(formik.touched, field)}
     >
       <TextInput
         id={field}
         name={field}
         onChange={formik.handleChange}
-        value={formik.values[field]}
+        value={getIn(formik.values, field)}
         suggestions={suggestions}
         placeholder={label}
         type={type}
