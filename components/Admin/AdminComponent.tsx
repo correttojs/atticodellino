@@ -8,7 +8,6 @@ export const AdminComponent: React.FC = () => {
 
   return (
     <>
-      AAA
       {!session && (
         <>
           Not signed in <br />
