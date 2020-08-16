@@ -46,6 +46,8 @@ export type MailResponse = {
   __typename?: 'MailResponse';
   guests?: Maybe<Array<Maybe<GuestMail>>>;
   email?: Maybe<Scalars['String']>;
+  _id: Scalars['ID'];
+  registrationStatus?: Maybe<Scalars['String']>;
 };
 
 export type ReviewType = {
@@ -94,6 +96,7 @@ export type Registration = {
   _id: Scalars['ID'];
   apartmentKey: Scalars['String'];
   email: Scalars['String'];
+  registrationStatus?: Maybe<Scalars['String']>;
   guests?: Maybe<Array<Maybe<GuestRegistration>>>;
 };
 
@@ -104,19 +107,25 @@ export type RegistrationList = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  sendMail?: Maybe<MailResponse>;
   book?: Maybe<BookResponse>;
-};
-
-
-export type MutationSendMailArgs = {
-  user: UserInput;
-  file: Array<Maybe<Scalars['Upload']>>;
+  register?: Maybe<MailResponse>;
+  registerConfirmation?: Maybe<MailResponse>;
 };
 
 
 export type MutationBookArgs = {
   user?: Maybe<BookInput>;
+};
+
+
+export type MutationRegisterArgs = {
+  user: UserInput;
+  file: Array<Maybe<Scalars['Upload']>>;
+};
+
+
+export type MutationRegisterConfirmationArgs = {
+  userId: Scalars['ID'];
 };
 
 export type Query = {
@@ -159,12 +168,25 @@ export type RegistrationsQuery = (
     { __typename?: 'RegistrationList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Registration' }
-      & Pick<Registration, '_id' | 'apartmentKey' | 'email'>
+      & Pick<Registration, '_id' | 'apartmentKey' | 'email' | 'registrationStatus'>
       & { guests?: Maybe<Array<Maybe<(
         { __typename?: 'GuestRegistration' }
         & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
       )>>> }
     )>>> }
+  )> }
+);
+
+export type RegisterConfirmationMutationVariables = Exact<{
+  userId: Scalars['ID'];
+}>;
+
+
+export type RegisterConfirmationMutation = (
+  { __typename?: 'Mutation' }
+  & { registerConfirmation?: Maybe<(
+    { __typename?: 'MailResponse' }
+    & Pick<MailResponse, 'registrationStatus' | '_id'>
   )> }
 );
 
@@ -206,15 +228,15 @@ export type PriceQuery = (
   & Pick<Query, 'price'>
 );
 
-export type SendMailMutationVariables = Exact<{
+export type RegisterMutationVariables = Exact<{
   user: UserInput;
   file: Array<Maybe<Scalars['Upload']>>;
 }>;
 
 
-export type SendMailMutation = (
+export type RegisterMutation = (
   { __typename?: 'Mutation' }
-  & { sendMail?: Maybe<(
+  & { register?: Maybe<(
     { __typename?: 'MailResponse' }
     & Pick<MailResponse, 'email'>
     & { guests?: Maybe<Array<Maybe<(
@@ -232,6 +254,7 @@ export const RegistrationsDocument = gql`
       _id
       apartmentKey
       email
+      registrationStatus
       guests {
         birthDate
         documentNumber
@@ -270,6 +293,39 @@ export function useRegistrationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type RegistrationsQueryHookResult = ReturnType<typeof useRegistrationsQuery>;
 export type RegistrationsLazyQueryHookResult = ReturnType<typeof useRegistrationsLazyQuery>;
 export type RegistrationsQueryResult = Apollo.QueryResult<RegistrationsQuery, RegistrationsQueryVariables>;
+export const RegisterConfirmationDocument = gql`
+    mutation registerConfirmation($userId: ID!) {
+  registerConfirmation(userId: $userId) {
+    registrationStatus
+    _id
+  }
+}
+    `;
+export type RegisterConfirmationMutationFn = Apollo.MutationFunction<RegisterConfirmationMutation, RegisterConfirmationMutationVariables>;
+
+/**
+ * __useRegisterConfirmationMutation__
+ *
+ * To run a mutation, you first call `useRegisterConfirmationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterConfirmationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerConfirmationMutation, { data, loading, error }] = useRegisterConfirmationMutation({
+ *   variables: {
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useRegisterConfirmationMutation(baseOptions?: Apollo.MutationHookOptions<RegisterConfirmationMutation, RegisterConfirmationMutationVariables>) {
+        return Apollo.useMutation<RegisterConfirmationMutation, RegisterConfirmationMutationVariables>(RegisterConfirmationDocument, baseOptions);
+      }
+export type RegisterConfirmationMutationHookResult = ReturnType<typeof useRegisterConfirmationMutation>;
+export type RegisterConfirmationMutationResult = Apollo.MutationResult<RegisterConfirmationMutation>;
+export type RegisterConfirmationMutationOptions = Apollo.BaseMutationOptions<RegisterConfirmationMutation, RegisterConfirmationMutationVariables>;
 export const BookNowDocument = gql`
     mutation bookNow($user: BookInput!) {
   book(user: $user) {
@@ -370,9 +426,9 @@ export function usePriceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pric
 export type PriceQueryHookResult = ReturnType<typeof usePriceQuery>;
 export type PriceLazyQueryHookResult = ReturnType<typeof usePriceLazyQuery>;
 export type PriceQueryResult = Apollo.QueryResult<PriceQuery, PriceQueryVariables>;
-export const SendMailDocument = gql`
-    mutation sendMail($user: UserInput!, $file: [Upload]!) {
-  sendMail(user: $user, file: $file) {
+export const RegisterDocument = gql`
+    mutation register($user: UserInput!, $file: [Upload]!) {
+  register(user: $user, file: $file) {
     guests {
       firstName
       lastName
@@ -381,29 +437,29 @@ export const SendMailDocument = gql`
   }
 }
     `;
-export type SendMailMutationFn = Apollo.MutationFunction<SendMailMutation, SendMailMutationVariables>;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
 
 /**
- * __useSendMailMutation__
+ * __useRegisterMutation__
  *
- * To run a mutation, you first call `useSendMailMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSendMailMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useRegisterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [sendMailMutation, { data, loading, error }] = useSendMailMutation({
+ * const [registerMutation, { data, loading, error }] = useRegisterMutation({
  *   variables: {
  *      user: // value for 'user'
  *      file: // value for 'file'
  *   },
  * });
  */
-export function useSendMailMutation(baseOptions?: Apollo.MutationHookOptions<SendMailMutation, SendMailMutationVariables>) {
-        return Apollo.useMutation<SendMailMutation, SendMailMutationVariables>(SendMailDocument, baseOptions);
+export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
       }
-export type SendMailMutationHookResult = ReturnType<typeof useSendMailMutation>;
-export type SendMailMutationResult = Apollo.MutationResult<SendMailMutation>;
-export type SendMailMutationOptions = Apollo.BaseMutationOptions<SendMailMutation, SendMailMutationVariables>;
+export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
+export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;

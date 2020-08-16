@@ -1,6 +1,6 @@
 import { withGrommetTheme } from "../components/withGrommetTheme";
 import { Box } from "grommet";
-import { getGlobalProps } from "../components/takeshape/getGlobal";
+import { getGlobalProps } from "../takeshape/getGlobal";
 
 const PageError = () => (
   <Box height="medium" justify="center">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { pdp_listing_detail, GlobalType } from "../../graphql/airbnDetail";
+import { pdp_listing_detail, GlobalType } from "../../graphql/_airbn.types";
 import { Map } from "../Map";
 import { BookingCalendar } from "../BookCalendar";
 import { Box, Text, Collapsible } from "grommet";

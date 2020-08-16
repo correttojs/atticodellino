@@ -6,6 +6,22 @@ mutation sendRegistration($input: CreateRegistrationsInput!) {
         firstName
         lastName
       }
+      _id
+      registrationStatus
+    }
+  }
+}
+
+mutation updateRegistrations($input: UpdateRegistrationsInput!) {
+  updateRegistrations(input: $input) {
+    result {
+      email
+      guests {
+        firstName
+        lastName
+      }
+      _id
+      registrationStatus
     }
   }
 }
@@ -15,6 +31,7 @@ query getRegistration($id: ID!) {
     _id
     apartmentKey
     email
+    registrationStatus
     guests {
       birthDate
       documentNumber
@@ -33,6 +50,7 @@ query getRegistrations {
       _id
       apartmentKey
       email
+      registrationStatus
       guests {
         birthDate
         documentNumber

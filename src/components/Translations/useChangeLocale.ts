@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useGlobal } from "../withGrommetTheme";
-import { GlobalType } from "../../graphql/airbnDetail";
+import { GlobalType } from "../../graphql/_airbn.types";
 
 export const splitPath = (pathname: string) =>
   pathname.split("/").filter((i) => !!i);

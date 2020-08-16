@@ -5,7 +5,7 @@ async function run() {
   await generate(
     {
       schema: "http://localhost:3000/api/graphql",
-      documents: "src/components/!(takeshape|graphql)/*.graphql",
+      documents: "src/components/**/*.graphql",
       generates: {
         [process.cwd() + "/src/generated/graphql.tsx"]: {
           plugins: [
@@ -36,7 +36,7 @@ async function run() {
           },
         },
       },
-      documents: "src/components/takeshape/*.graphql",
+      documents: "src/takeshape/*.graphql",
       generates: {
         [process.cwd() + "/src/generated/graphql-takeshape.ts"]: {
           plugins: [

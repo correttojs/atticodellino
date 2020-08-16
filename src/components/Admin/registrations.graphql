@@ -4,16 +4,23 @@ query Registrations {
       _id
       apartmentKey
       email
+      registrationStatus
       guests {
         birthDate
         documentNumber
         documentType
-
         firstName
         lastName
         nationality
         placeOfBirth
       }
     }
+  }
+}
+
+mutation registerConfirmation($userId: ID!) {
+  registerConfirmation(userId: $userId) {
+    registrationStatus
+    _id
   }
 }

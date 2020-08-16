@@ -5,7 +5,7 @@ import { gqlClient } from "./gqlClient";
 import { Layout } from "./Layout";
 import { theme } from "../CssVar/theme";
 import React, { useContext, useEffect, useState } from "react";
-import { GlobalType } from "../../graphql/airbnDetail";
+import { GlobalType } from "../../graphql/_airbn.types";
 
 const GlobalStyle = createGlobalStyle`
     html, body {

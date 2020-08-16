@@ -1,0 +1,9 @@
+mutation register($user: UserInput!, $file: [Upload]!) {
+  register(user: $user, file: $file) {
+    guests {
+      firstName
+      lastName
+    }
+    email
+  }
+}

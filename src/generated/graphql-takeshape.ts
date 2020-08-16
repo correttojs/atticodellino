@@ -1019,6 +1019,7 @@ export type TsWhereInput = {
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
@@ -1160,6 +1161,7 @@ export type TsAndOperator = {
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
@@ -1220,6 +1222,7 @@ export type TsOrOperator = {
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
@@ -1280,6 +1283,7 @@ export type TsNotOperator = {
   answer?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
 };
@@ -1494,7 +1498,6 @@ export type TsWhereGuests = {
   documentType?: Maybe<TsWhereString>;
   documentNumber?: Maybe<TsWhereString>;
   birthDate?: Maybe<TsWhereString>;
-  status?: Maybe<TsWhereString>;
 };
 
 /** TS search results */
@@ -2651,6 +2654,7 @@ export type FaqSearchResult = {
 
 export type TsWhereRegistrationsInput = {
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
@@ -2669,6 +2673,7 @@ export type TsWhereRegistrationsInput = {
 /** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
 export type TsRegistrationsAndOperator = {
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
@@ -2687,6 +2692,7 @@ export type TsRegistrationsAndOperator = {
 /** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
 export type TsRegistrationsOrOperator = {
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
@@ -2705,6 +2711,7 @@ export type TsRegistrationsOrOperator = {
 /** NOT takes a single condition that must not appear in the matching results. */
 export type TsRegistrationsNotOperator = {
   guests?: Maybe<TsWhereGuests>;
+  registrationStatus?: Maybe<TsWhereString>;
   apartmentKey?: Maybe<TsWhereString>;
   email?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
@@ -2728,6 +2735,7 @@ export type RegistrationsPaginatedList = {
 export type Registrations = TsSearchable & {
   __typename?: 'Registrations';
   guests?: Maybe<Array<Maybe<RegistrationsGuests>>>;
+  registrationStatus?: Maybe<Scalars['String']>;
   apartmentKey: Scalars['String'];
   email: Scalars['String'];
   _id?: Maybe<Scalars['ID']>;
@@ -2756,7 +2764,6 @@ export type RegistrationsGuests = {
   documentType: Scalars['String'];
   documentNumber: Scalars['String'];
   birthDate: Scalars['String'];
-  status?: Maybe<Scalars['String']>;
 };
 
 /** Registrations search results */
@@ -2770,6 +2777,7 @@ export type RegistrationsSearchResults = {
 export type RegistrationsSearchResult = {
   __typename?: 'RegistrationsSearchResult';
   searchSummary?: Maybe<Scalars['String']>;
+  registrationStatus?: Maybe<Scalars['String']>;
   apartmentKey?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['String']>;
@@ -4532,6 +4540,7 @@ export type DuplicateFaqResult = {
 /** create Registrations input */
 export type CreateRegistrationsInput = {
   guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
+  registrationStatus?: Maybe<Scalars['String']>;
   apartmentKey: Scalars['String'];
   email: Scalars['String'];
   _id?: Maybe<Scalars['ID']>;
@@ -4556,7 +4565,6 @@ export type RegistrationsGuestsInput = {
   documentType?: Maybe<Scalars['String']>;
   documentNumber?: Maybe<Scalars['String']>;
   birthDate?: Maybe<Scalars['String']>;
-  status?: Maybe<Scalars['String']>;
 };
 
 export type CreateRegistrationsResult = {
@@ -4568,6 +4576,7 @@ export type CreateRegistrationsResult = {
 /** update Registrations input */
 export type UpdateRegistrationsInput = {
   guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
+  registrationStatus?: Maybe<Scalars['String']>;
   apartmentKey?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   _id: Scalars['ID'];
@@ -4605,6 +4614,7 @@ export type DeleteRegistrationsResult = {
 /** duplicate Registrations input */
 export type DuplicateRegistrationsInput = {
   guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
+  registrationStatus?: Maybe<Scalars['String']>;
   apartmentKey?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   _id: Scalars['ID'];
@@ -4857,7 +4867,27 @@ export type SendRegistrationMutation = (
     { __typename?: 'CreateRegistrationsResult' }
     & { result?: Maybe<(
       { __typename?: 'Registrations' }
-      & Pick<Registrations, 'email'>
+      & Pick<Registrations, 'email' | '_id' | 'registrationStatus'>
+      & { guests?: Maybe<Array<Maybe<(
+        { __typename?: 'RegistrationsGuests' }
+        & Pick<RegistrationsGuests, 'firstName' | 'lastName'>
+      )>>> }
+    )> }
+  )> }
+);
+
+export type UpdateRegistrationsMutationVariables = Exact<{
+  input: UpdateRegistrationsInput;
+}>;
+
+
+export type UpdateRegistrationsMutation = (
+  { __typename?: 'Mutations' }
+  & { updateRegistrations?: Maybe<(
+    { __typename?: 'UpdateRegistrationsResult' }
+    & { result?: Maybe<(
+      { __typename?: 'Registrations' }
+      & Pick<Registrations, 'email' | '_id' | 'registrationStatus'>
       & { guests?: Maybe<Array<Maybe<(
         { __typename?: 'RegistrationsGuests' }
         & Pick<RegistrationsGuests, 'firstName' | 'lastName'>
@@ -4875,7 +4905,7 @@ export type GetRegistrationQuery = (
   { __typename?: 'Root' }
   & { getRegistrations?: Maybe<(
     { __typename?: 'Registrations' }
-    & Pick<Registrations, '_id' | 'apartmentKey' | 'email'>
+    & Pick<Registrations, '_id' | 'apartmentKey' | 'email' | 'registrationStatus'>
     & { guests?: Maybe<Array<Maybe<(
       { __typename?: 'RegistrationsGuests' }
       & Pick<RegistrationsGuests, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
@@ -4892,7 +4922,7 @@ export type GetRegistrationsQuery = (
     { __typename?: 'RegistrationsPaginatedList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Registrations' }
-      & Pick<Registrations, '_id' | 'apartmentKey' | 'email'>
+      & Pick<Registrations, '_id' | 'apartmentKey' | 'email' | 'registrationStatus'>
       & { guests?: Maybe<Array<Maybe<(
         { __typename?: 'RegistrationsGuests' }
         & Pick<RegistrationsGuests, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
@@ -5016,6 +5046,23 @@ export const SendRegistrationDocument = gql`
         firstName
         lastName
       }
+      _id
+      registrationStatus
+    }
+  }
+}
+    `;
+export const UpdateRegistrationsDocument = gql`
+    mutation updateRegistrations($input: UpdateRegistrationsInput!) {
+  updateRegistrations(input: $input) {
+    result {
+      email
+      guests {
+        firstName
+        lastName
+      }
+      _id
+      registrationStatus
     }
   }
 }
@@ -5026,6 +5073,7 @@ export const GetRegistrationDocument = gql`
     _id
     apartmentKey
     email
+    registrationStatus
     guests {
       birthDate
       documentNumber
@@ -5045,6 +5093,7 @@ export const GetRegistrationsDocument = gql`
       _id
       apartmentKey
       email
+      registrationStatus
       guests {
         birthDate
         documentNumber
@@ -5088,6 +5137,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     sendRegistration(variables: SendRegistrationMutationVariables): Promise<SendRegistrationMutation> {
       return withWrapper(() => client.request<SendRegistrationMutation>(print(SendRegistrationDocument), variables));
+    },
+    updateRegistrations(variables: UpdateRegistrationsMutationVariables): Promise<UpdateRegistrationsMutation> {
+      return withWrapper(() => client.request<UpdateRegistrationsMutation>(print(UpdateRegistrationsDocument), variables));
     },
     getRegistration(variables: GetRegistrationQueryVariables): Promise<GetRegistrationQuery> {
       return withWrapper(() => client.request<GetRegistrationQuery>(print(GetRegistrationDocument), variables));

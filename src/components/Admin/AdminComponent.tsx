@@ -1,6 +1,10 @@
 import React from "react";
 import { signIn, signOut, useSession } from "next-auth/client";
-import { useRegistrationsQuery } from "../../generated/graphql";
+import {
+  useRegistrationsQuery,
+  useRegisterConfirmationMutation,
+  RegistrationsDocument,
+} from "../../generated/graphql";
 import {
   Box,
   Button,
@@ -11,7 +15,7 @@ import {
   TableBody,
 } from "grommet";
 
-import { StatusGood, Login } from "grommet-icons";
+import { StatusGood, Login, InProgress } from "grommet-icons";
 import styled from "styled-components";
 
 const BodyStyle = styled(TableBody)`
@@ -21,6 +25,16 @@ const BodyStyle = styled(TableBody)`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const { data, loading } = useRegistrationsQuery();
+  const [
+    confirmRegister,
+    { data: confStatus },
+  ] = useRegisterConfirmationMutation({
+    refetchQueries: [
+      {
+        query: RegistrationsDocument,
+      },
+    ],
+  });
 
   return (
     <>
@@ -54,7 +68,7 @@ export const AdminComponent: React.FC = () => {
                   <b>Apartment</b>
                 </TableCell>
                 <TableCell scope="col" border="bottom">
-                  <b>Confirmed</b>
+                  <b>Status</b>
                 </TableCell>
               </TableRow>
             </TableHeader>
@@ -68,12 +82,26 @@ export const AdminComponent: React.FC = () => {
                     <b>{item.apartmentKey}</b>
                   </TableCell>
                   <TableCell>
-                    <Button
-                      style={{ float: "right" }}
-                      type="button"
-                      onClick={() => console.log(item)}
-                      icon={<StatusGood />}
-                    ></Button>
+                    {item.registrationStatus === "To Be Confirmed" && (
+                      <Button
+                        style={{ float: "right" }}
+                        type="button"
+                        onClick={() =>
+                          confirmRegister({ variables: { userId: item._id } })
+                        }
+                        icon={<InProgress />}
+                      ></Button>
+                    )}
+                    {item.registrationStatus === "Confirmed" && (
+                      <Button
+                        style={{ float: "right" }}
+                        type="button"
+                        // onClick={() =>
+                        //   confirmRegister({ variables: { userId: item._id } })
+                        // }
+                        icon={<StatusGood />}
+                      ></Button>
+                    )}
                   </TableCell>
                 </TableRow>
                 {item.guests.map((guest, k) => {

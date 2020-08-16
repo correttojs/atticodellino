@@ -30,6 +30,8 @@ export const typeDefs = gql`
   type MailResponse {
     guests: [GuestMail]
     email: String
+    _id: ID!
+    registrationStatus: String
   }
 
   type ReviewType {
@@ -72,6 +74,7 @@ export const typeDefs = gql`
     _id: ID!
     apartmentKey: String!
     email: String!
+    registrationStatus: String
     guests: [GuestRegistration]
   }
 
@@ -80,9 +83,9 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    sendMail(user: UserInput!, file: [Upload]!): MailResponse
     book(user: BookInput): BookResponse
-    # registerUser(user: UserInput!, file: Upload!): MailResponse
+    register(user: UserInput!, file: [Upload]!): MailResponse
+    registerConfirmation(userId: ID!): MailResponse
   }
   type Query {
     price(from: String!, to: String!, airBnb: String!): Float

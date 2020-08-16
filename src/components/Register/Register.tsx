@@ -1,11 +1,11 @@
 // Render Prop
-import React, { useState } from "react";
+import React from "react";
 import { useFormik, FieldArray, FormikProvider } from "formik";
 import { Form, Button, Box, Heading, Text, Select } from "grommet";
 import { initialValues, validationSchema, guestValue } from "./data";
 import { FormInput } from "../FormInput";
 import styled from "styled-components";
-import { useSendMailMutation } from "../../generated/graphql";
+import { useRegisterMutation } from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../withGrommetTheme";
 import { FormTrash, UserAdd } from "grommet-icons";
@@ -37,7 +37,7 @@ const GuestStyle = styled.div`
 `;
 
 export const Register: React.FC = () => {
-  const [sendMail, { data, loading, error }] = useSendMailMutation();
+  const [register, { data, loading, error }] = useRegisterMutation();
   const t = useTranslations();
   const { apartment } = useGlobal();
 
@@ -46,7 +46,7 @@ export const Register: React.FC = () => {
     onSubmit: async (values) => {
       const { guests, email } = values;
 
-      sendMail({
+      register({
         variables: {
           user: {
             apartment,
@@ -70,8 +70,8 @@ export const Register: React.FC = () => {
           <Box>
             <h3>
               {t("THANKYOU", {
-                name: data.sendMail?.guests?.[0].firstName,
-                lastName: data.sendMail?.guests?.[0].lastName,
+                name: data.register?.guests?.[0].firstName,
+                lastName: data.register?.guests?.[0].lastName,
               })}
             </h3>
           </Box>

@@ -1,9 +1,0 @@
-mutation sendMail($user: UserInput!, $file: [Upload]!) {
-  sendMail(user: $user, file: $file) {
-    guests {
-      firstName
-      lastName
-    }
-    email
-  }
-}

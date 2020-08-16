@@ -1,7 +1,7 @@
-import { getDetails } from "../graphql/airbnb";
+import { getDetails } from "../graphql/_airbnb";
 import { Home } from "../components/Home";
 import { withGrommetTheme } from "../components/withGrommetTheme";
-import { getGlobalProps } from "../components/takeshape/getGlobal";
+import { getGlobalProps } from "../takeshape/getGlobal";
 
 export async function getStaticProps() {
   const params = { lang: "en", apartment: "VR" };

@@ -1,5 +1,5 @@
 import React from "react";
-import { pdp_listing_detail } from "../../graphql/airbnDetail";
+import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Box, Text, Heading } from "grommet";
 import { Trophy } from "grommet-icons";
 import styled from "styled-components";

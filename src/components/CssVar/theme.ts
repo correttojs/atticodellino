@@ -1,4 +1,4 @@
-import { GlobalType } from "../../graphql/airbnDetail";
+import { GlobalType } from "../../graphql/_airbn.types";
 
 export const theme = (apartment: GlobalType) => {
   const {

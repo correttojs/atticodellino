@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 import { Box, ThemeType } from "grommet";
 import { MQ_MOBILE, MQ_NOT_MOBILE, MQ_DESKTOP } from "../CssVar/MediaQueries";
 import IntersectionImage from "react-intersection-image";
-import { GlobalType } from "../../graphql/airbnDetail";
+import { GlobalType } from "../../graphql/_airbn.types";
 
 // prettier-ignore
 export const HeroStyle = styled(Box)<{ apartment: GlobalType}>`
