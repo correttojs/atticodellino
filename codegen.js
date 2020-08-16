@@ -5,9 +5,9 @@ async function run() {
   await generate(
     {
       schema: "http://localhost:3000/api/graphql",
-      documents: "components/!(takeshape|graphql)/*.graphql",
+      documents: "src/components/!(takeshape|graphql)/*.graphql",
       generates: {
-        [process.cwd() + "/generated/graphql.tsx"]: {
+        [process.cwd() + "/src/generated/graphql.tsx"]: {
           plugins: [
             "typescript",
             "typescript-operations",
@@ -20,7 +20,7 @@ async function run() {
             gqlImport: "graphql-tag",
           },
         },
-        [process.cwd() + "/graphql.schema.json"]: {
+        [process.cwd() + "/src/graphql.schema.json"]: {
           plugins: ["introspection"],
         },
       },
@@ -36,9 +36,9 @@ async function run() {
           },
         },
       },
-      documents: "components/takeshape/*.graphql",
+      documents: "src/components/takeshape/*.graphql",
       generates: {
-        [process.cwd() + "/generated/graphql-takeshape.ts"]: {
+        [process.cwd() + "/src/generated/graphql-takeshape.ts"]: {
           plugins: [
             "typescript",
             "typescript-operations",
