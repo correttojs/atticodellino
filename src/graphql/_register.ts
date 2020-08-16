@@ -68,8 +68,10 @@ export const registerMutation = async (
 
 export const registerConfirmationMutation = async (
   _,
-  { userId }: MutationRegisterConfirmationArgs
+  { userId }: MutationRegisterConfirmationArgs,
+  context
 ) => {
+  if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const { getRegistrations: user } = await takeShapeGQLClient.getRegistration({
     id: userId,
   });
