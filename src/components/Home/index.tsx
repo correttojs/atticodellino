@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { pdp_listing_detail, GlobalType } from "../../graphql/_airbn.types";
 import { Map } from "../Map";
 import { BookingCalendar } from "../BookCalendar";
-import { Box, Text, Collapsible } from "grommet";
+import { Box, Collapsible } from "grommet";
 import { Hero } from "../Hero/Hero";
 import { Host } from "../Host";
 import { Reviews } from "../Reviews";
@@ -22,6 +22,8 @@ import Link from "next/link";
 import styled from "styled-components";
 import { MQ_MOBILE } from "../CssVar/MediaQueries";
 import Head from "next/head";
+import tw from "twin.macro";
+import { P, Span, FlexL } from "../HTML/HTML";
 
 const ApartmentLink = styled.a<{ backgroundColor: string }>`
   position: absolute;
@@ -79,11 +81,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         />
       </Head>
       <Hero photos={pdp_listing_detail.photos} />
-      <Box
-        pad={{ horizontal: "large", vertical: "small" }}
-        margin={{ bottom: "medium" }}
-        align="end"
-      >
+      <div css={tw`px-3 py-1 m-6`}>
         <Link href={apartmentLink(sponsor?.[0]?.key)} passHref={true}>
           <ApartmentLink backgroundColor={sponsor?.[0]?.brandColor.hex}>
             {translate("ALSO", {
@@ -91,7 +89,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
             })}
           </ApartmentLink>
         </Link>
-      </Box>
+      </div>
       <Box
         direction="row-responsive"
         align="center"
@@ -100,16 +98,16 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         margin={{ bottom: "large" }}
         border="bottom"
       >
-        <Text>
+        <Span>
           <Icon icon={faFemale} style={{ marginRight: "5px" }} />
           {pdp_listing_detail.guest_label}
-        </Text>
-        <Text>
+        </Span>
+        <Span>
           <Icon icon={faPersonBooth} style={{ marginRight: "5px" }} />
           {pdp_listing_detail.bedroom_label}
-        </Text>
+        </Span>
         {!/^0/.test(pdp_listing_detail.bed_label) && (
-          <Text>
+          <Span>
             <Icon
               width={"15px"}
               height={"15px"}
@@ -117,31 +115,28 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
               style={{ marginRight: "5px" }}
             />
             {pdp_listing_detail.bed_label}
-          </Text>
+          </Span>
         )}
-        <Text>
+        <Span>
           <Icon icon={faBath} style={{ marginRight: "5px" }} />
           {pdp_listing_detail.bathroom_label}
-        </Text>
+        </Span>
       </Box>
       {/* <Link to={apartment === "GARDA" ? "/" : "/garda"}></Link> */}
-      <Box pad="large">
-        <Text size={"large"}>
-          {pdp_listing_detail.sectioned_description.summary}
-        </Text>
-      </Box>
+      <FlexL>
+        <P>{pdp_listing_detail.sectioned_description.summary}</P>
+      </FlexL>
       {!readMoreOpen &&
         (pdp_listing_detail.sectioned_description.space ||
           pdp_listing_detail.sectioned_description.access ||
           pdp_listing_detail.sectioned_description.notes) && (
           <Box pad={{ horizontal: "large" }} margin={{ bottom: "medium" }}>
-            <Text
-              weight="bold"
-              size={"large"}
+            <p
+              css={tw`text-lg font-semibold cursor-pointer`}
               onClick={() => setReadMoreOpen(true)}
             >
               {translate("RERAD_MORE")}
-            </Text>
+            </p>
           </Box>
         )}
       <Collapsible open={readMoreOpen}>
@@ -159,13 +154,12 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         />
 
         <Box pad={{ horizontal: "large" }} margin={{ bottom: "medium" }}>
-          <Text
-            weight="bold"
-            size={"large"}
+          <p
+            css={tw`text-lg font-semibold cursor-pointer`}
             onClick={() => setReadMoreOpen(false)}
           >
             {translate("HIDE")}
-          </Text>
+          </p>
         </Box>
       </Collapsible>
       <Amenities listing_amenities={pdp_listing_detail.listing_amenities} />
@@ -193,7 +187,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       <Box pad={{ horizontal: "large", bottom: "large" }}>
         {pdp_listing_detail.guest_controls.structured_house_rules.map(
           (s, k) => (
-            <Text key={k}>{s}</Text>
+            <Span key={k}>{s}</Span>
           )
         )}
       </Box>
