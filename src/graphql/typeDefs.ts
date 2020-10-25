@@ -7,7 +7,7 @@ export const typeDefs = gql`
     encoding: String!
   }
 
-  interface IGuest{
+  interface IGuest {
     firstName: String!
     lastName: String!
     documentNumber: String!
@@ -17,7 +17,7 @@ export const typeDefs = gql`
     placeOfBirth: String!
   }
 
-  input Guest implements IGuest {
+  input Guest {
     firstName: String!
     lastName: String!
     documentNumber: String!
@@ -26,7 +26,7 @@ export const typeDefs = gql`
     nationality: String!
     placeOfBirth: String!
   }
-  
+
   input UserInput {
     guests: [Guest]
     apartment: String
@@ -72,7 +72,7 @@ export const typeDefs = gql`
     lastName: String
   }
 
-  type GuestRegistration implements IGuest {
+  type GuestRegistration {
     firstName: String!
     lastName: String!
     documentNumber: String!
@@ -81,7 +81,6 @@ export const typeDefs = gql`
     nationality: String!
     placeOfBirth: String!
   }
-
 
   type Registration {
     _id: ID!
