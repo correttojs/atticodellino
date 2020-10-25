@@ -1,4 +1,4 @@
-import { withGrommetTheme } from "../components/withGrommetTheme";
+import { withGrommetTheme } from "../components/Layout";
 import { Box } from "grommet";
 import { getGlobalProps } from "../takeshape/getGlobal";
 

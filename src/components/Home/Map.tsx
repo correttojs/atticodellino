@@ -1,7 +1,7 @@
 import GoogleMapReact from "google-map-react";
 import { Home, Indicator } from "grommet-icons";
 import { Box, Text } from "grommet";
-import { useGlobal } from "../withGrommetTheme";
+import { useGlobal } from "../Layout";
 import { useInView } from "react-intersection-observer";
 
 export const Map: React.FC<{ title: string }> = ({ title }) => {

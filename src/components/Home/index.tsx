@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { pdp_listing_detail, GlobalType } from "../../graphql/_airbn.types";
-import { Map } from "../Map";
+import { Map } from "./Map";
 import { BookingCalendar } from "../BookCalendar";
 import { Box, Collapsible } from "grommet";
 import { Hero } from "../Hero/Hero";
-import { Host } from "../Host";
-import { Reviews } from "../Reviews";
-import { Amenities } from "../Amenities";
+import { Host } from "./Host";
+import { Reviews } from "./Reviews";
+import { Amenities } from "./Amenities";
 import { useTranslations } from "../Translations/useTranslations";
 import { HomeSection } from "./HomeSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,14 +16,14 @@ import {
   faBath,
   faFemale,
 } from "@fortawesome/free-solid-svg-icons";
-import { useGlobal } from "../withGrommetTheme";
+import { useGlobal } from "../Layout";
 import { useChangeLocale } from "../Translations/useChangeLocale";
 import Link from "next/link";
 import styled from "styled-components";
-import { MQ_MOBILE } from "../CssVar/MediaQueries";
+import { MQ_MOBILE } from "../Layout/MediaQueries";
 import Head from "next/head";
 import tw from "twin.macro";
-import { P, Span, FlexL } from "../HTML/HTML";
+import { P, Span, FlexL } from "../Layout/HTML";
 
 const ApartmentLink = styled.a<{ backgroundColor: string }>`
   position: absolute;

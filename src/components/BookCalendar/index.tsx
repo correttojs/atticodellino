@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { Book } from "./Book";
 import { useState } from "react";
 import { Box, Heading, ThemeType } from "grommet";
-import { MQ_MOBILE } from "../CssVar/MediaQueries";
-import { theme } from "../CssVar/theme";
+import { MQ_MOBILE } from "../Layout/MediaQueries";
+import { theme } from "../Layout/theme";
 import { useTranslations } from "../Translations/useTranslations";
-import { useGlobal } from "../withGrommetTheme";
+import { useGlobal } from "../Layout";
 
 const StyledCalendar = styled(ReactCalendar)`
   .react-calendar__tile--now {

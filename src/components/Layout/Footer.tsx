@@ -3,8 +3,8 @@ import { Box, Text, Anchor } from "grommet";
 
 import SvgAirbnb1 from "../Icons/Airbnb";
 import { FacebookOption, Indicator } from "grommet-icons";
-import { useGlobal } from "../withGrommetTheme";
-import { Contacts } from "../Header/Contact";
+import { useGlobal } from ".";
+import { Contacts } from "./Contact";
 import Link from "next/link";
 import { useTranslations } from "../Translations/useTranslations";
 import styled from "styled-components";

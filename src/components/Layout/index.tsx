@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import { ApolloProvider } from "@apollo/client";
 import { gqlClient } from "./gqlClient";
 import { Layout } from "./Layout";
-import { theme } from "../CssVar/theme";
+import { theme } from "./theme";
 import React, { useContext, useEffect, useState } from "react";
 import { GlobalType } from "../../graphql/_airbn.types";
 

@@ -1,5 +1,5 @@
 import { AdminComponent } from "../components/Admin/AdminComponent";
-import { withGrommetTheme } from "../components/withGrommetTheme";
+import { withGrommetTheme } from "../components/Layout";
 import { getGlobalProps } from "../takeshape/getGlobal";
 
 export async function getStaticProps() {

@@ -1,4 +1,4 @@
-import { useGlobal } from "../withGrommetTheme";
+import { useGlobal } from "../Layout";
 import { Translations } from "./translations";
 
 export const useTranslations = () => {

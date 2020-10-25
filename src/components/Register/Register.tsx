@@ -7,7 +7,7 @@ import { FormInput } from "../FormInput";
 import styled from "styled-components";
 import { useRegisterMutation } from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
-import { useGlobal } from "../withGrommetTheme";
+import { useGlobal } from "../Layout";
 import { FormTrash, UserAdd } from "grommet-icons";
 
 const UploadStyle = styled.div<{ error: boolean }>`

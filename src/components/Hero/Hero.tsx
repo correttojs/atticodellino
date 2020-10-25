@@ -8,8 +8,8 @@ import {
 } from "./Hero.css";
 import { Box, Layer, Image } from "grommet";
 import { CaretNext, CaretPrevious, Close } from "grommet-icons";
-import { useGlobal } from "../withGrommetTheme";
-import { Contacts } from "../Header/Contact";
+import { useGlobal } from "../Layout";
+import { Contacts } from "../Layout/Contact";
 
 export const Hero: React.FC<{
   photos: { id; picture: string; x_large_cover: string; caption: string }[];

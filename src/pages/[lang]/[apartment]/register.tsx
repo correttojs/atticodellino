@@ -1,4 +1,4 @@
-import { withGrommetTheme } from "../../../components/withGrommetTheme";
+import { withGrommetTheme } from "../../../components/Layout";
 import { Register } from "../../../components/Register/Register";
 import { getGlobalProps, getGlobalPaths } from "../../../takeshape/getGlobal";
 

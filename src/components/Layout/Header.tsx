@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Menu } from "grommet";
 
 import styled from "styled-components";
-import { useGlobal } from "../withGrommetTheme";
-import { MQ_MOBILE } from "../CssVar/MediaQueries";
+import { useGlobal } from ".";
+import { MQ_MOBILE } from "./MediaQueries";
 import { Language } from "grommet-icons";
 import { useChangeLocale } from "../Translations/useChangeLocale";
 import { Contacts } from "./Contact";

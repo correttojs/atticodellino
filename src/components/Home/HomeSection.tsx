@@ -1,5 +1,5 @@
 import React from "react";
-import { P, H2, FlexL } from "../HTML/HTML";
+import { P, H2, FlexL } from "../Layout/HTML";
 
 export const HomeSection: React.FC<{ title: string; content: string }> = ({
   title,

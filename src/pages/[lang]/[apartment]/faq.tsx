@@ -1,4 +1,4 @@
-import { withGrommetTheme } from "../../../components/withGrommetTheme";
+import { withGrommetTheme } from "../../../components/Layout";
 import { NextPage } from "next";
 import { useState } from "react";
 import { Box } from "grommet";

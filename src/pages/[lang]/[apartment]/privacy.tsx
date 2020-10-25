@@ -1,4 +1,4 @@
-import { withGrommetTheme } from "../../../components/withGrommetTheme";
+import { withGrommetTheme } from "../../../components/Layout";
 import { getGlobalProps, getGlobalPaths } from "../../../takeshape/getGlobal";
 import { takeShapeGQLClient } from "../../../takeshape/takeShapeClient";
 import { GetArticleByPathQuery } from "../../../generated/graphql-takeshape";

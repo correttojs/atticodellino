@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Text } from "grommet";
 import { Phone, MailOption } from "grommet-icons";
 import styled from "styled-components";
-import { MQ_MOBILE } from "../CssVar/MediaQueries";
+import { MQ_MOBILE } from "./MediaQueries";
 
 const EMAIL = process.env.NEXT_PUBLIC_FROM_EMAIL;
 const TEL = process.env.NEXT_PUBLIC_PHONE;

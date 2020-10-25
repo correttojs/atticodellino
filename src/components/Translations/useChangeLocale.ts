@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useGlobal } from "../withGrommetTheme";
+import { useGlobal } from "../Layout";
 import { GlobalType } from "../../graphql/_airbn.types";
 
 export const splitPath = (pathname: string) =>

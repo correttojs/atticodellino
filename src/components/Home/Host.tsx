@@ -3,11 +3,11 @@ import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Box, Text, Heading } from "grommet";
 import { Trophy } from "grommet-icons";
 import styled from "styled-components";
-import { MQ_MOBILE } from "../CssVar/MediaQueries";
+import { MQ_MOBILE } from "../Layout/MediaQueries";
 import SvgAirbnb1 from "../Icons/Airbnb";
-import { theme } from "../CssVar/theme";
+import { theme } from "../Layout/theme";
 import { useTranslations } from "../Translations/useTranslations";
-import { useGlobal } from "../withGrommetTheme";
+import { useGlobal } from "../Layout";
 import IntersectionImage from "react-intersection-image";
 
 const ImgBox = styled(Box)`

@@ -2,15 +2,15 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 import React from "react";
 
-import { Header } from "..";
+import { Footer } from "../Footer";
 
 export default {
-  title: "Header",
+  title: "Footer",
 } as Meta;
 
 const Template: Story = (args) => (
   <>
-    <Header />
+    <Footer />
   </>
 );
 
