@@ -9,15 +9,15 @@ const Multi = styled.div`
 `;
 
 export const Amenities: React.FC<{
-  listing_amenities: pdp_listing_detail["pdp_listing_detail"]["listing_amenities"];
-}> = ({ listing_amenities }) => {
+  amenities: { name: string }[];
+}> = ({ amenities }) => {
   const t = useTranslations();
   return (
     <Box pad="large" background="lighter">
       <Heading level="2">{t("AMENITIES")}</Heading>
 
       <Multi>
-        {listing_amenities.map((s, k) => (
+        {amenities.map((s, k) => (
           <div key={k}>
             <Text>{s.name}</Text>
           </div>

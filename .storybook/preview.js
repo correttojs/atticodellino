@@ -1,8 +1,8 @@
-import { useGlobal, GlobalStyle } from "../src/components/withGrommetTheme";
+import { useGlobal, GlobalStyle } from "../src/components/Layout";
 import { Grommet } from "grommet";
 
 import { RouterContext } from "next/dist/next-server/lib/router-context";
-import { theme } from "../src/components/CssVar/theme";
+import { theme } from "../src/components/Layout/theme";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

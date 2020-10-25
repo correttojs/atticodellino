@@ -1,5 +1,5 @@
 import GoogleMapReact from "google-map-react";
-import { Home, Indicator } from "grommet-icons";
+import { Indicator } from "grommet-icons";
 import { Box, Text } from "grommet";
 import { useGlobal } from "../Layout";
 import { useInView } from "react-intersection-observer";

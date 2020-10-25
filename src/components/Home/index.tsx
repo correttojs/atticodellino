@@ -3,7 +3,7 @@ import { pdp_listing_detail, GlobalType } from "../../graphql/_airbn.types";
 import { Map } from "./Map";
 import { BookingCalendar } from "../BookCalendar";
 import { Box, Collapsible } from "grommet";
-import { Hero } from "../Hero/Hero";
+import { Hero } from "./Hero";
 import { Host } from "./Host";
 import { Reviews } from "./Reviews";
 import { Amenities } from "./Amenities";
@@ -162,7 +162,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
           </p>
         </Box>
       </Collapsible>
-      <Amenities listing_amenities={pdp_listing_detail.listing_amenities} />
+      <Amenities amenities={pdp_listing_detail.listing_amenities} />
       <BookingCalendar />
       <Box>
         <Map title={pdp_listing_detail.name} />
