@@ -1,4 +1,4 @@
-import { FormValues } from "../Register/data";
+import { FormValues } from "../FormRegister/data";
 import { useFormik, getIn } from "formik";
 import { FormField, TextInput } from "grommet";
 

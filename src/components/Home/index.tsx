@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { pdp_listing_detail, GlobalType } from "../../graphql/_airbn.types";
 import { Map } from "./Map";
-import { BookingCalendar } from "../BookCalendar";
+import { BookingCalendar } from "../FormBookCalendar";
 import { Box, Collapsible } from "grommet";
 import { Hero } from "./Hero";
 import { Host } from "./Host";
@@ -167,7 +167,14 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       <Box>
         <Map title={pdp_listing_detail.name} />
       </Box>
-      <Host {...pdp_listing_detail.primary_host} />
+      <Host
+        srcImage={pdp_listing_detail.primary_host.profile_pic_path}
+        about={pdp_listing_detail.primary_host.about}
+        reviews={
+          pdp_listing_detail.primary_host.badges.find((r) => r.id === "reviews")
+            .count
+        }
+      />
       <Reviews
         sorted_reviews={pdp_listing_detail.sorted_reviews}
         review_details_interface={pdp_listing_detail.review_details_interface}

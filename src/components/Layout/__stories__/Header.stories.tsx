@@ -5,7 +5,7 @@ import React from "react";
 import { Header } from "../Header";
 
 export default {
-  title: "Header",
+  title: "Layout/Header",
 } as Meta;
 
 const Template: Story = (args) => (

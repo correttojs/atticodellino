@@ -5,7 +5,7 @@ import React from "react";
 import { Footer } from "../Footer";
 
 export default {
-  title: "Footer",
+  title: "Layout/Footer",
 } as Meta;
 
 const Template: Story = (args) => (

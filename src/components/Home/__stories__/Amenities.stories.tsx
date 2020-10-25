@@ -5,7 +5,7 @@ import React from "react";
 import { Amenities } from "../Amenities";
 
 export default {
-  title: "Amenities",
+  title: "Home/Amenities",
 } as Meta;
 
 const Template: Story = (args) => (

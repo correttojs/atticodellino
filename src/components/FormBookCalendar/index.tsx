@@ -5,7 +5,6 @@ import { Book } from "./Book";
 import { useState } from "react";
 import { Box, Heading, ThemeType } from "grommet";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
-import { theme } from "../Layout/theme";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 

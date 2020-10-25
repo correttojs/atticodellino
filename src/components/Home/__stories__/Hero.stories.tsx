@@ -2,13 +2,13 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 import React from "react";
 
-import pic1 from "./1.jpg";
-import pic2 from "./2.jpg";
-import pic3 from "./3.jpg";
+const pic1 = require("./1.jpg");
+const pic2 = require("./2.jpg");
+const pic3 = require("./3.jpg");
 import { Hero } from "../Hero";
 
 export default {
-  title: "Hero",
+  title: "Home/Hero",
 } as Meta;
 
 const Template: Story = (args) => (

@@ -2,7 +2,7 @@ import React from "react";
 import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Box, Text, Heading } from "grommet";
 import styled from "styled-components";
-import SvgAirbnb1 from "../Icons/Airbnb";
+import SvgAirbnb1 from "../Layout/AirbnbIcon";
 import { useTranslations } from "../Translations/useTranslations";
 
 const StyledReview = styled.div`

@@ -1,11 +1,13 @@
-import { Grommet } from "grommet";
+import { Box, Grommet } from "grommet";
 import { createGlobalStyle } from "styled-components";
 import { ApolloProvider } from "@apollo/client";
 import { gqlClient } from "./gqlClient";
-import { Layout } from "./Layout";
 import { theme } from "./theme";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GlobalType } from "../../graphql/_airbn.types";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
+import { GlobalContext } from "./useGlobal";
 
 export const GlobalStyle = createGlobalStyle`
     html, body {
@@ -19,37 +21,6 @@ export const GlobalStyle = createGlobalStyle`
       color: #fff !important;
     }
 `;
-
-export const GlobalContext = React.createContext<GlobalType & { setLang? }>({
-  apartment: "VR",
-  lang: "en",
-  langs: ["en", "de"],
-  apartments: ["GARDA"],
-  lightColor: {
-    rgb: { a: 0.2, b: 18, g: 0, r: 41 },
-  },
-  brandColor: {
-    hex: "#290012",
-  },
-  name: `L'attico del lino`,
-  address: `San Nazaro st., 60, 4th floor, 37129, Verona - Italy`,
-});
-
-export const useGlobal = () => {
-  const context = useContext(GlobalContext);
-  return context;
-};
-
-const GrommetComp: React.FC = ({ children }) => {
-  const global = useGlobal();
-  return (
-    <Grommet theme={theme(global)}>
-      <ApolloProvider client={gqlClient}>
-        <Layout>{children}</Layout>
-      </ApolloProvider>
-    </Grommet>
-  );
-};
 
 export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
   global?: GlobalType;
@@ -77,10 +48,20 @@ export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
           global ? { ...global, lang: currentLang, setLang } : props.global
         }
       >
-        <GrommetComp>
-          <Comp {...props}></Comp>
-        </GrommetComp>
+        <Grommet theme={theme(props.global)}>
+          <ApolloProvider client={gqlClient}>
+            <Box align="center">
+              <Header />
+              <Box margin={{ top: "80px" }}>
+                <Comp {...props}></Comp>
+              </Box>
+              <Footer />
+            </Box>
+          </ApolloProvider>
+        </Grommet>
       </GlobalContext.Provider>
     </>
   );
 };
+
+export { useGlobal } from "./useGlobal";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text, Anchor } from "grommet";
 
-import SvgAirbnb1 from "../Icons/Airbnb";
+import SvgAirbnb1 from "./AirbnbIcon";
 import { FacebookOption, Indicator } from "grommet-icons";
 import { useGlobal } from ".";
 import { Contacts } from "./Contact";
