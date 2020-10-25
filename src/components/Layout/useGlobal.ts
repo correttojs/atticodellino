@@ -18,5 +18,19 @@ export const GlobalContext = React.createContext<GlobalType & { setLang? }>({
 
 export const useGlobal = () => {
   const context = useContext(GlobalContext);
-  return context;
+  const {
+    rgb: { r, g, b, a },
+  } = context?.lightColor;
+  const {
+    rgb: { r: r2, g: g2, b: b2, a: a2 },
+  } = context?.lightColor;
+  return {
+    ...context,
+    colors: {
+      brand: context.brandColor.hex,
+      active: "#290012e8",
+      light: `rgba(${r},${g},${b},${a})`,
+      lighter: `rgba(${r2},${g2},${b2},${a2})`,
+    },
+  };
 };

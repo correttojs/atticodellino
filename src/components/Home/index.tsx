@@ -8,7 +8,6 @@ import { Host } from "./Host";
 import { Reviews } from "./Reviews";
 import { Amenities } from "./Amenities";
 import { useTranslations } from "../Translations/useTranslations";
-import { HomeSection } from "./HomeSection";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBed,
@@ -23,7 +22,9 @@ import styled from "styled-components";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
 import Head from "next/head";
 import tw from "twin.macro";
-import { P, Span, FlexL } from "../Layout/HTML";
+import { H2, P, Span } from "../@UI/Texts";
+import { Section } from "../@UI/Section";
+import { Summary } from "./Summary";
 
 const ApartmentLink = styled.a<{ backgroundColor: string }>`
   position: absolute;
@@ -43,11 +44,6 @@ const ApartmentLink = styled.a<{ backgroundColor: string }>`
     border-top: 20px solid ${({ backgroundColor }) => backgroundColor};
     border-left: 10px solid transparent;
   }
-`;
-
-const Icon = styled(FontAwesomeIcon)`
-  max-width: 18px;
-  max-height: 18px;
 `;
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
@@ -90,42 +86,13 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
           </ApartmentLink>
         </Link>
       </div>
-      <Box
-        direction="row-responsive"
-        align="center"
-        justify="between"
-        pad={{ horizontal: "large", top: "large", bottom: "small" }}
-        margin={{ bottom: "large" }}
-        border="bottom"
-      >
-        <Span>
-          <Icon icon={faFemale} style={{ marginRight: "5px" }} />
-          {pdp_listing_detail.guest_label}
-        </Span>
-        <Span>
-          <Icon icon={faPersonBooth} style={{ marginRight: "5px" }} />
-          {pdp_listing_detail.bedroom_label}
-        </Span>
-        {!/^0/.test(pdp_listing_detail.bed_label) && (
-          <Span>
-            <Icon
-              width={"15px"}
-              height={"15px"}
-              icon={faBed}
-              style={{ marginRight: "5px" }}
-            />
-            {pdp_listing_detail.bed_label}
-          </Span>
-        )}
-        <Span>
-          <Icon icon={faBath} style={{ marginRight: "5px" }} />
-          {pdp_listing_detail.bathroom_label}
-        </Span>
-      </Box>
+
+      <Summary {...pdp_listing_detail} />
+
       {/* <Link to={apartment === "GARDA" ? "/" : "/garda"}></Link> */}
-      <FlexL>
+      <Section>
         <P>{pdp_listing_detail.sectioned_description.summary}</P>
-      </FlexL>
+      </Section>
       {!readMoreOpen &&
         (pdp_listing_detail.sectioned_description.space ||
           pdp_listing_detail.sectioned_description.access ||
@@ -140,18 +107,20 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
           </Box>
         )}
       <Collapsible open={readMoreOpen}>
-        <HomeSection
-          title={translate("SPACE")}
-          content={pdp_listing_detail.sectioned_description.space}
-        />
-        <HomeSection
-          title={translate("GUEST_ACCESS")}
-          content={pdp_listing_detail.sectioned_description.access}
-        />
-        <HomeSection
-          title={translate("OTHER_THINGS")}
-          content={pdp_listing_detail.sectioned_description.notes}
-        />
+        <Section>
+          <H2>{translate("SPACE")}</H2>
+          <P>{pdp_listing_detail.sectioned_description.space}</P>
+        </Section>
+
+        <Section>
+          <H2>{translate("GUEST_ACCESS")}</H2>
+          <P>{pdp_listing_detail.sectioned_description.access}</P>
+        </Section>
+
+        <Section>
+          <H2>{translate("OTHER_THINGS")}</H2>
+          <P>{pdp_listing_detail.sectioned_description.notes}</P>
+        </Section>
 
         <Box pad={{ horizontal: "large" }} margin={{ bottom: "medium" }}>
           <p
@@ -179,18 +148,21 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         sorted_reviews={pdp_listing_detail.sorted_reviews}
         review_details_interface={pdp_listing_detail.review_details_interface}
       />
-      <HomeSection
-        title={translate("NEIGHBORHOOD")}
-        content={pdp_listing_detail.sectioned_description.neighborhood_overview}
-      />
-      <HomeSection
-        title={translate("TRANSIT")}
-        content={pdp_listing_detail.sectioned_description.transit}
-      />{" "}
-      <HomeSection
-        title={translate("HOUSE_RULES")}
-        content={pdp_listing_detail.sectioned_description.house_rules}
-      />
+      <Section>
+        <H2>{translate("NEIGHBORHOOD")}</H2>
+        <P>{pdp_listing_detail.sectioned_description.neighborhood_overview}</P>
+      </Section>
+
+      <Section>
+        <H2>{translate("TRANSIT")}</H2>
+        <P>{pdp_listing_detail.sectioned_description.transit}</P>
+      </Section>
+
+      <Section>
+        <H2>{translate("HOUSE_RULES")}</H2>
+        <P>{pdp_listing_detail.sectioned_description.house_rules}</P>
+      </Section>
+
       <Box pad={{ horizontal: "large", bottom: "large" }}>
         {pdp_listing_detail.guest_controls.structured_house_rules.map(
           (s, k) => (

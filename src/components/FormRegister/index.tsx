@@ -1,7 +1,7 @@
 // Render Prop
 import React from "react";
 import { useFormik, FieldArray, FormikProvider } from "formik";
-import { Form, Button, Box, Heading, Text, Select } from "grommet";
+import { Form, Button, Box, Text, Select } from "grommet";
 import { initialValues, validationSchema, guestValue } from "./data";
 import { FormInput } from "../FormInput";
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import { useRegisterMutation } from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 import { FormTrash, UserAdd } from "grommet-icons";
+import { H1 } from "../@UI/Texts";
 
 const UploadStyle = styled.div<{ error: boolean }>`
   position: relative;
@@ -94,7 +95,7 @@ export const Register: React.FC = () => {
         )}
         {!data && !error && !loading && (
           <>
-            <Heading>{t("REGISTER")}</Heading>
+            <H1>{t("REGISTER")}</H1>
             <FormikProvider value={formik}>
               <Form
                 onSubmit={(e) => {

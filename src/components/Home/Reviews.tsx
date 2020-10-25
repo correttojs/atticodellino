@@ -4,6 +4,7 @@ import { Box, Text, Heading } from "grommet";
 import styled from "styled-components";
 import SvgAirbnb1 from "../Layout/AirbnbIcon";
 import { useTranslations } from "../Translations/useTranslations";
+import { H2 } from "../@UI/Texts";
 
 const StyledReview = styled.div`
   height: 400px;
@@ -23,7 +24,7 @@ export const Reviews: React.FC<{
   return (
     <Box pad="large">
       <Box align="center" direction="row">
-        <Heading level="2">{t("REVIEWS")}</Heading>
+        <H2>{t("REVIEWS")}</H2>
         <SvgAirbnb1 style={{ marginLeft: "20px" }} />
       </Box>
 

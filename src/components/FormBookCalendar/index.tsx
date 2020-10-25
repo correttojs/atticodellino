@@ -2,11 +2,12 @@ import ReactCalendar from "react-calendar";
 import { useCalendarQuery, usePriceLazyQuery } from "../../generated/graphql";
 import styled from "styled-components";
 import { Book } from "./Book";
-import { useState } from "react";
-import { Box, Heading, ThemeType } from "grommet";
+import React, { useState } from "react";
+import { Box, ThemeType } from "grommet";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
+import { H2 } from "../@UI/Texts";
 
 const StyledCalendar = styled(ReactCalendar)`
   .react-calendar__tile--now {
@@ -52,7 +53,7 @@ export const BookingCalendar = () => {
 
   return (
     <Box pad="large">
-      <Heading level="2">{t("BOOK")}</Heading>
+      <H2>{t("BOOK")}</H2>
       <StyledBook direction="row" justify="center" align="center">
         <StyledCalendar
           tileDisabled={(e) => {

@@ -1,15 +1,15 @@
 import React from "react";
-import { Box, Text, Heading } from "grommet";
-import { Trophy } from "grommet-icons";
 import styled from "styled-components";
-import { MQ_MOBILE } from "../Layout/MediaQueries";
-import SvgAirbnb1 from "../Layout/AirbnbIcon";
-import { theme } from "../Layout/theme";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 import IntersectionImage from "react-intersection-image";
+import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
+import { Section } from "../@UI/Section";
+import tw from "twin.macro";
+import { H2, P } from "../@UI/Texts";
+import { FaAirbnb, FaTrophy } from "react-icons/fa";
 
-const ImgBox = styled(Box)`
+const ImgBox = styled.div`
   img {
     border-radius: 50%;
     width: 150px;
@@ -19,43 +19,30 @@ const ImgBox = styled(Box)`
   padding: 10px;
 `;
 
-const Container = styled(Box)`
-  @media ${MQ_MOBILE} {
-    flex-direction: column-reverse;
-  }
-`;
-
 export const Host: React.FC<{
   srcImage: string;
   about: string;
   reviews: number;
 }> = ({ srcImage, about, reviews }) => {
   const translate = useTranslations();
-  const global = useGlobal();
+  const { colors } = useGlobal();
   return (
-    <Container
-      pad="large"
-      direction="row"
-      background={theme(global).global.colors.lighter}
-    >
-      <Box>
-        <Heading level="2">{translate("HOST")}</Heading>
-        <Text size={"large"}>{about}</Text>
-        <Box direction="row" align="center" margin={{ top: "20px" }}>
-          <Text weight="bold" margin={{ horizontal: "small" }}>
-            {reviews} reviews -{" "}
-          </Text>
-          <Trophy />
-          <Text margin={{ horizontal: "small" }} weight="bold">
-            Superhost
-          </Text>
-
-          <SvgAirbnb1 />
-        </Box>
-      </Box>
-      <ImgBox>
-        <IntersectionImage src={srcImage} width="150" height="150" />
-      </ImgBox>
-    </Container>
+    <BackgroundWrapper>
+      <Section css={tw`flex flex-col-reverse md:flex-row`}>
+        <div>
+          <H2>{translate("HOST")}</H2>
+          <P>{about}</P>
+          <div css={tw`flex flex-row pt-4`}>
+            <P css={tw`font-bold px-4`}>{reviews} reviews - </P>
+            <FaTrophy size="2em" />
+            <P css={tw`font-bold px-4`}>Superhost</P>
+            <FaAirbnb size="2em" color={"red"} />
+          </div>
+        </div>
+        <ImgBox>
+          <IntersectionImage src={srcImage} width="150" height="150" />
+        </ImgBox>
+      </Section>
+    </BackgroundWrapper>
   );
 };
