@@ -1,14 +1,14 @@
-import { withGrommetTheme } from "../../../components/Layout";
+import { withGrommetTheme } from "../../components/Layout";
 import { NextPage } from "next";
 import { useState } from "react";
 import { Box } from "grommet";
-import { GlobalType } from "../../../graphql/_airbn.types";
-import { takeShapeGQLClient } from "../../../takeshape/takeShapeClient";
-import { FaqsQuery } from "../../../generated/graphql-takeshape";
-import { getGlobalPaths, getGlobalProps } from "../../../takeshape/getGlobal";
+import { GlobalType } from "../../graphql/_airbn.types";
+import { takeShapeGQLClient } from "../../takeshape/takeShapeClient";
+import { FaqsQuery } from "../../generated/graphql-takeshape";
+import { getGlobalPaths, getGlobalProps } from "../../takeshape/getGlobal";
 
-export async function getStaticProps({ params }) {
-  const globalProps = await getGlobalProps({ params });
+export async function getStaticProps({ params, locale }) {
+  const globalProps = await getGlobalProps({ params, locale });
   const data = await takeShapeGQLClient.Faqs(globalProps.props.global);
 
   return {

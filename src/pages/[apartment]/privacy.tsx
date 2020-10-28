@@ -1,11 +1,11 @@
-import { withGrommetTheme } from "../../../components/Layout";
-import { getGlobalProps, getGlobalPaths } from "../../../takeshape/getGlobal";
-import { takeShapeGQLClient } from "../../../takeshape/takeShapeClient";
-import { GetArticleByPathQuery } from "../../../generated/graphql-takeshape";
+import { withGrommetTheme } from "../../components/Layout";
+import { getGlobalProps, getGlobalPaths } from "../../takeshape/getGlobal";
+import { takeShapeGQLClient } from "../../takeshape/takeShapeClient";
+import { GetArticleByPathQuery } from "../../generated/graphql-takeshape";
 import { Box } from "grommet";
 
-export const getStaticProps = async ({ params }) => {
-  const globalProps = await getGlobalProps({ params });
+export const getStaticProps = async ({ params, locale }) => {
+  const globalProps = await getGlobalProps({ params, locale });
   const data = await takeShapeGQLClient.getArticleByPath({ path: "/privacy" });
   return {
     props: { ...globalProps.props, data: data },

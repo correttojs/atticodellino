@@ -8,6 +8,7 @@ import { Contacts } from "./Contact";
 import Link from "next/link";
 import { useTranslations } from "../Translations/useTranslations";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const FooterLink = styled(Anchor)`
   margin: 0 5px;
@@ -15,8 +16,9 @@ const FooterLink = styled(Anchor)`
 
 export const Footer: React.FC = () => {
   const { address, airbnbLink, facebookLink } = useGlobal();
-  let { lang, apartment } = useGlobal();
-  lang = lang.toLowerCase();
+  let { apartment } = useGlobal();
+  const { locale } = useRouter();
+
   apartment = apartment.toLowerCase();
   const t = useTranslations();
 
@@ -55,20 +57,22 @@ export const Footer: React.FC = () => {
         </FooterLink>
       </Box>
       <Box direction="row" justify="center" align="center" margin="5px">
-        <Link href="/[lang]/[apartment]/faq" as={`/${lang}/${apartment}/faq`}>
+        <Link href="/[apartment]/faq" as={`/${apartment}/faq`} locale={locale}>
           <FooterLink>FAQ</FooterLink>
         </Link>
         -
         <Link
-          href="/[lang]/[apartment]/register"
-          as={`/${lang}/${apartment}/register`}
+          href="/[apartment]/register"
+          as={`/${apartment}/register`}
+          locale={locale}
         >
           <FooterLink>{t("REGISTER")}</FooterLink>
         </Link>
         -
         <Link
-          href="/[lang]/[apartment]/privacy"
-          as={`/${lang}/${apartment}/privacy`}
+          href="/[apartment]/privacy"
+          as={`/${apartment}/privacy`}
+          locale={locale}
         >
           <FooterLink>{t("PRIVACY")}</FooterLink>
         </Link>

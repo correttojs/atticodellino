@@ -48,24 +48,9 @@ const ApartmentLink = styled.a<{ backgroundColor: string }>`
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
-  const { lang, apartment, name, sponsor } = useGlobal();
+  const { name, sponsor } = useGlobal();
   const [readMoreOpen, setReadMoreOpen] = useState(false);
-  const { changeLocale, apartmentLink } = useChangeLocale();
-
-  useEffect(() => {
-    let navLang: GlobalType["lang"] = navigator.language.split("-")[0] as any;
-    if (navLang !== "it" && navLang !== "de") {
-      navLang = "en";
-    }
-    if (
-      !localStorage.getItem("lang") ||
-      localStorage.getItem("lang") !== lang
-    ) {
-      changeLocale(
-        (localStorage.getItem("lang") as GlobalType["lang"]) ?? navLang
-      );
-    }
-  }, [lang]);
+  const { apartmentLink } = useChangeLocale();
 
   return (
     <>
