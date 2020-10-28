@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useTranslations } from "../Translations/useTranslations";
 import styled from "styled-components";
 
-const FooterLink = styled.a`
+const FooterLink = styled(Anchor)`
   margin: 0 5px;
 `;
 

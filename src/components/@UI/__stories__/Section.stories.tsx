@@ -6,7 +6,7 @@ import tw from "twin.macro";
 
 import { Section, SplitSection } from "../Section";
 import { H2, P } from "../Texts";
-import bread from "./bread.png";
+const bread = require("./bread.png");
 
 const Bg = styled.div`
   ${tw`bg-gray-200`}
