@@ -1,5 +1,4 @@
 import fetch from "isomorphic-unfetch";
-import moment from "moment";
 import * as ical from "ical";
 import { takeShapeGQLClient } from "../takeshape/takeShapeClient";
 
@@ -8,8 +7,8 @@ const fetchIcal = async (icalUrl, summary: string) => {
   data = ical.parseICS(data);
 
   return Object.keys(data).map((item) => ({
-    start: moment(data[item].start).toISOString(),
-    end: moment(data[item].end).toISOString(),
+    start: new Date(data[item].start).toISOString(),
+    end: new Date(data[item].end).toISOString(),
     summary,
   }));
 };

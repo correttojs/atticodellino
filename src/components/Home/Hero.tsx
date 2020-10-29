@@ -41,6 +41,7 @@ export const Hero: React.FC<{
                 // whileHover={{ scale: 1.05 }}
                 alt={s.caption}
                 src={s.picture}
+                loading="lazy"
               />
             </Box>
           ))}

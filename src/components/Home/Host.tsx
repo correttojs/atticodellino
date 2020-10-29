@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
-import IntersectionImage from "react-intersection-image";
 import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
 import { Section } from "../@UI/Section";
 import tw from "twin.macro";
@@ -40,7 +39,7 @@ export const Host: React.FC<{
           </div>
         </div>
         <ImgBox>
-          <IntersectionImage src={srcImage} width="150" height="150" />
+          <img src={srcImage} width="150" height="150" loading="lazy" />
         </ImgBox>
       </Section>
     </BackgroundWrapper>
