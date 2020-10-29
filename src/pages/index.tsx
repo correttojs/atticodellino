@@ -12,7 +12,7 @@ export async function getStaticProps({ locale }) {
     globalProps.props.global.lang,
     globalProps.props.global.airBnb
   );
-  console.log(res);
+
   return {
     props: { ...res, ...globalProps.props },
   };

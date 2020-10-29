@@ -5,8 +5,8 @@ import styled from "styled-components";
 import { useGlobal } from ".";
 import { MQ_MOBILE } from "./MediaQueries";
 import { Language } from "grommet-icons";
-import { useChangeLocale } from "../Translations/useChangeLocale";
 import { Contacts } from "./Contact";
+import { useRouter } from "next/router";
 
 export const HeaderStyle = styled(Box)`
   top: 0;
@@ -67,7 +67,7 @@ const TitleStyle = styled.a`
 `;
 export const Header: React.FC = () => {
   const { apartment, name } = useGlobal();
-  const { changeLocale, homeLink } = useChangeLocale();
+  const { pathname, asPath, push } = useRouter();
 
   return (
     <HeaderStyle
@@ -78,7 +78,7 @@ export const Header: React.FC = () => {
       gridArea="header"
       pad="medium"
     >
-      <TitleStyle href={homeLink}>{name}</TitleStyle>
+      <TitleStyle href={`/${apartment.toLowerCase()}`}>{name}</TitleStyle>
       <Box direction="row">
         <StyledContacts>
           <Contacts />
@@ -91,16 +91,12 @@ export const Header: React.FC = () => {
             items={[
               {
                 label: "Italiano",
-                onClick: () => changeLocale("it"),
+                onClick: () => push(pathname, asPath, { locale: "it" }),
               },
               {
                 label: "English",
-                onClick: () => changeLocale("en"),
+                onClick: () => push(pathname, asPath, { locale: "en" }),
               },
-              // {
-              //   label: "Deutsch",
-              //   onClick: () => changeLocale("de")
-              // }
             ]}
           ></DropDownMenuStyle>
         </Box>

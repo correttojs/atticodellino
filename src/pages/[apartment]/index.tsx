@@ -4,7 +4,6 @@ import { withGrommetTheme } from "../../components/Layout";
 import { getGlobalPaths, getGlobalProps } from "../../takeshape/getGlobal";
 
 export async function getStaticProps({ params, locale }) {
-  console.log(params, locale, "ALL");
   const globalProps = await getGlobalProps({ params, locale });
   const res = await getDetails(
     globalProps.props.global.apartment,
