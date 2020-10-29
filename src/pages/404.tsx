@@ -8,9 +8,9 @@ const PageError = () => (
   </Box>
 );
 
-export async function getStaticProps() {
+export async function getStaticProps({ locale }) {
   const params = { lang: "en", apartment: "VR" };
-  return getGlobalProps({ params });
+  return getGlobalProps({ params, locale });
 }
 
 export default withGrommetTheme()(PageError);

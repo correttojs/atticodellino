@@ -1,17 +1,10 @@
 import { FaFemale, FaPersonBooth, FaBed, FaBath } from "react-icons/fa";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Box } from "grommet";
 import React from "react";
-import styled from "styled-components";
 import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Span } from "../@UI/Texts";
 import tw from "twin.macro";
 import { IconType } from "react-icons/lib";
-
-const Icon = styled(FontAwesomeIcon)`
-  max-width: 18px;
-  max-height: 18px;
-`;
 
 const Item: React.FC<{ Icon: IconType; label: string }> = ({ Icon, label }) => {
   return (

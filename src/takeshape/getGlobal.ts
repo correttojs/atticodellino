@@ -10,7 +10,10 @@ export type AsyncReturnType<T extends (...args: any) => any> = T extends (
 
 type ParamType = AsyncReturnType<typeof getGlobalPaths>["paths"][0];
 
-export async function getGlobalProps({ params }: ParamType) {
+export async function getGlobalProps({
+  params,
+  locale,
+}: ParamType & { locale: string }) {
   if (!params.apartment) {
     return null;
   }
@@ -28,6 +31,7 @@ export async function getGlobalProps({ params }: ParamType) {
     props: {
       global: {
         ...params,
+        lang: locale,
         ...currentApartment,
         langs: dataLang.getLanguageList.items.map((l) => l.code),
         apartments: dataApartment.getApartmentList.items.map((a) => a.key),
@@ -36,20 +40,21 @@ export async function getGlobalProps({ params }: ParamType) {
   };
 }
 
-export const getGlobalPaths = async () => {
+export const getGlobalPaths = async ({ locales }) => {
   const dataLang = await takeShapeGQLClient.getLangs();
   const dataApartment = await takeShapeGQLClient.getApartmentsKey();
   return {
-    paths: dataLang.getLanguageList.items.reduce(
+    paths: locales.reduce(
       (acc, current) => {
         return [
           ...acc,
           ...dataApartment.getApartmentList.items.map((a) => {
             return {
               params: {
-                lang: current.code.toLowerCase(),
+                lang: current.toLowerCase(),
                 apartment: a.key.toLowerCase(),
               },
+              locale: current,
             };
           }),
         ];

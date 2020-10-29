@@ -1,7 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import { Box, ThemeType } from "grommet";
 import { MQ_MOBILE, MQ_NOT_MOBILE, MQ_DESKTOP } from "../Layout/MediaQueries";
-import IntersectionImage from "react-intersection-image";
 import { GlobalType } from "../../graphql/_airbn.types";
 
 // prettier-ignore
@@ -23,7 +22,7 @@ export const HeroStyle = styled(Box)<{ apartment: GlobalType}>`
   min-height: 20rem;
 `;
 
-export const Cap = styled(IntersectionImage)`
+export const Cap = styled.img`
   object-fit: cover;
   width: 36rem;
   height: 20rem;

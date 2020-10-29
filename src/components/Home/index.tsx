@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { pdp_listing_detail, GlobalType } from "../../graphql/_airbn.types";
+import React, { useState } from "react";
+import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Map } from "./Map";
 import { BookingCalendar } from "../FormBookCalendar";
 import { Box, Collapsible } from "grommet";
@@ -8,15 +8,8 @@ import { Host } from "./Host";
 import { Reviews } from "./Reviews";
 import { Amenities } from "./Amenities";
 import { useTranslations } from "../Translations/useTranslations";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBed,
-  faPersonBooth,
-  faBath,
-  faFemale,
-} from "@fortawesome/free-solid-svg-icons";
+
 import { useGlobal } from "../Layout";
-import { useChangeLocale } from "../Translations/useChangeLocale";
 import Link from "next/link";
 import styled from "styled-components";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
@@ -48,24 +41,8 @@ const ApartmentLink = styled.a<{ backgroundColor: string }>`
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
-  const { lang, apartment, name, sponsor } = useGlobal();
+  const { name, sponsor } = useGlobal();
   const [readMoreOpen, setReadMoreOpen] = useState(false);
-  const { changeLocale, apartmentLink } = useChangeLocale();
-
-  useEffect(() => {
-    let navLang: GlobalType["lang"] = navigator.language.split("-")[0] as any;
-    if (navLang !== "it" && navLang !== "de") {
-      navLang = "en";
-    }
-    if (
-      !localStorage.getItem("lang") ||
-      localStorage.getItem("lang") !== lang
-    ) {
-      changeLocale(
-        (localStorage.getItem("lang") as GlobalType["lang"]) ?? navLang
-      );
-    }
-  }, [lang]);
 
   return (
     <>
@@ -78,7 +55,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       </Head>
       <Hero photos={pdp_listing_detail.photos} />
       <div css={tw`px-3 py-1 m-6`}>
-        <Link href={apartmentLink(sponsor?.[0]?.key)} passHref={true}>
+        <Link href={sponsor?.[0]?.key.toLowerCase()} passHref={true}>
           <ApartmentLink backgroundColor={sponsor?.[0]?.brandColor.hex}>
             {translate("ALSO", {
               c: sponsor?.[0]?.location,

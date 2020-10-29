@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 import { ApolloProvider } from "@apollo/client";
 import { gqlClient } from "./gqlClient";
 import { theme } from "./theme";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { GlobalType } from "../../graphql/_airbn.types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -26,15 +26,7 @@ export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
   global?: GlobalType;
 }) => {
   const [currentLang, setLang] = useState(global?.lang);
-  useEffect(() => {
-    if (
-      global &&
-      localStorage.getItem("lang") &&
-      global.lang !== localStorage.getItem("lang")
-    ) {
-      setLang(localStorage.getItem("lang") as any);
-    }
-  }, []);
+
   if (!props.global ?? global) {
     console.log(props);
     return null;

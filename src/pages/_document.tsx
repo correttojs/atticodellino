@@ -1,4 +1,4 @@
-import Document, { Head, Main, NextScript } from "next/document";
+import Document, { Head, Main, NextScript, Html } from "next/document";
 // Import styled components ServerStyleSheet
 import { ServerStyleSheet } from "styled-components";
 import { getGlobalProps } from "../takeshape/getGlobal";
@@ -18,12 +18,11 @@ export default class MyDocument extends Document<{
     );
 
     const styleTags = sheet.getStyleElement();
-    const global = await getGlobalProps({ params: ctx.query });
+    const global = await getGlobalProps({ params: ctx.query, locale: "en" });
 
     return {
       ...page,
       styleTags,
-      lang: ctx.query.lang ?? "en",
       apartment: global?.props?.global?.apartment,
       cover: global?.props?.global?.coverWebp,
       color: global?.props?.global?.brandColor,
@@ -32,7 +31,7 @@ export default class MyDocument extends Document<{
 
   render() {
     return (
-      <html lang={this.props.lang}>
+      <Html>
         <Head>
           <>
             <meta
@@ -90,7 +89,7 @@ export default class MyDocument extends Document<{
             src={`https://cmp.osano.com/${process.env.NEXT_PUBLIC_OSANO}/osano.js`}
           ></script>
         </body>
-      </html>
+      </Html>
     );
   }
 }
