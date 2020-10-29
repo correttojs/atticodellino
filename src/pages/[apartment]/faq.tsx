@@ -1,11 +1,11 @@
 import { withGrommetTheme } from "../../components/Layout";
 import { NextPage } from "next";
-import { useState } from "react";
-import { Box } from "grommet";
-import { GlobalType } from "../../graphql/_airbn.types";
+import React, { useState } from "react";
 import { takeShapeGQLClient } from "../../takeshape/takeShapeClient";
 import { FaqsQuery } from "../../generated/graphql-takeshape";
 import { getGlobalPaths, getGlobalProps } from "../../takeshape/getGlobal";
+import { Section } from "../../components/@UI/Section";
+import tw from "twin.macro";
 
 export async function getStaticProps({ params, locale }) {
   const globalProps = await getGlobalProps({ params, locale });
@@ -22,10 +22,10 @@ const Faq: NextPage<{ data: FaqsQuery }> = ({ data }) => {
   const [copied, setCopied] = useState<{ [key: string]: boolean }>({});
 
   return (
-    <Box>
+    <Section>
       {data.getFaqList.items.map((item, i) => (
-        <Box
-          margin="medium"
+        <div
+          css={tw`m-4`}
           style={{ marginTop: "-80px", paddingTop: "80px" }}
           key={i}
           id={"faq" + i}
@@ -45,9 +45,9 @@ const Faq: NextPage<{ data: FaqsQuery }> = ({ data }) => {
             {copied[i] && <span style={{ color: "red" }}> copied</span>}
           </h3>
           <p dangerouslySetInnerHTML={{ __html: item.answerHtml }} />
-        </Box>
+        </div>
       ))}
-    </Box>
+    </Section>
   );
 };
 

@@ -16,18 +16,6 @@ export const theme = (apartment: GlobalType) => {
         light: `rgba(${r},${g},${b},${a})`,
         lighter: `rgba(${r2},${g2},${b2},${a2})`,
       },
-      font: {
-        family: "Raleway",
-        size: "14px",
-        height: "20px",
-      },
-      text: {
-        medium: {
-          size: "30px",
-          height: "24px",
-          maxWidth: "432px",
-        },
-      },
     },
   };
 };
