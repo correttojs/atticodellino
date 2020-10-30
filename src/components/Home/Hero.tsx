@@ -31,7 +31,7 @@ export const Hero: React.FC<{
     <>
       <HeroStyle apartment={global} direction="row" align="center">
         <StyledContacts>
-          <Contacts direction="row" margin="5px" />
+          <Contacts direction="row" />
         </StyledContacts>
         <HeroCarousel>
           {photos.map((s, i) => (

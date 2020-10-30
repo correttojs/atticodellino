@@ -26,7 +26,7 @@ export const Header: React.FC = () => {
       </div>
       <div css={tw`flex`}>
         <div css={tw` hidden md:block`}>
-          <Contacts />
+          <Contacts direction="row" />
         </div>
         <DropDown>
           <DropDownItem

@@ -39,6 +39,11 @@ const ApartmentLink = styled.a<{ backgroundColor: string }>`
   }
 `;
 
+const Collapse: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  return <div></div>;
+};
+
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
   const { name, sponsor } = useGlobal();
@@ -53,10 +58,14 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
           content={pdp_listing_detail.sectioned_description.summary}
         />
       </Head>
+
       <Hero photos={pdp_listing_detail.photos} />
       <div css={tw`px-3 py-1 m-6`}>
         <Link href={sponsor?.[0]?.key.toLowerCase()} passHref={true}>
-          <ApartmentLink backgroundColor={sponsor?.[0]?.brandColor.hex}>
+          <ApartmentLink
+            css={tw`text-white`}
+            backgroundColor={sponsor?.[0]?.brandColor.hex}
+          >
             {translate("ALSO", {
               c: sponsor?.[0]?.location,
             })}
