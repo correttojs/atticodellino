@@ -1,10 +1,12 @@
 import React from "react";
 import { pdp_listing_detail } from "../../graphql/_airbn.types";
-import { Box, Text, Heading } from "grommet";
+import { Box, Text } from "grommet";
 import styled from "styled-components";
-import SvgAirbnb1 from "../Layout/AirbnbIcon";
+
 import { useTranslations } from "../Translations/useTranslations";
 import { H2 } from "../@UI/Texts";
+import { FaAirbnb } from "react-icons/fa";
+import tw from "twin.macro";
 
 const StyledReview = styled.div`
   height: 400px;
@@ -24,8 +26,8 @@ export const Reviews: React.FC<{
   return (
     <Box pad="large">
       <Box align="center" direction="row">
-        <H2>{t("REVIEWS")}</H2>
-        <SvgAirbnb1 style={{ marginLeft: "20px" }} />
+        <H2 css={tw`mr-2`}>{t("REVIEWS")}</H2>
+        <FaAirbnb size="1.5em" />
       </Box>
 
       <Multi>

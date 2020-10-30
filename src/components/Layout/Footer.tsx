@@ -1,85 +1,83 @@
 import React from "react";
-import { Box, Text, Anchor } from "grommet";
 
-import SvgAirbnb1 from "./AirbnbIcon";
-import { FacebookOption, Indicator } from "grommet-icons";
 import { useGlobal } from ".";
 import { Contacts } from "./Contact";
 import Link from "next/link";
 import { useTranslations } from "../Translations/useTranslations";
-import styled from "styled-components";
 import { useRouter } from "next/router";
-
-const FooterLink = styled(Anchor)`
-  margin: 0 5px;
-`;
+import tw from "twin.macro";
+import { FaAirbnb, FaFacebookSquare, FaMapMarker } from "react-icons/fa";
 
 export const Footer: React.FC = () => {
   const { address, airbnbLink, facebookLink } = useGlobal();
-  let { apartment } = useGlobal();
+  let { apartment, brandColor } = useGlobal();
   const { locale } = useRouter();
 
   apartment = apartment.toLowerCase();
   const t = useTranslations();
 
   return (
-    <Box
-      align="center"
-      justify="between"
-      background="brand"
-      pad="medium"
-      color="brand"
-      width="100%"
+    <footer
+      css={`
+        background-color: ${brandColor.hex};
+        ${tw` flex flex-col items-center justify-between flex-wrap p-4 w-full text-white`};
+      `}
     >
-      <Contacts direction="row" margin="5px" />
-      <Text alignSelf="center" margin="5px">
-        <Indicator /> {address}
-      </Text>
-      <Box direction="row" justify="center" align="center" margin="5px">
-        <FacebookOption />{" "}
-        <FooterLink
-          href={facebookLink}
-          target="_blank"
-          alignSelf="center"
-          margin={{ right: "20px" }}
-          rel="noopener"
-        >
-          Facebook
-        </FooterLink>
-        <SvgAirbnb1 style={{ color: "#fff", stroke: "#fff" }} />
-        <FooterLink
-          href={airbnbLink}
-          target="_blank"
-          alignSelf="center"
-          rel="noopener"
-        >
-          Airbnb
-        </FooterLink>
-      </Box>
-      <Box direction="row" justify="center" align="center" margin="5px">
-        <Link href="/[apartment]/faq" as={`/${apartment}/faq`} locale={locale}>
-          <FooterLink>FAQ</FooterLink>
-        </Link>
-        -
-        <Link
-          href="/[apartment]/register"
-          as={`/${apartment}/register`}
-          locale={locale}
-        >
-          <FooterLink>{t("REGISTER")}</FooterLink>
-        </Link>
-        -
-        <Link
-          href="/[apartment]/privacy"
-          as={`/${apartment}/privacy`}
-          locale={locale}
-        >
-          <FooterLink>{t("PRIVACY")}</FooterLink>
-        </Link>
-      </Box>
-      <Box width="100%" align="end">
-        <Text textAlign="end">© correttoweb 2020 </Text>
-      </Box>
-    </Box>
+      <div css={tw`max-w-screen-lg mx-auto`}>
+        <Contacts direction="row" />
+
+        <div css={tw`flex flex-row justify-center m-2 items-center`}>
+          <FaMapMarker /> <span css={tw`m-1`}>{address}</span>
+        </div>
+        <div css={tw`flex flex-row justify-center m-2 items-center`}>
+          <FaFacebookSquare />
+          <a
+            href={facebookLink}
+            target="_blank"
+            css={tw`self-center mr-4 ml-1`}
+            rel="noopener"
+          >
+            Facebook
+          </a>
+          <FaAirbnb />
+          <a
+            href={airbnbLink}
+            target="_blank"
+            css={tw`self-center  ml-1`}
+            rel="noopener"
+          >
+            Airbnb
+          </a>
+        </div>
+        <div css={tw`flex flex-row justify-center m-2`}>
+          <Link
+            href="/[apartment]/faq"
+            as={`/${apartment}/faq`}
+            locale={locale}
+          >
+            <a css={tw`mx-2`}>FAQ</a>
+          </Link>
+          -
+          <Link
+            href="/[apartment]/register"
+            as={`/${apartment}/register`}
+            locale={locale}
+          >
+            <a css={tw`mx-2`}>{t("REGISTER")}</a>
+          </Link>
+          -
+          <Link
+            href="/[apartment]/privacy"
+            as={`/${apartment}/privacy`}
+            locale={locale}
+          >
+            <a css={tw`mx-2`}>{t("PRIVACY")}</a>
+          </Link>
+        </div>
+      </div>
+      <div css={tw`flex flex-row justify-end w-full`}>
+        <p>© correttoweb 2020 </p>
+      </div>
+    </footer>
   );
 };

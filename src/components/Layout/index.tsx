@@ -17,9 +17,6 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         font-family: Raleway;
     }
-    a{
-      color: #fff !important;
-    }
 `;
 
 export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {

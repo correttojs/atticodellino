@@ -35,7 +35,7 @@ export const Host: React.FC<{
             <P css={tw`font-bold px-4`}>{reviews} reviews - </P>
             <FaTrophy size="2em" />
             <P css={tw`font-bold px-4`}>Superhost</P>
-            <FaAirbnb size="2em" color={"red"} />
+            <FaAirbnb size="2em" />
           </div>
         </div>
         <ImgBox>
