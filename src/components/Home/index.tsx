@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Map } from "./Map";
 import { BookingCalendar } from "../FormBookCalendar";
-import { Box, Collapsible } from "grommet";
+import { Collapsible } from "grommet";
 import { Hero } from "./Hero";
 import { Host } from "./Host";
 import { Reviews } from "./Reviews";
@@ -78,20 +78,19 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       {/* <Link to={apartment === "GARDA" ? "/" : "/garda"}></Link> */}
       <Section>
         <P>{pdp_listing_detail.sectioned_description.summary}</P>
-      </Section>
-      {!readMoreOpen &&
-        (pdp_listing_detail.sectioned_description.space ||
-          pdp_listing_detail.sectioned_description.access ||
-          pdp_listing_detail.sectioned_description.notes) && (
-          <Box pad={{ horizontal: "large" }} margin={{ bottom: "medium" }}>
+        {!readMoreOpen &&
+          (pdp_listing_detail.sectioned_description.space ||
+            pdp_listing_detail.sectioned_description.access ||
+            pdp_listing_detail.sectioned_description.notes) && (
             <p
-              css={tw`text-lg font-semibold cursor-pointer`}
+              css={tw`text-lg font-semibold cursor-pointer pt-4`}
               onClick={() => setReadMoreOpen(true)}
             >
               {translate("RERAD_MORE")}
             </p>
-          </Box>
-        )}
+          )}
+      </Section>
+
       <Collapsible open={readMoreOpen}>
         <Section>
           <H2>{translate("SPACE")}</H2>
@@ -106,22 +105,20 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         <Section>
           <H2>{translate("OTHER_THINGS")}</H2>
           <P>{pdp_listing_detail.sectioned_description.notes}</P>
-        </Section>
 
-        <Box pad={{ horizontal: "large" }} margin={{ bottom: "medium" }}>
           <p
-            css={tw`text-lg font-semibold cursor-pointer`}
+            css={tw`text-lg font-semibold cursor-pointer pt-4`}
             onClick={() => setReadMoreOpen(false)}
           >
             {translate("HIDE")}
           </p>
-        </Box>
+        </Section>
       </Collapsible>
       <Amenities amenities={pdp_listing_detail.listing_amenities} />
       <BookingCalendar />
-      <Box>
+      <div>
         <Map title={pdp_listing_detail.name} />
-      </Box>
+      </div>
       <Host
         srcImage={pdp_listing_detail.primary_host.profile_pic_path}
         about={pdp_listing_detail.primary_host.about}
@@ -147,15 +144,16 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       <Section>
         <H2>{translate("HOUSE_RULES")}</H2>
         <P>{pdp_listing_detail.sectioned_description.house_rules}</P>
+        <ul css={tw`pt-2`}>
+          {pdp_listing_detail.guest_controls.structured_house_rules.map(
+            (s, k) => (
+              <li css={tw`font-bold`} key={k}>
+                {s}
+              </li>
+            )
+          )}
+        </ul>
       </Section>
-
-      <Box pad={{ horizontal: "large", bottom: "large" }}>
-        {pdp_listing_detail.guest_controls.structured_house_rules.map(
-          (s, k) => (
-            <Span key={k}>{s}</Span>
-          )
-        )}
-      </Box>
     </>
   );
 };
