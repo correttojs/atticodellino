@@ -1,11 +1,12 @@
 import styled, { keyframes } from "styled-components";
-import { Box, ThemeType } from "grommet";
-import { MQ_MOBILE, MQ_NOT_MOBILE, MQ_DESKTOP } from "../Layout/MediaQueries";
+
+import { MQ_MOBILE, MQ_DESKTOP } from "../Layout/MediaQueries";
 import { GlobalType } from "../../graphql/_airbn.types";
+import tw from "twin.macro";
 
 // prettier-ignore
-export const HeroStyle = styled(Box)<{ apartment: GlobalType}>`
- 
+export const HeroStyle = styled.div<{ apartment: GlobalType}>`
+  ${tw`flex flex-row items-center`}
 
    background: url(${({ apartment }) => apartment.apartment === "VR" ? "/images/cover.jpg" : "/images/cover-garda.jpg"})  center / cover;
   
@@ -28,8 +29,8 @@ export const Cap = styled.img`
   height: 20rem;
   border-radius: 5px;
   border: 1px solid
-    ${({ theme }: { theme: ThemeType }) => `  ${theme.global.colors.brand};`};
-  /* box-shadow: ${({ theme }: { theme: ThemeType }) =>
+    ${({ theme }: { theme }) => `  ${theme.global.colors.brand};`};
+  /* box-shadow: ${({ theme }: { theme }) =>
     ` 3px 5px ${theme.global.colors.brand};`}; */
 
   @media ${MQ_DESKTOP} {
@@ -62,9 +63,9 @@ export const HeroCarousel = styled.div`
   position: absolute;
   left: 0;
   top: calc(100vw * 0.1);
-  /* background-color: ${({ theme }: { theme: ThemeType }) =>
+  /* background-color: ${({ theme }: { theme }) =>
     theme.global.colors.light}; */
-  background-image: ${({ theme }: { theme: ThemeType }) =>
+  background-image: ${({ theme }: { theme }) =>
     `linear-gradient(0deg, rgba(225,223,255,0) 0%, ${theme.global.colors.light} 10%, ${theme.global.colors.light} 90%, rgba(255,255,255,0) 100%);`};
   animation: ${slidein} 1s ease-in;
   div {
@@ -82,20 +83,4 @@ export const HeroCarousel = styled.div`
       margin: 1rem;
     }
   }
-`;
-
-export const CloseIcon = styled(Box)`
-  position: absolute;
-  top: 5px;
-  right: 5px;
-`;
-
-export const StyledContacts = styled(Box)`
-  @media ${MQ_NOT_MOBILE} {
-    display: none;
-  }
-  position: fixed;
-  top: 80px;
-  left: 0;
-  background-color: white;
 `;
