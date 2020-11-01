@@ -19,6 +19,7 @@
     "@apollo/client": "^3.2.5",
     "@graphql-codegen/cli": "^1.19.0",
     "@sendgrid/mail": "^7.3.0",
+    "@tailwindcss/custom-forms": "^0.2.1",
     "@types/apollo-upload-client": "^14.1.0",
     "@types/yup": "^0.29.9",
     "@zeit/next-source-maps": "0.0.3",

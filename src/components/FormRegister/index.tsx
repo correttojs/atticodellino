@@ -1,15 +1,16 @@
 // Render Prop
 import React from "react";
 import { useFormik, FieldArray, FormikProvider } from "formik";
-import { Form, Button, Box, Text, Select } from "grommet";
 import { initialValues, validationSchema, guestValue } from "./data";
 import { FormInput } from "../FormInput";
 import styled from "styled-components";
 import { useRegisterMutation } from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
-import { FormTrash, UserAdd } from "grommet-icons";
 import { H1 } from "../@UI/Texts";
+import tw from "twin.macro";
+import { Button } from "../@UI/Buttons";
+import { GrUserAdd, GrTrash } from "react-icons/gr";
 
 const UploadStyle = styled.div<{ error: boolean }>`
   position: relative;
@@ -40,7 +41,8 @@ const GuestStyle = styled.div`
 export const Register: React.FC = () => {
   const [register, { data, loading, error }] = useRegisterMutation();
   const t = useTranslations();
-  const { apartment } = useGlobal();
+  const { apartment, brandColor } = useGlobal();
+  console.log(brandColor);
 
   const formik = useFormik({
     initialValues,
@@ -65,39 +67,43 @@ export const Register: React.FC = () => {
   });
 
   return (
-    <Box align="center" gridArea="main" pad="medium">
-      <Box width="medium" margin="large">
+    <div
+      css={`
+        ${tw`items-center p-4`};
+        grid-area: "main";
+      `}
+    >
+      <div css={tw`p-2 md:p-8 max-w-screen-lg mx-auto `}>
         {data && (
-          <Box>
-            <h3>
-              {t("THANKYOU", {
-                name: data.register?.guests?.[0].firstName,
-                lastName: data.register?.guests?.[0].lastName,
-              })}
-            </h3>
-          </Box>
+          <h3>
+            {t("THANKYOU", {
+              name: data.register?.guests?.[0].firstName,
+              lastName: data.register?.guests?.[0].lastName,
+            })}
+          </h3>
         )}
         {error && (
-          <Box
-            direction="row"
+          <div
+            css={tw`flex flex-col p-4 items-center `}
             onClick={() => window.location.reload()}
-            pad="medium"
-            align="center"
           >
-            <Text>{t("ERROR")}</Text>
-            <Button margin="medium" type="submit" primary label="Ok" />
-          </Box>
+            <p>{t("ERROR")}</p>
+            <Button
+              css={`
+                background-color: ${brandColor.hex};
+              `}
+              type="submit"
+            >
+              Ok
+            </Button>
+          </div>
         )}
-        {loading && (
-          <Box>
-            <Text>{t("LOADING")}</Text>
-          </Box>
-        )}
+        {loading && <p>{t("LOADING")}</p>}
         {!data && !error && !loading && (
           <>
-            <H1>{t("REGISTER")}</H1>
+            <H1 css={tw`mb-4`}>{t("REGISTER")}</H1>
             <FormikProvider value={formik}>
-              <Form
+              <form
                 onSubmit={(e) => {
                   e.preventDefault();
                   formik.handleSubmit();
@@ -112,12 +118,12 @@ export const Register: React.FC = () => {
                         return (
                           <GuestStyle key={`guest${index}`}>
                             {formik.values.guests.length > 1 && (
-                              <Button
+                              <div
                                 style={{ float: "right" }}
-                                type="button"
                                 onClick={() => arrayHelpers.remove(index)}
-                                icon={<FormTrash />}
-                              ></Button>
+                              >
+                                <GrTrash />
+                              </div>
                             )}
                             <FormInput
                               formik={formik}
@@ -129,31 +135,43 @@ export const Register: React.FC = () => {
                               field={`guests[${index}].lastName`}
                               label="Last name"
                             />
-                            <Select
-                              options={[
-                                "Passport",
-                                "ID Card",
-                                "Driving License",
-                              ]}
-                              value={
-                                formik.values.guests[index]["documentType"]
-                              }
-                              id={`guests[${index}]["documentType"]`}
-                              name={`guests[${index}]["documentType"]`}
-                              onChange={(e) => {
-                                formik.setFieldValue(
-                                  `guests[${index}].documentType`,
-                                  e.value
-                                );
-                              }}
-                            />
+                            <div css={tw`m-2`}>
+                              <label
+                                css={tw`block`}
+                                htmlFor={`guests[${index}]["documentType"]`}
+                              >
+                                <span css={tw`text-gray-700`}>
+                                  Document Type
+                                </span>
+                                <select
+                                  css={tw`form-select block w-full`}
+                                  value={
+                                    formik.values.guests[index]["documentType"]
+                                  }
+                                  id={`guests[${index}]["documentType"]`}
+                                  name={`guests[${index}]["documentType"]`}
+                                  onChange={(e) => {
+                                    formik.setFieldValue(
+                                      `guests[${index}].documentType`,
+                                      e.target.value
+                                    );
+                                  }}
+                                >
+                                  <option value="Passport">Passport</option>
+                                  <option value="ID Card">ID Card</option>
+                                  <option value="Driving License">
+                                    Driving License
+                                  </option>
+                                </select>
+                              </label>
+                            </div>
 
                             <FormInput
                               formik={formik}
                               field={`guests[${index}].documentNumber`}
                               label="Document Number"
                             />
-                            <Box direction="row">
+                            <div css={tw`flex flex-row`}>
                               <FormInput
                                 type="number"
                                 formik={formik}
@@ -172,7 +190,7 @@ export const Register: React.FC = () => {
                                 field={`guests[${index}].year`}
                                 label="Year"
                               />
-                            </Box>
+                            </div>
                             <FormInput
                               formik={formik}
                               field={`guests[${index}].nationality`}
@@ -184,18 +202,20 @@ export const Register: React.FC = () => {
                               label="Place of Birth"
                             />
 
-                            <Box
-                              direction="row"
-                              margin={{ vertical: "medium" }}
-                              align="center"
-                            >
+                            <div css={tw`flex flex-col my-4 items-center`}>
                               <UploadStyle
                                 error={
                                   !!formik.errors?.guests?.[index]?.["file"] &&
                                   !!formik.touched?.guests?.[index]?.["file"]
                                 }
                               >
-                                <Button label="Upload your document" />
+                                <Button
+                                  css={`
+                                    background-color: ${brandColor.hex};
+                                  `}
+                                >
+                                  Upload your document
+                                </Button>
                                 <input
                                   id={`guests[${index}].file`}
                                   name={`guests[${index}].file`}
@@ -210,18 +230,16 @@ export const Register: React.FC = () => {
                                   className="form-control"
                                 />
                               </UploadStyle>
-                              <Text>
-                                {formik.values.guests[index].file?.name}
-                              </Text>
-                            </Box>
+                              <p>{formik.values.guests[index].file?.name}</p>
+                            </div>
 
-                            <Button
-                              type="button"
+                            <div
                               onClick={() => {
                                 arrayHelpers.push({ ...guestValue });
                               }}
-                              icon={<UserAdd />}
-                            ></Button>
+                            >
+                              <GrUserAdd />
+                            </div>
                           </GuestStyle>
                         );
                       })}
@@ -229,14 +247,21 @@ export const Register: React.FC = () => {
                   )}
                 />
 
-                <Box direction="row" justify="end">
-                  <Button type="submit" primary label="Submit" />
-                </Box>
-              </Form>
+                <div css={tw`flex justify-end`}>
+                  <Button
+                    css={`
+                      background-color: ${brandColor.hex};
+                    `}
+                    type="submit"
+                  >
+                    Submit
+                  </Button>
+                </div>
+              </form>
             </FormikProvider>
           </>
         )}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };

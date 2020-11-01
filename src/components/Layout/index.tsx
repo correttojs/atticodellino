@@ -1,4 +1,3 @@
-import { Box, Grommet } from "grommet";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ApolloProvider } from "@apollo/client";
 import { gqlClient } from "./gqlClient";
@@ -53,17 +52,19 @@ export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
         }
       >
         <ThemeProvider theme={theme(props.global)}>
-          <Grommet theme={theme(props.global)}>
-            <ApolloProvider client={gqlClient}>
-              <Box align="center">
-                <Header />
-                <Box margin={{ top: "80px" }}>
-                  <Comp {...props}></Comp>
-                </Box>
-                <Footer />
-              </Box>
-            </ApolloProvider>
-          </Grommet>
+          <ApolloProvider client={gqlClient}>
+            <div css={tw`flex flex-col items-center`}>
+              <Header />
+              <div
+                css={`
+                  margin-top: 80px;
+                `}
+              >
+                <Comp {...props}></Comp>
+              </div>
+              <Footer />
+            </div>
+          </ApolloProvider>
         </ThemeProvider>
       </GlobalContext.Provider>
     </>
