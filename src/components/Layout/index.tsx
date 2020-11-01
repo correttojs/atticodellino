@@ -8,6 +8,8 @@ import { GlobalType } from "../../graphql/_airbn.types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { GlobalContext } from "./useGlobal";
+import tw from "twin.macro";
+import { MQ_MOBILE } from "./MediaQueries";
 
 export const GlobalStyle = createGlobalStyle`
     html, body {
@@ -16,6 +18,19 @@ export const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
         font-family: Raleway;
+    }
+
+    .ReactModal__Overlay{
+      ${tw`z-20`}
+
+    }
+    @media ${MQ_MOBILE} {
+      .ReactModal__Content{
+        top:0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+      }
     }
 `;
 
