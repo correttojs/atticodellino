@@ -1,5 +1,4 @@
 import { useGlobal, GlobalStyle } from "../src/components/Layout";
-import { Grommet } from "grommet";
 
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { theme } from "../src/components/Layout/theme";
@@ -21,9 +20,7 @@ export const decorators = [
     return (
       <RouterContext.Provider value={router}>
         <GlobalStyle />
-        <Grommet theme={theme(global)}>
-          <Story />
-        </Grommet>
+        <Story />
       </RouterContext.Provider>
     );
   },
