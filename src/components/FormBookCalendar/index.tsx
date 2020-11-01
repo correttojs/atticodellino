@@ -7,14 +7,15 @@ import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 import { H2 } from "../@UI/Texts";
 import tw from "twin.macro";
-import { MQ_NOT_DESKTOP } from "../Layout/MediaQueries";
+import { MQ_MOBILE, MQ_NOT_MOBILE } from "../Layout/MediaQueries";
 import { ThemeType } from "../Layout/useGlobal";
 
 const StyledCalendar = styled(ReactCalendar)`
-  @media ${MQ_NOT_DESKTOP} {
-    .react-calendar {
-      min-width: 350px !important;
-    }
+  @media ${MQ_NOT_MOBILE} {
+    min-width: 350px;
+  }
+  @media ${MQ_MOBILE} {
+    width: unset !important;
   }
 
   .react-calendar__tile--now {
@@ -53,7 +54,7 @@ export const BookingCalendar = () => {
   return (
     <section
       css={`
-        ${tw`md:p-8 max-w-screen-lg mx-auto `}
+        ${tw`p-2 md:p-8 max-w-screen-lg mx-auto `}
       `}
     >
       <H2>{t("BOOK")}</H2>

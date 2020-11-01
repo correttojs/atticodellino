@@ -23,14 +23,13 @@ export const Reviews: React.FC<{
         css={`
           column-count: 3;
           margin-bottom: 20px;
+          max-width: 90vw;
         `}
       >
         {review_details_interface.review_summary.map((s, k) => (
-          <div key={k}>
-            <p>
-              {s.label}: {s.localized_rating}/5
-            </p>
-          </div>
+          <p key={k}>
+            {s.label}: {s.localized_rating}/5
+          </p>
         ))}
       </div>
       <div

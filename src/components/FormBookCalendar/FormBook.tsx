@@ -9,6 +9,7 @@ import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
 import { FormError } from "../@UI/FormError";
 import { FormLoading } from "../@UI/FormLoading";
+import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
 
 export const FormBook: React.FC<{
   from: string;
@@ -33,7 +34,9 @@ export const FormBook: React.FC<{
     <div
       css={`
         ${tw`m-4 w-full`}
-        min-width: 400px;
+        @media ${MQ_NOT_MOBILE} {
+          min-width: 400px;
+        }
       `}
     >
       {data && (

@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
     >
       <div css={tw`flex items-center flex-shrink-0 text-white mr-6`}>
         <a
-          css={tw`font-dancing no-underline text-4xl font-bold`}
+          css={tw`font-dancing no-underline text-3xl md:text-4xl font-bold`}
           href={`/${apartment.toLowerCase()}`}
         >
           {name}

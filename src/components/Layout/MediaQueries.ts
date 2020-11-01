@@ -8,3 +8,6 @@ export const MQ_DESKTOP = ` screen and (min-width: ${
 }px) `;
 export const MQ_NOT_DESKTOP = ` screen and (max-width: ${BREAKPOINTS.DESKTOP}px) `;
 export const MQ_MOBILE = ` screen and (max-width: ${BREAKPOINTS.MOBILE}px) `;
+export const MQ_NOT_MOBILE = ` screen and (min-width: ${
+  BREAKPOINTS.MOBILE + 1
+}px) `;
