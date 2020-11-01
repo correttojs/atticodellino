@@ -35,12 +35,7 @@ export const AdminComponent: React.FC = () => {
     <>
       {!loading && !session && (
         <div css={tw`p-4`}>
-          <Button
-            onClick={signIn}
-            css={`
-              background-color: ${brandColor.hex};
-            `}
-          >
+          <Button onClick={signIn}>
             <div css={tw`flex`}>
               <GrLogin color="#fff" /> Sign in
             </div>

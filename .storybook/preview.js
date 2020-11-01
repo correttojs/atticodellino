@@ -1,5 +1,5 @@
 import { useGlobal, GlobalStyle } from "../src/components/Layout";
-
+import { ThemeProvider } from "styled-components";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { theme } from "../src/components/Layout/theme";
 
@@ -20,7 +20,9 @@ export const decorators = [
     return (
       <RouterContext.Provider value={router}>
         <GlobalStyle />
-        <Story />
+        <ThemeProvider theme={theme(global)}>
+          <Story />
+        </ThemeProvider>
       </RouterContext.Provider>
     );
   },

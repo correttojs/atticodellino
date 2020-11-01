@@ -88,14 +88,7 @@ export const Register: React.FC = () => {
             onClick={() => window.location.reload()}
           >
             <p>{t("ERROR")}</p>
-            <Button
-              css={`
-                background-color: ${brandColor.hex};
-              `}
-              type="submit"
-            >
-              Ok
-            </Button>
+            <Button type="submit">Ok</Button>
           </div>
         )}
         {loading && <p>{t("LOADING")}</p>}
@@ -209,13 +202,7 @@ export const Register: React.FC = () => {
                                   !!formik.touched?.guests?.[index]?.["file"]
                                 }
                               >
-                                <Button
-                                  css={`
-                                    background-color: ${brandColor.hex};
-                                  `}
-                                >
-                                  Upload your document
-                                </Button>
+                                <Button>Upload your document</Button>
                                 <input
                                   id={`guests[${index}].file`}
                                   name={`guests[${index}].file`}
@@ -248,14 +235,7 @@ export const Register: React.FC = () => {
                 />
 
                 <div css={tw`flex justify-end`}>
-                  <Button
-                    css={`
-                      background-color: ${brandColor.hex};
-                    `}
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
+                  <Button type="submit">Submit</Button>
                 </div>
               </form>
             </FormikProvider>

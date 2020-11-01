@@ -53,14 +53,7 @@ export const Book: React.FC<{ from: string; to: string; price: number }> = ({
           onClick={() => window.location.reload()}
         >
           <p>{t("ERROR")}</p>
-          <Button
-            css={`
-              background-color: ${brandColor.hex};
-            `}
-            type="submit"
-          >
-            Ok
-          </Button>
+          <Button type="submit">Ok</Button>
         </div>
       )}
       {loading && <p>{t("LOADING")}</p>}
@@ -79,13 +72,7 @@ export const Book: React.FC<{ from: string; to: string; price: number }> = ({
             <div css={tw`m-2`}>{price && <p>{price} euros</p>}</div>
 
             <div css={tw`flex justify-end`}>
-              <Button
-                css={`
-                  background-color: ${brandColor.hex};
-                `}
-                disabled={!from || !to || !price}
-                type="submit"
-              >
+              <Button disabled={!from || !to || !price} type="submit">
                 Submit
               </Button>
             </div>
