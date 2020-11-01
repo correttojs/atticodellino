@@ -9,7 +9,7 @@ type PropType = {
   label?: string;
 };
 
-const formatLabel = (value: string) =>
+export const formatLabel = (value: string) =>
   value
     // insert a space before all caps
     .replace(/([A-Z])/g, " $1")

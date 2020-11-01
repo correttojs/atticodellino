@@ -13,7 +13,7 @@ export const Collapsible: React.FC<{
     <>
       <Section>
         {Preview}
-        {showReadMore && (
+        {showReadMore && !isOpen && (
           <p
             css={tw`text-lg font-semibold cursor-pointer pt-4`}
             onClick={() => setIsOpen(true)}

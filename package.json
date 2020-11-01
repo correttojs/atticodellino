@@ -9,7 +9,7 @@
     "export": "next export",
     "start": "next start",
     "codegen": "node codegen",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook --no-dll -p 6006",
     "build-storybook": "build-storybook"
   },
   "keywords": [],

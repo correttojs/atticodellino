@@ -10,34 +10,13 @@ import { useTranslations } from "../Translations/useTranslations";
 
 import { useGlobal } from "../Layout";
 import Link from "next/link";
-import styled from "styled-components";
-import { MQ_MOBILE } from "../Layout/MediaQueries";
 import Head from "next/head";
 import tw from "twin.macro";
 import { H2, P } from "../@UI/Texts";
 import { Section } from "../@UI/Section";
 import { Summary } from "./Summary";
 import { Collapsible } from "../@UI/Collapsible";
-
-const ApartmentLink = styled.a<{ backgroundColor: string }>`
-  position: absolute;
-  padding: 0 20px;
-  right: 0px;
-  height: 0;
-  border-bottom: 30px solid ${({ backgroundColor }) => backgroundColor};
-  border-top: 30px solid ${({ backgroundColor }) => backgroundColor};
-  border-left: 20px solid transparent;
-  cursor: pointer;
-  font-size: 1.5em;
-  line-height: 0px;
-  text-decoration: none;
-  @media ${MQ_MOBILE} {
-    font-size: 1.2em;
-    border-bottom: 20px solid ${({ backgroundColor }) => backgroundColor};
-    border-top: 20px solid ${({ backgroundColor }) => backgroundColor};
-    border-left: 10px solid transparent;
-  }
-`;
+import { ApartmentLink } from "./ApartmentLink";
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
@@ -56,10 +35,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       <Hero photos={pdp_listing_detail.photos} />
       <div css={tw`px-3 py-1 m-6`}>
         <Link href={sponsor?.[0]?.key.toLowerCase()} passHref={true}>
-          <ApartmentLink
-            css={tw`text-white`}
-            backgroundColor={sponsor?.[0]?.brandColor.hex}
-          >
+          <ApartmentLink backgroundColor={sponsor?.[0]?.brandColor.hex}>
             {translate("ALSO", {
               c: sponsor?.[0]?.location,
             })}
@@ -97,9 +73,9 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
 
       <Amenities amenities={pdp_listing_detail.listing_amenities} />
       <BookingCalendar />
-      <div>
-        <Map title={pdp_listing_detail.name} />
-      </div>
+
+      <Map title={pdp_listing_detail.name} />
+
       <Host
         srcImage={pdp_listing_detail.primary_host.profile_pic_path}
         about={pdp_listing_detail.primary_host.about}

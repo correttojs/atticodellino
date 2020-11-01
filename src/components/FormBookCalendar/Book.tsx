@@ -1,12 +1,11 @@
 // Render Prop
 import React from "react";
 import { useFormik } from "formik";
-import { FormInput } from "../FormInput";
+import { FormInput } from "../@UI/FormInput";
 import { useBookNowMutation } from "../../generated/graphql";
 import { bookInitialValues, bookValidationSchema } from "./bookData";
 import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
-import { useGlobal } from "../Layout";
 import { Button } from "../@UI/Buttons";
 
 export const Book: React.FC<{ from: string; to: string; price: number }> = ({
@@ -16,7 +15,6 @@ export const Book: React.FC<{ from: string; to: string; price: number }> = ({
 }) => {
   const [bookNow, { data, loading, error }] = useBookNowMutation();
   const t = useTranslations();
-  const { brandColor } = useGlobal();
   const formik = useFormik({
     initialValues: bookInitialValues,
     onSubmit: (values) => {

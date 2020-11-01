@@ -10,7 +10,6 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
 import { GrStatusGood, GrLogin, GrInProgress } from "react-icons/gr";
-import { useGlobal } from "../Layout";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;
@@ -19,7 +18,6 @@ const BodyStyle = styled.tbody`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const { data, loading } = useRegistrationsQuery();
-  const { brandColor } = useGlobal();
   const [
     confirmRegister,
     { data: confStatus },
