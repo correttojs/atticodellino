@@ -1,47 +1,39 @@
 import React from "react";
-import { Box, Text } from "grommet";
-import { Phone, MailOption } from "grommet-icons";
-import styled from "styled-components";
-import { MQ_MOBILE } from "./MediaQueries";
+import tw from "twin.macro";
+import { FaPhoneSquare } from "react-icons/fa";
+import { MdMail } from "react-icons/md";
 
 const EMAIL = process.env.NEXT_PUBLIC_FROM_EMAIL;
 const TEL = process.env.NEXT_PUBLIC_PHONE;
 
-const Link = styled(Text)`
-  a {
-    color: #fff !important;
-    text-decoration: none;
-  }
-  @media ${MQ_MOBILE} {
-    font-size: 0.9rem;
-  }
-`;
-
-export const Contacts: React.FC<{ direction?; margin? }> = ({
+export const Contacts: React.FC<{ direction?: "row" | "col" }> = ({
   direction,
-  margin,
 }) => {
   return (
-    <Box direction={direction} margin={margin}>
-      <Box
-        direction="row"
+    <div
+      css={[
+        tw`flex justify-center m-2`,
+        direction === "row" ? tw`flex-row` : tw`flex-col`,
+      ]}
+    >
+      <div
+        css={[tw`flex flex-row items-center`, direction === "row" && tw`mr-2`]}
         onClick={() => {
           window.open(`tel:${TEL}`, "emailWindow");
         }}
       >
-        <Phone />
-        <Link margin={{ left: "small" }}>{TEL}</Link>
-      </Box>
-      <Box
-        direction="row"
-        margin={{ left: margin }}
+        <FaPhoneSquare />
+        <a css={tw`ml-1`}>{TEL}</a>
+      </div>
+      <div
+        css={tw`flex flex-row items-center`}
         onClick={() => {
           window.open(`mailto:${EMAIL}`, "emailWindow");
         }}
       >
-        <MailOption />
-        <Link margin={{ left: "small" }}>{EMAIL}</Link>
-      </Box>
-    </Box>
+        <MdMail />
+        <a css={tw`ml-1`}>{EMAIL}</a>
+      </div>
+    </div>
   );
 };

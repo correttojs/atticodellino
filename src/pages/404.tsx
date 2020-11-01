@@ -1,11 +1,16 @@
 import { withGrommetTheme } from "../components/Layout";
-import { Box } from "grommet";
 import { getGlobalProps } from "../takeshape/getGlobal";
+import tw from "twin.macro";
 
 const PageError = () => (
-  <Box height="medium" justify="center">
+  <div
+    css={`
+      ${tw`flex items-center`}
+      min-height: 300px;
+    `}
+  >
     <h1>Page Not Found</h1>
-  </Box>
+  </div>
 );
 
 export async function getStaticProps({ locale }) {

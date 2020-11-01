@@ -5,8 +5,13 @@ module.exports = {
   },
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+        dancing: ["Dancing Script", "cursive"],
+      },
+    },
   },
   variants: {},
-  plugins: [],
-}
+  plugins: [require("@tailwindcss/custom-forms")],
+};

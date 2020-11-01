@@ -5,20 +5,13 @@ import {
   useRegisterConfirmationMutation,
   RegistrationsDocument,
 } from "../../generated/graphql";
-import {
-  Box,
-  Button,
-  Table,
-  TableHeader,
-  TableRow,
-  TableCell,
-  TableBody,
-} from "grommet";
 
-import { StatusGood, Login, InProgress } from "grommet-icons";
 import styled from "styled-components";
+import tw from "twin.macro";
+import { Button } from "../@UI/Buttons";
+import { GrStatusGood, GrLogin, GrInProgress } from "react-icons/gr";
 
-const BodyStyle = styled(TableBody)`
+const BodyStyle = styled.tbody`
   border: 1px solid;
 `;
 
@@ -39,49 +32,53 @@ export const AdminComponent: React.FC = () => {
   return (
     <>
       {!loading && !session && (
-        <Box pad="large">
-          <Button icon={<Login />} label="Sign in" onClick={signIn}></Button>
-        </Box>
+        <div css={tw`p-4`}>
+          <Button onClick={signIn}>
+            <div css={tw`flex`}>
+              <GrLogin color="#fff" /> Sign in
+            </div>
+          </Button>
+        </div>
       )}
       {loading && <p>Loading...</p>}
       {session && data && (
-        <Box pad="medium">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableCell scope="col" border="bottom">
+        <div css={tw`p-4`}>
+          <table>
+            <thead>
+              <tr>
+                <td scope="col" css={tw`border-b-2`}>
                   <b>Name</b>
-                </TableCell>
-                <TableCell scope="col" border="bottom">
+                </td>
+                <td scope="col" css={tw`border-b-2`}>
                   <b>Document</b>
-                </TableCell>
-                <TableCell scope="col" border="bottom">
+                </td>
+                <td scope="col" css={tw`border-b-2`}>
                   <b>Nationality</b>
-                </TableCell>
-                <TableCell scope="col" border="bottom">
+                </td>
+                <td scope="col" css={tw`border-b-2`}>
                   <b>Birth Date</b>
-                </TableCell>
-                <TableCell scope="col" border="bottom">
+                </td>
+                <td scope="col" css={tw`border-b-2`}>
                   <b>Place of Birth</b>
-                </TableCell>
-                <TableCell scope="col" border="bottom">
+                </td>
+                <td scope="col" css={tw`border-b-2`}>
                   <b>Apartment</b>
-                </TableCell>
-                <TableCell scope="col" border="bottom">
+                </td>
+                <td scope="col" css={tw`border-b-2`}>
                   <b>Status</b>
-                </TableCell>
-              </TableRow>
-            </TableHeader>
+                </td>
+              </tr>
+            </thead>
             {data.registrationList.items.map((item, key) => (
               <BodyStyle key={`user${key}`}>
-                <TableRow>
-                  <TableCell colSpan={5} scope="row">
+                <tr>
+                  <td colSpan={5} scope="row">
                     <b>{item.email}</b>
-                  </TableCell>
-                  <TableCell>
+                  </td>
+                  <td>
                     <b>{item.apartmentKey}</b>
-                  </TableCell>
-                  <TableCell>
+                  </td>
+                  <td>
                     {item.registrationStatus === "To Be Confirmed" && (
                       <Button
                         style={{ float: "right" }}
@@ -89,8 +86,9 @@ export const AdminComponent: React.FC = () => {
                         onClick={() =>
                           confirmRegister({ variables: { userId: item._id } })
                         }
-                        icon={<InProgress />}
-                      ></Button>
+                      >
+                        <GrInProgress />
+                      </Button>
                     )}
                     {item.registrationStatus === "Confirmed" && (
                       <Button
@@ -99,30 +97,31 @@ export const AdminComponent: React.FC = () => {
                         // onClick={() =>
                         //   confirmRegister({ variables: { userId: item._id } })
                         // }
-                        icon={<StatusGood />}
-                      ></Button>
+                      >
+                        <GrStatusGood />
+                      </Button>
                     )}
-                  </TableCell>
-                </TableRow>
+                  </td>
+                </tr>
                 {item.guests.map((guest, k) => {
                   return (
-                    <TableRow key={`guest${k}`}>
-                      <TableCell scope="row">
+                    <tr key={`guest${k}`}>
+                      <td scope="row">
                         {guest.lastName} {guest.firstName}
-                      </TableCell>
-                      <TableCell>
+                      </td>
+                      <td>
                         {guest.documentType} {guest.documentNumber}
-                      </TableCell>
-                      <TableCell>{guest.nationality}</TableCell>
-                      <TableCell>{guest.birthDate}</TableCell>
-                      <TableCell colSpan={3}>{guest.placeOfBirth}</TableCell>
-                    </TableRow>
+                      </td>
+                      <td>{guest.nationality}</td>
+                      <td>{guest.birthDate}</td>
+                      <td colSpan={3}>{guest.placeOfBirth}</td>
+                    </tr>
                   );
                 })}
               </BodyStyle>
             ))}
-          </Table>
-        </Box>
+          </table>
+        </div>
       )}
     </>
   );

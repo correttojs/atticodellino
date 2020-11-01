@@ -1,8 +1,7 @@
 import { useGlobal, GlobalStyle } from "../src/components/Layout";
-import { Grommet } from "grommet";
-
+import { ThemeProvider } from "styled-components";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
-import { theme } from "../src/components/Layout/theme";
+import { theme } from "../src/components/Layout/useGlobal";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -21,9 +20,9 @@ export const decorators = [
     return (
       <RouterContext.Provider value={router}>
         <GlobalStyle />
-        <Grommet theme={theme(global)}>
+        <ThemeProvider theme={theme(global)}>
           <Story />
-        </Grommet>
+        </ThemeProvider>
       </RouterContext.Provider>
     );
   },

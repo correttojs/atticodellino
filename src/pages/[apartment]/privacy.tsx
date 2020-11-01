@@ -2,7 +2,8 @@ import { withGrommetTheme } from "../../components/Layout";
 import { getGlobalProps, getGlobalPaths } from "../../takeshape/getGlobal";
 import { takeShapeGQLClient } from "../../takeshape/takeShapeClient";
 import { GetArticleByPathQuery } from "../../generated/graphql-takeshape";
-import { Box } from "grommet";
+
+import { Section } from "../../components/@UI/Section";
 
 export const getStaticProps = async ({ params, locale }) => {
   const globalProps = await getGlobalProps({ params, locale });
@@ -17,10 +18,10 @@ export const getStaticPaths = getGlobalPaths;
 const Privacy = ({ data }: { data: GetArticleByPathQuery }) => {
   const article = data?.getArticleList?.items?.[0];
   return (
-    <Box pad="large">
+    <Section>
       <h1>{article?.title}</h1>{" "}
       <div dangerouslySetInnerHTML={{ __html: article?.contentHtml }}></div>
-    </Box>
+    </Section>
   );
 };
 

@@ -1,5 +1,5 @@
 import { withGrommetTheme } from "../../components/Layout";
-import { Register } from "../../components/FormRegister";
+import { Register } from "../../components/FormRegister/FormRegister";
 import { getGlobalProps, getGlobalPaths } from "../../takeshape/getGlobal";
 
 export const getStaticProps = getGlobalProps;

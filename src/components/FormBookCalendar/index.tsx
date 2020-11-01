@@ -1,15 +1,22 @@
 import ReactCalendar from "react-calendar";
 import { useCalendarQuery, usePriceLazyQuery } from "../../generated/graphql";
 import styled from "styled-components";
-import { Book } from "./Book";
+import { FormBook } from "./FormBook";
 import React, { useState } from "react";
-import { Box, ThemeType } from "grommet";
-import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 import { H2 } from "../@UI/Texts";
+import tw from "twin.macro";
+import { MQ_NOT_DESKTOP } from "../Layout/MediaQueries";
+import { ThemeType } from "../Layout/useGlobal";
 
 const StyledCalendar = styled(ReactCalendar)`
+  @media ${MQ_NOT_DESKTOP} {
+    .react-calendar {
+      min-width: 350px !important;
+    }
+  }
+
   .react-calendar__tile--now {
     background: #fff;
     border: solid 1px;
@@ -20,19 +27,11 @@ const StyledCalendar = styled(ReactCalendar)`
     background-color: #e6e6e6;
   }
   .react-calendar__tile--active {
-    background: ${({ theme }: { theme: ThemeType }) =>
-      theme.global.colors.brand};
+    background: ${({ theme }: ThemeType) => theme.colors.brand};
   }
   .react-calendar__tile--active:enabled:focus,
   .react-calendar__tile--active:enabled:hover {
-    background: ${({ theme }: { theme: ThemeType }) =>
-      theme.global.colors.active};
-  }
-`;
-
-const StyledBook = styled(Box)`
-  @media ${MQ_MOBILE} {
-    flex-direction: column;
+    background: ${({ theme }: ThemeType) => theme.colors.active};
   }
 `;
 
@@ -52,9 +51,15 @@ export const BookingCalendar = () => {
   const [selection, setSelection] = useState([]);
 
   return (
-    <Box pad="large">
+    <section
+      css={`
+        ${tw`md:p-8 max-w-screen-lg mx-auto `}
+      `}
+    >
       <H2>{t("BOOK")}</H2>
-      <StyledBook direction="row" justify="center" align="center">
+      <div
+        css={tw`md:m-4 flex flex-col justify-center items-center md:flex-row`}
+      >
         <StyledCalendar
           tileDisabled={(e) => {
             if (!data) {
@@ -84,8 +89,8 @@ export const BookingCalendar = () => {
             });
           }}
         />
-        <Book from={selection[0]} to={selection[1]} price={price?.price} />
-      </StyledBook>
-    </Box>
+        <FormBook from={selection[0]} to={selection[1]} price={price?.price} />
+      </div>
+    </section>
   );
 };

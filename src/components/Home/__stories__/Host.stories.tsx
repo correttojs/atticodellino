@@ -19,4 +19,4 @@ const Template: Story = (args) => (
   />
 );
 
-export const HeroStory = Template.bind({});
+export const HostStory = Template.bind({});

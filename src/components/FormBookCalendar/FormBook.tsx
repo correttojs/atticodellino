@@ -1,17 +1,18 @@
 // Render Prop
 import React from "react";
 import { useFormik } from "formik";
-import { Form, Button, Box, Text } from "grommet";
-import { FormInput } from "../FormInput";
+import { FormInput } from "../@UI/FormInput";
 import { useBookNowMutation } from "../../generated/graphql";
 import { bookInitialValues, bookValidationSchema } from "./bookData";
 import { useTranslations } from "../Translations/useTranslations";
+import tw from "twin.macro";
+import { Button } from "../@UI/Buttons";
 
-export const Book: React.FC<{ from: string; to: string; price: number }> = ({
-  from,
-  to,
-  price,
-}) => {
+export const FormBook: React.FC<{
+  from: string;
+  to: string;
+  price: number;
+}> = ({ from, to, price }) => {
   const [bookNow, { data, loading, error }] = useBookNowMutation();
   const t = useTranslations();
   const formik = useFormik({
@@ -27,37 +28,36 @@ export const Book: React.FC<{ from: string; to: string; price: number }> = ({
   });
 
   return (
-    <Box width="medium" margin="large">
+    <div
+      css={`
+        ${tw`m-4 w-full`}
+        min-width: 400px;
+      `}
+    >
       {data && (
-        <Box>
+        <div>
           <h3>
             {t("THANKYOU", {
               name: data.book.firstName,
               lastName: data.book.lastName,
             })}
           </h3>
-          <Text>{t("BOOK_RESPONSE")}</Text>
-        </Box>
+          <p>{t("BOOK_RESPONSE")}</p>
+        </div>
       )}
       {error && (
-        <Box
-          direction="row"
+        <div
+          css={tw`flex flex-col p-4 items-center `}
           onClick={() => window.location.reload()}
-          pad="medium"
-          align="center"
         >
-          <Text>{t("ERROR")}</Text>
-          <Button margin="medium" type="submit" primary label="Ok" />
-        </Box>
+          <p>{t("ERROR")}</p>
+          <Button type="submit">Ok</Button>
+        </div>
       )}
-      {loading && (
-        <Box>
-          <Text>{t("LOADING")}</Text>
-        </Box>
-      )}
+      {loading && <p>{t("LOADING")}</p>}
       {!data && !error && !loading && (
         <>
-          <Form
+          <form
             onSubmit={(e) => {
               e.preventDefault();
               formik.handleSubmit();
@@ -67,19 +67,16 @@ export const Book: React.FC<{ from: string; to: string; price: number }> = ({
             <FormInput formik={formik} field={"lastName"} />
 
             <FormInput formik={formik} field={"email"} />
-            <Box pad="small">{price && <Text>{price} euros</Text>}</Box>
+            <div css={tw`m-2`}>{price && <p>{price} euros</p>}</div>
 
-            <Box direction="row" justify="end">
-              <Button
-                type="submit"
-                disabled={!from || !to || !price}
-                primary
-                label="Submit"
-              />
-            </Box>
-          </Form>
+            <div css={tw`flex justify-end`}>
+              <Button disabled={!from || !to || !price} type="submit">
+                Submit
+              </Button>
+            </div>
+          </form>
         </>
       )}
-    </Box>
+    </div>
   );
 };

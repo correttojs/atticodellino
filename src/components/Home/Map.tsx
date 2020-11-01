@@ -1,6 +1,6 @@
 import GoogleMapReact from "google-map-react";
-import { Indicator } from "grommet-icons";
-import { Box, Text } from "grommet";
+
+import { FaMapMarker } from "react-icons/fa";
 import { useGlobal } from "../Layout";
 import { useInView } from "react-intersection-observer";
 
@@ -20,9 +20,9 @@ export const Map: React.FC<{ title: string }> = ({ title }) => {
           defaultCenter={[lat, lng]}
           defaultZoom={16}
         >
-          <Box {...{ lat, lng }} direction="row">
-            <Indicator color="brand" /> <Text>{title}</Text>
-          </Box>
+          <div {...{ lat, lng }}>
+            <FaMapMarker /> <p>{title}</p>
+          </div>
         </GoogleMapReact>
       )}
     </div>
