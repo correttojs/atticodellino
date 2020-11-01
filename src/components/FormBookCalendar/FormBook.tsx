@@ -7,6 +7,8 @@ import { bookInitialValues, bookValidationSchema } from "./bookData";
 import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
+import { FormError } from "../@UI/FormError";
+import { FormLoading } from "../@UI/FormLoading";
 
 export const FormBook: React.FC<{
   from: string;
@@ -45,16 +47,8 @@ export const FormBook: React.FC<{
           <p>{t("BOOK_RESPONSE")}</p>
         </div>
       )}
-      {error && (
-        <div
-          css={tw`flex flex-col p-4 items-center `}
-          onClick={() => window.location.reload()}
-        >
-          <p>{t("ERROR")}</p>
-          <Button type="submit">Ok</Button>
-        </div>
-      )}
-      {loading && <p>{t("LOADING")}</p>}
+      {error && <FormError />}
+      {loading && <FormLoading />}
       {!data && !error && !loading && (
         <>
           <form
