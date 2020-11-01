@@ -8,7 +8,7 @@ import { useGlobal } from "../Layout";
 import { H2 } from "../@UI/Texts";
 import tw from "twin.macro";
 import { MQ_NOT_DESKTOP } from "../Layout/MediaQueries";
-import { ThemeType } from "../Layout/theme";
+import { ThemeType } from "../Layout/useGlobal";
 
 const StyledCalendar = styled(ReactCalendar)`
   @media ${MQ_NOT_DESKTOP} {

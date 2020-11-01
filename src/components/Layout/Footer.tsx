@@ -9,11 +9,14 @@ import tw from "twin.macro";
 import { FaAirbnb, FaFacebookSquare, FaMapMarker } from "react-icons/fa";
 
 export const Footer: React.FC = () => {
-  const { address, airbnbLink, facebookLink } = useGlobal();
-  let { apartment, brandColor } = useGlobal();
+  const {
+    address,
+    airbnbLink,
+    facebookLink,
+    apartment,
+    brandColor,
+  } = useGlobal();
   const { locale } = useRouter();
-
-  apartment = apartment.toLowerCase();
   const t = useTranslations();
 
   return (
@@ -52,7 +55,7 @@ export const Footer: React.FC = () => {
         <div css={tw`flex flex-row justify-center m-2`}>
           <Link
             href="/[apartment]/faq"
-            as={`/${apartment}/faq`}
+            as={`/${apartment.toLowerCase()}/faq`}
             locale={locale}
           >
             <a css={tw`mx-2`}>FAQ</a>
@@ -60,7 +63,7 @@ export const Footer: React.FC = () => {
           -
           <Link
             href="/[apartment]/register"
-            as={`/${apartment}/register`}
+            as={`/${apartment.toLowerCase()}/register`}
             locale={locale}
           >
             <a css={tw`mx-2`}>{t("REGISTER")}</a>
@@ -68,7 +71,7 @@ export const Footer: React.FC = () => {
           -
           <Link
             href="/[apartment]/privacy"
-            as={`/${apartment}/privacy`}
+            as={`/${apartment.toLowerCase()}/privacy`}
             locale={locale}
           >
             <a css={tw`mx-2`}>{t("PRIVACY")}</a>

@@ -1,7 +1,7 @@
 import { useGlobal, GlobalStyle } from "../src/components/Layout";
 import { ThemeProvider } from "styled-components";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
-import { theme } from "../src/components/Layout/theme";
+import { theme } from "../src/components/Layout/useGlobal";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

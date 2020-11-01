@@ -1,12 +1,11 @@
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import { ApolloProvider } from "@apollo/client";
 import { gqlClient } from "./gqlClient";
-import { theme } from "./theme";
 import React, { useState } from "react";
 import { GlobalType } from "../../graphql/_airbn.types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { GlobalContext } from "./useGlobal";
+import { GlobalContext, theme } from "./useGlobal";
 import tw from "twin.macro";
 import { MQ_MOBILE } from "./MediaQueries";
 

@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { MQ_MOBILE, MQ_DESKTOP } from "../Layout/MediaQueries";
 import { GlobalType } from "../../graphql/_airbn.types";
 import tw from "twin.macro";
-import { ThemeType } from "../Layout/theme";
+import { ThemeType } from "../Layout/useGlobal";
 
 // prettier-ignore
 export const HeroStyle = styled.div<{ apartment: GlobalType}>`

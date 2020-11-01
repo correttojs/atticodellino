@@ -16,21 +16,31 @@ export const GlobalContext = React.createContext<GlobalType & { setLang? }>({
   address: `San Nazaro st., 60, 4th floor, 37129, Verona - Italy`,
 });
 
-export const useGlobal = () => {
-  const context = useContext(GlobalContext);
+export const theme = (apartment: GlobalType) => {
   const {
     rgb: { r, g, b, a },
-  } = context?.lightColor;
+  } = apartment.lightColor;
   const {
     rgb: { r: r2, g: g2, b: b2, a: a2 },
-  } = context?.lightColor;
+  } = apartment.lightColor;
   return {
-    ...context,
     colors: {
-      brand: context.brandColor.hex,
+      brand: apartment.brandColor.hex,
+      focus: apartment.brandColor.hex,
       active: "#290012e8",
       light: `rgba(${r},${g},${b},${a})`,
       lighter: `rgba(${r2},${g2},${b2},${a2})`,
     },
+  };
+};
+
+export type ThemeType = { theme: ReturnType<typeof theme> };
+
+export const useGlobal = () => {
+  const context = useContext(GlobalContext);
+
+  return {
+    ...context,
+    colors: theme(context),
   };
 };
