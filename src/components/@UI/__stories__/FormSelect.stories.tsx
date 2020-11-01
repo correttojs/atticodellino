@@ -6,7 +6,7 @@ import { Button } from "../Buttons";
 import { FormSelect } from "../FormSelect";
 
 export default {
-  title: "UI/FormInput",
+  title: "UI/FormSelect",
 } as Meta;
 
 const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
@@ -36,4 +36,4 @@ const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
   );
 };
 
-export const FormInputStories = Template.bind({});
+export const FormSelectStories = Template.bind({});

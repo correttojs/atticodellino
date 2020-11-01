@@ -7,7 +7,7 @@ export const BackgroundWrapper: React.FC = ({ children }) => {
   return (
     <div
       css={`
-        background-color: ${colors.lighter};
+        background-color: ${colors.colors.lighter};
       `}
     >
       {children}

@@ -12,6 +12,8 @@ import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
 import { GrUserAdd, GrTrash } from "react-icons/gr";
 import { FormSelect } from "../@UI/FormSelect";
+import { FormError } from "../@UI/FormError";
+import { FormLoading } from "../@UI/FormLoading";
 
 const UploadStyle = styled.div<{ error: boolean }>`
   position: relative;
@@ -82,16 +84,8 @@ export const Register: React.FC = () => {
             })}
           </h3>
         )}
-        {error && (
-          <div
-            css={tw`flex flex-col p-4 items-center `}
-            onClick={() => window.location.reload()}
-          >
-            <p>{t("ERROR")}</p>
-            <Button type="submit">Ok</Button>
-          </div>
-        )}
-        {loading && <p>{t("LOADING")}</p>}
+        {error && <FormError />}
+        {loading && <FormLoading />}
         {!data && !error && !loading && (
           <>
             <H1 css={tw`mb-4`}>{t("REGISTER")}</H1>
