@@ -8,11 +8,11 @@ import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
 
-export const Book: React.FC<{ from: string; to: string; price: number }> = ({
-  from,
-  to,
-  price,
-}) => {
+export const FormBook: React.FC<{
+  from: string;
+  to: string;
+  price: number;
+}> = ({ from, to, price }) => {
   const [bookNow, { data, loading, error }] = useBookNowMutation();
   const t = useTranslations();
   const formik = useFormik({

@@ -1,13 +1,14 @@
 import ReactCalendar from "react-calendar";
 import { useCalendarQuery, usePriceLazyQuery } from "../../generated/graphql";
 import styled from "styled-components";
-import { Book } from "./Book";
+import { FormBook } from "./FormBook";
 import React, { useState } from "react";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 import { H2 } from "../@UI/Texts";
 import tw from "twin.macro";
 import { MQ_NOT_DESKTOP } from "../Layout/MediaQueries";
+import { ThemeType } from "../Layout/theme";
 
 const StyledCalendar = styled(ReactCalendar)`
   @media ${MQ_NOT_DESKTOP} {
@@ -26,11 +27,11 @@ const StyledCalendar = styled(ReactCalendar)`
     background-color: #e6e6e6;
   }
   .react-calendar__tile--active {
-    background: ${({ theme }: { theme }) => theme.global.colors.brand};
+    background: ${({ theme }: ThemeType) => theme.colors.brand};
   }
   .react-calendar__tile--active:enabled:focus,
   .react-calendar__tile--active:enabled:hover {
-    background: ${({ theme }: { theme }) => theme.global.colors.active};
+    background: ${({ theme }: ThemeType) => theme.colors.active};
   }
 `;
 
@@ -88,7 +89,7 @@ export const BookingCalendar = () => {
             });
           }}
         />
-        <Book from={selection[0]} to={selection[1]} price={price?.price} />
+        <FormBook from={selection[0]} to={selection[1]} price={price?.price} />
       </div>
     </section>
   );
