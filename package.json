@@ -12,8 +12,7 @@
     "storybook": "start-storybook --no-dll -p 6006",
     "build-storybook": "build-storybook --no-dll",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect",
-    "chromatic": "npx chromatic --project-token 0nipau2e2xxn"
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
