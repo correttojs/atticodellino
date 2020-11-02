@@ -1,6 +1,6 @@
 // Render Prop
 import React from "react";
-import { useFormik, FieldArray } from "formik";
+import { useFormik, FieldArray, FormikProvider } from "formik";
 import { initialValues, validationSchema, guestValue } from "./data";
 import { FormInput } from "../@UI/FormInput";
 import { useRegisterMutation } from "../../generated/graphql";
@@ -63,109 +63,117 @@ export const Register: React.FC = () => {
         {!data && !error && !loading && (
           <>
             <H1 css={tw`mb-4`}>{t("REGISTER")}</H1>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                formik.handleSubmit();
-              }}
-            >
-              <FormInput type="email" formik={formik} field={"email"} />
-              <FieldArray
-                name="guests"
-                render={(arrayHelpers) => (
-                  <>
-                    {formik.values.guests.map((guest, index) => {
-                      return (
-                        <div css={tw`p-4 my-6 border-2`} key={`guest${index}`}>
-                          {formik.values.guests.length > 1 && (
-                            <div
-                              style={{ float: "right" }}
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              <GrTrash />
-                            </div>
-                          )}
-                          <FormInput
-                            formik={formik}
-                            field={`guests[${index}].firstName`}
-                            label="First name"
-                          />
-                          <FormInput
-                            formik={formik}
-                            field={`guests[${index}].lastName`}
-                            label="Last name"
-                          />
-
-                          <FormSelect
-                            formik={formik}
-                            field={`guests[${index}]["documentType"]`}
-                            options={["Passport", "ID Card", "Driving License"]}
-                            label="Document Type"
-                          />
-
-                          <FormInput
-                            formik={formik}
-                            field={`guests[${index}].documentNumber`}
-                            label="Document Number"
-                          />
-                          <div css={tw`flex flex-row`}>
-                            <FormInput
-                              type="number"
-                              formik={formik}
-                              field={`guests[${index}].day`}
-                              label="Day"
-                            />
-                            <FormInput
-                              type="number"
-                              formik={formik}
-                              field={`guests[${index}].month`}
-                              label="Month"
-                            />
-                            <FormInput
-                              type="number"
-                              formik={formik}
-                              field={`guests[${index}].year`}
-                              label="Year"
-                            />
-                          </div>
-
-                          <FormInput
-                            formik={formik}
-                            field={`guests[${index}].nationality`}
-                            label="Nationality"
-                          />
-
-                          <FormInput
-                            formik={formik}
-                            field={`guests[${index}].placeOfBirth`}
-                            label="Place of Birth"
-                          />
-
-                          <FormUpload
-                            formik={formik}
-                            field={`guests[${index}].file`}
-                            label={"Upload your document"}
-                          />
-
+            <FormikProvider value={formik}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  formik.handleSubmit();
+                }}
+              >
+                <FormInput type="email" formik={formik} field={"email"} />
+                <FieldArray
+                  name="guests"
+                  render={(arrayHelpers) => (
+                    <>
+                      {formik.values.guests.map((guest, index) => {
+                        return (
                           <div
-                            onClick={() => {
-                              arrayHelpers.push({ ...guestValue });
-                            }}
+                            css={tw`p-4 my-6 border-2`}
+                            key={`guest${index}`}
                           >
-                            <GrUserAdd />
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </>
-                )}
-              />
+                            {formik.values.guests.length > 1 && (
+                              <div
+                                style={{ float: "right" }}
+                                onClick={() => arrayHelpers.remove(index)}
+                              >
+                                <GrTrash />
+                              </div>
+                            )}
+                            <FormInput
+                              formik={formik}
+                              field={`guests[${index}].firstName`}
+                              label="First name"
+                            />
+                            <FormInput
+                              formik={formik}
+                              field={`guests[${index}].lastName`}
+                              label="Last name"
+                            />
 
-              <div css={tw`flex justify-end`}>
-                <Button type="submit">Submit</Button>
-              </div>
-            </form>
+                            <FormSelect
+                              formik={formik}
+                              field={`guests[${index}]["documentType"]`}
+                              options={[
+                                "Passport",
+                                "ID Card",
+                                "Driving License",
+                              ]}
+                              label="Document Type"
+                            />
+
+                            <FormInput
+                              formik={formik}
+                              field={`guests[${index}].documentNumber`}
+                              label="Document Number"
+                            />
+                            <div css={tw`flex flex-row`}>
+                              <FormInput
+                                type="number"
+                                formik={formik}
+                                field={`guests[${index}].day`}
+                                label="Day"
+                              />
+                              <FormInput
+                                type="number"
+                                formik={formik}
+                                field={`guests[${index}].month`}
+                                label="Month"
+                              />
+                              <FormInput
+                                type="number"
+                                formik={formik}
+                                field={`guests[${index}].year`}
+                                label="Year"
+                              />
+                            </div>
+
+                            <FormInput
+                              formik={formik}
+                              field={`guests[${index}].nationality`}
+                              label="Nationality"
+                            />
+
+                            <FormInput
+                              formik={formik}
+                              field={`guests[${index}].placeOfBirth`}
+                              label="Place of Birth"
+                            />
+
+                            <FormUpload
+                              formik={formik}
+                              field={`guests[${index}].file`}
+                              label={"Upload your document"}
+                            />
+
+                            <div
+                              onClick={() => {
+                                arrayHelpers.push({ ...guestValue });
+                              }}
+                            >
+                              <GrUserAdd />
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </>
+                  )}
+                />
+
+                <div css={tw`flex justify-end`}>
+                  <Button type="submit">Submit</Button>
+                </div>
+              </form>
+            </FormikProvider>
           </>
         )}
       </div>
