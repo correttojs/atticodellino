@@ -5,7 +5,7 @@ import React from "react";
 import { FormInput } from "../FormInput";
 
 export default {
-  title: "UI/FormInput",
+  title: "UI/Form/Input",
 } as Meta;
 
 const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {

@@ -1,17 +1,17 @@
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Meta, Story } from "@storybook/react/types-6-0";
-import { FormikProvider, useFormik } from "formik";
+import { useFormik } from "formik";
 import React from "react";
 import { Button } from "../Buttons";
-import { FormSelect } from "../FormSelect";
+import { FormUpload } from "../FormUpload";
 
 export default {
-  title: "UI/Form/Select",
+  title: "UI/Form/Upload",
 } as Meta;
 
 const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
   const formik = useFormik({
-    initialValues: { lastName: "Test1" },
+    initialValues: { file: null },
     onSubmit: (values) => {
       console.log(values);
     },
@@ -24,12 +24,7 @@ const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
           formik.handleSubmit();
         }}
       >
-        <FormSelect
-          formik={formik}
-          field={`lastName`}
-          label="Last name"
-          options={["Test1", "Test2"]}
-        />
+        <FormUpload formik={formik} field={`file`} label="Upload" />
         <Button type="submit">Submit</Button>
       </form>
     </div>
