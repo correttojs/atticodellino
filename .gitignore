@@ -5,3 +5,5 @@ node_modules
 out
 .vscode
 .env.local
+storybook-static
+build-storybook.log
