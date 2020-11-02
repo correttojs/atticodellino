@@ -43,7 +43,7 @@
     "query-string": "^6.13.6",
     "react": "^17.0.1",
     "react-calendar": "^3.1.0",
-    "react-cookie-consent": "^5.2.0",
+    "react-cookie-consent": "^6.0.0",
     "react-dom": "^17.0.1",
     "react-icons": "^3.11.0",
     "react-intersection-observer": "^8.29.1",
