@@ -5,7 +5,7 @@ import React from "react";
 import { FormError } from "../FormError";
 
 export default {
-  title: "UI/FormError",
+  title: "UI/Form/Error",
 } as Meta;
 
 const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {

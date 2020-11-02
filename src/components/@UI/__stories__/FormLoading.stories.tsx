@@ -5,7 +5,7 @@ import React from "react";
 import { FormLoading } from "../FormLoading";
 
 export default {
-  title: "UI/FormLoading",
+  title: "UI/Form/Loading",
 } as Meta;
 
 const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
