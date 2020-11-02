@@ -10,7 +10,9 @@
     "start": "next start",
     "codegen": "node codegen",
     "storybook": "start-storybook --no-dll -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -48,7 +50,8 @@
     "react-modal": "^3.11.2",
     "styled-components": "^5.2.1",
     "twin.macro": "^1.12.0",
-    "yup": "^0.29.3"
+    "yup": "^0.29.3",
+    "snyk": "^1.421.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
@@ -80,5 +83,6 @@
       "debugPlugins": false,
       "debug": false
     }
-  }
+  },
+  "snyk": true
 }
