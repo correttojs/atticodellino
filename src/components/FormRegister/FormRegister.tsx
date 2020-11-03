@@ -77,10 +77,11 @@ export const Register: React.FC = () => {
                     <>
                       {formik.values.guests.map((guest, index) => {
                         return (
-                          <div
+                          <fieldset
                             css={tw`p-4 my-6 border-2`}
                             key={`guest${index}`}
                           >
+                            <legend>Guest {index + 1}</legend>
                             {formik.values.guests.length > 1 && (
                               <div
                                 style={{ float: "right" }}
@@ -162,7 +163,7 @@ export const Register: React.FC = () => {
                             >
                               <GrUserAdd />
                             </div>
-                          </div>
+                          </fieldset>
                         );
                       })}
                     </>
