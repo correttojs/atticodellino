@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
   const { pathname, asPath, push } = useRouter();
 
   return (
-    <nav
+    <header
       css={`
         background-color: ${brandColor.hex};
         ${tw`fixed z-10 flex items-center justify-between flex-wrap p-4 w-full text-white`};
@@ -39,6 +39,6 @@ export const Header: React.FC = () => {
           />
         </DropDown>
       </div>
-    </nav>
+    </header>
   );
 };
