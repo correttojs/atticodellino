@@ -6,23 +6,19 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "export": "next export",
     "start": "next start",
     "codegen": "node codegen",
     "storybook": "start-storybook --no-dll -p 6006",
     "build-storybook": "build-storybook --no-dll"
   },
   "keywords": [],
-  "author": "",
+  "author": "Fabio Benedetti",
   "license": "ISC",
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@graphql-codegen/cli": "^1.19.0",
     "@sendgrid/mail": "^7.3.0",
     "@tailwindcss/custom-forms": "^0.2.1",
-    "@types/apollo-upload-client": "^14.1.0",
-    "@types/yup": "^0.29.9",
-    "@zeit/next-source-maps": "0.0.3",
     "apollo-server-micro": "^2.19.0",
     "apollo-upload-client": "^14.1.2",
     "formik": "^2.2.1",
@@ -45,7 +41,6 @@
     "react-icons": "^3.11.0",
     "react-intersection-observer": "^8.30.0",
     "react-modal": "^3.11.2",
-    "snyk": "^1.421.1",
     "styled-components": "^5.2.1",
     "tailwindcss": "^1.9.6",
     "twin.macro": "^1.12.0",
@@ -62,9 +57,11 @@
     "@storybook/addon-essentials": "^6.0.28",
     "@storybook/addon-links": "^6.0.28",
     "@storybook/react": "^6.0.28",
+    "@types/apollo-upload-client": "^14.1.0",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
     "@types/styled-components": "^5.1.4",
+    "@types/yup": "^0.29.9",
     "babel-loader": "^8.1.0",
     "babel-plugin-styled-components": "^1.11.1",
     "chromatic": "^5.3.0",
@@ -81,6 +78,5 @@
       "debugPlugins": false,
       "debug": false
     }
-  },
-  "snyk": true
+  }
 }
