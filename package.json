@@ -10,7 +10,9 @@
     "start": "next start",
     "codegen": "node codegen",
     "storybook": "start-storybook --no-dll -p 6006",
-    "build-storybook": "build-storybook --no-dll"
+    "build-storybook": "build-storybook --no-dll",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [],
   "author": "",
@@ -45,7 +47,7 @@
     "react-icons": "^3.11.0",
     "react-intersection-observer": "^8.30.0",
     "react-modal": "^3.11.2",
-    "snyk": "^1.421.1",
+    "snyk": "^1.424.4",
     "styled-components": "^5.2.1",
     "tailwindcss": "^1.9.6",
     "twin.macro": "^1.12.0",
