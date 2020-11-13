@@ -39,7 +39,7 @@
     "next-pwa": "^3.1.5",
     "nodemailer": "^6.4.14",
     "polished": "^4.0.3",
-    "query-string": "^6.13.6",
+    "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-calendar": "^3.2.0",
     "react-cookie-consent": "^6.0.0",
