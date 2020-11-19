@@ -78,5 +78,8 @@
       "debugPlugins": false,
       "debug": false
     }
+  },
+  "repository": {
+    "url": "https://github.com/correttojs/atticodellino"
   }
 }
