@@ -54,7 +54,7 @@
     "@graphql-codegen/typescript-operations": "^1.17.10",
     "@graphql-codegen/typescript-react-apollo": "^2.1.1",
     "@storybook/addon-actions": "^6.1.1",
-    "@storybook/addon-essentials": "^6.1.1",
+    "@storybook/addon-essentials": "^6.1.2",
     "@storybook/addon-links": "^6.1.1",
     "@storybook/react": "^6.1.1",
     "@types/apollo-upload-client": "^14.1.0",
