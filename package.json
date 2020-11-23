@@ -47,7 +47,7 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.12.7",
     "@graphql-codegen/introspection": "^1.18.0",
     "@graphql-codegen/typescript": "^1.17.11",
     "@graphql-codegen/typescript-graphql-request": "^2.0.2",
