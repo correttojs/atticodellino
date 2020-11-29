@@ -8,7 +8,7 @@ const pic3 = require("./3.jpg");
 import { Hero } from "../NewHero";
 
 export default {
-  title: "Homes/NewHero",
+  title: "Home/NewHero2",
 } as Meta;
 
 const Template: Story = (args) => (

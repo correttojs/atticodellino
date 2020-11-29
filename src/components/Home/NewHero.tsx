@@ -6,7 +6,6 @@ import { useGlobal } from "../Layout";
 import { Contacts } from "../Layout/Contact";
 import tw from "twin.macro";
 import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
-import { Section } from "../@UI/Section";
 
 // Modal.setAppElement("#__next");
 
@@ -14,56 +13,46 @@ export const Hero: React.FC<{
   photos: { id; picture: string; x_large_cover: string; caption: string }[];
 }> = ({ photos }) => {
   const [show, setShow] = useState(-1);
-  // const global = useGlobal();
+  const global = useGlobal();
 
-  // if (global.apartment === "VR") {
-  //   photos = [
-  //     photos.find((p) => p.id === 406200537),
-  //     photos.find((p) => p.id === 406200123),
-  //     ...photos.filter(
-  //       (p) => p.id !== 406200537 && p.id !== 278532343 && p.id !== 406200123
-  //     ),
-  //   ];
-  // }
-  const col = [0, 1, 2, 3];
+  if (global.apartment === "VR") {
+    photos = [
+      photos.find((p) => p.id === 406200537),
+      photos.find((p) => p.id === 406200123),
+      ...photos.filter(
+        (p) => p.id !== 406200537 && p.id !== 278532343 && p.id !== 406200123
+      ),
+    ];
+  }
 
   return (
     <>
-      <Section css={tw`flex`}>
-        <div css={tw`w-1/2 mr-2`}>
-          <img
-            src={photos[0].picture}
-            css={`
-              ${tw`w-full object-cover rounded-l-md`}
-              max-height: calc(60vh - 64px) !important;
-            `}
-          />
-        </div>
+      <HeroStyle apartment={global}>
         <div
           css={`
-            ${tw`w-1/2 flex`} max-height: calc(60vh - 64px) !important;
+            ${tw`md:hidden fixed mt-2 bg-white`}
+            top:80px;
+            left: 0px;
           `}
         >
-          {photos.slice(1, 4).map((p) => (
-            <div
-              css={`
-                ${tw`w-1/2  flex`} max-height: calc(60vh - 64px) !important;
-              `}
-            >
-              <img
-                src={p.picture}
-                css={`
-                  max-width: 100%;
-                  max-height: 100%;
-                  ${tw` object-contain rounded-l-md`}
-                `}
+          <Contacts direction="row" />
+        </div>
+        <HeroCarousel>
+          {photos.map((s, i) => (
+            <div key={i} css={tw`p-4`} onClick={() => setShow(i)}>
+              <Cap
+                id={s.id}
+                // whileHover={{ scale: 1.05 }}
+                alt={s.caption}
+                src={s.picture}
+                loading="lazy"
               />
             </div>
           ))}
-        </div>
-      </Section>
+        </HeroCarousel>
+      </HeroStyle>
 
-      {/* <Modal isOpen={show !== -1} shouldCloseOnOverlayClick={true}>
+      <Modal isOpen={show !== -1} shouldCloseOnOverlayClick={true}>
         <div
           css={tw`flex flex-row items-center max-w-full min-w-0 min-h-0 box-border`}
         >
@@ -105,7 +94,7 @@ export const Hero: React.FC<{
             onClick={() => setShow(-1)}
           />
         </div>
-      </Modal> */}
+      </Modal>
     </>
   );
 };
