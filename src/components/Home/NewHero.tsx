@@ -19,7 +19,6 @@ const slidein = keyframes`
     opacity: 1;
   }
 `;
-Modal.setAppElement("#__next");
 
 export const Hero: React.FC<{
   photos: { id; picture: string; x_large_cover: string; caption: string }[];

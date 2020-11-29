@@ -8,6 +8,7 @@ import { Reviews } from "./Reviews";
 import { Amenities } from "./Amenities";
 import { useTranslations } from "../Translations/useTranslations";
 
+import Modal from "react-modal";
 import { useGlobal } from "../Layout";
 import Link from "next/link";
 import Head from "next/head";
@@ -17,6 +18,8 @@ import { Section } from "../@UI/Section";
 import { Summary } from "./Summary";
 import { Collapsible } from "../@UI/Collapsible";
 import { ApartmentLink } from "./ApartmentLink";
+
+Modal.setAppElement("#__next");
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
