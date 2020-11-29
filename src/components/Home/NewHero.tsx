@@ -6,7 +6,19 @@ import { useGlobal } from "../Layout";
 import { Contacts } from "../Layout/Contact";
 import tw from "twin.macro";
 import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
+import { ThemeType } from "../Layout/useGlobal";
+import { keyframes } from "styled-components";
+import { MQ_MOBILE } from "../Layout/MediaQueries";
 
+const slidein = keyframes`
+   from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
 // Modal.setAppElement("#__next");
 
 export const Hero: React.FC<{
@@ -37,9 +49,42 @@ export const Hero: React.FC<{
         >
           <Contacts direction="row" />
         </div>
-        <HeroCarousel>
+        <div
+          css={`
+            ${tw`flex items-start absolute overflow-y-hidden`}left: 0;
+            top: calc(100vw * 0.1);
+            background-image: ${({ theme }: ThemeType) =>
+              `linear-gradient(0deg, rgba(225,223,255,0) 0%, ${theme.colors.light} 10%, ${theme.colors.light} 90%, rgba(255,255,255,0) 100%);`};
+            animation: ${slidein} 1s ease-in;
+          `}
+        >
           {photos.map((s, i) => (
-            <div key={i} css={tw`p-4`} onClick={() => setShow(i)}>
+            <div
+              key={i}
+              css={`
+                border-radius: 20px;
+                /* padding: 1rem 1rem 1rem 1rem; */
+                /* margin: 0.5rem; */
+                border: none;
+                box-shadow: none;
+                width: 40rem;
+                height: 24rem;
+                @media ${MQ_MOBILE} {
+                  width: 12rem;
+                  height: 12rem;
+                  padding: 0.5rem 1rem 0.5rem 1rem;
+                  margin: 1rem;
+                }
+              `}
+              onClick={() => setShow(i)}
+            >
+              <Cap
+                id={s.id}
+                // whileHover={{ scale: 1.05 }}
+                alt={s.caption}
+                src={s.picture}
+                loading="lazy"
+              />
               <Cap
                 id={s.id}
                 // whileHover={{ scale: 1.05 }}
@@ -49,7 +94,7 @@ export const Hero: React.FC<{
               />
             </div>
           ))}
-        </HeroCarousel>
+        </div>
       </HeroStyle>
 
       <Modal isOpen={show !== -1} shouldCloseOnOverlayClick={true}>
