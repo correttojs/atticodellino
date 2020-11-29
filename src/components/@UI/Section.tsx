@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import tw from "twin.macro";
 
-export const Section = tw.section`p-4 md:p-8 max-w-screen-lg mx-auto `;
+export const Section = tw.section`p-4 md:p-8 max-w-screen-xl mx-auto `;
 
 export const SplitSection = {
   Section: styled(Section)`

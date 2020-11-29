@@ -2,40 +2,32 @@
 import { Meta, Story } from "@storybook/react/types-6-0";
 import React from "react";
 
-const pic1 = require("./1.jpg");
-const pic2 = require("./2.jpg");
-const pic3 = require("./3.jpg");
+const pics = [];
+pics.push(require("./1.jpg"));
+pics.push(require("./2.jpg"));
+pics.push(require("./3.jpg"));
+
 import { Hero } from "../NewHero";
 
 export default {
-  title: "Home/NewHero2",
+  title: "Home/NewHero",
 } as Meta;
+
+const photos = [];
+for (let i = 1; i < 12; i++) {
+  photos.push({
+    id: i,
+    picture: pics[i % 3],
+    x_large_cover: pics[i % 3],
+    caption: `pic${i}`,
+  });
+}
+photos[0].id = 406200537;
+photos[1].id = 406200123;
 
 const Template: Story = (args) => (
   <>
-    <Hero
-      photos={[
-        {
-          id: 406200537,
-          picture: pic1,
-          x_large_cover: pic1,
-          caption: "Pic 1",
-        },
-        {
-          id: 406200123,
-          picture: pic2,
-          x_large_cover: pic2,
-          caption: "Pic 2",
-        },
-        ,
-        {
-          id: 123,
-          picture: pic3,
-          x_large_cover: pic3,
-          caption: "Pic 3",
-        },
-      ]}
-    />
+    <Hero photos={photos} />
   </>
 );
 

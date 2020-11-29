@@ -2,7 +2,7 @@ import React from "react";
 import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Map } from "./Map";
 import { BookingCalendar } from "../FormBookCalendar";
-import { Hero } from "./Hero";
+import { Hero } from "./NewHero";
 import { Host } from "./Host";
 import { Reviews } from "./Reviews";
 import { Amenities } from "./Amenities";
@@ -34,7 +34,10 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
 
       <Hero photos={pdp_listing_detail.photos} />
       <div css={tw`px-3 py-1 m-6`}>
-        <Link href={sponsor?.[0]?.key.toLowerCase()} passHref={true}>
+        <Link
+          href={`/${sponsor?.[0]?.key.toLowerCase()}`.replace("//", "/")}
+          passHref={true}
+        >
           <ApartmentLink backgroundColor={sponsor?.[0]?.brandColor.hex}>
             {translate("ALSO", {
               c: sponsor?.[0]?.location,
