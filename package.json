@@ -24,7 +24,7 @@
     "formik": "^2.2.5",
     "google-map-react": "^2.1.9",
     "graphql": "^15.4.0",
-    "graphql-codegen-apollo-cache": "^0.1.4",
+    "graphql-codegen-apollo-cache": "^0.1.6",
     "graphql-codegen-apollo-next-ssr": "^1.1.0",
     "ical": "^0.8.0",
     "isomorphic-unfetch": "^3.1.0",
