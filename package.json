@@ -43,7 +43,7 @@
     "react-modal": "^3.12.1",
     "styled-components": "^5.2.1",
     "tailwindcss": "^2.0.1",
-    "twin.macro": "^1.12.1",
+    "twin.macro": "^2.0.4",
     "yup": "^0.30.0"
   },
   "devDependencies": {
