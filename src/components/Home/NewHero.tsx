@@ -80,9 +80,9 @@ export const Hero: React.FC<{
               grid-template-rows: 15rem 15rem;
               animation: ${slidein} 1s ease-in;
               @media ${MQ_MOBILE} {
-                grid-template-columns: 100%;
-                grid-auto-columns: minmax(100%, 1fr);
-                grid-template-rows: 25rem;
+                grid-template-columns: calc(85vw);
+                grid-auto-columns: calc(85vw);
+                grid-template-rows: calc(45vh);
               }
             `}
           >
