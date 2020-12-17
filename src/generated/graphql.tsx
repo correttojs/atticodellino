@@ -2,6 +2,8 @@ import gql from 'graphql-tag';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -18,6 +20,16 @@ export type File = {
   filename: Scalars['String'];
   mimetype: Scalars['String'];
   encoding: Scalars['String'];
+};
+
+export type IGuest = {
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  documentNumber: Scalars['String'];
+  documentType: Scalars['String'];
+  birthDate: Scalars['String'];
+  nationality: Scalars['String'];
+  placeOfBirth: Scalars['String'];
 };
 
 export type Guest = {
@@ -82,11 +94,11 @@ export type BookResponse = {
 
 export type GuestRegistration = {
   __typename?: 'GuestRegistration';
-  birthDate: Scalars['String'];
-  documentNumber: Scalars['String'];
-  documentType: Scalars['String'];
   firstName: Scalars['String'];
   lastName: Scalars['String'];
+  documentNumber: Scalars['String'];
+  documentType: Scalars['String'];
+  birthDate: Scalars['String'];
   nationality: Scalars['String'];
   placeOfBirth: Scalars['String'];
 };
@@ -103,6 +115,15 @@ export type Registration = {
 export type RegistrationList = {
   __typename?: 'RegistrationList';
   items?: Maybe<Array<Maybe<Registration>>>;
+};
+
+export type Reservation = {
+  __typename?: 'Reservation';
+  check_in?: Maybe<Scalars['String']>;
+  check_out?: Maybe<Scalars['String']>;
+  guest_name?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  hash?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -134,6 +155,8 @@ export type Query = {
   reviews?: Maybe<Array<Maybe<ReviewType>>>;
   calendar?: Maybe<Array<Maybe<Calendar>>>;
   registrationList?: Maybe<RegistrationList>;
+  syncReservations?: Maybe<Array<Maybe<Reservation>>>;
+  reservations?: Maybe<Array<Maybe<Reservation>>>;
 };
 
 
@@ -384,7 +407,7 @@ export const CalendarDocument = gql`
  *   },
  * });
  */
-export function useCalendarQuery(baseOptions?: Apollo.QueryHookOptions<CalendarQuery, CalendarQueryVariables>) {
+export function useCalendarQuery(baseOptions: Apollo.QueryHookOptions<CalendarQuery, CalendarQueryVariables>) {
         return Apollo.useQuery<CalendarQuery, CalendarQueryVariables>(CalendarDocument, baseOptions);
       }
 export function useCalendarLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CalendarQuery, CalendarQueryVariables>) {
@@ -417,7 +440,7 @@ export const PriceDocument = gql`
  *   },
  * });
  */
-export function usePriceQuery(baseOptions?: Apollo.QueryHookOptions<PriceQuery, PriceQueryVariables>) {
+export function usePriceQuery(baseOptions: Apollo.QueryHookOptions<PriceQuery, PriceQueryVariables>) {
         return Apollo.useQuery<PriceQuery, PriceQueryVariables>(PriceDocument, baseOptions);
       }
 export function usePriceLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PriceQuery, PriceQueryVariables>) {

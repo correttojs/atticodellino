@@ -1,0 +1,19 @@
+mutation createReservation($input: ReservationCreateInput!) {
+  createReservation(data: $input) {
+    hash
+    phone
+    guest_name
+    check_in
+    check_out
+  }
+}
+
+query getReservations($input: Date!) {
+  reservations(where: { check_out_gt: $input }) {
+    id
+    guest_name
+    check_out
+    check_in
+    hash
+  }
+}

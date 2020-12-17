@@ -3,6 +3,7 @@ import { reviewsResolver, priceResolver } from "./_airbnb";
 import { calendarResolver } from "./_calendar";
 import { registrationListResolver } from "./_registrationList";
 import { bookMutation } from "./_book";
+import { syncReservations, getReservations } from "./_airbnbApi";
 
 export const resolvers = {
   Mutation: {
@@ -15,5 +16,7 @@ export const resolvers = {
     reviews: reviewsResolver,
     calendar: calendarResolver,
     registrationList: registrationListResolver,
+    syncReservations: syncReservations,
+    reservations: getReservations,
   },
 };

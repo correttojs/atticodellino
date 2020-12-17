@@ -56,6 +56,35 @@ async function run() {
     },
     true
   );
+  await generate(
+    {
+      schema: {
+        [`https://api-eu-central-1.graphcms.com/v2/${process.env.GQL_CMS_ID}/master`]: {
+          headers: {
+            Authorization: `Bearer ${process.env.GQL_CMS_TOKEN}`,
+          },
+        },
+      },
+      documents: "src/graphcms/*.graphql",
+      generates: {
+        [process.cwd() + "/src/generated/graphql-graphcms.ts"]: {
+          plugins: [
+            "typescript",
+            "typescript-operations",
+            "typescript-graphql-request",
+          ],
+          config: {
+            withHooks: true,
+            withHOC: false,
+            withComponent: false,
+            reactApolloVersion: 3,
+            // gqlImport: "@apollo/client",
+          },
+        },
+      },
+    },
+    true
+  );
 }
 
 run();

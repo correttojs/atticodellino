@@ -94,15 +94,26 @@ export const typeDefs = gql`
     items: [Registration]
   }
 
+  type Reservation {
+    check_in: String
+    check_out: String
+    guest_name: String
+    phone: String
+    hash: String
+  }
+
   type Mutation {
     book(user: BookInput): BookResponse
     register(user: UserInput!, file: [Upload]!): MailResponse
     registerConfirmation(userId: ID!): MailResponse
   }
+
   type Query {
     price(from: String!, to: String!, airBnb: String!): Float
     reviews(airBnb: String!): [ReviewType]
     calendar(apartment: String!): [Calendar]
     registrationList: RegistrationList
+    syncReservations: [Reservation]
+    reservations: [Reservation]
   }
 `;
