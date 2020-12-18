@@ -124,6 +124,7 @@ export type Reservation = {
   guest_name?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
   hash?: Maybe<Scalars['String']>;
+  guests?: Maybe<Array<Maybe<GuestRegistration>>>;
 };
 
 export type Mutation = {

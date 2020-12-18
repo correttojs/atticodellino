@@ -100,6 +100,7 @@ export const typeDefs = gql`
     guest_name: String
     phone: String
     hash: String
+    guests: [GuestRegistration]
   }
 
   type Mutation {

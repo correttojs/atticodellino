@@ -18,6 +18,7 @@ const getAirBnbReservations = async () => {
   const res = await airbnb._get_reservations({
     _limit: 50,
     include_canceled: false,
+    // start_date: "2020-01-01",
   } as any);
   const reservationDetails = await Promise.all(
     res.reservations
@@ -32,6 +33,7 @@ const getAirBnbReservations = async () => {
       guest_name,
       guest: { phone },
     } = detail.homes_booking_detail.reservation;
+    const { listing_id_str: home } = detail.homes_booking_detail.listing;
 
     const hash = crypto
       .createHash("md5")
@@ -44,6 +46,7 @@ const getAirBnbReservations = async () => {
       guest_name,
       phone,
       hash,
+      home,
     };
   });
 };
@@ -55,8 +58,8 @@ export const syncReservations = async () => {
   });
 
   const hashes = storedReservations.reservations.map((r) => r.hash);
-  const toBeAdded = result.filter((r) => hashes.includes(r.hash));
-
+  const toBeAdded = result.filter((r) => !hashes.includes(r.hash));
+  console.log(toBeAdded.length);
   await Promise.all(
     toBeAdded.map((r) => graphcmsGQLClient.createReservation({ input: r }))
   );
@@ -66,7 +69,7 @@ export const syncReservations = async () => {
 
 export const getReservations = async () => {
   const storedReservations = await graphcmsGQLClient.getReservations({
-    input: new Date().toISOString(),
+    input: new Date("2020-01-01").toISOString(),
   });
   return storedReservations.reservations;
 };

@@ -5,6 +5,7 @@ mutation createReservation($input: ReservationCreateInput!) {
     guest_name
     check_in
     check_out
+    home
   }
 }
 
@@ -15,5 +16,15 @@ query getReservations($input: Date!) {
     check_out
     check_in
     hash
+    home
+    guests {
+      birthDate
+      documentNumber
+      documentType
+      firstName
+      lastName
+      nationality
+      placeOfBirth
+    }
   }
 }
