@@ -30,8 +30,8 @@ const Faq: NextPage<{ data: FaqsQuery }> = ({ data }) => {
           key={i}
           id={"faq" + i}
         >
-          <H2>{item.question}</H2>
-          <div dangerouslySetInnerHTML={{ __html: item.answerHtml }} />
+          <H2>{item?.question}</H2>
+          <div dangerouslySetInnerHTML={{ __html: item?.answerHtml }} />
         </div>
       ))}
     </Section>
