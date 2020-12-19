@@ -54,44 +54,23 @@ export const AdminComponent: React.FC = () => {
             </div>
           </Button>
           <table>
-            <thead>
-              <tr>
-                <td scope="col" css={tw`border-b-2`}>
-                  <b>Name</b>
-                </td>
-                <td scope="col" css={tw`border-b-2`}>
-                  <b>Document</b>
-                </td>
-                <td scope="col" css={tw`border-b-2`}>
-                  <b>Nationality</b>
-                </td>
-                <td scope="col" css={tw`border-b-2`}>
-                  <b>Birth Date</b>
-                </td>
-                <td scope="col" css={tw`border-b-2`}>
-                  <b>Place of Birth</b>
-                </td>
-                <td scope="col" css={tw`border-b-2`}>
-                  <b>Apartment</b>
-                </td>
-                <td scope="col" css={tw`border-b-2`}>
-                  <b>Status</b>
-                </td>
-              </tr>
-            </thead>
             {(syncedData?.syncReservations ?? data.reservations).map(
               (item, key) => (
                 <BodyStyle key={`user${key}`}>
                   <tr>
-                    <td colSpan={5} scope="row">
+                    <td scope="row">
                       <b>{item.guest_name}</b>
                     </td>
-                    <td>
-                      <b>{item.home}</b>
+                    <td scope="row">
+                      <a
+                        css={tw`underline`}
+                        href={`https://www.atticodellino.com/register?hash=${item.hash}&id=${item.id}`}
+                      >
+                        register
+                      </a>
                     </td>
-                    <td>
-                      <b>{item.phone}</b>
-                    </td>
+                    <td>{item.home}</td>
+                    <td>{item.phone}</td>
                     <td>
                       {item.reservationStatus === "new" && (
                         <Button
@@ -146,6 +125,7 @@ export const AdminComponent: React.FC = () => {
                       )}
                     </td>
                   </tr>
+
                   {item.guests.map((guest, k) => {
                     return (
                       <tr key={`guest${k}`}>
@@ -153,11 +133,12 @@ export const AdminComponent: React.FC = () => {
                           {guest.lastName} {guest.firstName}
                         </td>
                         <td>
-                          {guest.documentType} {guest.documentNumber}
+                          {guest.documentType}: {guest.documentNumber}
                         </td>
                         <td>{guest.nationality}</td>
-                        <td>{guest.birthDate}</td>
-                        <td colSpan={3}>{guest.placeOfBirth}</td>
+                        <td colSpan={2}>
+                          {guest.placeOfBirth} - {guest.birthDate}
+                        </td>
                       </tr>
                     );
                   })}

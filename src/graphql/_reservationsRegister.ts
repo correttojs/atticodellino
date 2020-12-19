@@ -58,7 +58,7 @@ export const registerGuests = async (
   };
 
   await sgMail.send([content]);
-  const { guests, ...input } = user;
+  const { guests, phone, ...input } = user;
 
   const data = await graphcmsGQLClient.updateReservation({
     input,
