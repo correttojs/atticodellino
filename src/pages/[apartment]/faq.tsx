@@ -20,7 +20,6 @@ export async function getStaticProps({ params, locale }) {
 export const getStaticPaths = getGlobalPaths;
 
 const Faq: NextPage<{ data: FaqsQuery }> = ({ data }) => {
-  console.log(data.getFaqList.items[0].answerHtml);
   return (
     <Section>
       {data.getFaqList.items.map((item, i) => (
