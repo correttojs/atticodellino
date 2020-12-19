@@ -16,7 +16,9 @@ query getReservations($input: Date!) {
     check_out
     check_in
     hash
+    phone
     home
+    reservationStatus
     guests {
       birthDate
       documentNumber
@@ -26,5 +28,24 @@ query getReservations($input: Date!) {
       nationality
       placeOfBirth
     }
+  }
+}
+
+mutation updateReservation(
+  $input: ReservationWhereUniqueInput!
+  $data: ReservationUpdateInput!
+) {
+  updateReservation(where: $input, data: $data) {
+    reservationStatus
+  }
+}
+
+query getReservation($input: ReservationWhereUniqueInput!) {
+  reservation(where: $input) {
+    guest_name
+    check_out
+    check_in
+    home
+    phone
   }
 }

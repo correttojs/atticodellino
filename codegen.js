@@ -36,7 +36,7 @@ async function run() {
           },
         },
       },
-      documents: "src/takeshape/*.graphql",
+      documents: "src/graphql/takeshape/*.graphql",
       generates: {
         [process.cwd() + "/src/generated/graphql-takeshape.ts"]: {
           plugins: [
@@ -65,7 +65,7 @@ async function run() {
           },
         },
       },
-      documents: "src/graphcms/*.graphql",
+      documents: "src/graphql/graphcms/*.graphql",
       generates: {
         [process.cwd() + "/src/generated/graphql-graphcms.ts"]: {
           plugins: [

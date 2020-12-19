@@ -3,7 +3,10 @@ import React from "react";
 import { useFormik, FieldArray, FormikProvider } from "formik";
 import { initialValues, validationSchema, guestValue } from "./data";
 import { FormInput } from "../@UI/FormInput";
-import { useRegisterMutation } from "../../generated/graphql";
+import {
+  useRegisterMutation,
+  useReservationQuery,
+} from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 import { H1 } from "../@UI/Texts";
@@ -14,22 +17,30 @@ import { FormSelect } from "../@UI/FormSelect";
 import { FormError } from "../@UI/FormError";
 import { FormLoading } from "../@UI/FormLoading";
 import { FormUpload } from "../@UI/FormUpload";
+import { useRouter } from "next/router";
 
 export const Register: React.FC = () => {
   const [register, { data, loading, error }] = useRegisterMutation();
+  const router = useRouter();
   const t = useTranslations();
-  const { apartment } = useGlobal();
+  const { data: guestData } = useReservationQuery({
+    variables: {
+      hash: router.query.hash as string,
+      id: router.query.id as string,
+    },
+  });
 
   const formik = useFormik({
     initialValues,
     onSubmit: async (values) => {
-      const { guests, email } = values;
+      const { guests } = values;
 
       register({
         variables: {
           user: {
-            apartment,
-            email: email,
+            phone: guestData?.reservation?.phone,
+            hash: router.query.hash as string,
+            id: router.query.id as string,
             guests: guests.map(({ day, year, month, file, ...rest }) => ({
               ...rest,
               birthDate: `${day}-${month}-${year}`,
@@ -53,8 +64,8 @@ export const Register: React.FC = () => {
         {data && (
           <h3>
             {t("THANKYOU", {
-              name: data.register?.guests?.[0].firstName,
-              lastName: data.register?.guests?.[0].lastName,
+              name: guestData?.reservation?.guest_name,
+              lastName: "",
             })}
           </h3>
         )}
@@ -63,6 +74,9 @@ export const Register: React.FC = () => {
         {!data && !error && !loading && (
           <>
             <H1 css={tw`mb-4`}>{t("REGISTER")}</H1>
+            <p>{guestData?.reservation?.guest_name}</p>
+            <p>Checkin: {guestData?.reservation?.check_in}</p>
+            <p>Checkout: {guestData?.reservation?.check_out}</p>
             <FormikProvider value={formik}>
               <form
                 onSubmit={(e) => {
@@ -70,7 +84,7 @@ export const Register: React.FC = () => {
                   formik.handleSubmit();
                 }}
               >
-                <FormInput type="email" formik={formik} field={"email"} />
+                {/* <FormInput type="email" formik={formik} field={"email"} /> */}
                 <FieldArray
                   name="guests"
                   render={(arrayHelpers) => (
@@ -154,6 +168,7 @@ export const Register: React.FC = () => {
                               formik={formik}
                               field={`guests[${index}].file`}
                               label={"Upload your document"}
+                              index={index}
                             />
 
                             <div

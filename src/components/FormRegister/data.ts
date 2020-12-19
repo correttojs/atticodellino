@@ -15,7 +15,7 @@ export const guestValue = {
   file: null,
 };
 export const initialValues = {
-  email: "",
+  // email: "",
   guests: [guestValue],
 };
 
@@ -64,5 +64,5 @@ export const validationSchema = Yup.object().shape({
     )
     .required("Must have guests"),
 
-  email: Yup.string().email("Invalid email").required("Required"),
+  // email: Yup.string().email("Invalid email").required("Required"),
 });

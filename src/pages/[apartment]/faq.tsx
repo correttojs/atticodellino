@@ -1,9 +1,12 @@
 import { withGrommetTheme } from "../../components/Layout";
 import { NextPage } from "next";
 import React from "react";
-import { takeShapeGQLClient } from "../../takeshape/takeShapeClient";
+import { takeShapeGQLClient } from "../../graphql/takeshape/takeShapeClient";
 import { FaqsQuery } from "../../generated/graphql-takeshape";
-import { getGlobalPaths, getGlobalProps } from "../../takeshape/getGlobal";
+import {
+  getGlobalPaths,
+  getGlobalProps,
+} from "../../graphql/takeshape/getGlobal";
 import { Section } from "../../components/@UI/Section";
 import tw from "twin.macro";
 import { H2 } from "../../components/@UI/Texts";

@@ -1,6 +1,6 @@
 import { AdminComponent } from "../components/Admin/AdminComponent";
 import { withGrommetTheme } from "../components/Layout";
-import { getGlobalProps } from "../takeshape/getGlobal";
+import { getGlobalProps } from "../graphql/takeshape/getGlobal";
 
 export async function getStaticProps({ locale }) {
   const params = { lang: "en", apartment: "VR" };

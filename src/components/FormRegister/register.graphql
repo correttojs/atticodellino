@@ -1,9 +1,13 @@
 mutation register($user: UserInput!, $file: [Upload]!) {
-  register(user: $user, file: $file) {
-    guests {
-      firstName
-      lastName
-    }
-    email
+  registerGuests(user: $user, file: $file)
+}
+
+query Reservation($id: ID!, $hash: String!) {
+  reservation(id: $id, hash: $hash) {
+    guest_name
+    check_out
+    check_in
+    phone
+    home
   }
 }

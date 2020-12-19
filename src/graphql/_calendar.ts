@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import * as ical from "ical";
-import { takeShapeGQLClient } from "../takeshape/takeShapeClient";
+import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
 
 const fetchIcal = async (icalUrl, summary: string) => {
   let data = await fetch(icalUrl).then((r) => r.text());

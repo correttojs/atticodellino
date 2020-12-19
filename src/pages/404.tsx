@@ -1,5 +1,5 @@
 import { withGrommetTheme } from "../components/Layout";
-import { getGlobalProps } from "../takeshape/getGlobal";
+import { getGlobalProps } from "../graphql/takeshape/getGlobal";
 import tw from "twin.macro";
 
 const PageError = () => (

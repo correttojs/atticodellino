@@ -1,0 +1,6 @@
+query getApartments {
+  apartments {
+    code
+    name
+  }
+}
