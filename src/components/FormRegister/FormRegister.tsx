@@ -44,6 +44,8 @@ export const Register: React.FC = () => {
       register({
         variables: {
           user: {
+            check_out: guestData?.reservation?.check_out,
+            home: guestData?.reservation?.home,
             phone: guestData?.reservation?.phone,
             hash: router.query.hash as string,
             id: router.query.id as string,

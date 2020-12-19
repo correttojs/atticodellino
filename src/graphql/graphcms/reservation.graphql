@@ -37,6 +37,7 @@ mutation updateReservation(
 ) {
   updateReservation(where: $input, data: $data) {
     reservationStatus
+    phone
   }
 }
 

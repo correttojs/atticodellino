@@ -32,6 +32,8 @@ export const typeDefs = gql`
     id: ID!
     hash: String!
     phone: String!
+    home: String!
+    check_out: String!
   }
 
   type GuestMail {

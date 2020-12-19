@@ -29,6 +29,7 @@ export const AdminComponent: React.FC = () => {
     refetchQueries: [
       {
         query: ReservationsDocument,
+        variables: { isPast },
       },
     ],
   });

@@ -48,6 +48,7 @@ export type Apartment = Node & {
   publishedAt?: Maybe<Scalars['DateTime']>;
   code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  enterCode?: Maybe<Scalars['String']>;
   /** List of Apartment versions */
   history: Array<Version>;
 };
@@ -81,6 +82,7 @@ export type ApartmentCreateInput = {
   updatedAt?: Maybe<Scalars['DateTime']>;
   code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  enterCode?: Maybe<Scalars['String']>;
 };
 
 /** An edge in a connection. */
@@ -204,6 +206,25 @@ export type ApartmentManyWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  enterCode?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  enterCode_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  enterCode_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  enterCode_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  enterCode_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  enterCode_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  enterCode_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  enterCode_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  enterCode_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  enterCode_not_ends_with?: Maybe<Scalars['String']>;
 };
 
 export enum ApartmentOrderByInput {
@@ -218,17 +239,21 @@ export enum ApartmentOrderByInput {
   CodeAsc = 'code_ASC',
   CodeDesc = 'code_DESC',
   NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC'
+  NameDesc = 'name_DESC',
+  EnterCodeAsc = 'enterCode_ASC',
+  EnterCodeDesc = 'enterCode_DESC'
 }
 
 export type ApartmentUpdateInput = {
   code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  enterCode?: Maybe<Scalars['String']>;
 };
 
 export type ApartmentUpdateManyInput = {
   code?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
+  enterCode?: Maybe<Scalars['String']>;
 };
 
 export type ApartmentUpdateManyWithNestedWhereInput = {
@@ -371,6 +396,25 @@ export type ApartmentWhereInput = {
   name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   name_not_ends_with?: Maybe<Scalars['String']>;
+  enterCode?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  enterCode_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  enterCode_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  enterCode_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  enterCode_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  enterCode_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  enterCode_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  enterCode_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  enterCode_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  enterCode_not_ends_with?: Maybe<Scalars['String']>;
 };
 
 /** References Apartment record uniquely */
@@ -3710,7 +3754,7 @@ export type GetApartmentsQuery = (
   { __typename?: 'Query' }
   & { apartments: Array<(
     { __typename?: 'Apartment' }
-    & Pick<Apartment, 'code' | 'name'>
+    & Pick<Apartment, 'code' | 'name' | 'enterCode'>
   )> }
 );
 
@@ -3754,7 +3798,7 @@ export type UpdateReservationMutation = (
   { __typename?: 'Mutation' }
   & { updateReservation?: Maybe<(
     { __typename?: 'Reservation' }
-    & Pick<Reservation, 'reservationStatus'>
+    & Pick<Reservation, 'reservationStatus' | 'phone'>
   )> }
 );
 
@@ -3788,6 +3832,7 @@ export const GetApartmentsDocument = gql`
   apartments {
     code
     name
+    enterCode
   }
 }
     `;
@@ -3830,6 +3875,7 @@ export const UpdateReservationDocument = gql`
     mutation updateReservation($input: ReservationWhereUniqueInput!, $data: ReservationUpdateInput!) {
   updateReservation(where: $input, data: $data) {
     reservationStatus
+    phone
   }
 }
     `;

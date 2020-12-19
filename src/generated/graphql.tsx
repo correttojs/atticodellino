@@ -47,6 +47,8 @@ export type UserInput = {
   id: Scalars['ID'];
   hash: Scalars['String'];
   phone: Scalars['String'];
+  home: Scalars['String'];
+  check_out: Scalars['String'];
 };
 
 export type GuestMail = {

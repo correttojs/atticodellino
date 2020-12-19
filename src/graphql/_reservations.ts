@@ -3,6 +3,7 @@ import {
   MutationUpdateReservationStatusArgs,
   ReservationQueryVariables,
 } from "../generated/graphql";
+import { smsRegisterLink } from "./_sms";
 
 export const reservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
@@ -42,9 +43,17 @@ export const updateReservationStatus = async (
 ) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const { reservationStatus, ...rest } = args;
+
   const storedReservations = await graphcmsGQLClient.updateReservation({
     input: rest,
     data: { reservationStatus: reservationStatus as any },
   });
+
+  const phone = storedReservations?.updateReservation?.phone;
+  const lang = /\+39/.test(phone) ? "it" : "en";
+  await smsRegisterLink(
+    phone,
+    `https://www.atticodellino.com/${lang}/register?hash=${rest.hash}&id=${rest.id}`
+  );
   return storedReservations.updateReservation.reservationStatus;
 };

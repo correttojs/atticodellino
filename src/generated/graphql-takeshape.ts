@@ -4636,6 +4636,22 @@ export type ApartmentCodeQuery = (
   )> }
 );
 
+export type ApartmentCodeByIdQueryVariables = Exact<{
+  key: Scalars['String'];
+}>;
+
+
+export type ApartmentCodeByIdQuery = (
+  { __typename?: 'Root' }
+  & { getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'code'>
+    )>>> }
+  )> }
+);
+
 export type ApartmentSecretQueryVariables = Exact<{
   key: Scalars['String'];
 }>;
@@ -4840,6 +4856,15 @@ export const ApartmentCodeDocument = gql`
   }
 }
     `;
+export const ApartmentCodeByIdDocument = gql`
+    query ApartmentCodeById($key: String!) {
+  getApartmentList(where: {airBnb: {eq: $key}}) {
+    items {
+      code
+    }
+  }
+}
+    `;
 export const ApartmentSecretDocument = gql`
     query ApartmentSecret($key: String!) {
   getApartmentList(where: {key: {eq: $key}}) {
@@ -4967,6 +4992,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     ApartmentCode(variables: ApartmentCodeQueryVariables): Promise<ApartmentCodeQuery> {
       return withWrapper(() => client.request<ApartmentCodeQuery>(print(ApartmentCodeDocument), variables));
+    },
+    ApartmentCodeById(variables: ApartmentCodeByIdQueryVariables): Promise<ApartmentCodeByIdQuery> {
+      return withWrapper(() => client.request<ApartmentCodeByIdQuery>(print(ApartmentCodeByIdDocument), variables));
     },
     ApartmentSecret(variables: ApartmentSecretQueryVariables): Promise<ApartmentSecretQuery> {
       return withWrapper(() => client.request<ApartmentSecretQuery>(print(ApartmentSecretDocument), variables));
