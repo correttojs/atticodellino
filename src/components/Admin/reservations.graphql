@@ -1,44 +1,33 @@
-query Reservations {
-  reservations {
-    id
-    guest_name
-    check_out
-    check_in
-    hash
-    phone
-    home
-    reservationStatus
-    guests {
-      birthDate
-      documentNumber
-      documentType
-      firstName
-      lastName
-      nationality
-      placeOfBirth
-    }
+query Reservations($isPast: Boolean!) {
+  reservations(isPast: $isPast) {
+    ...ReservationResp
   }
 }
 
 query syncRegistrations {
   syncReservations {
-    id
-    guest_name
-    check_out
-    check_in
-    hash
-    phone
-    home
-    reservationStatus
-    guests {
-      birthDate
-      documentNumber
-      documentType
-      firstName
-      lastName
-      nationality
-      placeOfBirth
-    }
+    ...ReservationResp
+  }
+}
+
+fragment ReservationResp on Reservation {
+  id
+  guest_name
+  check_out
+  check_in
+  hash
+  phone
+  home
+  reservationStatus
+  registrationUrl
+  guests {
+    birthDate
+    documentNumber
+    documentType
+    firstName
+    lastName
+    nationality
+    placeOfBirth
   }
 }
 

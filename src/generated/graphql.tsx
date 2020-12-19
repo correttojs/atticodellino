@@ -125,6 +125,7 @@ export type Reservation = {
   phone?: Maybe<Scalars['String']>;
   hash?: Maybe<Scalars['String']>;
   home?: Maybe<Scalars['String']>;
+  registrationUrl?: Maybe<Scalars['String']>;
   reservationStatus?: Maybe<ReservationStatus>;
   guests?: Maybe<Array<Maybe<GuestRegistration>>>;
 };
@@ -191,6 +192,11 @@ export type QueryCalendarArgs = {
 };
 
 
+export type QueryReservationsArgs = {
+  isPast: Scalars['Boolean'];
+};
+
+
 export type QueryReservationArgs = {
   id: Scalars['ID'];
   hash: Scalars['String'];
@@ -202,18 +208,16 @@ export enum CacheControlScope {
 }
 
 
-export type ReservationsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ReservationsQueryVariables = Exact<{
+  isPast: Scalars['Boolean'];
+}>;
 
 
 export type ReservationsQuery = (
   { __typename?: 'Query' }
   & { reservations?: Maybe<Array<Maybe<(
     { __typename?: 'Reservation' }
-    & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus'>
-    & { guests?: Maybe<Array<Maybe<(
-      { __typename?: 'GuestRegistration' }
-      & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
-    )>>> }
+    & ReservationRespFragment
   )>>> }
 );
 
@@ -224,11 +228,16 @@ export type SyncRegistrationsQuery = (
   { __typename?: 'Query' }
   & { syncReservations?: Maybe<Array<Maybe<(
     { __typename?: 'Reservation' }
-    & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus'>
-    & { guests?: Maybe<Array<Maybe<(
-      { __typename?: 'GuestRegistration' }
-      & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
-    )>>> }
+    & ReservationRespFragment
+  )>>> }
+);
+
+export type ReservationRespFragment = (
+  { __typename?: 'Reservation' }
+  & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus' | 'registrationUrl'>
+  & { guests?: Maybe<Array<Maybe<(
+    { __typename?: 'GuestRegistration' }
+    & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
   )>>> }
 );
 
@@ -307,30 +316,35 @@ export type ReservationQuery = (
   )> }
 );
 
-
-export const ReservationsDocument = gql`
-    query Reservations {
-  reservations {
-    id
-    guest_name
-    check_out
-    check_in
-    hash
-    phone
-    home
-    reservationStatus
-    guests {
-      birthDate
-      documentNumber
-      documentType
-      firstName
-      lastName
-      nationality
-      placeOfBirth
-    }
+export const ReservationRespFragmentDoc = gql`
+    fragment ReservationResp on Reservation {
+  id
+  guest_name
+  check_out
+  check_in
+  hash
+  phone
+  home
+  reservationStatus
+  registrationUrl
+  guests {
+    birthDate
+    documentNumber
+    documentType
+    firstName
+    lastName
+    nationality
+    placeOfBirth
   }
 }
     `;
+export const ReservationsDocument = gql`
+    query Reservations($isPast: Boolean!) {
+  reservations(isPast: $isPast) {
+    ...ReservationResp
+  }
+}
+    ${ReservationRespFragmentDoc}`;
 
 /**
  * __useReservationsQuery__
@@ -344,10 +358,11 @@ export const ReservationsDocument = gql`
  * @example
  * const { data, loading, error } = useReservationsQuery({
  *   variables: {
+ *      isPast: // value for 'isPast'
  *   },
  * });
  */
-export function useReservationsQuery(baseOptions?: Apollo.QueryHookOptions<ReservationsQuery, ReservationsQueryVariables>) {
+export function useReservationsQuery(baseOptions: Apollo.QueryHookOptions<ReservationsQuery, ReservationsQueryVariables>) {
         return Apollo.useQuery<ReservationsQuery, ReservationsQueryVariables>(ReservationsDocument, baseOptions);
       }
 export function useReservationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ReservationsQuery, ReservationsQueryVariables>) {
@@ -359,26 +374,10 @@ export type ReservationsQueryResult = Apollo.QueryResult<ReservationsQuery, Rese
 export const SyncRegistrationsDocument = gql`
     query syncRegistrations {
   syncReservations {
-    id
-    guest_name
-    check_out
-    check_in
-    hash
-    phone
-    home
-    reservationStatus
-    guests {
-      birthDate
-      documentNumber
-      documentType
-      firstName
-      lastName
-      nationality
-      placeOfBirth
-    }
+    ...ReservationResp
   }
 }
-    `;
+    ${ReservationRespFragmentDoc}`;
 
 /**
  * __useSyncRegistrationsQuery__

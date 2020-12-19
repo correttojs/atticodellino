@@ -8,12 +8,18 @@ export const reservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const apartments = await graphcmsGQLClient.getApartments();
   const storedReservations = await graphcmsGQLClient.getReservations({
-    input: new Date("2020-01-01").toISOString(),
+    input: args.isPast
+      ? new Date("2020-01-01").toISOString()
+      : new Date().toISOString(),
   });
-  return storedReservations.reservations.map((r) => ({
-    ...r,
-    home: apartments.apartments.find((a) => a.code === r.home).name,
-  }));
+  return storedReservations.reservations.map((r) => {
+    const lang = /\+39/.test(r.phone) ? "it" : "en";
+    return {
+      ...r,
+      home: apartments.apartments.find((a) => a.code === r.home).name,
+      registrationUrl: `https://www.atticodellino.com/${lang}/register?hash=${r.hash}&id=${r.id}`,
+    };
+  });
 };
 
 export const reservation = async (

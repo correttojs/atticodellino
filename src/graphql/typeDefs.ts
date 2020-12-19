@@ -102,6 +102,7 @@ export const typeDefs = gql`
     phone: String
     hash: String
     home: String
+    registrationUrl: String
     reservationStatus: ReservationStatus
     guests: [GuestRegistration]
   }
@@ -129,7 +130,7 @@ export const typeDefs = gql`
     reviews(airBnb: String!): [ReviewType]
     calendar(apartment: String!): [Calendar]
     syncReservations: [Reservation]
-    reservations: [Reservation]
+    reservations(isPast: Boolean!): [Reservation]
     reservation(id: ID!, hash: String!): Reservation
   }
 `;
