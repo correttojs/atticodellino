@@ -1,11 +1,15 @@
 import { withGrommetTheme } from "../../components/Layout";
 import { NextPage } from "next";
-import React, { useState } from "react";
-import { takeShapeGQLClient } from "../../takeshape/takeShapeClient";
+import React from "react";
+import { takeShapeGQLClient } from "../../graphql/takeshape/takeShapeClient";
 import { FaqsQuery } from "../../generated/graphql-takeshape";
-import { getGlobalPaths, getGlobalProps } from "../../takeshape/getGlobal";
+import {
+  getGlobalPaths,
+  getGlobalProps,
+} from "../../graphql/takeshape/getGlobal";
 import { Section } from "../../components/@UI/Section";
 import tw from "twin.macro";
+import { H2 } from "../../components/@UI/Texts";
 
 export async function getStaticProps({ params, locale }) {
   const globalProps = await getGlobalProps({ params, locale });
@@ -19,8 +23,6 @@ export async function getStaticProps({ params, locale }) {
 export const getStaticPaths = getGlobalPaths;
 
 const Faq: NextPage<{ data: FaqsQuery }> = ({ data }) => {
-  const [copied, setCopied] = useState<{ [key: string]: boolean }>({});
-
   return (
     <Section>
       {data.getFaqList.items.map((item, i) => (
@@ -30,21 +32,8 @@ const Faq: NextPage<{ data: FaqsQuery }> = ({ data }) => {
           key={i}
           id={"faq" + i}
         >
-          <h3
-            onClick={() => {
-              navigator.clipboard.writeText(
-                `${window.location.href.split("#")[0]}#faq` + i
-              );
-              setCopied({ [i]: true });
-              setTimeout(() => {
-                setCopied({ [i]: false });
-              }, 2000);
-            }}
-          >
-            {item.question}
-            {copied[i] && <span style={{ color: "red" }}> copied</span>}
-          </h3>
-          <p dangerouslySetInnerHTML={{ __html: item.answerHtml }} />
+          <H2>{item?.question}</H2>
+          <div dangerouslySetInnerHTML={{ __html: item?.answerHtml }} />
         </div>
       ))}
     </Section>

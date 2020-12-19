@@ -27,11 +27,24 @@ type PropType = {
   field: string;
   formik: ReturnType<typeof useFormik>;
   label: string;
+  index?: number;
 };
 
-export const FormUpload: React.FC<PropType> = ({ formik, field, label }) => {
+export const FormUpload: React.FC<PropType> = ({
+  formik,
+  field,
+  label,
+  index,
+}) => {
+  const filedPart = field.split(".")[1];
   return (
     <div css={tw`flex flex-col my-4 items-center`}>
+      {formik.errors?.guests?.[index]?.[filedPart] &&
+        formik.touched?.guests?.[index]?.[filedPart] && (
+          <p css={tw`text-red-500 text-xs italic`}>
+            {formik.errors?.guests?.[index]?.[filedPart]}
+          </p>
+        )}
       <UploadStyle error={false}>
         <Button>{label}</Button>
         <input
@@ -41,12 +54,13 @@ export const FormUpload: React.FC<PropType> = ({ formik, field, label }) => {
           onChange={(event) => {
             const file = event.currentTarget.files[0];
             console.log(file, field);
-            // formik.setFieldValue(field, file);
+            formik.setFieldValue(field, file);
+            console.log(formik.values.guests[index].file?.name);
           }}
           className="form-control"
         />
       </UploadStyle>
-      <p>{formik.values[field]?.name}</p>
+      <p>{formik.values.guests[index].file?.name}</p>
     </div>
   );
 };

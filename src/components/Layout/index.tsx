@@ -30,6 +30,10 @@ export const GlobalStyle = createGlobalStyle`
         bottom: 0 !important;
       }
     }
+
+    a{
+      cursor:pointer;
+    }
 `;
 
 export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {

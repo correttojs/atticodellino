@@ -1,7 +1,10 @@
 import { getDetails } from "../../graphql/_airbnb";
 import { Home } from "../../components/Home";
 import { withGrommetTheme } from "../../components/Layout";
-import { getGlobalPaths, getGlobalProps } from "../../takeshape/getGlobal";
+import {
+  getGlobalPaths,
+  getGlobalProps,
+} from "../../graphql/takeshape/getGlobal";
 
 export async function getStaticProps({ params, locale }) {
   const globalProps = await getGlobalProps({ params, locale });

@@ -29,20 +29,14 @@ export const typeDefs = gql`
 
   input UserInput {
     guests: [Guest]
-    apartment: String
-    email: String!
+    id: ID!
+    hash: String!
+    phone: String!
   }
 
   type GuestMail {
     firstName: String
     lastName: String
-  }
-
-  type MailResponse {
-    guests: [GuestMail]
-    email: String
-    _id: ID!
-    registrationStatus: String
   }
 
   type ReviewType {
@@ -94,15 +88,48 @@ export const typeDefs = gql`
     items: [Registration]
   }
 
+  enum ReservationStatus {
+    link_sent
+    new
+    registered
+  }
+
+  type Reservation {
+    id: ID!
+    check_in: String
+    check_out: String
+    guest_name: String
+    phone: String
+    hash: String
+    home: String
+    reservationStatus: ReservationStatus
+    guests: [GuestRegistration]
+  }
+
+  type ReservationShort {
+    check_in: String
+    check_out: String
+    guest_name: String
+    home: String
+    phone: String
+  }
+
   type Mutation {
     book(user: BookInput): BookResponse
-    register(user: UserInput!, file: [Upload]!): MailResponse
-    registerConfirmation(userId: ID!): MailResponse
+    registerGuests(user: UserInput!, file: [Upload]!): ReservationStatus
+    updateReservationStatus(
+      id: ID!
+      hash: String!
+      reservationStatus: ReservationStatus!
+    ): ReservationStatus
   }
+
   type Query {
     price(from: String!, to: String!, airBnb: String!): Float
     reviews(airBnb: String!): [ReviewType]
     calendar(apartment: String!): [Calendar]
-    registrationList: RegistrationList
+    syncReservations: [Reservation]
+    reservations: [Reservation]
+    reservation(id: ID!, hash: String!): Reservation
   }
 `;

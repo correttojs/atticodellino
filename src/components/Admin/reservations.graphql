@@ -1,0 +1,55 @@
+query Reservations {
+  reservations {
+    id
+    guest_name
+    check_out
+    check_in
+    hash
+    phone
+    home
+    reservationStatus
+    guests {
+      birthDate
+      documentNumber
+      documentType
+      firstName
+      lastName
+      nationality
+      placeOfBirth
+    }
+  }
+}
+
+query syncRegistrations {
+  syncReservations {
+    id
+    guest_name
+    check_out
+    check_in
+    hash
+    phone
+    home
+    reservationStatus
+    guests {
+      birthDate
+      documentNumber
+      documentType
+      firstName
+      lastName
+      nationality
+      placeOfBirth
+    }
+  }
+}
+
+mutation updateReservationStatus(
+  $userId: ID!
+  $hash: String!
+  $reservationStatus: ReservationStatus!
+) {
+  updateReservationStatus(
+    id: $userId
+    hash: $hash
+    reservationStatus: $reservationStatus
+  )
+}

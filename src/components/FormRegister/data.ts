@@ -9,13 +9,11 @@ export const guestValue = {
   documentType: "Passport",
   nationality: "",
   placeOfBirth: "",
-  day: null,
-  month: null,
-  year: null,
+  birthDate: null,
   file: null,
 };
 export const initialValues = {
-  email: "",
+  // email: "",
   guests: [guestValue],
 };
 
@@ -47,22 +45,11 @@ export const validationSchema = Yup.object().shape({
           .min(2, "Too Short!")
           .max(50, "Too Long!")
           .required("Required"),
-        month: Yup.number()
-          .min(1, "Too Short!")
-          .max(12, "Too Long!")
-          .required("Required"),
-        day: Yup.number()
-          .min(1, "Too Short!")
-          .max(31, "Too Long!")
-          .required("Required"),
-        year: Yup.number()
-          .min(1900, "Too Short!")
-          .max(new Date().getFullYear() - 18, "Too Long!")
-          .required("Required"),
+        birthDate: Yup.date().required("Required"),
         file: Yup.mixed().required("A file is required"),
       })
     )
     .required("Must have guests"),
 
-  email: Yup.string().email("Invalid email").required("Required"),
+  // email: Yup.string().email("Invalid email").required("Required"),
 });
