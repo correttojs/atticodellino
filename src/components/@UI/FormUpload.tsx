@@ -36,8 +36,15 @@ export const FormUpload: React.FC<PropType> = ({
   label,
   index,
 }) => {
+  const filedPart = field.split(".")[1];
   return (
     <div css={tw`flex flex-col my-4 items-center`}>
+      {formik.errors?.guests?.[index]?.[filedPart] &&
+        formik.touched?.guests?.[index]?.[filedPart] && (
+          <p css={tw`text-red-500 text-xs italic`}>
+            {formik.errors?.guests?.[index]?.[filedPart]}
+          </p>
+        )}
       <UploadStyle error={false}>
         <Button>{label}</Button>
         <input

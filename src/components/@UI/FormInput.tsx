@@ -7,6 +7,7 @@ type PropType = {
   formik: ReturnType<typeof useFormik>;
   type?: "text" | "number" | "email";
   label?: string;
+  index: number;
 };
 
 export const formatLabel = (value: string) =>
@@ -23,12 +24,17 @@ export const FormInput: React.FC<PropType> = ({
   formik,
   label,
   type = "text",
+  index,
 }) => {
+  const filedPart = field.split(".")[1];
   return (
     <div css={tw`m-2`}>
-      {formik.errors[field] && formik.touched[field] && (
-        <p css={tw`text-red-500 text-xs italic`}>{formik.errors[field]}</p>
-      )}
+      {formik.errors?.guests?.[index]?.[filedPart] &&
+        formik.touched?.guests?.[index]?.[filedPart] && (
+          <p css={tw`text-red-500 text-xs italic`}>
+            {formik.errors?.guests?.[index]?.[filedPart]}
+          </p>
+        )}
       <label css={tw`block`} htmlFor={field}>
         <span css={tw`text-gray-700`}> {label ?? formatLabel(field)}</span>
         <input
