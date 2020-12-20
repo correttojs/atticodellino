@@ -4647,7 +4647,7 @@ export type ApartmentCodeByIdQuery = (
     { __typename?: 'ApartmentPaginatedList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
-      & Pick<Apartment, 'code'>
+      & Pick<Apartment, 'code' | 'key'>
     )>>> }
   )> }
 );
@@ -4861,6 +4861,7 @@ export const ApartmentCodeByIdDocument = gql`
   getApartmentList(where: {airBnb: {eq: $key}}) {
     items {
       code
+      key
     }
   }
 }

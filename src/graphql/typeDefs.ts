@@ -105,6 +105,7 @@ export const typeDefs = gql`
     hash: String
     home: String
     registrationUrl: String
+    faqUrl: String
     reservationStatus: ReservationStatus
     guests: [GuestRegistration]
   }
@@ -115,6 +116,12 @@ export const typeDefs = gql`
     guest_name: String
     home: String
     phone: String
+  }
+
+  type Faq {
+    question: String!
+    answerHtml: String!
+    linkVideo: String
   }
 
   type Mutation {
@@ -134,5 +141,6 @@ export const typeDefs = gql`
     syncReservations: [Reservation]
     reservations(isPast: Boolean!): [Reservation]
     reservation(id: ID!, hash: String!): Reservation
+    faq(id: ID!, hash: String!): [Faq]
   }
 `;

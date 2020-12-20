@@ -128,6 +128,7 @@ export type Reservation = {
   hash?: Maybe<Scalars['String']>;
   home?: Maybe<Scalars['String']>;
   registrationUrl?: Maybe<Scalars['String']>;
+  faqUrl?: Maybe<Scalars['String']>;
   reservationStatus?: Maybe<ReservationStatus>;
   guests?: Maybe<Array<Maybe<GuestRegistration>>>;
 };
@@ -139,6 +140,13 @@ export type ReservationShort = {
   guest_name?: Maybe<Scalars['String']>;
   home?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
+};
+
+export type Faq = {
+  __typename?: 'Faq';
+  question: Scalars['String'];
+  answerHtml: Scalars['String'];
+  linkVideo?: Maybe<Scalars['String']>;
 };
 
 export type Mutation = {
@@ -174,6 +182,7 @@ export type Query = {
   syncReservations?: Maybe<Array<Maybe<Reservation>>>;
   reservations?: Maybe<Array<Maybe<Reservation>>>;
   reservation?: Maybe<Reservation>;
+  faq?: Maybe<Array<Maybe<Faq>>>;
 };
 
 
@@ -200,6 +209,12 @@ export type QueryReservationsArgs = {
 
 
 export type QueryReservationArgs = {
+  id: Scalars['ID'];
+  hash: Scalars['String'];
+};
+
+
+export type QueryFaqArgs = {
   id: Scalars['ID'];
   hash: Scalars['String'];
 };
@@ -236,7 +251,7 @@ export type SyncRegistrationsQuery = (
 
 export type ReservationRespFragment = (
   { __typename?: 'Reservation' }
-  & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus' | 'registrationUrl'>
+  & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus' | 'registrationUrl' | 'faqUrl'>
   & { guests?: Maybe<Array<Maybe<(
     { __typename?: 'GuestRegistration' }
     & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
@@ -253,6 +268,20 @@ export type UpdateReservationStatusMutationVariables = Exact<{
 export type UpdateReservationStatusMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'updateReservationStatus'>
+);
+
+export type FaqQueryVariables = Exact<{
+  id: Scalars['ID'];
+  hash: Scalars['String'];
+}>;
+
+
+export type FaqQuery = (
+  { __typename?: 'Query' }
+  & { faq?: Maybe<Array<Maybe<(
+    { __typename?: 'Faq' }
+    & Pick<Faq, 'answerHtml' | 'question' | 'linkVideo'>
+  )>>> }
 );
 
 export type BookNowMutationVariables = Exact<{
@@ -329,6 +358,7 @@ export const ReservationRespFragmentDoc = gql`
   home
   reservationStatus
   registrationUrl
+  faqUrl
   guests {
     birthDate
     documentNumber
@@ -441,6 +471,42 @@ export function useUpdateReservationStatusMutation(baseOptions?: Apollo.Mutation
 export type UpdateReservationStatusMutationHookResult = ReturnType<typeof useUpdateReservationStatusMutation>;
 export type UpdateReservationStatusMutationResult = Apollo.MutationResult<UpdateReservationStatusMutation>;
 export type UpdateReservationStatusMutationOptions = Apollo.BaseMutationOptions<UpdateReservationStatusMutation, UpdateReservationStatusMutationVariables>;
+export const FaqDocument = gql`
+    query Faq($id: ID!, $hash: String!) {
+  faq(id: $id, hash: $hash) {
+    answerHtml
+    question
+    linkVideo
+  }
+}
+    `;
+
+/**
+ * __useFaqQuery__
+ *
+ * To run a query within a React component, call `useFaqQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFaqQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFaqQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *      hash: // value for 'hash'
+ *   },
+ * });
+ */
+export function useFaqQuery(baseOptions: Apollo.QueryHookOptions<FaqQuery, FaqQueryVariables>) {
+        return Apollo.useQuery<FaqQuery, FaqQueryVariables>(FaqDocument, baseOptions);
+      }
+export function useFaqLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FaqQuery, FaqQueryVariables>) {
+          return Apollo.useLazyQuery<FaqQuery, FaqQueryVariables>(FaqDocument, baseOptions);
+        }
+export type FaqQueryHookResult = ReturnType<typeof useFaqQuery>;
+export type FaqLazyQueryHookResult = ReturnType<typeof useFaqLazyQuery>;
+export type FaqQueryResult = Apollo.QueryResult<FaqQuery, FaqQueryVariables>;
 export const BookNowDocument = gql`
     mutation bookNow($user: BookInput!) {
   book(user: $user) {

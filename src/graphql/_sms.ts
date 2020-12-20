@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import { getLangByPhone } from "./_lang";
 
 const MESSAGES = {
   registrationLink: (link: string) => ({
@@ -45,16 +46,13 @@ export const sendSms = (
 };
 
 export const smsRegisterLink = (phone: string, link: string) => {
-  const lang = /\+39/.test(phone) ? "it" : "en";
-  return sendSms(phone, MESSAGES.registrationLink(link)[lang]);
+  return sendSms(phone, MESSAGES.registrationLink(link)[getLangByPhone(phone)]);
 };
 
 export const smsConfirmLink = (phone: string, link: string, code: string) => {
-  const lang = /\+39/.test(phone) ? "it" : "en";
-  return sendSms(phone, MESSAGES.confirm(link, code)[lang]);
+  return sendSms(phone, MESSAGES.confirm(link, code)[getLangByPhone(phone)]);
 };
 
 export const smsReminderLink = (phone: string, schedule: string) => {
-  const lang = /\+39/.test(phone) ? "it" : "en";
-  return sendSms(phone, MESSAGES.reminder[lang], schedule);
+  return sendSms(phone, MESSAGES.reminder[getLangByPhone(phone)], schedule);
 };

@@ -20,6 +20,7 @@ fragment ReservationResp on Reservation {
   home
   reservationStatus
   registrationUrl
+  faqUrl
   guests {
     birthDate
     documentNumber

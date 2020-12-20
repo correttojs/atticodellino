@@ -4,6 +4,7 @@ import {
   ReservationQueryVariables,
 } from "../generated/graphql";
 import { smsRegisterLink } from "./_sms";
+import { getLangByPhone } from "./_lang";
 
 export const reservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
@@ -14,11 +15,15 @@ export const reservations = async (parent, args, context) => {
       : new Date().toISOString(),
   });
   return storedReservations.reservations.map((r) => {
-    const lang = /\+39/.test(r.phone) ? "it" : "en";
     return {
       ...r,
       home: apartments.apartments.find((a) => a.code === r.home).name,
-      registrationUrl: `https://www.atticodellino.com/${lang}/register?hash=${r.hash}&id=${r.id}`,
+      registrationUrl: `https://www.atticodellino.com/${getLangByPhone(
+        r.phone
+      )}/register?hash=${r.hash}&id=${r.id}`,
+      faqUrl: `https://www.atticodellino.com/${getLangByPhone(
+        r.phone
+      )}/faq?hash=${r.hash}&id=${r.id}`,
     };
   });
 };
@@ -28,8 +33,6 @@ export const reservation = async (
   args: ReservationQueryVariables,
   context
 ) => {
-  // if (context.session.user.name !== "lino") throw new Error("Invalid session");
-  const apartments = await graphcmsGQLClient.getApartments();
   const storedReservations = await graphcmsGQLClient.getReservation({
     input: args,
   });
@@ -50,10 +53,11 @@ export const updateReservationStatus = async (
   });
 
   const phone = storedReservations?.updateReservation?.phone;
-  const lang = /\+39/.test(phone) ? "it" : "en";
   await smsRegisterLink(
     phone,
-    `https://www.atticodellino.com/${lang}/register?hash=${rest.hash}&id=${rest.id}`
+    `https://www.atticodellino.com/${getLangByPhone(phone)}/register?hash=${
+      rest.hash
+    }&id=${rest.id}`
   );
   return storedReservations.updateReservation.reservationStatus;
 };

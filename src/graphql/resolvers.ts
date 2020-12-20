@@ -8,6 +8,7 @@ import {
   reservation,
 } from "./_reservations";
 import { registerGuests } from "./_reservationsRegister";
+import { faq } from "./_faq";
 
 export const resolvers = {
   Mutation: {
@@ -22,5 +23,6 @@ export const resolvers = {
     syncReservations,
     reservations,
     reservation,
+    faq,
   },
 };

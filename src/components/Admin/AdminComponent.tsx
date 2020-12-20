@@ -92,6 +92,14 @@ export const AdminComponent: React.FC = () => {
                         >
                           register
                         </a>
+                        {" - "}
+                        <a
+                          css={tw`underline`}
+                          href={item.faqUrl}
+                          target="_blank"
+                        >
+                          faq
+                        </a>
                       </td>
                       <td>
                         {item.check_in} - {item.check_out}

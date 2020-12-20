@@ -9,6 +9,7 @@ query ApartmentCodeById($key: String!) {
   getApartmentList(where: { airBnb: { eq: $key } }) {
     items {
       code
+      key
     }
   }
 }
