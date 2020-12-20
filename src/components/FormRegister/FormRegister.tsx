@@ -96,7 +96,11 @@ export const Register: React.FC = () => {
           </>
         )}
         {error && <FormError />}
-        {loading || (guestLoading && <Loading />)}
+        {(loading || guestLoading) && (
+          <div css={tw`flex justify-center`}>
+            <Loading />
+          </div>
+        )}
         {!data && !error && !loading && (
           <>
             <Section>

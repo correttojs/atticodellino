@@ -1066,6 +1066,7 @@ export type Guest = Node & {
   nationality?: Maybe<Scalars['String']>;
   placeOfBirth?: Maybe<Scalars['String']>;
   reservation?: Maybe<Reservation>;
+  documentPlace?: Maybe<Scalars['String']>;
   /** List of Guest versions */
   history: Array<Version>;
 };
@@ -1117,6 +1118,7 @@ export type GuestCreateInput = {
   nationality?: Maybe<Scalars['String']>;
   placeOfBirth?: Maybe<Scalars['String']>;
   reservation?: Maybe<ReservationCreateOneInlineInput>;
+  documentPlace?: Maybe<Scalars['String']>;
 };
 
 export type GuestCreateManyInlineInput = {
@@ -1346,6 +1348,25 @@ export type GuestManyWhereInput = {
   /** All values not ending with the given string */
   placeOfBirth_not_ends_with?: Maybe<Scalars['String']>;
   reservation?: Maybe<ReservationWhereInput>;
+  documentPlace?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  documentPlace_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  documentPlace_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  documentPlace_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  documentPlace_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  documentPlace_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  documentPlace_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  documentPlace_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  documentPlace_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  documentPlace_not_ends_with?: Maybe<Scalars['String']>;
 };
 
 export enum GuestOrderByInput {
@@ -1370,7 +1391,9 @@ export enum GuestOrderByInput {
   NationalityAsc = 'nationality_ASC',
   NationalityDesc = 'nationality_DESC',
   PlaceOfBirthAsc = 'placeOfBirth_ASC',
-  PlaceOfBirthDesc = 'placeOfBirth_DESC'
+  PlaceOfBirthDesc = 'placeOfBirth_DESC',
+  DocumentPlaceAsc = 'documentPlace_ASC',
+  DocumentPlaceDesc = 'documentPlace_DESC'
 }
 
 /** Guest Status */
@@ -1389,6 +1412,7 @@ export type GuestUpdateInput = {
   nationality?: Maybe<Scalars['String']>;
   placeOfBirth?: Maybe<Scalars['String']>;
   reservation?: Maybe<ReservationUpdateOneInlineInput>;
+  documentPlace?: Maybe<Scalars['String']>;
 };
 
 export type GuestUpdateManyInlineInput = {
@@ -1416,6 +1440,7 @@ export type GuestUpdateManyInput = {
   lastName?: Maybe<Scalars['String']>;
   nationality?: Maybe<Scalars['String']>;
   placeOfBirth?: Maybe<Scalars['String']>;
+  documentPlace?: Maybe<Scalars['String']>;
 };
 
 export type GuestUpdateManyWithNestedWhereInput = {
@@ -1665,6 +1690,25 @@ export type GuestWhereInput = {
   /** All values not ending with the given string */
   placeOfBirth_not_ends_with?: Maybe<Scalars['String']>;
   reservation?: Maybe<ReservationWhereInput>;
+  documentPlace?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  documentPlace_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  documentPlace_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  documentPlace_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  documentPlace_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  documentPlace_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  documentPlace_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  documentPlace_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  documentPlace_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  documentPlace_not_ends_with?: Maybe<Scalars['String']>;
 };
 
 /** References Guest record uniquely */
