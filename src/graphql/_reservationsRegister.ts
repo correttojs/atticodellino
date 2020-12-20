@@ -4,6 +4,7 @@ import { streamTo64 } from "./_streamToBase64";
 import { GuestStatus } from "../generated/graphql-graphcms";
 import { smsConfirmLink, smsReminderLink } from "./_sms";
 import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
+import { getLangByPhone } from "./_lang";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
@@ -76,7 +77,9 @@ export const registerGuests = async (
 
   await smsConfirmLink(
     phone,
-    `https://www.atticodellino.com/garda/faq`,
+    `https://www.atticodellino.com/${getLangByPhone(phone)}/faq?hash=${
+      input.hash
+    }&id=${input.id}`,
     apartment?.getApartmentList?.items?.[0]?.code
   );
 
