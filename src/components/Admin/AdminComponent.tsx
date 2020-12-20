@@ -10,9 +10,10 @@ import {
 
 import styled from "styled-components";
 import tw from "twin.macro";
-import { Button, ButtonInverted } from "../@UI/Buttons";
-import { GrLogin } from "react-icons/gr";
+import { Button, ButtonSkinned, ButtonWithIcon } from "../@UI/Buttons";
 import { MdNewReleases, MdDone, MdDoneAll, MdSync } from "react-icons/md";
+import { Loading } from "../@UI/Loading";
+import { IoLogInSharp } from "react-icons/io5";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;
@@ -39,40 +40,36 @@ export const AdminComponent: React.FC = () => {
     <>
       {!loading && !session && (
         <div css={tw`p-4`}>
-          <Button onClick={signIn}>
-            <div css={tw`flex`}>
-              <GrLogin color="#fff" /> Sign in
-            </div>
-          </Button>
+          <ButtonWithIcon onClick={signIn} Icon={<IoLogInSharp />}>
+            Sign in
+          </ButtonWithIcon>
         </div>
       )}
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       {session && (
         <div css={tw`p-4`}>
-          <Button onClick={() => sync()}>
-            <div css={tw`flex cursor-pointer`}>
-              <MdSync color="#fff" /> Sync with Airbnb
-            </div>
-          </Button>
+          <ButtonWithIcon
+            css={tw`m-2`}
+            onClick={() => sync()}
+            Icon={<MdSync />}
+          >
+            Sync with Airbnb
+          </ButtonWithIcon>
           <nav css={tw`flex flex-col sm:flex-row`}>
-            {isPast ? (
-              <ButtonInverted css={tw`m-2`} onClick={() => setIsPast(false)}>
-                Upcoming
-              </ButtonInverted>
-            ) : (
-              <Button css={tw`m-2`} onClick={() => setIsPast(false)}>
-                Upcoming
-              </Button>
-            )}
-            {isPast ? (
-              <Button css={tw`m-2`} onClick={() => setIsPast(true)}>
-                Past
-              </Button>
-            ) : (
-              <ButtonInverted css={tw`m-2`} onClick={() => setIsPast(true)}>
-                Past
-              </ButtonInverted>
-            )}
+            <ButtonSkinned
+              isInverter={isPast}
+              css={tw`m-2`}
+              onClick={() => setIsPast(false)}
+            >
+              Upcoming
+            </ButtonSkinned>
+            <ButtonSkinned
+              isInverter={!isPast}
+              css={tw`m-2`}
+              onClick={() => setIsPast(true)}
+            >
+              Past
+            </ButtonSkinned>
           </nav>
 
           {data && (

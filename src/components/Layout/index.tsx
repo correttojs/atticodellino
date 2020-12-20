@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
       }
     }
 
-    a{
+    a,button{
       cursor:pointer;
     }
 `;
