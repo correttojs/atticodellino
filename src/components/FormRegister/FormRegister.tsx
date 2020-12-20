@@ -15,18 +15,18 @@ import { Button } from "../@UI/Buttons";
 import { GrUserAdd, GrTrash } from "react-icons/gr";
 import { FormSelect } from "../@UI/FormSelect";
 import { FormError } from "../@UI/FormError";
-import { FormLoading } from "../@UI/FormLoading";
 import { FormUpload } from "../@UI/FormUpload";
 import { useRouter } from "next/router";
 import { Section } from "../@UI/Section";
 import { Card } from "../@UI/Card";
+import { Loading } from "../@UI/Loading";
 
 export const Register: React.FC = () => {
   const [register, { data, loading, error }] = useRegisterMutation();
   const router = useRouter();
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const t = useTranslations();
-  const { data: guestData } = useReservationQuery({
+  const { data: guestData, loading: guestLoading } = useReservationQuery({
     variables: {
       hash: router.query.hash as string,
       id: router.query.id as string,
@@ -96,7 +96,7 @@ export const Register: React.FC = () => {
           </>
         )}
         {error && <FormError />}
-        {loading && <FormLoading />}
+        {loading || (guestLoading && <Loading />)}
         {!data && !error && !loading && (
           <>
             <Section>

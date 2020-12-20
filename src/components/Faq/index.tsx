@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
 import { useFaqQuery } from "../../generated/graphql";
+import { Loading } from "../@UI/Loading";
 
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
@@ -16,7 +17,7 @@ export const FaqPage: React.FC = () => {
     },
   });
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   return (
     <Section>

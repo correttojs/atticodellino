@@ -8,8 +8,8 @@ import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
 import { FormError } from "../@UI/FormError";
-import { FormLoading } from "../@UI/FormLoading";
 import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
+import { Loading } from "../@UI/Loading";
 
 export const FormBook: React.FC<{
   from: string;
@@ -51,7 +51,7 @@ export const FormBook: React.FC<{
         </div>
       )}
       {error && <FormError />}
-      {loading && <FormLoading />}
+      {loading && <Loading />}
       {!data && !error && !loading && (
         <>
           <form
