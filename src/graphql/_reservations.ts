@@ -4,7 +4,7 @@ import {
   ReservationQueryVariables,
 } from "../generated/graphql";
 import { smsRegisterLink } from "./_sms";
-import { getLangByPhone } from "./_lang";
+import { faqLink, getLangByPhone, registerLink } from "./_util";
 
 export const reservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
@@ -18,12 +18,8 @@ export const reservations = async (parent, args, context) => {
     return {
       ...r,
       home: apartments.apartments.find((a) => a.code === r.home).name,
-      registrationUrl: `https://www.atticodellino.com/${getLangByPhone(
-        r.phone
-      )}/register?hash=${r.hash}&id=${r.id}`,
-      faqUrl: `https://www.atticodellino.com/${getLangByPhone(
-        r.phone
-      )}/faq?hash=${r.hash}&id=${r.id}`,
+      registrationUrl: registerLink(r),
+      faqUrl: faqLink(r),
     };
   });
 };
@@ -53,11 +49,6 @@ export const updateReservationStatus = async (
   });
 
   const phone = storedReservations?.updateReservation?.phone;
-  await smsRegisterLink(
-    phone,
-    `https://www.atticodellino.com/${getLangByPhone(phone)}/register?hash=${
-      rest.hash
-    }&id=${rest.id}`
-  );
+  await smsRegisterLink(phone, registerLink({ ...rest, phone }));
   return storedReservations.updateReservation.reservationStatus;
 };

@@ -4,21 +4,18 @@ import { streamTo64 } from "./_streamToBase64";
 import { GuestStatus } from "../generated/graphql-graphcms";
 import { smsConfirmLink, smsReminderLink } from "./_sms";
 import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
-import { getLangByPhone } from "./_lang";
+import { faqLink, getLangByPhone } from "./_util";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
 
-const FROM = `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`;
-
-export const registerGuests = async (
-  _,
-  { file, user }: MutationRegisterGuestsArgs
-) => {
+const sendEmail = async ({
+  file,
+  user,
+  apartmentCode,
+}: MutationRegisterGuestsArgs & { apartmentCode: string }) => {
   const files = await Promise.all(file);
-
   console.log(files, user);
-
   let attachments = [];
   if (files?.[0]) {
     const streams = await Promise.all(
@@ -44,24 +41,38 @@ export const registerGuests = async (
 
   const content = {
     to: process.env.NEXT_PUBLIC_FROM_EMAIL,
-    from: FROM, // sender address
+    from: `info@atticodellino.com`, // sender address
     subject: `Registration request from L'attico del Lino`, // Subject line
     html: `
-        <h1>Registration Request</h1>
+        <h1>Registration Request ${user.phone}</h1>
+        <p>Phone: ${user.phone}</p>
+        <p>Apartment: ${apartmentCode}</p>
+        <p>Checkout: ${user.check_out}</p>
         ${user.guests.map((item) => {
           return `
              <p>User: ${item.firstName} ${item.lastName}</p>
             <p>Document: ${item.documentType} - ${item.documentNumber}</p>
             <p>Birth: ${item.birthDate} - ${item.nationality} - ${item.placeOfBirth}</p>`;
         })}
-       
-  
     `,
     attachments,
   };
+  try {
+    await sgMail.send([content]);
+  } catch (e) {
+    console.error(e);
+  }
+};
 
-  await sgMail.send([content]);
+export const registerGuests = async (
+  _,
+  { file, user }: MutationRegisterGuestsArgs
+) => {
   const { guests, phone, home, check_out, ...input } = user;
+
+  const apartment = await takeShapeGQLClient.ApartmentCodeById({ key: home });
+  const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code;
+  await sendEmail({ file, user, apartmentCode });
 
   const data = await graphcmsGQLClient.updateReservation({
     input,
@@ -73,13 +84,9 @@ export const registerGuests = async (
     },
   });
 
-  const apartment = await takeShapeGQLClient.ApartmentCodeById({ key: home });
-
   await smsConfirmLink(
     phone,
-    `https://www.atticodellino.com/${getLangByPhone(phone)}/faq?hash=${
-      input.hash
-    }&id=${input.id}`,
+    faqLink({ ...input, phone }),
     apartment?.getApartmentList?.items?.[0]?.code
   );
 
