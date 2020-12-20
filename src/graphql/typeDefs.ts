@@ -77,6 +77,8 @@ export const typeDefs = gql`
     birthDate: String!
     nationality: String!
     placeOfBirth: String!
+    docFile: String
+    documentPlace: String
   }
 
   type Registration {

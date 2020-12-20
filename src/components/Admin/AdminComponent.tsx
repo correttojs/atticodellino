@@ -166,7 +166,18 @@ export const AdminComponent: React.FC = () => {
                             {guest.lastName} {guest.firstName}
                           </td>
                           <td>
-                            {guest.documentType}: {guest.documentNumber}
+                            {guest.docFile ? (
+                              <a
+                                css={tw`underline`}
+                                href={guest.docFile}
+                                target="_blank"
+                              >
+                                {guest.documentType}
+                              </a>
+                            ) : (
+                              guest.documentType
+                            )}
+                            : {guest.documentNumber} ({guest.documentPlace})
                           </td>
                           <td>{guest.nationality}</td>
                           <td colSpan={3}>

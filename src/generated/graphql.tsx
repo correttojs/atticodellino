@@ -97,6 +97,8 @@ export type GuestRegistration = {
   birthDate: Scalars['String'];
   nationality: Scalars['String'];
   placeOfBirth: Scalars['String'];
+  docFile?: Maybe<Scalars['String']>;
+  documentPlace?: Maybe<Scalars['String']>;
 };
 
 export type Registration = {
@@ -255,7 +257,7 @@ export type ReservationRespFragment = (
   & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus' | 'registrationUrl' | 'faqUrl'>
   & { guests?: Maybe<Array<Maybe<(
     { __typename?: 'GuestRegistration' }
-    & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
+    & Pick<GuestRegistration, 'birthDate' | 'documentNumber' | 'documentType' | 'documentPlace' | 'docFile' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
   )>>> }
 );
 
@@ -364,6 +366,8 @@ export const ReservationRespFragmentDoc = gql`
     birthDate
     documentNumber
     documentType
+    documentPlace
+    docFile
     firstName
     lastName
     nationality

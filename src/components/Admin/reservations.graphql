@@ -25,6 +25,8 @@ fragment ReservationResp on Reservation {
     birthDate
     documentNumber
     documentType
+    documentPlace
+    docFile
     firstName
     lastName
     nationality

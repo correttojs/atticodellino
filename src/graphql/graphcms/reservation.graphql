@@ -22,6 +22,8 @@ query getReservations($input: Date!) {
     guests {
       birthDate
       documentNumber
+      documentPlace
+      docFile
       documentType
       firstName
       lastName

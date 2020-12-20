@@ -9,6 +9,7 @@ import {
 } from "./_reservations";
 import { registerGuests } from "./_reservationsRegister";
 import { faq } from "./_faq";
+import { upload } from "./upload";
 
 export const resolvers = {
   Mutation: {
