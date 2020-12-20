@@ -33,7 +33,7 @@ export const Translations = {
   BEDROOM: t("[n] bedroom", "[n] stanza"),
   BED: t("[n] bed", "[n] letto"),
   BATH: t("[n] bath", "[n] bagno"),
-  ALSO: t("Have a look @[c]", "Dai un'occhiata @[c]"),
+  ALSO: t("Have a look @", "Dai un'occhiata @"),
   PRIVACY: t("Privacy policy", "Informativa Privacy"),
   COOKIES: t(
     "This website uses cookies to enhance the user experience.",
