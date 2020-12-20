@@ -3938,7 +3938,7 @@ export const CreateReservationDocument = gql`
     `;
 export const GetReservationsDocument = gql`
     query getReservations($input: Date!) {
-  reservations(where: {check_out_gt: $input}) {
+  reservations(where: {check_out_gt: $input}, orderBy: check_out_DESC) {
     id
     guest_name
     check_out
