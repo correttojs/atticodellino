@@ -81,18 +81,6 @@ export const typeDefs = gql`
     documentPlace: String
   }
 
-  type Registration {
-    _id: ID!
-    apartmentKey: String!
-    email: String!
-    registrationStatus: String
-    guests: [GuestRegistration]
-  }
-
-  type RegistrationList {
-    items: [Registration]
-  }
-
   enum ReservationStatus {
     link_sent
     new
@@ -121,10 +109,15 @@ export const typeDefs = gql`
     phone: String
   }
 
+  type Asset {
+    path: String
+    mimeType: String
+  }
   type Faq {
     question: String!
     answerHtml: String!
     linkVideo: String
+    asset: Asset
   }
 
   type Mutation {
