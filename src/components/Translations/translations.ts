@@ -50,7 +50,10 @@ export const Translations = {
   BIRTH_DATE: t("Date of Birth", "Data di nascita"),
   BROWSE_CALENDAR: t("Browse calendar", "Sfoglia il calendario"),
   NATIONALITY: t("Nationality", "Nazionalità"),
-  PLACE_BIRTH: t("Place of birth", "Luogo di nascita"),
+  PLACE_BIRTH: t(
+    "Place of birth (only italians)",
+    "Luogo di nascita (solo per italian)"
+  ),
   UPLOAD_DOC: t("Upload your document", "Carica il tuo documento"),
   SUBMIT: t("Submit", "Invia"),
   BROWSE_FILE: t("Browse file", "Sfoglia file"),
