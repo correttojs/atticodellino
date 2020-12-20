@@ -18,3 +18,25 @@ export const ButtonInverted = styled.button`
     background-color: ${({ theme }: ThemeType) => theme.colors.light};
   }
 `;
+
+export const ButtonSkinned: React.FC<
+  React.ButtonHTMLAttributes<any> & { isInverter: boolean }
+> = ({ isInverter, children, ...rest }) => {
+  return isInverter ? (
+    <ButtonInverted {...rest}>{children}</ButtonInverted>
+  ) : (
+    <Button {...rest}>{children}</Button>
+  );
+};
+
+export const ButtonWithIcon: React.FC<
+  React.ButtonHTMLAttributes<any> & { Icon: React.ReactElement }
+> = ({ Icon, children, ...rest }) => {
+  return (
+    <Button {...rest}>
+      <div css={tw`flex  items-center`}>
+        {Icon} <span css={tw`mx-2`}>{children}</span>
+      </div>
+    </Button>
+  );
+};
