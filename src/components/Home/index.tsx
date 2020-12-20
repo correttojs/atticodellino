@@ -18,6 +18,7 @@ import { Section } from "../@UI/Section";
 import { Summary } from "./Summary";
 import { Collapsible } from "../@UI/Collapsible";
 import { ApartmentLink } from "./ApartmentLink";
+import { CardHorizontal } from "../@UI/Card";
 
 Modal.setAppElement("#__next");
 
@@ -36,18 +37,22 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       </Head>
 
       <Hero photos={pdp_listing_detail.photos} />
-      <div css={tw`px-3 py-1 m-6`}>
-        <Link
-          href={`/${sponsor?.[0]?.key.toLowerCase()}`.replace("//", "/")}
-          passHref={true}
-        >
-          <ApartmentLink backgroundColor={sponsor?.[0]?.brandColor.hex}>
-            {translate("ALSO", {
-              c: sponsor?.[0]?.location,
-            })}
-          </ApartmentLink>
-        </Link>
-      </div>
+
+      <Section css={tw`flex justify-end `}>
+        <CardHorizontal
+          img={`/images/promo-${sponsor?.[0]?.key.toLowerCase()}.webp`}
+          title={sponsor?.[0]?.location}
+          message={translate("ALSO", {
+            c: sponsor?.[0]?.location,
+          })}
+          onClick={() =>
+            (window.location.href = `/${sponsor?.[0]?.key.toLowerCase()}`.replace(
+              "//",
+              "/"
+            ))
+          }
+        />
+      </Section>
 
       <Summary {...pdp_listing_detail} />
 

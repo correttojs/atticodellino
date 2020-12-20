@@ -263,6 +263,16 @@
             "defaultValue": null
           },
           {
+            "name": "documentPlace",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "birthDate",
             "description": null,
             "type": {
@@ -294,13 +304,9 @@
             "name": "placeOfBirth",
             "description": null,
             "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "defaultValue": null
           }

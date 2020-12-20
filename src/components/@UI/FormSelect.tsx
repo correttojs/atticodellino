@@ -21,7 +21,10 @@ export const FormSelect: React.FC<PropType> = ({
       <label css={tw`block`} htmlFor={field}>
         <span css={tw`text-gray-700`}>{label ?? formatLabel(field)}</span>
         <select
-          css={tw`form-select block w-full`}
+          css={`
+            border-width: 1px;
+            ${tw`border-solid border-gray-400 leading-6 p-3 rounded-md mt-1 block w-full focus:border-blue-800`}
+          `}
           value={formik.values[field]}
           id={field}
           name={field}

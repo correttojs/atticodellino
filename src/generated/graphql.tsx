@@ -37,9 +37,10 @@ export type Guest = {
   lastName: Scalars['String'];
   documentNumber: Scalars['String'];
   documentType: Scalars['String'];
+  documentPlace?: Maybe<Scalars['String']>;
   birthDate: Scalars['String'];
   nationality: Scalars['String'];
-  placeOfBirth: Scalars['String'];
+  placeOfBirth?: Maybe<Scalars['String']>;
 };
 
 export type UserInput = {

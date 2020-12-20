@@ -22,9 +22,10 @@ export const typeDefs = gql`
     lastName: String!
     documentNumber: String!
     documentType: String!
+    documentPlace: String
     birthDate: String!
     nationality: String!
-    placeOfBirth: String!
+    placeOfBirth: String
   }
 
   input UserInput {

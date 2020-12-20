@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { useTranslations } from "../Translations/useTranslations";
 import { Button } from "./Buttons";
 
 const UploadStyle = styled.div<{ error: boolean }>`
@@ -36,17 +37,19 @@ export const FormUpload: React.FC<PropType> = ({
   label,
   index,
 }) => {
+  const t = useTranslations();
   const filedPart = field.split(".")[1];
   return (
-    <div css={tw`flex flex-col my-4 items-center`}>
+    <div css={tw`flex flex-col my-4 mx-2`}>
       {formik.errors?.guests?.[index]?.[filedPart] &&
         formik.touched?.guests?.[index]?.[filedPart] && (
           <p css={tw`text-red-500 text-xs italic`}>
             {formik.errors?.guests?.[index]?.[filedPart]}
           </p>
         )}
-      <UploadStyle error={false}>
-        <Button>{label}</Button>
+      <p css={tw`text-gray-700`}>{label}</p>
+      <UploadStyle css={tw`my-2`} error={false}>
+        <Button>{t("BROWSE_FILE")}</Button>
         <input
           id={field}
           name={field}

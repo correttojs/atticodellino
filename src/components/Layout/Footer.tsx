@@ -54,14 +54,6 @@ export const Footer: React.FC = () => {
         </div>
         <div css={tw`flex flex-row justify-center m-2`}>
           <Link
-            href="/[apartment]/faq"
-            as={`/${apartment.toLowerCase()}/faq`}
-            locale={locale}
-          >
-            <a css={tw`mx-2`}>FAQ</a>
-          </Link>
-          -
-          <Link
             href="/[apartment]/privacy"
             as={`/${apartment.toLowerCase()}/privacy`}
             locale={locale}

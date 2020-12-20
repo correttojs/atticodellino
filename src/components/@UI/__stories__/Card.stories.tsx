@@ -4,7 +4,7 @@ import React from "react";
 import tw from "twin.macro";
 const img = require("../../../../public/images/promo-garda.webp");
 const imgVr = require("../../../../public/images/promo-vr.webp");
-import { Card } from "../Card";
+import { Card, CardHorizontal } from "../Card";
 
 export default {
   title: "UI/Card",
@@ -30,3 +30,14 @@ const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => (
 );
 
 export const CardStory = Template.bind({});
+
+export const CardHorizontalStory = () => (
+  <div css={tw`flex`}>
+    <CardHorizontal
+      onClick={() => {}}
+      title={"L'attico del Lino Garda"}
+      message={"Test message"}
+      img={img}
+    />
+  </div>
+);
