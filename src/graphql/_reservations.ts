@@ -28,7 +28,7 @@ export const reservation = async (
   args: ReservationQueryVariables,
   context
 ) => {
-  if (context.session.user.name !== "lino") throw new Error("Invalid session");
+  // if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const apartments = await graphcmsGQLClient.getApartments();
   const storedReservations = await graphcmsGQLClient.getReservation({
     input: args,
