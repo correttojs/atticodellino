@@ -43,7 +43,7 @@ export const FormInput: React.FC<PropType> = ({
           name={field}
           id={field}
           onChange={formik.handleChange}
-          placeholder={label ?? formatLabel(field)}
+          // placeholder={label ?? formatLabel(field)}
           type={type}
           value={formik.values[field]}
         />

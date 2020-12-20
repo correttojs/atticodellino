@@ -17,9 +17,10 @@ export const Translations = {
   ),
   REGISTER: t("Register", "Registrazione"),
   REVIEWS: t("Reviews", "Recensioni"),
-  THANKYOU: t(
-    "Thank you [name] [lastName]. You will receive a confirmation email soon.",
-    "Grazie [name] [lastName]. Riceverai presto un'email di conferma"
+  THANKYOU: t("Thank you [name] [lastName]", "Grazie [name] [lastName]"),
+  THANKYOU_CONFIRMATION: t(
+    "You will receive a confirmation sms soon.",
+    "Riceverai presto un di conferma"
   ),
   CODE: t("The apartment code [code]", "Il codice dell'appartamento è [code]"),
   RERAD_MORE: t("Read more...", "Leggi ancora..."),
