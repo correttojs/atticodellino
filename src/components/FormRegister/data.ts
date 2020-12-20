@@ -7,6 +7,7 @@ export const guestValue = {
   lastName: "",
   documentNumber: "",
   documentType: "Passport",
+  documentPlace: "",
   nationality: "",
   placeOfBirth: "",
   birthDate: null,
@@ -41,10 +42,10 @@ export const validationSchema = Yup.object().shape({
           .min(2, "Too Short!")
           .max(50, "Too Long!")
           .required("Required"),
-        placeOfBirth: Yup.string()
-          .min(2, "Too Short!")
-          .max(50, "Too Long!")
-          .required("Required"),
+        // placeOfBirth: Yup.string()
+        //   .min(2, "Too Short!")
+        //   .max(50, "Too Long!")
+        //   .required("Required"),
         birthDate: Yup.date().required("Required"),
         file: Yup.mixed().required("A file is required"),
       })
