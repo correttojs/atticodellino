@@ -101,20 +101,6 @@ export type GuestRegistration = {
   documentPlace?: Maybe<Scalars['String']>;
 };
 
-export type Registration = {
-  __typename?: 'Registration';
-  _id: Scalars['ID'];
-  apartmentKey: Scalars['String'];
-  email: Scalars['String'];
-  registrationStatus?: Maybe<Scalars['String']>;
-  guests?: Maybe<Array<Maybe<GuestRegistration>>>;
-};
-
-export type RegistrationList = {
-  __typename?: 'RegistrationList';
-  items?: Maybe<Array<Maybe<Registration>>>;
-};
-
 export enum ReservationStatus {
   LinkSent = 'link_sent',
   New = 'new',
@@ -145,11 +131,18 @@ export type ReservationShort = {
   phone?: Maybe<Scalars['String']>;
 };
 
+export type Asset = {
+  __typename?: 'Asset';
+  path?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+};
+
 export type Faq = {
   __typename?: 'Faq';
   question: Scalars['String'];
   answerHtml: Scalars['String'];
   linkVideo?: Maybe<Scalars['String']>;
+  asset?: Maybe<Asset>;
 };
 
 export type Mutation = {
@@ -284,6 +277,10 @@ export type FaqQuery = (
   & { faq?: Maybe<Array<Maybe<(
     { __typename?: 'Faq' }
     & Pick<Faq, 'answerHtml' | 'question' | 'linkVideo'>
+    & { asset?: Maybe<(
+      { __typename?: 'Asset' }
+      & Pick<Asset, 'mimeType' | 'path'>
+    )> }
   )>>> }
 );
 
@@ -482,6 +479,10 @@ export const FaqDocument = gql`
     answerHtml
     question
     linkVideo
+    asset {
+      mimeType
+      path
+    }
   }
 }
     `;

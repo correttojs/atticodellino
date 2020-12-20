@@ -10,7 +10,10 @@ query Faqs($apartment: String!, $lang: String!) {
     items {
       answerHtml
       question
-
+      asset {
+        path
+        mimeType
+      }
       linkVideo
     }
   }

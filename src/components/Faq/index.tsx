@@ -19,6 +19,8 @@ export const FaqPage: React.FC = () => {
   if (loading) {
     return <Loading />;
   }
+
+  console.log(data?.faq[0]?.asset?.path);
   return (
     <Section>
       {data?.faq.map((item, i) => (
@@ -30,6 +32,15 @@ export const FaqPage: React.FC = () => {
         >
           <H2>{item?.question}</H2>
           <div dangerouslySetInnerHTML={{ __html: item?.answerHtml }} />
+          {item.asset?.path && (
+            <video width="320" height="240" controls>
+              <source
+                src={`https://assets.takeshape.io/${item.asset.path}`}
+                type={item.asset?.mimeType}
+              />
+              Your browser does not support the video tag.
+            </video>
+          )}
         </div>
       ))}
     </Section>

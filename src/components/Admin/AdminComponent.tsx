@@ -151,6 +151,7 @@ export const AdminComponent: React.FC = () => {
                       <td>{item.phone}</td>
                       <td>
                         <Button
+                          title={item.reservationStatus}
                           style={{ float: "right" }}
                           type="button"
                           onClick={() => {

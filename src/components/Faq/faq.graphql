@@ -3,5 +3,9 @@ query Faq($id: ID!, $hash: String!) {
     answerHtml
     question
     linkVideo
+    asset {
+      mimeType
+      path
+    }
   }
 }
