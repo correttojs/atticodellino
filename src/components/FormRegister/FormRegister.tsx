@@ -10,7 +10,7 @@ import {
 } from "../../generated/graphql";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
-import { H1 } from "../@UI/Texts";
+import { H1, H2 } from "../@UI/Texts";
 import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
 import { GrUserAdd, GrTrash } from "react-icons/gr";
@@ -20,6 +20,7 @@ import { FormLoading } from "../@UI/FormLoading";
 import { FormUpload } from "../@UI/FormUpload";
 import { useRouter } from "next/router";
 import { Section } from "../@UI/Section";
+import { Card } from "../@UI/Card";
 
 export const Register: React.FC = () => {
   const [register, { data, loading, error }] = useRegisterMutation();
@@ -66,13 +67,35 @@ export const Register: React.FC = () => {
       `}
     >
       <div css={tw`p-2 md:p-8 max-w-screen-lg mx-auto `}>
+        <div css={tw`flex flex-col md:flex-row  justify-around`}>
+          <div css={tw` p-4 `}>
+            <Card
+              onClick={() => "https://www.atticodellino.com/garda"}
+              title={"L'attico del Lino Garda"}
+              img={"/images/promo-garda.webp"}
+            />
+          </div>
+          <div css={tw` p-4 `}>
+            <Card
+              onClick={() =>
+                (window.location.href = "https://www.atticodellino.com")
+              }
+              title={"L'attico del Lino Verona"}
+              img={"/images/promo-vr.webp"}
+            />
+          </div>
+        </div>
         {data && (
-          <h3>
-            {t("THANKYOU", {
-              name: guestData?.reservation?.guest_name,
-              lastName: "",
-            })}
-          </h3>
+          <>
+            <H2 css={tw` p-4 text-center`}>
+              {t("THANKYOU", {
+                name: guestData?.reservation?.guest_name,
+                lastName: "",
+              })}
+            </H2>
+
+            <p css={tw` p-4  text-center`}>{t("THANKYOU_CONFIRMATION")}</p>
+          </>
         )}
         {error && <FormError />}
         {loading && <FormLoading />}
