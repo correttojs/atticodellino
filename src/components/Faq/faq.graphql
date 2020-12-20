@@ -1,0 +1,7 @@
+query Faq($id: ID!, $hash: String!) {
+  faq(id: $id, hash: $hash) {
+    answerHtml
+    question
+    linkVideo
+  }
+}

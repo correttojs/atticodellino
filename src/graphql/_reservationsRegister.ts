@@ -2,6 +2,9 @@ import { graphcmsGQLClient } from "./graphcms/client";
 import { MutationRegisterGuestsArgs } from "../generated/graphql";
 import { streamTo64 } from "./_streamToBase64";
 import { GuestStatus } from "../generated/graphql-graphcms";
+import { smsConfirmLink, smsReminderLink } from "./_sms";
+import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
+import { getLangByPhone } from "./_lang";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
@@ -58,7 +61,7 @@ export const registerGuests = async (
   };
 
   await sgMail.send([content]);
-  const { guests, phone, ...input } = user;
+  const { guests, phone, home, check_out, ...input } = user;
 
   const data = await graphcmsGQLClient.updateReservation({
     input,
@@ -69,6 +72,18 @@ export const registerGuests = async (
       reservationStatus: GuestStatus.Registered,
     },
   });
+
+  const apartment = await takeShapeGQLClient.ApartmentCodeById({ key: home });
+
+  await smsConfirmLink(
+    phone,
+    `https://www.atticodellino.com/${getLangByPhone(phone)}/faq?hash=${
+      input.hash
+    }&id=${input.id}`,
+    apartment?.getApartmentList?.items?.[0]?.code
+  );
+
+  await smsReminderLink(phone, `${check_out}103010`);
 
   return data?.updateReservation?.reservationStatus;
 };

@@ -2,5 +2,6 @@ query getApartments {
   apartments {
     code
     name
+    enterCode
   }
 }

@@ -1,6 +1,7 @@
 import { graphcmsGQLClient } from "./graphcms/client";
 import { AirBnbClient } from "airbnb-private-api";
 import * as crypto from "crypto";
+import { reservations } from "./_reservations";
 
 const getAirBnbReservations = async () => {
   let airbnb = new AirBnbClient({
@@ -18,7 +19,7 @@ const getAirBnbReservations = async () => {
   const res = await airbnb._get_reservations({
     _limit: 50,
     include_canceled: false,
-    start_date: "2020-01-01",
+    // start_date: "2020-01-01",
   } as any);
 
   const reservationDetails = await Promise.all(
@@ -55,18 +56,16 @@ const getAirBnbReservations = async () => {
 export const syncReservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const result = await getAirBnbReservations();
-  const storedReservations = await graphcmsGQLClient.getReservations({
-    input: new Date("2020-01-01").toISOString(),
-  });
+  const storedReservations = await reservations(parent, args, context);
 
-  const hashes = storedReservations.reservations.map((r) => r.hash);
+  const hashes = storedReservations.map((r) => r.hash);
   const toBeAdded = result.filter((r) => !hashes.includes(r.hash));
   await Promise.all(
     toBeAdded.map((r) => graphcmsGQLClient.createReservation({ input: r }))
   );
 
   return [
-    ...storedReservations.reservations,
+    ...storedReservations,
     ...toBeAdded.map((i) => ({ ...i, guests: [] })),
   ];
 };
