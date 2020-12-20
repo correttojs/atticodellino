@@ -1067,6 +1067,7 @@ export type Guest = Node & {
   placeOfBirth?: Maybe<Scalars['String']>;
   reservation?: Maybe<Reservation>;
   documentPlace?: Maybe<Scalars['String']>;
+  docFile?: Maybe<Scalars['String']>;
   /** List of Guest versions */
   history: Array<Version>;
 };
@@ -1119,6 +1120,7 @@ export type GuestCreateInput = {
   placeOfBirth?: Maybe<Scalars['String']>;
   reservation?: Maybe<ReservationCreateOneInlineInput>;
   documentPlace?: Maybe<Scalars['String']>;
+  docFile?: Maybe<Scalars['String']>;
 };
 
 export type GuestCreateManyInlineInput = {
@@ -1367,6 +1369,25 @@ export type GuestManyWhereInput = {
   documentPlace_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   documentPlace_not_ends_with?: Maybe<Scalars['String']>;
+  docFile?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  docFile_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  docFile_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  docFile_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  docFile_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  docFile_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  docFile_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  docFile_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  docFile_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  docFile_not_ends_with?: Maybe<Scalars['String']>;
 };
 
 export enum GuestOrderByInput {
@@ -1393,7 +1414,9 @@ export enum GuestOrderByInput {
   PlaceOfBirthAsc = 'placeOfBirth_ASC',
   PlaceOfBirthDesc = 'placeOfBirth_DESC',
   DocumentPlaceAsc = 'documentPlace_ASC',
-  DocumentPlaceDesc = 'documentPlace_DESC'
+  DocumentPlaceDesc = 'documentPlace_DESC',
+  DocFileAsc = 'docFile_ASC',
+  DocFileDesc = 'docFile_DESC'
 }
 
 /** Guest Status */
@@ -1413,6 +1436,7 @@ export type GuestUpdateInput = {
   placeOfBirth?: Maybe<Scalars['String']>;
   reservation?: Maybe<ReservationUpdateOneInlineInput>;
   documentPlace?: Maybe<Scalars['String']>;
+  docFile?: Maybe<Scalars['String']>;
 };
 
 export type GuestUpdateManyInlineInput = {
@@ -1441,6 +1465,7 @@ export type GuestUpdateManyInput = {
   nationality?: Maybe<Scalars['String']>;
   placeOfBirth?: Maybe<Scalars['String']>;
   documentPlace?: Maybe<Scalars['String']>;
+  docFile?: Maybe<Scalars['String']>;
 };
 
 export type GuestUpdateManyWithNestedWhereInput = {
@@ -1709,6 +1734,25 @@ export type GuestWhereInput = {
   documentPlace_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string */
   documentPlace_not_ends_with?: Maybe<Scalars['String']>;
+  docFile?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  docFile_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  docFile_in?: Maybe<Array<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  docFile_not_in?: Maybe<Array<Scalars['String']>>;
+  /** All values containing the given string. */
+  docFile_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  docFile_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  docFile_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  docFile_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  docFile_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  docFile_not_ends_with?: Maybe<Scalars['String']>;
 };
 
 /** References Guest record uniquely */
@@ -3827,7 +3871,7 @@ export type GetReservationsQuery = (
     & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus'>
     & { guests: Array<(
       { __typename?: 'Guest' }
-      & Pick<Guest, 'birthDate' | 'documentNumber' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
+      & Pick<Guest, 'birthDate' | 'documentNumber' | 'documentPlace' | 'docFile' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
     )> }
   )> }
 );
@@ -3906,6 +3950,8 @@ export const GetReservationsDocument = gql`
     guests {
       birthDate
       documentNumber
+      documentPlace
+      docFile
       documentType
       firstName
       lastName

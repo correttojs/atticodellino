@@ -5,16 +5,20 @@ import { GuestStatus } from "../generated/graphql-graphcms";
 import { smsConfirmLink, smsReminderLink } from "./_sms";
 import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
 import { faqLink, getLangByPhone } from "./_util";
+import { upload } from "./upload";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
 
 const sendEmail = async ({
-  file,
+  files,
   user,
   apartmentCode,
-}: MutationRegisterGuestsArgs & { apartmentCode: string }) => {
-  const files = await Promise.all(file);
+}: {
+  user: MutationRegisterGuestsArgs["user"];
+  files: any[];
+  apartmentCode: string;
+}) => {
   console.log(files, user);
   let attachments = [];
   if (files?.[0]) {
@@ -68,17 +72,28 @@ export const registerGuests = async (
   _,
   { file, user }: MutationRegisterGuestsArgs
 ) => {
+  const files = await Promise.all(file);
   const { guests, phone, home, check_out, ...input } = user;
 
   const apartment = await takeShapeGQLClient.ApartmentCodeById({ key: home });
   const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code;
-  await sendEmail({ file, user, apartmentCode });
+  await sendEmail({ files, user, apartmentCode });
+
+  const urls = await Promise.all(
+    files?.map((item) => {
+      if (item) {
+        const { createReadStream } = item;
+        return upload(createReadStream());
+      }
+      return null;
+    })
+  );
 
   const data = await graphcmsGQLClient.updateReservation({
     input,
     data: {
       guests: {
-        create: guests,
+        create: guests.map((g, i) => ({ ...g, docFile: urls[i] })),
       },
       reservationStatus: GuestStatus.Registered,
     },
