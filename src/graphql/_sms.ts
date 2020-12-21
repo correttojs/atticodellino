@@ -45,7 +45,9 @@ export const sendSms = ({ recipient, message, schedule, orderId }: Payload) => {
   }
 
   console.log(body);
-
+  if (process.env.VERCEL_ENV !== "production") {
+    Promise.resolve();
+  }
   return fetch("https://api.trendoo.net/API/v1.0/REST/sms", {
     method: "POST",
     headers: {
