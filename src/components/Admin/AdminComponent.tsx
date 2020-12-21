@@ -6,9 +6,10 @@ import {
   useSyncRegistrationsLazyQuery,
   useUpdateReservationStatusMutation,
   ReservationStatus,
+  ReservationsQuery,
 } from "../../generated/graphql";
 
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
 import {
   Button,
@@ -16,15 +17,39 @@ import {
   ButtonSkinned,
   ButtonWithIcon,
 } from "../@UI/Buttons";
-import { MdNewReleases, MdDone, MdDoneAll, MdSync } from "react-icons/md";
+import {
+  MdNewReleases,
+  MdDone,
+  MdDoneAll,
+  MdSync,
+  MdHelpOutline,
+  MdAccountCircle,
+  MdDetails,
+} from "react-icons/md";
 import { Loading } from "../@UI/Loading";
 import { IoLogInSharp } from "react-icons/io5";
 
 import Modal from "react-modal";
 import { Guests } from "./Guest";
+import { MQ_MOBILE } from "../Layout/MediaQueries";
+import { Reservation } from "./Reservation";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;
+`;
+
+export const GlobalStyle = createGlobalStyle`
+    
+    @media ${MQ_MOBILE} {
+      .ReactModal__Content{
+        top:50% !important;
+        left: 50% !important;
+        right: auto !important;
+        bottom: auto !important;
+      }
+    }
+
+  
 `;
 
 export const AdminComponent: React.FC = () => {
@@ -39,19 +64,29 @@ export const AdminComponent: React.FC = () => {
       },
     ],
     onCompleted: () => {
-      setIsOpen(null);
+      setIsSmsOpen(null);
     },
   });
   const [sync, { data: syncedData }] = useSyncRegistrationsLazyQuery();
 
-  const [isOpen, setIsOpen] = useState<{ userId: string; hash: string } | null>(
-    null
-  );
+  const [isSmsOpen, setIsSmsOpen] = useState<{
+    userId: string;
+    hash: string;
+  } | null>(null);
+
+  const [reservationDetails, setReservationDetails] = useState<
+    ReservationsQuery["reservations"][0] | null
+  >(null);
 
   return (
     <>
+      <GlobalStyle />
+      <Reservation
+        reservation={reservationDetails}
+        onClose={() => setReservationDetails(null)}
+      />
       <Modal
-        isOpen={!!isOpen}
+        isOpen={!!isSmsOpen}
         style={{
           content: {
             top: "50%",
@@ -70,7 +105,7 @@ export const AdminComponent: React.FC = () => {
             onClick={() => {
               updateStaus({
                 variables: {
-                  ...isOpen,
+                  ...isSmsOpen,
                   reservationStatus: ReservationStatus.LinkSent,
                 },
               });
@@ -79,7 +114,7 @@ export const AdminComponent: React.FC = () => {
           >
             Ok
           </Button>
-          <ButtonInverted onClick={() => setIsOpen(null)} css={tw`m-4`}>
+          <ButtonInverted onClick={() => setIsSmsOpen(null)} css={tw`m-4`}>
             Cancel
           </ButtonInverted>
         </div>
@@ -127,28 +162,19 @@ export const AdminComponent: React.FC = () => {
                       <td scope="row">
                         <b>{item.guest_name}</b>
                       </td>
-                      <td scope="row">
-                        <a
-                          css={tw`underline`}
-                          href={item.registrationUrl}
-                          target="_blank"
-                        >
-                          register
-                        </a>
-                        {" - "}
-                        <a
-                          css={tw`underline`}
-                          href={item.faqUrl}
-                          target="_blank"
-                        >
-                          faq
-                        </a>
-                      </td>
-                      <td>
-                        {item.check_in} - {item.check_out}
-                      </td>
+
+                      <td>{item.check_in}</td>
                       <td>{item.home}</td>
-                      <td>{item.phone}</td>
+                      <td>
+                        <Button
+                          title={item.reservationStatus}
+                          style={{ float: "right" }}
+                          type="button"
+                          onClick={() => setReservationDetails(item)}
+                        >
+                          <MdDetails color="#fff" />
+                        </Button>
+                      </td>
                       <td>
                         <Button
                           title={item.reservationStatus}
@@ -156,7 +182,10 @@ export const AdminComponent: React.FC = () => {
                           type="button"
                           onClick={() => {
                             if (item.reservationStatus === "new") {
-                              setIsOpen({ userId: item.id, hash: item.hash });
+                              setIsSmsOpen({
+                                userId: item.id,
+                                hash: item.hash,
+                              });
                             } else {
                               updateStaus({
                                 variables: {
@@ -181,8 +210,6 @@ export const AdminComponent: React.FC = () => {
                         </Button>
                       </td>
                     </tr>
-
-                    <Guests guests={item.guests} />
                   </BodyStyle>
                 )
               )}
