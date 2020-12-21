@@ -22,15 +22,12 @@ import {
   MdDone,
   MdDoneAll,
   MdSync,
-  MdHelpOutline,
-  MdAccountCircle,
   MdDetails,
 } from "react-icons/md";
 import { Loading } from "../@UI/Loading";
 import { IoLogInSharp } from "react-icons/io5";
 
 import Modal from "react-modal";
-import { Guests } from "./Guest";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { Reservation } from "./Reservation";
 
