@@ -4,11 +4,9 @@ export const getLangByPhone = (phone: string) =>
 type Props = { phone?: string; hash?: string; id?: string };
 
 export const faqLink = ({ phone, hash, id }: Props) =>
-  `https://www.atticodellino.com/${getLangByPhone(
-    phone
-  )}/faq?hash=${hash}&id=${id}`;
+  `https://www.atticodellino.com/${getLangByPhone(phone)}/faq?hash=${hash}`;
 
 export const registerLink = ({ phone, hash, id }: Props) =>
   `https://www.atticodellino.com/${getLangByPhone(
     phone
-  )}/register?hash=${hash}&id=${id}`;
+  )}/register?hash=${hash}`;

@@ -3855,7 +3855,7 @@ export type CreateReservationMutation = (
   { __typename?: 'Mutation' }
   & { createReservation?: Maybe<(
     { __typename?: 'Reservation' }
-    & Pick<Reservation, 'hash' | 'phone' | 'guest_name' | 'check_in' | 'check_out' | 'home'>
+    & ReservationFragment
   )> }
 );
 
@@ -3868,11 +3868,16 @@ export type GetReservationsQuery = (
   { __typename?: 'Query' }
   & { reservations: Array<(
     { __typename?: 'Reservation' }
-    & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus'>
-    & { guests: Array<(
-      { __typename?: 'Guest' }
-      & Pick<Guest, 'birthDate' | 'documentNumber' | 'documentPlace' | 'docFile' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
-    )> }
+    & ReservationFragment
+  )> }
+);
+
+export type ReservationFragment = (
+  { __typename?: 'Reservation' }
+  & Pick<Reservation, 'id' | 'guest_name' | 'check_out' | 'check_in' | 'hash' | 'phone' | 'home' | 'reservationStatus'>
+  & { guests: Array<(
+    { __typename?: 'Guest' }
+    & Pick<Guest, 'birthDate' | 'documentNumber' | 'documentPlace' | 'docFile' | 'documentType' | 'firstName' | 'lastName' | 'nationality' | 'placeOfBirth'>
   )> }
 );
 
@@ -3891,13 +3896,13 @@ export type UpdateReservationMutation = (
 );
 
 export type GetReservationQueryVariables = Exact<{
-  input: ReservationWhereUniqueInput;
+  input: Scalars['String'];
 }>;
 
 
 export type GetReservationQuery = (
   { __typename?: 'Query' }
-  & { reservation?: Maybe<(
+  & { reservations: Array<(
     { __typename?: 'Reservation' }
     & Pick<Reservation, 'guest_name' | 'check_out' | 'check_in' | 'home' | 'phone'>
   )> }
@@ -3914,7 +3919,29 @@ export type GetTokenQuery = (
   )> }
 );
 
-
+export const ReservationFragmentDoc = gql`
+    fragment Reservation on Reservation {
+  id
+  guest_name
+  check_out
+  check_in
+  hash
+  phone
+  home
+  reservationStatus
+  guests {
+    birthDate
+    documentNumber
+    documentPlace
+    docFile
+    documentType
+    firstName
+    lastName
+    nationality
+    placeOfBirth
+  }
+}
+    `;
 export const GetApartmentsDocument = gql`
     query getApartments {
   apartments {
@@ -3927,40 +3954,17 @@ export const GetApartmentsDocument = gql`
 export const CreateReservationDocument = gql`
     mutation createReservation($input: ReservationCreateInput!) {
   createReservation(data: $input) {
-    hash
-    phone
-    guest_name
-    check_in
-    check_out
-    home
+    ...Reservation
   }
 }
-    `;
+    ${ReservationFragmentDoc}`;
 export const GetReservationsDocument = gql`
     query getReservations($input: Date!) {
   reservations(where: {check_out_gt: $input}, orderBy: check_out_DESC) {
-    id
-    guest_name
-    check_out
-    check_in
-    hash
-    phone
-    home
-    reservationStatus
-    guests {
-      birthDate
-      documentNumber
-      documentPlace
-      docFile
-      documentType
-      firstName
-      lastName
-      nationality
-      placeOfBirth
-    }
+    ...Reservation
   }
 }
-    `;
+    ${ReservationFragmentDoc}`;
 export const UpdateReservationDocument = gql`
     mutation updateReservation($input: ReservationWhereUniqueInput!, $data: ReservationUpdateInput!) {
   updateReservation(where: $input, data: $data) {
@@ -3970,8 +3974,8 @@ export const UpdateReservationDocument = gql`
 }
     `;
 export const GetReservationDocument = gql`
-    query getReservation($input: ReservationWhereUniqueInput!) {
-  reservation(where: $input) {
+    query getReservation($input: String!) {
+  reservations(where: {hash: $input}, orderBy: check_out_DESC) {
     guest_name
     check_out
     check_in

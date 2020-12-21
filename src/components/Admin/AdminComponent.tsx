@@ -65,7 +65,10 @@ export const AdminComponent: React.FC = () => {
       setIsSmsOpen(null);
     },
   });
-  const [sync, { data: syncedData }] = useSyncRegistrationsLazyQuery();
+  const [
+    sync,
+    { data: syncedData, error: syncError, loading: syncLoading },
+  ] = useSyncRegistrationsLazyQuery();
 
   const [isSmsOpen, setIsSmsOpen] = useState<{
     userId: string;
@@ -79,6 +82,7 @@ export const AdminComponent: React.FC = () => {
   return (
     <>
       <GlobalStyle />
+      {syncError && <div>An Error occurred</div>}
       <Reservation
         reservation={reservationDetails}
         onClose={() => setReservationDetails(null)}
@@ -127,13 +131,18 @@ export const AdminComponent: React.FC = () => {
       {loading && <Loading />}
       {session && (
         <div css={tw`p-4`}>
-          <ButtonWithIcon
-            css={tw`m-2`}
-            onClick={() => sync()}
-            Icon={<MdSync />}
-          >
-            Sync with Airbnb
-          </ButtonWithIcon>
+          {syncLoading ? (
+            <Loading />
+          ) : (
+            <ButtonWithIcon
+              css={tw`m-2`}
+              onClick={() => sync()}
+              Icon={<MdSync />}
+            >
+              Sync with Airbnb
+            </ButtonWithIcon>
+          )}
+
           <nav css={tw`flex flex-col sm:flex-row`}>
             <ButtonSkinned
               isInverter={isPast}
@@ -158,21 +167,16 @@ export const AdminComponent: React.FC = () => {
                   <BodyStyle key={`user${key}`}>
                     <tr>
                       <td scope="row">
-                        <b>{item.guest_name}</b>
+                        <b
+                          css={tw`underline`}
+                          onClick={() => setReservationDetails(item)}
+                        >
+                          {item.guest_name}
+                        </b>
                       </td>
 
                       <td>{item.check_in}</td>
                       <td>{item.home}</td>
-                      <td>
-                        <ButtonSmall
-                          title={item.reservationStatus}
-                          style={{ float: "right" }}
-                          type="button"
-                          onClick={() => setReservationDetails(item)}
-                        >
-                          <MdDetails color="#fff" />
-                        </ButtonSmall>
-                      </td>
                       <td>
                         <ButtonSmall
                           title={item.reservationStatus}

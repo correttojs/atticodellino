@@ -30,7 +30,6 @@ export const typeDefs = gql`
 
   input UserInput {
     guests: [Guest]
-    id: ID!
     hash: String!
     phone: String!
     home: String!
@@ -136,7 +135,7 @@ export const typeDefs = gql`
     calendar(apartment: String!): [Calendar]
     syncReservations: [Reservation]
     reservations(isPast: Boolean!): [Reservation]
-    reservation(id: ID!, hash: String!): Reservation
-    faq(id: ID!, hash: String!): [Faq]
+    reservation(hash: String!): Reservation
+    faq(hash: String!): [Faq]
   }
 `;

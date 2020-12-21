@@ -1,35 +1,34 @@
 mutation createReservation($input: ReservationCreateInput!) {
   createReservation(data: $input) {
-    hash
-    phone
-    guest_name
-    check_in
-    check_out
-    home
+    ...Reservation
   }
 }
 
 query getReservations($input: Date!) {
   reservations(where: { check_out_gt: $input }, orderBy: check_out_DESC) {
-    id
-    guest_name
-    check_out
-    check_in
-    hash
-    phone
-    home
-    reservationStatus
-    guests {
-      birthDate
-      documentNumber
-      documentPlace
-      docFile
-      documentType
-      firstName
-      lastName
-      nationality
-      placeOfBirth
-    }
+    ...Reservation
+  }
+}
+
+fragment Reservation on Reservation {
+  id
+  guest_name
+  check_out
+  check_in
+  hash
+  phone
+  home
+  reservationStatus
+  guests {
+    birthDate
+    documentNumber
+    documentPlace
+    docFile
+    documentType
+    firstName
+    lastName
+    nationality
+    placeOfBirth
   }
 }
 
@@ -43,8 +42,8 @@ mutation updateReservation(
   }
 }
 
-query getReservation($input: ReservationWhereUniqueInput!) {
-  reservation(where: $input) {
+query getReservation($input: String!) {
+  reservations(where: { hash: $input }, orderBy: check_out_DESC) {
     guest_name
     check_out
     check_in

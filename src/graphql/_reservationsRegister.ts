@@ -99,13 +99,18 @@ export const registerGuests = async (
     },
   });
 
-  await smsConfirmLink(
+  await smsConfirmLink({
     phone,
-    faqLink({ ...input, phone }),
-    apartment?.getApartmentList?.items?.[0]?.code
-  );
+    link: faqLink({ ...input, phone }),
+    code: apartment?.getApartmentList?.items?.[0]?.code,
+    hash: input.hash,
+  });
 
-  await smsReminderLink(phone, `${check_out}103010`);
+  await smsReminderLink({
+    phone,
+    schedule: `${check_out}103010`,
+    hash: input.hash,
+  });
 
   return data?.updateReservation?.reservationStatus;
 };

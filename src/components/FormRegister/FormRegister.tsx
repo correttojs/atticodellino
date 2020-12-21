@@ -29,7 +29,6 @@ export const Register: React.FC = () => {
   const { data: guestData, loading: guestLoading } = useReservationQuery({
     variables: {
       hash: router.query.hash as string,
-      id: router.query.id as string,
     },
   });
 
@@ -48,7 +47,6 @@ export const Register: React.FC = () => {
             home: guestData?.reservation?.home,
             phone: guestData?.reservation?.phone,
             hash: router.query.hash as string,
-            id: router.query.id as string,
             guests,
           },
           file: guestsForm.map((g) => g.file),

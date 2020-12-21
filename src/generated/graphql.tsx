@@ -45,7 +45,6 @@ export type Guest = {
 
 export type UserInput = {
   guests?: Maybe<Array<Maybe<Guest>>>;
-  id: Scalars['ID'];
   hash: Scalars['String'];
   phone: Scalars['String'];
   home: Scalars['String'];
@@ -205,13 +204,11 @@ export type QueryReservationsArgs = {
 
 
 export type QueryReservationArgs = {
-  id: Scalars['ID'];
   hash: Scalars['String'];
 };
 
 
 export type QueryFaqArgs = {
-  id: Scalars['ID'];
   hash: Scalars['String'];
 };
 
@@ -267,7 +264,6 @@ export type UpdateReservationStatusMutation = (
 );
 
 export type FaqQueryVariables = Exact<{
-  id: Scalars['ID'];
   hash: Scalars['String'];
 }>;
 
@@ -334,7 +330,6 @@ export type RegisterMutation = (
 );
 
 export type ReservationQueryVariables = Exact<{
-  id: Scalars['ID'];
   hash: Scalars['String'];
 }>;
 
@@ -474,8 +469,8 @@ export type UpdateReservationStatusMutationHookResult = ReturnType<typeof useUpd
 export type UpdateReservationStatusMutationResult = Apollo.MutationResult<UpdateReservationStatusMutation>;
 export type UpdateReservationStatusMutationOptions = Apollo.BaseMutationOptions<UpdateReservationStatusMutation, UpdateReservationStatusMutationVariables>;
 export const FaqDocument = gql`
-    query Faq($id: ID!, $hash: String!) {
-  faq(id: $id, hash: $hash) {
+    query Faq($hash: String!) {
+  faq(hash: $hash) {
     answerHtml
     question
     linkVideo
@@ -499,7 +494,6 @@ export const FaqDocument = gql`
  * @example
  * const { data, loading, error } = useFaqQuery({
  *   variables: {
- *      id: // value for 'id'
  *      hash: // value for 'hash'
  *   },
  * });
@@ -645,8 +639,8 @@ export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const ReservationDocument = gql`
-    query Reservation($id: ID!, $hash: String!) {
-  reservation(id: $id, hash: $hash) {
+    query Reservation($hash: String!) {
+  reservation(hash: $hash) {
     guest_name
     check_out
     check_in
@@ -668,7 +662,6 @@ export const ReservationDocument = gql`
  * @example
  * const { data, loading, error } = useReservationQuery({
  *   variables: {
- *      id: // value for 'id'
  *      hash: // value for 'hash'
  *   },
  * });

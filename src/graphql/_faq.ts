@@ -5,16 +5,16 @@ import { getLangByPhone } from "./_util";
 
 export const faq = async (parent, args: ReservationQueryVariables, context) => {
   const result = await graphcmsGQLClient.getReservation({
-    input: args,
+    input: args.hash,
   });
-
+  const reservation = result.reservations?.[0];
   const apartment = await takeShapeGQLClient.ApartmentCodeById({
-    key: result.reservation?.home,
+    key: reservation?.home,
   });
 
   const data = await takeShapeGQLClient.Faqs({
     apartment: apartment?.getApartmentList?.items?.[0]?.key,
-    lang: getLangByPhone(result.reservation?.phone),
+    lang: getLangByPhone(reservation?.phone),
   });
 
   return data?.getFaqList?.items;

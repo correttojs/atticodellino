@@ -13,7 +13,6 @@ export const FaqPage: React.FC = () => {
   const { data, loading } = useFaqQuery({
     variables: {
       hash: router.query.hash as string,
-      id: router.query.id as string,
     },
   });
   if (loading) {

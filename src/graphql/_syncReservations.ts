@@ -2,6 +2,7 @@ import { graphcmsGQLClient } from "./graphcms/client";
 import { AirBnbClient } from "airbnb-private-api";
 import * as crypto from "crypto";
 import { reservations } from "./_reservations";
+import { GuestStatus } from "../generated/graphql-graphcms";
 
 const getAirBnbReservations = async () => {
   let airbnb = new AirBnbClient({
@@ -49,6 +50,7 @@ const getAirBnbReservations = async () => {
       phone,
       hash,
       home,
+      reservationStatus: GuestStatus.New,
     };
   });
 };
@@ -56,16 +58,15 @@ const getAirBnbReservations = async () => {
 export const syncReservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const result = await getAirBnbReservations();
+
   const storedReservations = await reservations(parent, args, context);
 
   const hashes = storedReservations.map((r) => r.hash);
   const toBeAdded = result.filter((r) => !hashes.includes(r.hash));
-  await Promise.all(
+  console.log(toBeAdded);
+  const added = await Promise.all(
     toBeAdded.map((r) => graphcmsGQLClient.createReservation({ input: r }))
   );
 
-  return [
-    ...storedReservations,
-    ...toBeAdded.map((i) => ({ ...i, guests: [] })),
-  ];
+  return [...added.map((r) => r.createReservation), ...storedReservations];
 };

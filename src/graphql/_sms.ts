@@ -3,8 +3,8 @@ import { getLangByPhone } from "./_util";
 
 const MESSAGES = {
   registrationLink: (link: string) => ({
-    it: `Benvenuto/a all'attico del Lino. Registrati per ricevere codice di entrata, video e istruzioni: ${link}`,
-    en: `Welcome to Attico del Lino. Register to get the entry code, video and self-checkin instructions: ${link}`,
+    it: `Attico del Lino. Registrati per ricevere codice di entrata e istruzioni: ${link}`,
+    en: ` Attico del Lino. Register to get the entry code and self-checkin instructions: ${link}`,
   }),
   confirm: (link: string, code: string) => ({
     it: `Codice di entrata: "${code}". Istruzioni: ${link}`,
@@ -16,43 +16,99 @@ const MESSAGES = {
   },
 };
 
-export const sendSms = (
-  recipient: string,
-  message: string,
-  schedule?: string
-) => {
-  console.log(recipient, message, parseInt(schedule?.replace(/-/g, "")));
-  return Promise.resolve();
+type Payload = {
+  recipient: string;
+  message: string;
+  schedule?: string;
+  orderId: string;
+};
+export const sendSms = ({ recipient, message, schedule, orderId }: Payload) => {
+  console.log(
+    recipient,
+    message,
+    message.length,
+    parseInt(schedule?.replace(/-/g, "")),
+    orderId
+  );
 
-  // return fetch("https://api.trendoo.net/API/v1.0/REST/sms", {
-  //   method: "POST",
-  //   headers: {
-  //     user_key: process.env.TRENDOO_ID,
-  //     Access_token: process.env.TRENDOO_PWD,
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     message_type: "GP",
-  //     message: message,
-  //     recipient: [recipient],
-  //     sender: "Attico del Lino",
-  //     // scheduled_delivery_time: 20201219102310,
-  //     order_id: "123456789",
-  //     returnCredits: true,
-  //   }),
-  // })
-  //   .then((r) => r.json())
-  //   .then((r) => console.log(r));
+  const body: any = {
+    message_type: "GS",
+    message,
+    recipient: [recipient.replace(/ /g, "")],
+    // sender: "+393477594144",
+    // scheduled_delivery_time: 20201219102310,
+    order_id: orderId,
+    returnCredits: true,
+  };
+  if (schedule) {
+    body.scheduled_delivery_time = schedule;
+  }
+
+  console.log(body);
+
+  return fetch("https://api.trendoo.net/API/v1.0/REST/sms", {
+    method: "POST",
+    headers: {
+      user_key: process.env.TRENDOO_ID,
+      Access_token: process.env.TRENDOO_PWD,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  })
+    .then((r) => r.json())
+    .then((r) => {
+      console.log(r);
+      return r;
+    });
 };
 
-export const smsRegisterLink = (phone: string, link: string) => {
-  return sendSms(phone, MESSAGES.registrationLink(link)[getLangByPhone(phone)]);
+export const smsRegisterLink = ({
+  phone,
+  link,
+  hash,
+}: {
+  phone: string;
+  link: string;
+  hash: string;
+}) => {
+  return sendSms({
+    recipient: phone,
+    message: MESSAGES.registrationLink(link)[getLangByPhone(phone)],
+    orderId: `${hash}_register`,
+  });
 };
 
-export const smsConfirmLink = (phone: string, link: string, code: string) => {
-  return sendSms(phone, MESSAGES.confirm(link, code)[getLangByPhone(phone)]);
+export const smsConfirmLink = ({
+  phone,
+  link,
+  code,
+  hash,
+}: {
+  phone: string;
+  link: string;
+  code: string;
+  hash: string;
+}) => {
+  return sendSms({
+    recipient: phone,
+    message: MESSAGES.confirm(link, code)[getLangByPhone(phone)],
+    orderId: `${hash}_confirm`,
+  });
 };
 
-export const smsReminderLink = (phone: string, schedule: string) => {
-  return sendSms(phone, MESSAGES.reminder[getLangByPhone(phone)], schedule);
+export const smsReminderLink = ({
+  phone,
+  schedule,
+  hash,
+}: {
+  phone: string;
+  schedule: string;
+  hash: string;
+}) => {
+  return sendSms({
+    recipient: phone,
+    message: MESSAGES.reminder[getLangByPhone(phone)],
+    schedule,
+    orderId: `${hash}_reminder`,
+  });
 };

@@ -1,5 +1,5 @@
-query Faq($id: ID!, $hash: String!) {
-  faq(id: $id, hash: $hash) {
+query Faq($hash: String!) {
+  faq(hash: $hash) {
     answerHtml
     question
     linkVideo

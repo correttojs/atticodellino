@@ -30,9 +30,9 @@ export const reservation = async (
   context
 ) => {
   const storedReservations = await graphcmsGQLClient.getReservation({
-    input: args,
+    input: args.hash,
   });
-  return storedReservations.reservation;
+  return storedReservations.reservations?.[0];
 };
 
 export const updateReservationStatus = async (
@@ -49,6 +49,10 @@ export const updateReservationStatus = async (
   });
 
   const phone = storedReservations?.updateReservation?.phone;
-  await smsRegisterLink(phone, registerLink({ ...rest, phone }));
+  await smsRegisterLink({
+    phone,
+    link: registerLink({ ...rest, phone }),
+    hash: rest.hash,
+  });
   return storedReservations.updateReservation.reservationStatus;
 };
