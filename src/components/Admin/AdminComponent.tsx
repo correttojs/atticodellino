@@ -15,6 +15,7 @@ import {
   Button,
   ButtonInverted,
   ButtonSkinned,
+  ButtonSmall,
   ButtonWithIcon,
 } from "../@UI/Buttons";
 import {
@@ -163,17 +164,17 @@ export const AdminComponent: React.FC = () => {
                       <td>{item.check_in}</td>
                       <td>{item.home}</td>
                       <td>
-                        <Button
+                        <ButtonSmall
                           title={item.reservationStatus}
                           style={{ float: "right" }}
                           type="button"
                           onClick={() => setReservationDetails(item)}
                         >
                           <MdDetails color="#fff" />
-                        </Button>
+                        </ButtonSmall>
                       </td>
                       <td>
-                        <Button
+                        <ButtonSmall
                           title={item.reservationStatus}
                           style={{ float: "right" }}
                           type="button"
@@ -204,7 +205,7 @@ export const AdminComponent: React.FC = () => {
                           ) : (
                             <MdDoneAll color="#fff" />
                           )}
-                        </Button>
+                        </ButtonSmall>
                       </td>
                     </tr>
                   </BodyStyle>

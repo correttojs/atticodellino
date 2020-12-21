@@ -2,6 +2,14 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { ThemeType } from "../Layout/useGlobal";
 
+export const ButtonSmall = styled.button`
+  ${tw`text-white tracking-wider py-2 px-2 rounded`}
+  background-color: ${({ theme }: ThemeType) => theme.colors.brand};
+  &:hover {
+    background-color: ${({ theme }: ThemeType) => theme.colors.active};
+  }
+`;
+
 export const Button = styled.button`
   ${tw`text-white tracking-wider py-2 px-6 rounded`}
   background-color: ${({ theme }: ThemeType) => theme.colors.brand};
