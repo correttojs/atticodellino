@@ -2,6 +2,7 @@ import { graphcmsGQLClient } from "./graphcms/client";
 import {
   MutationUpdateReservationStatusArgs,
   ReservationQueryVariables,
+  ReservationStatus,
 } from "../generated/graphql";
 import { smsRegisterLink } from "./_sms";
 import { faqLink, getLangByPhone, registerLink } from "./_util";
@@ -48,11 +49,14 @@ export const updateReservationStatus = async (
     data: { reservationStatus: reservationStatus as any },
   });
 
-  const phone = storedReservations?.updateReservation?.phone;
-  await smsRegisterLink({
-    phone,
-    link: registerLink({ ...rest, phone }),
-    hash: rest.hash,
-  });
+  if (args.reservationStatus === ReservationStatus.LinkSent) {
+    const phone = storedReservations?.updateReservation?.phone;
+    await smsRegisterLink({
+      phone,
+      link: registerLink({ ...rest, phone }),
+      hash: rest.hash,
+    });
+  }
+
   return storedReservations.updateReservation.reservationStatus;
 };
