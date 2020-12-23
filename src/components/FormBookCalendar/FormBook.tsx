@@ -2,7 +2,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { FormInput } from "../@UI/FormInput";
-import { useBookNowMutation } from "../../generated/graphql";
+
 import { bookInitialValues, bookValidationSchema } from "./bookData";
 import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
@@ -10,13 +10,15 @@ import { Button } from "../@UI/Buttons";
 import { FormError } from "../@UI/FormError";
 import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
 import { Loading } from "../@UI/Loading";
+import { useMutation } from "@apollo/client";
+import { BookNowDocument } from "./bookNow.generated";
 
 export const FormBook: React.FC<{
   from: string;
   to: string;
   price: number;
 }> = ({ from, to, price }) => {
-  const [bookNow, { data, loading, error }] = useBookNowMutation();
+  const [bookNow, { data, loading, error }] = useMutation(BookNowDocument);
   const t = useTranslations();
   const formik = useFormik({
     initialValues: bookInitialValues,

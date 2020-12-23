@@ -62,7 +62,9 @@ export const FormUpload: React.FC<PropType> = ({
           }}
           className="form-control"
         />
-        <span css={tw`mx-4`}>{formik.values.guests[index].file?.name}</span>
+        <span css={tw`mx-4`}>
+          {formik?.values?.guests?.[index]?.file?.name}
+        </span>
       </UploadStyle>
     </div>
   );

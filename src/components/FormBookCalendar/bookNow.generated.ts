@@ -1,3 +1,6 @@
+import * as Types from '../../generated/graphql';
+
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -216,3 +219,19 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+
+export type BookNowMutationVariables = Types.Exact<{
+  user: Types.BookInput;
+}>;
+
+
+export type BookNowMutation = (
+  { __typename?: 'Mutation' }
+  & { book?: Types.Maybe<(
+    { __typename?: 'BookResponse' }
+    & Pick<Types.BookResponse, 'firstName' | 'lastName'>
+  )> }
+);
+
+
+export const BookNowDocument: DocumentNode<BookNowMutation, BookNowMutationVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"bookNow"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"BookInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"book"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]};

@@ -27,6 +27,10 @@ export type Scalars = {
   RichTextAST: any;
 };
 
+
+
+
+
 export type Aggregate = {
   __typename?: 'Aggregate';
   count: Scalars['Int'];

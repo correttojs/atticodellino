@@ -1,3 +1,6 @@
+import * as Types from '../../generated/graphql';
+
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -216,3 +219,23 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+
+export type FaqQueryVariables = Types.Exact<{
+  hash: Types.Scalars['String'];
+}>;
+
+
+export type FaqQuery = (
+  { __typename?: 'Query' }
+  & { faq?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Faq' }
+    & Pick<Types.Faq, 'answerHtml' | 'question' | 'linkVideo'>
+    & { asset?: Types.Maybe<(
+      { __typename?: 'Asset' }
+      & Pick<Types.Asset, 'mimeType' | 'path'>
+    )> }
+  )>>> }
+);
+
+
+export const FaqDocument: DocumentNode<FaqQuery, FaqQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Faq"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"hash"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"faq"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"hash"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"answerHtml"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"linkVideo"}},{"kind":"Field","name":{"kind":"Name","value":"asset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"mimeType"}},{"kind":"Field","name":{"kind":"Name","value":"path"}}]}}]}}]}}]};

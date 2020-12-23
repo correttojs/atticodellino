@@ -10,8 +10,26 @@ async function run() {
         [process.cwd() + "/src/generated/graphql.tsx"]: {
           plugins: [
             "typescript",
+            // "typescript-operations",
+            // "typescript-react-apollo",
+          ],
+          config: {
+            withHooks: true,
+            withHOC: false,
+            withComponent: false,
+            gqlImport: "graphql-tag",
+          },
+        },
+        ["src/"]: {
+          preset: "near-operation-file",
+          presetConfig: {
+            extension: ".generated.ts",
+            baseTypesPath: "/generated/graphql.tsx",
+          },
+          plugins: [
+            "typescript",
             "typescript-operations",
-            "typescript-react-apollo",
+            "typed-document-node",
           ],
           config: {
             withHooks: true,

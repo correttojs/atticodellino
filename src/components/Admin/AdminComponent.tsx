@@ -1,13 +1,5 @@
 import React, { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/client";
-import {
-  useReservationsQuery,
-  ReservationsDocument,
-  useSyncRegistrationsLazyQuery,
-  useUpdateReservationStatusMutation,
-  ReservationStatus,
-  ReservationsQuery,
-} from "../../generated/graphql";
 
 import styled, { createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
@@ -18,19 +10,21 @@ import {
   ButtonSmall,
   ButtonWithIcon,
 } from "../@UI/Buttons";
-import {
-  MdNewReleases,
-  MdDone,
-  MdDoneAll,
-  MdSync,
-  MdDetails,
-} from "react-icons/md";
+import { MdNewReleases, MdDone, MdDoneAll, MdSync } from "react-icons/md";
 import { Loading } from "../@UI/Loading";
 import { IoLogInSharp } from "react-icons/io5";
 
 import Modal from "react-modal";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { Reservation } from "./Reservation";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import {
+  ReservationsDocument,
+  ReservationsQuery,
+  ReservationStatus,
+  SyncRegistrationsDocument,
+  UpdateReservationStatusDocument,
+} from "./reservations.generated";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;
@@ -53,8 +47,10 @@ export const GlobalStyle = createGlobalStyle`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
-  const { data, loading } = useReservationsQuery({ variables: { isPast } });
-  const [updateStaus] = useUpdateReservationStatusMutation({
+  const { data, loading } = useQuery(ReservationsDocument, {
+    variables: { isPast },
+  });
+  const [updateStaus] = useMutation(UpdateReservationStatusDocument, {
     refetchQueries: [
       {
         query: ReservationsDocument,
@@ -68,7 +64,7 @@ export const AdminComponent: React.FC = () => {
   const [
     sync,
     { data: syncedData, error: syncError, loading: syncLoading },
-  ] = useSyncRegistrationsLazyQuery();
+  ] = useLazyQuery(SyncRegistrationsDocument);
 
   const [isSmsOpen, setIsSmsOpen] = useState<{
     userId: string;
