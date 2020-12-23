@@ -1,4 +1,3 @@
-import { ReservationsQuery } from "../../generated/graphql";
 import React, { useState } from "react";
 import tw from "twin.macro";
 import Modal from "react-modal";
@@ -9,6 +8,7 @@ import { FaRegIdCard } from "react-icons/fa";
 import styled from "styled-components";
 import { ThemeType } from "../Layout/useGlobal";
 import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
+import { ReservationsQuery } from "./reservations.generated";
 
 const DescStyle = styled.i`
   ${tw`text-red-900`}

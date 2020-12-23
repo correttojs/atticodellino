@@ -1,5 +1,5 @@
 import ReactCalendar from "react-calendar";
-import { useCalendarQuery, usePriceLazyQuery } from "../../generated/graphql";
+
 import styled from "styled-components";
 import { FormBook } from "./FormBook";
 import React, { useState } from "react";
@@ -9,6 +9,9 @@ import { H2 } from "../@UI/Texts";
 import tw from "twin.macro";
 import { MQ_MOBILE, MQ_NOT_MOBILE } from "../Layout/MediaQueries";
 import { ThemeType } from "../Layout/useGlobal";
+import { useLazyQuery, useQuery } from "@apollo/client";
+import { CalendarDocument } from "./calendar.generated";
+import { PriceDocument } from "./price.generated";
 
 const StyledCalendar = styled(ReactCalendar)`
   @media ${MQ_NOT_MOBILE} {
@@ -45,8 +48,8 @@ const formatDate = (date: Date) => {
 
 export const BookingCalendar = () => {
   const { apartment, airBnb } = useGlobal();
-  const { data } = useCalendarQuery({ variables: { apartment } });
-  const [calcPrice, { data: price }] = usePriceLazyQuery();
+  const { data } = useQuery(CalendarDocument, { variables: { apartment } });
+  const [calcPrice, { data: price }] = useLazyQuery(PriceDocument);
   const t = useTranslations();
 
   const [selection, setSelection] = useState([]);

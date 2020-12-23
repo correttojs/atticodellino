@@ -1,16 +1,17 @@
+import { useQuery } from "@apollo/client";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { useFaqQuery } from "../../generated/graphql";
 import { Loading } from "../@UI/Loading";
 
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
+import { FaqDocument } from "./faq.generated";
 
 export const FaqPage: React.FC = () => {
   const router = useRouter();
-  const { data, loading } = useFaqQuery({
+  const { data, loading } = useQuery(FaqDocument, {
     variables: {
       hash: router.query.hash as string,
     },

@@ -1,3 +1,6 @@
+import * as Types from '../../generated/graphql';
+
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -216,3 +219,19 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+
+export type CalendarQueryVariables = Types.Exact<{
+  apartment: Types.Scalars['String'];
+}>;
+
+
+export type CalendarQuery = (
+  { __typename?: 'Query' }
+  & { calendar?: Types.Maybe<Array<Types.Maybe<(
+    { __typename?: 'Calendar' }
+    & Pick<Types.Calendar, 'start' | 'end'>
+  )>>> }
+);
+
+
+export const CalendarDocument: DocumentNode<CalendarQuery, CalendarQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Calendar"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"apartment"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"calendar"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"apartment"},"value":{"kind":"Variable","name":{"kind":"Name","value":"apartment"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"start"}},{"kind":"Field","name":{"kind":"Name","value":"end"}}]}}]}}]};

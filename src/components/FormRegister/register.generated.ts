@@ -1,3 +1,6 @@
+import * as Types from '../../generated/graphql';
+
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -216,3 +219,31 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+
+export type RegisterMutationVariables = Types.Exact<{
+  user: Types.UserInput;
+  file: Array<Types.Maybe<Types.Scalars['Upload']>>;
+}>;
+
+
+export type RegisterMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Types.Mutation, 'registerGuests'>
+);
+
+export type ReservationQueryVariables = Types.Exact<{
+  hash: Types.Scalars['String'];
+}>;
+
+
+export type ReservationQuery = (
+  { __typename?: 'Query' }
+  & { reservation?: Types.Maybe<(
+    { __typename?: 'Reservation' }
+    & Pick<Types.Reservation, 'guest_name' | 'check_out' | 'check_in' | 'phone' | 'home'>
+  )> }
+);
+
+
+export const RegisterDocument: DocumentNode<RegisterMutation, RegisterMutationVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"file"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerGuests"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}},{"kind":"Argument","name":{"kind":"Name","value":"file"},"value":{"kind":"Variable","name":{"kind":"Name","value":"file"}}}]}]}}]};
+export const ReservationDocument: DocumentNode<ReservationQuery, ReservationQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Reservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"hash"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"hash"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"guest_name"}},{"kind":"Field","name":{"kind":"Name","value":"check_out"}},{"kind":"Field","name":{"kind":"Name","value":"check_in"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"home"}}]}}]}}]};

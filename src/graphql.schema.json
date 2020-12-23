@@ -2474,6 +2474,38 @@
     ],
     "directives": [
       {
+        "name": "cacheControl",
+        "description": null,
+        "isRepeatable": false,
+        "locations": [
+          "FIELD_DEFINITION",
+          "OBJECT",
+          "INTERFACE"
+        ],
+        "args": [
+          {
+            "name": "maxAge",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "scope",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "CacheControlScope",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ]
+      },
+      {
         "name": "include",
         "description": "Directs the executor to include this field or fragment only when the `if` argument is true.",
         "isRepeatable": false,

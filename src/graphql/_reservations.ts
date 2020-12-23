@@ -1,11 +1,11 @@
 import { graphcmsGQLClient } from "./graphcms/client";
 import {
   MutationUpdateReservationStatusArgs,
-  ReservationQueryVariables,
   ReservationStatus,
 } from "../generated/graphql";
 import { smsRegisterLink } from "./_sms";
 import { faqLink, getLangByPhone, registerLink } from "./_util";
+import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
 
 export const reservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");

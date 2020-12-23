@@ -1,4 +1,4 @@
-import { ReservationQueryVariables } from "../generated/graphql";
+import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
 import { graphcmsGQLClient } from "./graphcms/client";
 import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
 import { getLangByPhone } from "./_util";

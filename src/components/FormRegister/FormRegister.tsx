@@ -4,10 +4,7 @@ import { useFormik, FieldArray, FormikProvider } from "formik";
 import { initialValues, validationSchema, guestValue } from "./data";
 import { FormInput } from "../@UI/FormInput";
 import ReactCalendar from "react-calendar";
-import {
-  useRegisterMutation,
-  useReservationQuery,
-} from "../../generated/graphql";
+
 import { useTranslations } from "../Translations/useTranslations";
 import { H1, H2 } from "../@UI/Texts";
 import tw from "twin.macro";
@@ -20,17 +17,22 @@ import { useRouter } from "next/router";
 import { Section } from "../@UI/Section";
 import { Card } from "../@UI/Card";
 import { Loading } from "../@UI/Loading";
+import { useMutation, useQuery } from "@apollo/client";
+import { RegisterDocument, ReservationDocument } from "./register.generated";
 
 export const Register: React.FC = () => {
-  const [register, { data, loading, error }] = useRegisterMutation();
+  const [register, { data, loading, error }] = useMutation(RegisterDocument);
   const router = useRouter();
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const t = useTranslations();
-  const { data: guestData, loading: guestLoading } = useReservationQuery({
-    variables: {
-      hash: router.query.hash as string,
-    },
-  });
+  const { data: guestData, loading: guestLoading } = useQuery(
+    ReservationDocument,
+    {
+      variables: {
+        hash: router.query.hash as string,
+      },
+    }
+  );
 
   const formik = useFormik({
     initialValues,
