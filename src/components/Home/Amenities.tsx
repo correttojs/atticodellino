@@ -4,6 +4,7 @@ import { Section } from "../@UI/Section";
 import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
 import { H2, P } from "../@UI/Texts";
 import tw from "twin.macro";
+import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
 
 export const Amenities: React.FC<{
   amenities: { name: string }[];
@@ -17,8 +18,11 @@ export const Amenities: React.FC<{
         <div
           css={`
             ${tw`pt-5`}
-            column-count: 3;
+            column-count: 2;
             max-width: 90vw;
+            @media ${MQ_NOT_MOBILE} {
+              column-count: 3;
+            }
           `}
         >
           {amenities.map((s, k) => (

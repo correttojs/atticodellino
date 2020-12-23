@@ -6,6 +6,7 @@ import { H2 } from "../@UI/Texts";
 import { FaAirbnb } from "react-icons/fa";
 import tw from "twin.macro";
 import { Section } from "../@UI/Section";
+import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
 
 export const Reviews: React.FC<{
   sorted_reviews: pdp_listing_detail["pdp_listing_detail"]["sorted_reviews"];
@@ -21,9 +22,12 @@ export const Reviews: React.FC<{
 
       <div
         css={`
-          column-count: 3;
+          column-count: 2;
           margin-bottom: 20px;
           max-width: 90vw;
+          @media ${MQ_NOT_MOBILE} {
+            column-count: 3;
+          }
         `}
       >
         {review_details_interface.review_summary.map((s, k) => (
