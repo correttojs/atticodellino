@@ -40,6 +40,7 @@ query Apartment($key: String!) {
         location
         key
       }
+      mapLink
     }
   }
 }

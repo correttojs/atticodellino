@@ -999,24 +999,25 @@ export type TsWhereInput = {
   environmentVariables?: Maybe<TsWhereTsStaticSiteEnvironmentVariables>;
   triggers?: Maybe<TsWhereTsStaticSiteTriggers>;
   templateHash?: Maybe<TsWhereString>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   relationship?: Maybe<TsWhereLanguageRelationship>;
   content?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
@@ -1145,24 +1146,25 @@ export type TsAndOperator = {
   environmentVariables?: Maybe<TsWhereTsStaticSiteEnvironmentVariables>;
   triggers?: Maybe<TsWhereTsStaticSiteTriggers>;
   templateHash?: Maybe<TsWhereString>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   relationship?: Maybe<TsWhereLanguageRelationship>;
   content?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
@@ -1210,24 +1212,25 @@ export type TsOrOperator = {
   environmentVariables?: Maybe<TsWhereTsStaticSiteEnvironmentVariables>;
   triggers?: Maybe<TsWhereTsStaticSiteTriggers>;
   templateHash?: Maybe<TsWhereString>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   relationship?: Maybe<TsWhereLanguageRelationship>;
   content?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
@@ -1275,24 +1278,25 @@ export type TsNotOperator = {
   environmentVariables?: Maybe<TsWhereTsStaticSiteEnvironmentVariables>;
   triggers?: Maybe<TsWhereTsStaticSiteTriggers>;
   templateHash?: Maybe<TsWhereString>;
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   relationship?: Maybe<TsWhereLanguageRelationship>;
   content?: Maybe<TsWhereDraftjs>;
   apartment?: Maybe<TsWhereApartmentRelationship>;
@@ -1373,22 +1377,74 @@ export type TsWhereTsStaticSiteTriggers = {
   status?: Maybe<TsWhereString>;
 };
 
+export type TsWhereTsColor = {
+  hex?: Maybe<TsWhereString>;
+  hsl?: Maybe<TsWhereTsColorHsl>;
+  hsv?: Maybe<TsWhereTsColorHsv>;
+  rgb?: Maybe<TsWhereTsColorRgb>;
+};
+
+export type TsWhereTsColorHsl = {
+  h?: Maybe<TsWhereNumber>;
+  a?: Maybe<TsWhereNumber>;
+  s?: Maybe<TsWhereNumber>;
+  l?: Maybe<TsWhereNumber>;
+};
+
+export type TsWhereTsColorHsv = {
+  h?: Maybe<TsWhereNumber>;
+  a?: Maybe<TsWhereNumber>;
+  s?: Maybe<TsWhereNumber>;
+  v?: Maybe<TsWhereNumber>;
+};
+
+export type TsWhereTsColorRgb = {
+  a?: Maybe<TsWhereNumber>;
+  b?: Maybe<TsWhereNumber>;
+  r?: Maybe<TsWhereNumber>;
+  g?: Maybe<TsWhereNumber>;
+};
+
+export type TsWhereAssetRelationship = {
+  sourceUrl?: Maybe<TsWhereString>;
+  path?: Maybe<TsWhereString>;
+  filename?: Maybe<TsWhereString>;
+  description?: Maybe<TsWhereString>;
+  caption?: Maybe<TsWhereDraftjs>;
+  uploadStatus?: Maybe<TsWhereString>;
+  mimeType?: Maybe<TsWhereString>;
+  title?: Maybe<TsWhereString>;
+  credit?: Maybe<TsWhereDraftjs>;
+  _id?: Maybe<TsWhereId>;
+  _version?: Maybe<TsWhereInteger>;
+  _shapeId?: Maybe<TsWhereId>;
+  _shapeName?: Maybe<TsWhereString>;
+  _createdAt?: Maybe<TsWhereDate>;
+  _updatedAt?: Maybe<TsWhereDate>;
+  _schemaVersion?: Maybe<TsWhereNumber>;
+  _status?: Maybe<TsWhereWorkflow>;
+  _contentTypeId?: Maybe<TsWhereId>;
+  _contentTypeName?: Maybe<TsWhereString>;
+  s3Key?: Maybe<TsWhereString>;
+};
+
 export type TsWhereApartmentRelationship = {
-  bookingIcal?: Maybe<TsWhereString>;
+  name?: Maybe<TsWhereString>;
   brandColor?: Maybe<TsShallowWhereTsColor>;
+  key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
+  longitude?: Maybe<TsWhereString>;
   code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsShallowWhereTsColor>;
   lighterColor?: Maybe<TsShallowWhereTsColor>;
   address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsShallowWhereTsColor>;
   airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
   facebookLink?: Maybe<TsWhereString>;
-  name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
   airbnbIcal?: Maybe<TsWhereString>;
-  key?: Maybe<TsWhereString>;
-  longitude?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _shapeId?: Maybe<TsWhereId>;
@@ -1423,57 +1479,6 @@ export type TsShallowWhereTsColorHsv = {
 };
 
 export type TsShallowWhereTsColorRgb = {
-  a?: Maybe<TsWhereNumber>;
-  b?: Maybe<TsWhereNumber>;
-  r?: Maybe<TsWhereNumber>;
-  g?: Maybe<TsWhereNumber>;
-};
-
-export type TsWhereAssetRelationship = {
-  sourceUrl?: Maybe<TsWhereString>;
-  path?: Maybe<TsWhereString>;
-  filename?: Maybe<TsWhereString>;
-  description?: Maybe<TsWhereString>;
-  caption?: Maybe<TsWhereDraftjs>;
-  uploadStatus?: Maybe<TsWhereString>;
-  mimeType?: Maybe<TsWhereString>;
-  title?: Maybe<TsWhereString>;
-  credit?: Maybe<TsWhereDraftjs>;
-  _id?: Maybe<TsWhereId>;
-  _version?: Maybe<TsWhereInteger>;
-  _shapeId?: Maybe<TsWhereId>;
-  _shapeName?: Maybe<TsWhereString>;
-  _createdAt?: Maybe<TsWhereDate>;
-  _updatedAt?: Maybe<TsWhereDate>;
-  _schemaVersion?: Maybe<TsWhereNumber>;
-  _status?: Maybe<TsWhereWorkflow>;
-  _contentTypeId?: Maybe<TsWhereId>;
-  _contentTypeName?: Maybe<TsWhereString>;
-  s3Key?: Maybe<TsWhereString>;
-};
-
-export type TsWhereTsColor = {
-  hex?: Maybe<TsWhereString>;
-  hsl?: Maybe<TsWhereTsColorHsl>;
-  hsv?: Maybe<TsWhereTsColorHsv>;
-  rgb?: Maybe<TsWhereTsColorRgb>;
-};
-
-export type TsWhereTsColorHsl = {
-  h?: Maybe<TsWhereNumber>;
-  a?: Maybe<TsWhereNumber>;
-  s?: Maybe<TsWhereNumber>;
-  l?: Maybe<TsWhereNumber>;
-};
-
-export type TsWhereTsColorHsv = {
-  h?: Maybe<TsWhereNumber>;
-  a?: Maybe<TsWhereNumber>;
-  s?: Maybe<TsWhereNumber>;
-  v?: Maybe<TsWhereNumber>;
-};
-
-export type TsWhereTsColorRgb = {
   a?: Maybe<TsWhereNumber>;
   b?: Maybe<TsWhereNumber>;
   r?: Maybe<TsWhereNumber>;
@@ -1777,24 +1782,25 @@ export type TsStaticSiteSearchResults = {
 };
 
 export type TsWhereApartmentInput = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _shapeId?: Maybe<TsWhereId>;
@@ -1812,24 +1818,25 @@ export type TsWhereApartmentInput = {
 
 /** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
 export type TsApartmentAndOperator = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _shapeId?: Maybe<TsWhereId>;
@@ -1847,24 +1854,25 @@ export type TsApartmentAndOperator = {
 
 /** OR takes an array of conditions that should appear in the matching results. Nested boolean operators can be used to create complex filters. */
 export type TsApartmentOrOperator = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _shapeId?: Maybe<TsWhereId>;
@@ -1882,24 +1890,25 @@ export type TsApartmentOrOperator = {
 
 /** NOT takes a single condition that must not appear in the matching results. */
 export type TsApartmentNotOperator = {
-  sponsor?: Maybe<TsWhereApartmentRelationship>;
-  bookingIcal?: Maybe<TsWhereString>;
-  coverJpg?: Maybe<TsWhereAssetRelationship>;
-  brandColor?: Maybe<TsWhereTsColor>;
-  code?: Maybe<TsWhereString>;
-  lighterColor?: Maybe<TsWhereTsColor>;
-  address?: Maybe<TsWhereString>;
-  latitude?: Maybe<TsWhereString>;
-  lightColor?: Maybe<TsWhereTsColor>;
-  airbnbLink?: Maybe<TsWhereString>;
-  airBnb?: Maybe<TsWhereString>;
-  facebookLink?: Maybe<TsWhereString>;
-  coverWebp?: Maybe<TsWhereAssetRelationship>;
   name?: Maybe<TsWhereString>;
-  location?: Maybe<TsWhereString>;
-  airbnbIcal?: Maybe<TsWhereString>;
+  brandColor?: Maybe<TsWhereTsColor>;
   key?: Maybe<TsWhereString>;
+  location?: Maybe<TsWhereString>;
+  airBnb?: Maybe<TsWhereString>;
+  latitude?: Maybe<TsWhereString>;
   longitude?: Maybe<TsWhereString>;
+  code?: Maybe<TsWhereString>;
+  lightColor?: Maybe<TsWhereTsColor>;
+  lighterColor?: Maybe<TsWhereTsColor>;
+  coverWebp?: Maybe<TsWhereAssetRelationship>;
+  coverJpg?: Maybe<TsWhereAssetRelationship>;
+  address?: Maybe<TsWhereString>;
+  airbnbLink?: Maybe<TsWhereString>;
+  facebookLink?: Maybe<TsWhereString>;
+  sponsor?: Maybe<TsWhereApartmentRelationship>;
+  airbnbIcal?: Maybe<TsWhereString>;
+  bookingIcal?: Maybe<TsWhereString>;
+  mapLink?: Maybe<TsWhereString>;
   _id?: Maybe<TsWhereId>;
   _version?: Maybe<TsWhereInteger>;
   _shapeId?: Maybe<TsWhereId>;
@@ -2306,24 +2315,25 @@ export type AssetReference = Apartment | Faq;
 
 export type Apartment = TsSearchable & {
   __typename?: 'Apartment';
-  sponsor?: Maybe<Array<Maybe<Apartment>>>;
-  bookingIcal?: Maybe<Scalars['String']>;
-  coverJpg?: Maybe<Asset>;
-  brandColor?: Maybe<TsColor>;
-  code?: Maybe<Scalars['String']>;
-  lighterColor?: Maybe<TsColor>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  lightColor?: Maybe<TsColor>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  coverWebp?: Maybe<Asset>;
   name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  airbnbIcal?: Maybe<Scalars['String']>;
+  brandColor?: Maybe<TsColor>;
   key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  lightColor?: Maybe<TsColor>;
+  lighterColor?: Maybe<TsColor>;
+  coverWebp?: Maybe<Asset>;
+  coverJpg?: Maybe<Asset>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  sponsor?: Maybe<Array<Maybe<Apartment>>>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
   _shapeId?: Maybe<Scalars['String']>;
@@ -2347,7 +2357,7 @@ export type Apartment = TsSearchable & {
 };
 
 
-export type ApartmentSponsorArgs = {
+export type ApartmentCoverWebpArgs = {
   locale?: Maybe<Scalars['String']>;
   enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
@@ -2359,7 +2369,7 @@ export type ApartmentCoverJpgArgs = {
 };
 
 
-export type ApartmentCoverWebpArgs = {
+export type ApartmentSponsorArgs = {
   locale?: Maybe<Scalars['String']>;
   enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
@@ -4016,24 +4026,25 @@ export type DeleteTsStaticSiteResult = {
 /** update Apartment input */
 export type UpdateApartmentInput = {
   _id?: Maybe<Scalars['ID']>;
-  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  bookingIcal?: Maybe<Scalars['String']>;
-  coverJpg?: Maybe<TsRelationshipInput>;
-  brandColor?: Maybe<TsColorInput>;
-  code?: Maybe<Scalars['String']>;
-  lighterColor?: Maybe<TsColorInput>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  lightColor?: Maybe<TsColorInput>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  coverWebp?: Maybe<TsRelationshipInput>;
   name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  airbnbIcal?: Maybe<Scalars['String']>;
+  brandColor?: Maybe<TsColorInput>;
   key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  lightColor?: Maybe<TsColorInput>;
+  lighterColor?: Maybe<TsColorInput>;
+  coverWebp?: Maybe<TsRelationshipInput>;
+  coverJpg?: Maybe<TsRelationshipInput>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
   _version?: Maybe<Scalars['Int']>;
   _shapeId?: Maybe<Scalars['String']>;
   _shapeName?: Maybe<Scalars['String']>;
@@ -4048,12 +4059,6 @@ export type UpdateApartmentInput = {
   _contentTypeId?: Maybe<Scalars['String']>;
   _contentTypeName?: Maybe<Scalars['String']>;
   clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type TsRelationshipInput = {
-  shapeId?: Maybe<Scalars['String']>;
-  contentTypeId?: Maybe<Scalars['String']>;
-  id?: Maybe<Scalars['String']>;
 };
 
 export type TsColorInput = {
@@ -4084,6 +4089,12 @@ export type TsColorRgbInput = {
   g?: Maybe<Scalars['Float']>;
 };
 
+export type TsRelationshipInput = {
+  shapeId?: Maybe<Scalars['String']>;
+  contentTypeId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+};
+
 export type UpdateApartmentResult = {
   __typename?: 'UpdateApartmentResult';
   clientMutationId?: Maybe<Scalars['String']>;
@@ -4092,24 +4103,25 @@ export type UpdateApartmentResult = {
 
 /** create Apartment input */
 export type CreateApartmentInput = {
-  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  bookingIcal?: Maybe<Scalars['String']>;
-  coverJpg?: Maybe<TsRelationshipInput>;
-  brandColor?: Maybe<TsColorInput>;
-  code?: Maybe<Scalars['String']>;
-  lighterColor?: Maybe<TsColorInput>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  lightColor?: Maybe<TsColorInput>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  coverWebp?: Maybe<TsRelationshipInput>;
   name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  airbnbIcal?: Maybe<Scalars['String']>;
+  brandColor?: Maybe<TsColorInput>;
   key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  lightColor?: Maybe<TsColorInput>;
+  lighterColor?: Maybe<TsColorInput>;
+  coverWebp?: Maybe<TsRelationshipInput>;
+  coverJpg?: Maybe<TsRelationshipInput>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
   _id?: Maybe<Scalars['ID']>;
   _version?: Maybe<Scalars['Int']>;
   _shapeId?: Maybe<Scalars['String']>;
@@ -4136,24 +4148,25 @@ export type CreateApartmentResult = {
 /** duplicate Apartment input */
 export type DuplicateApartmentInput = {
   _id?: Maybe<Scalars['ID']>;
-  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  bookingIcal?: Maybe<Scalars['String']>;
-  coverJpg?: Maybe<TsRelationshipInput>;
-  brandColor?: Maybe<TsColorInput>;
-  code?: Maybe<Scalars['String']>;
-  lighterColor?: Maybe<TsColorInput>;
-  address?: Maybe<Scalars['String']>;
-  latitude?: Maybe<Scalars['String']>;
-  lightColor?: Maybe<TsColorInput>;
-  airbnbLink?: Maybe<Scalars['String']>;
-  airBnb?: Maybe<Scalars['String']>;
-  facebookLink?: Maybe<Scalars['String']>;
-  coverWebp?: Maybe<TsRelationshipInput>;
   name?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  airbnbIcal?: Maybe<Scalars['String']>;
+  brandColor?: Maybe<TsColorInput>;
   key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
   longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
+  lightColor?: Maybe<TsColorInput>;
+  lighterColor?: Maybe<TsColorInput>;
+  coverWebp?: Maybe<TsRelationshipInput>;
+  coverJpg?: Maybe<TsRelationshipInput>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
+  sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
   _version?: Maybe<Scalars['Int']>;
   _shapeId?: Maybe<Scalars['String']>;
   _shapeName?: Maybe<Scalars['String']>;
@@ -4602,7 +4615,7 @@ export type ApartmentQuery = (
     { __typename?: 'ApartmentPaginatedList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
-      & Pick<Apartment, 'airBnb' | 'latitude' | 'longitude' | 'name' | 'address' | 'airbnbLink' | 'facebookLink'>
+      & Pick<Apartment, 'airBnb' | 'latitude' | 'longitude' | 'name' | 'address' | 'airbnbLink' | 'facebookLink' | 'mapLink'>
       & { brandColor?: Maybe<(
         { __typename?: 'TSColor' }
         & Pick<TsColor, 'hex'>
@@ -4868,6 +4881,7 @@ export const ApartmentDocument = gql`
         location
         key
       }
+      mapLink
     }
   }
 }

@@ -15,7 +15,9 @@ export const Footer: React.FC = () => {
     facebookLink,
     apartment,
     brandColor,
+    mapLink,
   } = useGlobal();
+
   const { locale } = useRouter();
   const t = useTranslations();
 
@@ -28,10 +30,14 @@ export const Footer: React.FC = () => {
     >
       <div css={tw`max-w-screen-lg mx-auto`}>
         <Contacts direction="row" />
-
-        <div css={tw`flex flex-row justify-center m-2 items-center`}>
+        <a
+          css={tw`flex flex-row justify-center m-2 items-center`}
+          href={mapLink}
+          target="_blank"
+          rel="noopener"
+        >
           <FaMapMarker /> <span css={tw`m-1`}>{address}</span>
-        </div>
+        </a>
         <div css={tw`flex flex-row justify-center m-2 items-center`}>
           <FaFacebookSquare />
           <a
