@@ -56,8 +56,8 @@ export const Hero: React.FC<{
       >
         <div
           css={`
-            ${tw`md:hidden fixed mt-2 bg-white`}
-            top:80px;
+            ${tw`md:hidden fixed bg-white w-full`}
+            top:77px;
             left: 0px;
           `}
         >
