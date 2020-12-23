@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
     <footer
       css={`
         background-color: ${brandColor.hex};
-        ${tw` flex flex-col items-center justify-between flex-wrap p-4 w-full text-white`};
+        ${tw` flex flex-col items-center justify-between flex-wrap p-2 md:p-4 w-full text-white`};
       `}
     >
       <div css={tw`max-w-screen-lg mx-auto`}>
