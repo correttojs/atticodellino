@@ -4002,23 +4002,23 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getApartments(variables?: GetApartmentsQueryVariables): Promise<GetApartmentsQuery> {
-      return withWrapper(() => client.request<GetApartmentsQuery>(print(GetApartmentsDocument), variables));
+    getApartments(variables?: GetApartmentsQueryVariables, requestHeaders?: Headers): Promise<GetApartmentsQuery> {
+      return withWrapper(() => client.request<GetApartmentsQuery>(print(GetApartmentsDocument), variables, requestHeaders));
     },
-    createReservation(variables: CreateReservationMutationVariables): Promise<CreateReservationMutation> {
-      return withWrapper(() => client.request<CreateReservationMutation>(print(CreateReservationDocument), variables));
+    createReservation(variables: CreateReservationMutationVariables, requestHeaders?: Headers): Promise<CreateReservationMutation> {
+      return withWrapper(() => client.request<CreateReservationMutation>(print(CreateReservationDocument), variables, requestHeaders));
     },
-    getReservations(variables: GetReservationsQueryVariables): Promise<GetReservationsQuery> {
-      return withWrapper(() => client.request<GetReservationsQuery>(print(GetReservationsDocument), variables));
+    getReservations(variables: GetReservationsQueryVariables, requestHeaders?: Headers): Promise<GetReservationsQuery> {
+      return withWrapper(() => client.request<GetReservationsQuery>(print(GetReservationsDocument), variables, requestHeaders));
     },
-    updateReservation(variables: UpdateReservationMutationVariables): Promise<UpdateReservationMutation> {
-      return withWrapper(() => client.request<UpdateReservationMutation>(print(UpdateReservationDocument), variables));
+    updateReservation(variables: UpdateReservationMutationVariables, requestHeaders?: Headers): Promise<UpdateReservationMutation> {
+      return withWrapper(() => client.request<UpdateReservationMutation>(print(UpdateReservationDocument), variables, requestHeaders));
     },
-    getReservation(variables: GetReservationQueryVariables): Promise<GetReservationQuery> {
-      return withWrapper(() => client.request<GetReservationQuery>(print(GetReservationDocument), variables));
+    getReservation(variables: GetReservationQueryVariables, requestHeaders?: Headers): Promise<GetReservationQuery> {
+      return withWrapper(() => client.request<GetReservationQuery>(print(GetReservationDocument), variables, requestHeaders));
     },
-    getToken(variables?: GetTokenQueryVariables): Promise<GetTokenQuery> {
-      return withWrapper(() => client.request<GetTokenQuery>(print(GetTokenDocument), variables));
+    getToken(variables?: GetTokenQueryVariables, requestHeaders?: Headers): Promise<GetTokenQuery> {
+      return withWrapper(() => client.request<GetTokenQuery>(print(GetTokenDocument), variables, requestHeaders));
     }
   };
 }

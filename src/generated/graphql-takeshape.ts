@@ -5023,41 +5023,41 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    Apartment(variables: ApartmentQueryVariables): Promise<ApartmentQuery> {
-      return withWrapper(() => client.request<ApartmentQuery>(print(ApartmentDocument), variables));
+    Apartment(variables: ApartmentQueryVariables, requestHeaders?: Headers): Promise<ApartmentQuery> {
+      return withWrapper(() => client.request<ApartmentQuery>(print(ApartmentDocument), variables, requestHeaders));
     },
-    getApartmentsKey(variables?: GetApartmentsKeyQueryVariables): Promise<GetApartmentsKeyQuery> {
-      return withWrapper(() => client.request<GetApartmentsKeyQuery>(print(GetApartmentsKeyDocument), variables));
+    getApartmentsKey(variables?: GetApartmentsKeyQueryVariables, requestHeaders?: Headers): Promise<GetApartmentsKeyQuery> {
+      return withWrapper(() => client.request<GetApartmentsKeyQuery>(print(GetApartmentsKeyDocument), variables, requestHeaders));
     },
-    ApartmentCode(variables: ApartmentCodeQueryVariables): Promise<ApartmentCodeQuery> {
-      return withWrapper(() => client.request<ApartmentCodeQuery>(print(ApartmentCodeDocument), variables));
+    ApartmentCode(variables: ApartmentCodeQueryVariables, requestHeaders?: Headers): Promise<ApartmentCodeQuery> {
+      return withWrapper(() => client.request<ApartmentCodeQuery>(print(ApartmentCodeDocument), variables, requestHeaders));
     },
-    ApartmentCodeById(variables: ApartmentCodeByIdQueryVariables): Promise<ApartmentCodeByIdQuery> {
-      return withWrapper(() => client.request<ApartmentCodeByIdQuery>(print(ApartmentCodeByIdDocument), variables));
+    ApartmentCodeById(variables: ApartmentCodeByIdQueryVariables, requestHeaders?: Headers): Promise<ApartmentCodeByIdQuery> {
+      return withWrapper(() => client.request<ApartmentCodeByIdQuery>(print(ApartmentCodeByIdDocument), variables, requestHeaders));
     },
-    ApartmentSecret(variables: ApartmentSecretQueryVariables): Promise<ApartmentSecretQuery> {
-      return withWrapper(() => client.request<ApartmentSecretQuery>(print(ApartmentSecretDocument), variables));
+    ApartmentSecret(variables: ApartmentSecretQueryVariables, requestHeaders?: Headers): Promise<ApartmentSecretQuery> {
+      return withWrapper(() => client.request<ApartmentSecretQuery>(print(ApartmentSecretDocument), variables, requestHeaders));
     },
-    getArticleByPath(variables: GetArticleByPathQueryVariables): Promise<GetArticleByPathQuery> {
-      return withWrapper(() => client.request<GetArticleByPathQuery>(print(GetArticleByPathDocument), variables));
+    getArticleByPath(variables: GetArticleByPathQueryVariables, requestHeaders?: Headers): Promise<GetArticleByPathQuery> {
+      return withWrapper(() => client.request<GetArticleByPathQuery>(print(GetArticleByPathDocument), variables, requestHeaders));
     },
-    Faqs(variables: FaqsQueryVariables): Promise<FaqsQuery> {
-      return withWrapper(() => client.request<FaqsQuery>(print(FaqsDocument), variables));
+    Faqs(variables: FaqsQueryVariables, requestHeaders?: Headers): Promise<FaqsQuery> {
+      return withWrapper(() => client.request<FaqsQuery>(print(FaqsDocument), variables, requestHeaders));
     },
-    getLangs(variables?: GetLangsQueryVariables): Promise<GetLangsQuery> {
-      return withWrapper(() => client.request<GetLangsQuery>(print(GetLangsDocument), variables));
+    getLangs(variables?: GetLangsQueryVariables, requestHeaders?: Headers): Promise<GetLangsQuery> {
+      return withWrapper(() => client.request<GetLangsQuery>(print(GetLangsDocument), variables, requestHeaders));
     },
-    sendRegistration(variables: SendRegistrationMutationVariables): Promise<SendRegistrationMutation> {
-      return withWrapper(() => client.request<SendRegistrationMutation>(print(SendRegistrationDocument), variables));
+    sendRegistration(variables: SendRegistrationMutationVariables, requestHeaders?: Headers): Promise<SendRegistrationMutation> {
+      return withWrapper(() => client.request<SendRegistrationMutation>(print(SendRegistrationDocument), variables, requestHeaders));
     },
-    updateRegistrations(variables: UpdateRegistrationsMutationVariables): Promise<UpdateRegistrationsMutation> {
-      return withWrapper(() => client.request<UpdateRegistrationsMutation>(print(UpdateRegistrationsDocument), variables));
+    updateRegistrations(variables: UpdateRegistrationsMutationVariables, requestHeaders?: Headers): Promise<UpdateRegistrationsMutation> {
+      return withWrapper(() => client.request<UpdateRegistrationsMutation>(print(UpdateRegistrationsDocument), variables, requestHeaders));
     },
-    getRegistration(variables: GetRegistrationQueryVariables): Promise<GetRegistrationQuery> {
-      return withWrapper(() => client.request<GetRegistrationQuery>(print(GetRegistrationDocument), variables));
+    getRegistration(variables: GetRegistrationQueryVariables, requestHeaders?: Headers): Promise<GetRegistrationQuery> {
+      return withWrapper(() => client.request<GetRegistrationQuery>(print(GetRegistrationDocument), variables, requestHeaders));
     },
-    getRegistrations(variables?: GetRegistrationsQueryVariables): Promise<GetRegistrationsQuery> {
-      return withWrapper(() => client.request<GetRegistrationsQuery>(print(GetRegistrationsDocument), variables));
+    getRegistrations(variables?: GetRegistrationsQueryVariables, requestHeaders?: Headers): Promise<GetRegistrationsQuery> {
+      return withWrapper(() => client.request<GetRegistrationsQuery>(print(GetRegistrationsDocument), variables, requestHeaders));
     }
   };
 }

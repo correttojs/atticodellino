@@ -8,17 +8,7 @@ async function run() {
       documents: "src/components/**/*.graphql",
       generates: {
         [process.cwd() + "/src/generated/graphql.tsx"]: {
-          plugins: [
-            "typescript",
-            // "typescript-operations",
-            // "typescript-react-apollo",
-          ],
-          config: {
-            withHooks: true,
-            withHOC: false,
-            withComponent: false,
-            gqlImport: "graphql-tag",
-          },
+          plugins: ["typescript"],
         },
         ["src/"]: {
           preset: "near-operation-file",
@@ -31,12 +21,6 @@ async function run() {
             "typescript-operations",
             "typed-document-node",
           ],
-          config: {
-            withHooks: true,
-            withHOC: false,
-            withComponent: false,
-            gqlImport: "graphql-tag",
-          },
         },
         [process.cwd() + "/src/graphql.schema.json"]: {
           plugins: ["introspection"],
@@ -62,13 +46,6 @@ async function run() {
             "typescript-operations",
             "typescript-graphql-request",
           ],
-          config: {
-            withHooks: true,
-            withHOC: false,
-            withComponent: false,
-            reactApolloVersion: 3,
-            // gqlImport: "@apollo/client",
-          },
         },
       },
     },
@@ -91,13 +68,6 @@ async function run() {
             "typescript-operations",
             "typescript-graphql-request",
           ],
-          config: {
-            withHooks: true,
-            withHOC: false,
-            withComponent: false,
-            reactApolloVersion: 3,
-            // gqlImport: "@apollo/client",
-          },
         },
       },
     },
