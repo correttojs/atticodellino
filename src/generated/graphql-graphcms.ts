@@ -3909,6 +3909,10 @@ export type GetReservationQuery = (
   & { reservations: Array<(
     { __typename?: 'Reservation' }
     & Pick<Reservation, 'guest_name' | 'check_out' | 'check_in' | 'home' | 'phone'>
+    & { guests: Array<(
+      { __typename?: 'Guest' }
+      & Pick<Guest, 'firstName' | 'lastName'>
+    )> }
   )> }
 );
 
@@ -3985,6 +3989,10 @@ export const GetReservationDocument = gql`
     check_in
     home
     phone
+    guests {
+      firstName
+      lastName
+    }
   }
 }
     `;

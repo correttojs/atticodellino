@@ -9,5 +9,13 @@ query Reservation($hash: String!) {
     check_in
     phone
     home
+    address
+    displayHome
+    isExpired
+    guests {
+      firstName
+      lastName
+    }
+    code
   }
 }

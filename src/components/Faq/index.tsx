@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
@@ -20,7 +19,6 @@ export const FaqPage: React.FC = () => {
     return <Loading />;
   }
 
-  console.log(data?.faq[0]?.asset?.path);
   return (
     <Section>
       {data?.faq.map((item, i) => (

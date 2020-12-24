@@ -110,7 +110,7 @@ export enum ReservationStatus {
 
 export type Reservation = {
   __typename?: 'Reservation';
-  id: Scalars['ID'];
+  id?: Maybe<Scalars['ID']>;
   check_in?: Maybe<Scalars['String']>;
   check_out?: Maybe<Scalars['String']>;
   guest_name?: Maybe<Scalars['String']>;
@@ -121,6 +121,10 @@ export type Reservation = {
   faqUrl?: Maybe<Scalars['String']>;
   reservationStatus?: Maybe<ReservationStatus>;
   guests?: Maybe<Array<Maybe<GuestRegistration>>>;
+  address?: Maybe<Scalars['String']>;
+  displayHome?: Maybe<Scalars['String']>;
+  isExpired?: Maybe<Scalars['Boolean']>;
+  code?: Maybe<Scalars['String']>;
 };
 
 export type ReservationShort = {
@@ -240,10 +244,14 @@ export type ReservationQuery = (
   { __typename?: 'Query' }
   & { reservation?: Types.Maybe<(
     { __typename?: 'Reservation' }
-    & Pick<Types.Reservation, 'guest_name' | 'check_out' | 'check_in' | 'phone' | 'home'>
+    & Pick<Types.Reservation, 'guest_name' | 'check_out' | 'check_in' | 'phone' | 'home' | 'address' | 'displayHome' | 'isExpired' | 'code'>
+    & { guests?: Types.Maybe<Array<Types.Maybe<(
+      { __typename?: 'GuestRegistration' }
+      & Pick<Types.GuestRegistration, 'firstName' | 'lastName'>
+    )>>> }
   )> }
 );
 
 
 export const RegisterDocument: DocumentNode<RegisterMutation, RegisterMutationVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"register"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"user"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UserInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"file"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Upload"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"registerGuests"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"user"},"value":{"kind":"Variable","name":{"kind":"Name","value":"user"}}},{"kind":"Argument","name":{"kind":"Name","value":"file"},"value":{"kind":"Variable","name":{"kind":"Name","value":"file"}}}]}]}}]};
-export const ReservationDocument: DocumentNode<ReservationQuery, ReservationQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Reservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"hash"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"hash"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"guest_name"}},{"kind":"Field","name":{"kind":"Name","value":"check_out"}},{"kind":"Field","name":{"kind":"Name","value":"check_in"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"home"}}]}}]}}]};
+export const ReservationDocument: DocumentNode<ReservationQuery, ReservationQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Reservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"hash"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"hash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"hash"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"guest_name"}},{"kind":"Field","name":{"kind":"Name","value":"check_out"}},{"kind":"Field","name":{"kind":"Name","value":"check_in"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"home"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"displayHome"}},{"kind":"Field","name":{"kind":"Name","value":"isExpired"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}}]};
