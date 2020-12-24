@@ -8,6 +8,7 @@ type PropType = {
   type?: "text" | "number" | "email";
   label?: string;
   index?: number;
+  placeholder?: string;
 };
 
 export const formatLabel = (value: string) =>
@@ -25,6 +26,7 @@ export const FormInput: React.FC<PropType> = ({
   label,
   type = "text",
   index,
+  placeholder,
 }) => {
   const filedPart = field.split(".")[1];
   let error = formik.errors[field];
@@ -46,7 +48,7 @@ export const FormInput: React.FC<PropType> = ({
           name={field}
           id={field}
           onChange={formik.handleChange}
-          // placeholder={label ?? formatLabel(field)}
+          placeholder={placeholder ?? ""}
           type={type}
           value={formik.values[field]}
         />

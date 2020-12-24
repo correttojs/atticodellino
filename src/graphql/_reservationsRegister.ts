@@ -99,12 +99,12 @@ export const registerGuests = async (
     },
   });
 
-  await smsConfirmLink({
-    phone,
-    link: faqLink({ ...input, phone }),
-    code: apartment?.getApartmentList?.items?.[0]?.code,
-    hash: input.hash,
-  });
+  // await smsConfirmLink({
+  //   phone,
+  //   link: faqLink({ ...input, phone }),
+  //   code: apartment?.getApartmentList?.items?.[0]?.code,
+  //   hash: input.hash,
+  // });
 
   await smsReminderLink({
     phone,

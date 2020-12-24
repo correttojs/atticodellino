@@ -6,6 +6,7 @@ import {
 import { smsRegisterLink } from "./_sms";
 import { faqLink, getLangByPhone, registerLink } from "./_util";
 import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
+import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
 
 export const reservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
@@ -33,7 +34,25 @@ export const reservation = async (
   const storedReservations = await graphcmsGQLClient.getReservation({
     input: args.hash,
   });
-  return storedReservations.reservations?.[0];
+  const result = storedReservations.reservations?.[0];
+  const apartments = await takeShapeGQLClient.ApartmentCodeById({
+    key: result?.home,
+  });
+  const tomorrow = new Date();
+  tomorrow.setDate(new Date().getDate() + 1);
+  const isExpired =
+    new Date(result?.check_out.toString()).getTime() - tomorrow.getTime() < 0;
+
+  return {
+    ...result,
+    address: apartments?.getApartmentList?.items?.[0]?.address,
+    displayHome: apartments?.getApartmentList?.items?.[0]?.name,
+    code:
+      isExpired || !result?.guests?.length
+        ? null
+        : apartments?.getApartmentList?.items?.[0]?.code,
+    isExpired,
+  };
 };
 
 export const updateReservationStatus = async (

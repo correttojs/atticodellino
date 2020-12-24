@@ -49,5 +49,9 @@ query getReservation($input: String!) {
     check_in
     home
     phone
+    guests {
+      firstName
+      lastName
+    }
   }
 }

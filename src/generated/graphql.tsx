@@ -107,7 +107,7 @@ export enum ReservationStatus {
 
 export type Reservation = {
   __typename?: 'Reservation';
-  id: Scalars['ID'];
+  id?: Maybe<Scalars['ID']>;
   check_in?: Maybe<Scalars['String']>;
   check_out?: Maybe<Scalars['String']>;
   guest_name?: Maybe<Scalars['String']>;
@@ -118,6 +118,10 @@ export type Reservation = {
   faqUrl?: Maybe<Scalars['String']>;
   reservationStatus?: Maybe<ReservationStatus>;
   guests?: Maybe<Array<Maybe<GuestRegistration>>>;
+  address?: Maybe<Scalars['String']>;
+  displayHome?: Maybe<Scalars['String']>;
+  isExpired?: Maybe<Scalars['Boolean']>;
+  code?: Maybe<Scalars['String']>;
 };
 
 export type ReservationShort = {

@@ -4690,7 +4690,7 @@ export type ApartmentCodeByIdQuery = (
     { __typename?: 'ApartmentPaginatedList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
-      & Pick<Apartment, 'code' | 'key'>
+      & Pick<Apartment, 'code' | 'key' | 'address' | 'name'>
     )>>> }
   )> }
 );
@@ -4910,6 +4910,8 @@ export const ApartmentCodeByIdDocument = gql`
     items {
       code
       key
+      address
+      name
     }
   }
 }

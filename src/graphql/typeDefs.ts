@@ -87,7 +87,7 @@ export const typeDefs = gql`
   }
 
   type Reservation {
-    id: ID!
+    id: ID
     check_in: String
     check_out: String
     guest_name: String
@@ -98,6 +98,10 @@ export const typeDefs = gql`
     faqUrl: String
     reservationStatus: ReservationStatus
     guests: [GuestRegistration]
+    address: String
+    displayHome: String
+    isExpired: Boolean
+    code: String
   }
 
   type ReservationShort {

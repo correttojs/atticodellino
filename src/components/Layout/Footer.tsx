@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
           target="_blank"
           rel="noopener"
         >
-          <FaMapMarker /> <span css={tw`m-1`}>{address}</span>
+          <FaMapMarker css={tw`inline`} /> <span css={tw`m-1`}>{address}</span>
         </a>
         <div css={tw`flex flex-row justify-center m-2 items-center`}>
           <FaFacebookSquare />

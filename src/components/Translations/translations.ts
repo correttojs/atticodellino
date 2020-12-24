@@ -15,9 +15,18 @@ export const Translations = {
     "We will send you a response soon.",
     "Ti invieremo presto una risposta"
   ),
-  REGISTER: t("Register", "Registrazione"),
+  REGISTER: t("Register guests", "Registrazione ospiti"),
   REVIEWS: t("Reviews", "Recensioni"),
-  THANKYOU: t("Thank you [name]", "Grazie [name]"),
+  THANKYOU: t("See you on [data]!", "Ci vediamo il [data]!"),
+  ERROR_RESERVATION: t(
+    "Your reservation link is incorrect",
+    "Il link della tua prenotazione non è corretto"
+  ),
+  ERROR_RESERVATION_EXPIRED: t(
+    "Please rate me on Google and Airbnb. See you next time!",
+    "Lascia una recensione su Google e Airbnb. All prossima!"
+  ),
+  APARTMENT_CODE: t("Enter code", "Codice di entrata"),
   THANKYOU_CONFIRMATION: t(
     "You will receive a confirmation sms soon.",
     "Riceverai presto un di conferma"
