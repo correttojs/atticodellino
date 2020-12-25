@@ -122,6 +122,8 @@ export type Reservation = {
   displayHome?: Maybe<Scalars['String']>;
   isExpired?: Maybe<Scalars['Boolean']>;
   code?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
 };
 
 export type ReservationShort = {

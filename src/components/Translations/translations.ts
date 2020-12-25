@@ -22,10 +22,11 @@ export const Translations = {
     "Your reservation link is incorrect",
     "Il link della tua prenotazione non è corretto"
   ),
-  ERROR_RESERVATION_EXPIRED: t(
-    "Please rate me on Google and Airbnb. See you next time!",
-    "Lascia una recensione su Google e Airbnb. All prossima!"
+  RATE_US: t(
+    "I hope you enjoyed your staying. Please rate me on:",
+    "Spero ti sia piaciuto il posto. Lascia una recensione:"
   ),
+  NEXT_TIME: t("See you next time at", "Ci vediamo la prossima volta a"),
   APARTMENT_CODE: t("Enter code", "Codice di entrata"),
   THANKYOU_CONFIRMATION: t(
     "You will receive a confirmation sms soon.",

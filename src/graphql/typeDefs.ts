@@ -102,6 +102,8 @@ export const typeDefs = gql`
     displayHome: String
     isExpired: Boolean
     code: String
+    airbnbLink: String
+    mapLink: String
   }
 
   type ReservationShort {

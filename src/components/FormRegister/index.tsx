@@ -13,13 +13,14 @@ import { Detail } from "./Detail";
 import { Sponsor } from "./Sponsor";
 import { FaqPage } from "../Faq";
 import { FormRegister } from "./FormRegister";
+import { SiGooglestreetview } from "react-icons/si";
+import { FaAirbnb } from "react-icons/fa";
+import { reservation } from "../../graphql/_reservations";
 
 export const Register: React.FC = () => {
   const router = useRouter();
 
   const t = useTranslations();
-
-  const [isCompleted, setIsCompleted] = useState(false);
 
   const { data, loading, error } = useQuery(ReservationDocument, {
     variables: {
@@ -47,7 +48,26 @@ export const Register: React.FC = () => {
   if (data?.reservation?.isExpired) {
     return (
       <>
-        <H2 css={tw`p-4 text-center`}>{t("ERROR_RESERVATION_EXPIRED")}</H2>
+        <H2 css={tw`p-4 text-center`}>{t("RATE_US")}</H2>
+        <div css={tw`flex justify-center`}>
+          <a
+            href={data?.reservation?.mapLink}
+            css={tw`m-2 flex items-center cursor-pointer`}
+            target="_blank"
+            rel="noopener"
+          >
+            <SiGooglestreetview css={tw`inline`} /> Google
+          </a>
+          <a
+            href={data?.reservation?.airbnbLink}
+            css={tw`m-2 flex items-center cursor-pointer`}
+            target="_blank"
+            rel="noopener"
+          >
+            <FaAirbnb css={tw`inline`} /> Airbnb
+          </a>
+        </div>
+        <H2 css={tw`p-4 text-center`}>{t("NEXT_TIME")}</H2>
         <Sponsor />
       </>
     );

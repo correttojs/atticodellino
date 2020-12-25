@@ -38,6 +38,8 @@ export const reservation = async (
   const apartments = await takeShapeGQLClient.ApartmentCodeById({
     key: result?.home,
   });
+  const apartment = apartments?.getApartmentList?.items?.[0];
+
   const tomorrow = new Date();
   tomorrow.setDate(new Date().getDate() + 1);
   const isExpired =
@@ -45,13 +47,12 @@ export const reservation = async (
 
   return {
     ...result,
-    address: apartments?.getApartmentList?.items?.[0]?.address,
-    displayHome: apartments?.getApartmentList?.items?.[0]?.name,
-    code:
-      isExpired || !result?.guests?.length
-        ? null
-        : apartments?.getApartmentList?.items?.[0]?.code,
+    address: apartment?.address,
+    displayHome: apartment?.name,
+    code: isExpired || !result?.guests?.length ? null : apartment?.code,
     isExpired,
+    airbnbLink: apartment?.airbnbLink,
+    mapLink: apartment?.mapLink,
   };
 };
 

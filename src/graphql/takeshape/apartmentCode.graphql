@@ -12,6 +12,8 @@ query ApartmentCodeById($key: String!) {
       key
       address
       name
+      airbnbLink
+      mapLink
     }
   }
 }

@@ -52,8 +52,8 @@ export const Footer: React.FC = () => {
           <a
             href={airbnbLink}
             target="_blank"
-            css={tw`self-center  ml-1`}
             rel="noopener"
+            css={tw`self-center  ml-1`}
           >
             Airbnb
           </a>

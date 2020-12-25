@@ -17,5 +17,7 @@ query Reservation($hash: String!) {
       lastName
     }
     code
+    mapLink
+    airbnbLink
   }
 }
