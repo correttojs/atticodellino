@@ -1,6 +1,7 @@
 import React from "react";
 import { FaMapMarker } from "react-icons/fa";
 import tw from "twin.macro";
+import { H3 } from "../@UI/Texts";
 import { ThemeType } from "../Layout/useGlobal";
 import { useTranslations } from "../Translations/useTranslations";
 import { ReservationQuery } from "./register.generated";
@@ -18,7 +19,7 @@ export const Detail: React.FC<{
         ${tw`shadow-xl p-4 md:p-4 rounded-md`}
       `}
     >
-      <p css={tw`p-2`}>{reservation?.displayHome}</p>
+      <H3 css={tw`p-2`}>{reservation?.displayHome}</H3>
       {reservation?.code && (
         <p css={tw`p-2`}>
           <Red css={tw`mr-2`}>{t("APARTMENT_CODE")}</Red>

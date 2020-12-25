@@ -90,7 +90,7 @@ export const Hero: React.FC<{
               <img
                 key={i}
                 css={[
-                  tw`object-cover w-full h-full cursor-pointer`,
+                  tw`object-cover w-full h-full cursor-pointer p-1 bg-white`,
                   i === 0 && tw`md:row-span-2 rounded-l-lg`,
                 ]}
                 id={s.id}
