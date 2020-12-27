@@ -6,7 +6,7 @@ import { useInView } from "react-intersection-observer";
 
 export const Map: React.FC<{ title: string }> = ({ title }) => {
   const { latitude, longitude } = useGlobal();
-  const [ref, inView] = useInView();
+  const [ref, inView] = useInView({ triggerOnce: true });
   const { lat, lng } = {
     lat: parseFloat(latitude),
     lng: parseFloat(longitude),
