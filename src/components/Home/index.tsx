@@ -7,7 +7,7 @@ import { Host } from "./Host";
 import { Reviews } from "./Reviews";
 import { Amenities } from "./Amenities";
 import { useTranslations } from "../Translations/useTranslations";
-
+import Image from "next/image";
 import Modal from "react-modal";
 import { useGlobal } from "../Layout";
 import Head from "next/head";
@@ -43,7 +43,6 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
 
       <Section css={tw`flex justify-end `}>
         <CardHorizontal
-          img={`/images/promo-${sponsor?.[0]?.key.toLowerCase()}.webp`}
           title={sponsor?.[0]?.location}
           message={translate("ALSO", {
             c: sponsor?.[0]?.location,
@@ -54,7 +53,16 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
               "/"
             ))
           }
-        />
+        >
+          <Image
+            src={`/images/promo-${sponsor?.[0]?.key.toLowerCase()}.webp`}
+            title={sponsor?.[0]?.location}
+            alt={sponsor?.[0]?.location}
+            width={128}
+            height={128}
+            css={tw`w-32 h-32  object-cover `}
+          />
+        </CardHorizontal>
       </Section>
 
       <Summary {...pdp_listing_detail} />
