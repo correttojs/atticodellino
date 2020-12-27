@@ -30,11 +30,11 @@ export const Card: React.FC<{
 };
 
 export const CardHorizontal: React.FC<{
-  img: string;
+  img?: string;
   title: string;
   message?: string;
   onClick?: (event: any) => void;
-}> = ({ img, onClick, title, message }) => {
+}> = ({ img, onClick, title, message, children }) => {
   return (
     <div
       onClick={onClick}
@@ -45,7 +45,8 @@ export const CardHorizontal: React.FC<{
     >
       <div css={tw`flex`}>
         <div css={tw`flex-shrink-0`}>
-          <img css={tw`w-32 h-32  object-cover `} src={img} />
+          {img && <img css={tw`w-32 h-32  object-cover `} src={img} />}
+          {children}
         </div>
         <div css={tw`p-4`}>
           {message && <p css={tw`mt-2 text-gray-500`}>{message}</p>}
