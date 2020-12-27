@@ -1,16 +1,6 @@
-import tw from "twin.macro";
-import React from "react";
-import { useGlobal } from "../Layout";
+import styled from "styled-components";
+import { ThemeType } from "../Layout/useGlobal";
 
-export const BackgroundWrapper: React.FC = ({ children }) => {
-  const { colors } = useGlobal();
-  return (
-    <div
-      css={`
-        background-color: ${colors.colors.lighter};
-      `}
-    >
-      {children}
-    </div>
-  );
-};
+export const BackgroundWrapper = styled.div`
+  background-color: ${({ theme }: ThemeType) => theme.colors.lighter};
+`;
