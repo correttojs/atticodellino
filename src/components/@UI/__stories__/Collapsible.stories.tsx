@@ -29,7 +29,7 @@ const Section = () => (
 const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
   return (
     <div>
-      <Collapsible Preview={<Section />} showReadMore={true}>
+      <Collapsible showReadMore={true}>
         <Section />
         <Section />
         <Section />
