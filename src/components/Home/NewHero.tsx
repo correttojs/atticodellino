@@ -3,12 +3,18 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { useGlobal } from "../Layout";
 import { Contacts } from "../Layout/Contact";
-import tw from "twin.macro";
 import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
 import { ThemeType } from "../Layout/useGlobal";
-import { keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { Section } from "../@UI/Section";
+import { MdInsertPhoto } from "react-icons/md";
+import { useTranslations } from "../Translations/useTranslations";
+import tw from "twin.macro";
+
+const Img = styled.img`
+  padding: 2px;
+`;
 
 const slidein = keyframes`
    from {
@@ -25,6 +31,8 @@ export const Hero: React.FC<{
 }> = ({ photos }) => {
   const [show, setShow] = useState(-1);
   const global = useGlobal();
+  const { name, sponsor } = useGlobal();
+  const translate = useTranslations();
 
   if (global.apartment === "VR") {
     photos = [
@@ -40,18 +48,27 @@ export const Hero: React.FC<{
     <>
       <div
         css={`
-          ${tw`flex flex-row items-center w-screen`}
-
-          background: url(${global.apartment === "VR"
+          ${tw`bg-repeat-x h-20`}
+          @media ${MQ_MOBILE} {
+            margin-top: 40px;
+          }
+          margin-top: 5px;
+          background-size: auto 100%;
+          background-image: url(${global.apartment === "VR"
             ? "/images/cover.jpg"
-            : "/images/cover-garda.jpg"})  center / cover;
+            : "/images/cover-garda.jpg"});
 
           @supports (background-image: url("image.webp")) {
-            background: url(${global.apartment === "VR"
-                ? "/images/cover.webp"
-                : "/images/cover-garda.webp"})
-              center / cover;
+            background-image: url(${global.apartment === "VR"
+              ? "/images/cover.webp"
+              : "/images/cover-garda.webp"});
           }
+        `}
+      ></div>
+
+      <div
+        css={`
+          ${tw`flex flex-row items-center w-screen`}
         `}
       >
         <div
@@ -63,20 +80,15 @@ export const Hero: React.FC<{
         >
           <Contacts direction="row" />
         </div>
-        <Section
-          css={`
-            ${tw`mt-4`}
-            background-image: ${({ theme }: ThemeType) =>
-              `linear-gradient(0deg, rgba(225,223,255,0) 0%, ${theme.colors.light} 10%, ${theme.colors.light} 90%, rgba(255,255,255,0) 100%);`};
-          `}
-        >
+
+        <Section css={tw`relative`}>
           <div
             css={`
-              ${tw`grid my-8 gap-4 px-4`}
+              ${tw`grid  gap-4 px-4`}
               grid-template-columns: 50% repeat(auto-fill, minmax(25%, 1fr));
               grid-auto-flow: column;
               grid-auto-columns: minmax(25%, 1fr);
-              overflow-x: auto;
+              /* overflow-x: auto; */
               grid-template-rows: 15rem 15rem;
               animation: ${slidein} 1s ease-in;
               @media ${MQ_MOBILE} {
@@ -86,12 +98,14 @@ export const Hero: React.FC<{
               }
             `}
           >
-            {photos.map((s, i) => (
-              <img
+            {photos.slice(0, 5).map((s, i) => (
+              <Img
                 key={i}
                 css={[
-                  tw`object-cover w-full h-full cursor-pointer p-1 bg-white`,
-                  i === 0 && tw`md:row-span-2 rounded-l-lg`,
+                  tw`object-cover w-full h-full cursor-pointer bg-white`,
+                  i === 0 && tw`md:row-span-2 rounded-l-xl`,
+                  i === 3 && tw`rounded-tr-xl`,
+                  i === 4 && tw`rounded-br-xl`,
                 ]}
                 id={s.id}
                 alt={s.caption}
@@ -101,6 +115,18 @@ export const Hero: React.FC<{
               />
             ))}
           </div>
+          <MdInsertPhoto
+            css={`
+              ${tw`absolute h-10 w-10 cursor-pointer p-2 bg-white`}
+              bottom: 3rem;
+              left: 4rem;
+              @media ${MQ_MOBILE} {
+                bottom: 2rem;
+                left: 3rem;
+              }
+            `}
+            onClick={() => setShow(0)}
+          />
         </Section>
       </div>
 
@@ -110,8 +136,9 @@ export const Hero: React.FC<{
         >
           {show > 0 && (
             <GrPrevious
-              style={{ cursor: "pointer" }}
-              size="5rem"
+              // style={{ cursor: "pointer" }}
+              // size="5rem"
+              css={tw`cursor-pointer h-10 w-10 md:h-20 md:w-20`}
               onClick={() => setShow(show - 1)}
             />
           )}
@@ -127,8 +154,9 @@ export const Hero: React.FC<{
 
           {show < photos.length - 1 && (
             <GrNext
-              style={{ cursor: "pointer" }}
-              size="5rem"
+              // style={{ cursor: "pointer" }}
+              // size="5rem"
+              css={tw`cursor-pointer h-10 w-10 md:h-20 md:w-20`}
               onClick={() => setShow(show + 1)}
             />
           )}

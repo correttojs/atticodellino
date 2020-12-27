@@ -5,14 +5,12 @@ import { Section } from "./Section";
 
 export const Collapsible: React.FC<{
   showReadMore: boolean;
-  Preview: React.ReactNode;
-}> = ({ showReadMore, Preview, children }) => {
+}> = ({ showReadMore, children }) => {
   const translate = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <Section>
-        {Preview}
+      <Section css={tw`pt-0`}>
         {showReadMore && !isOpen && (
           <p
             css={tw`text-lg font-semibold cursor-pointer pt-4`}
@@ -23,7 +21,7 @@ export const Collapsible: React.FC<{
         )}
       </Section>
       {isOpen && (
-        <Section>
+        <Section css={tw`pt-0`}>
           {children}
           <p
             css={tw`text-lg font-semibold cursor-pointer pt-4`}
