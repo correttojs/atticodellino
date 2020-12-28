@@ -4,16 +4,15 @@ import Modal from "react-modal";
 import { useGlobal } from "../Layout";
 import { Contacts } from "../Layout/Contact";
 import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
-import { ThemeType } from "../Layout/useGlobal";
 import styled, { keyframes } from "styled-components";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
-import { Section } from "../@UI/Section";
 import { MdInsertPhoto } from "react-icons/md";
 import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
 
 const Img = styled.img`
   padding: 2px;
+  ${tw`object-cover w-full h-full cursor-pointer bg-white`}/* min-width: 100%; */
 `;
 
 const slidein = keyframes`
@@ -48,7 +47,7 @@ export const Hero: React.FC<{
     <>
       <div
         css={`
-          ${tw`bg-repeat-x h-20`}
+          ${tw`bg-repeat-x h-20 w-screen`}
           @media ${MQ_MOBILE} {
             margin-top: 40px;
           }
@@ -81,40 +80,37 @@ export const Hero: React.FC<{
           <Contacts direction="row" />
         </div>
 
-        <Section css={tw`relative`}>
-          <div
-            css={`
-              ${tw`grid  gap-4 px-4`}
-              grid-template-columns: 50% repeat(auto-fill, minmax(25%, 1fr));
-              grid-auto-flow: column;
-              grid-auto-columns: minmax(25%, 1fr);
-              /* overflow-x: auto; */
-              grid-template-rows: 15rem 15rem;
-              animation: ${slidein} 1s ease-in;
-              @media ${MQ_MOBILE} {
-                grid-template-columns: calc(85vw);
-                grid-auto-columns: calc(85vw);
-                grid-template-rows: calc(45vh);
-              }
-            `}
-          >
-            {photos.slice(0, 5).map((s, i) => (
-              <Img
-                key={i}
-                css={[
-                  tw`object-cover w-full h-full cursor-pointer bg-white`,
-                  i === 0 && tw`md:row-span-2 rounded-l-xl`,
-                  i === 3 && tw`rounded-tr-xl`,
-                  i === 4 && tw`rounded-br-xl`,
-                ]}
-                id={s.id}
-                alt={s.caption}
-                src={s.picture}
-                loading="lazy"
-                onClick={() => setShow(i)}
-              />
-            ))}
-          </div>
+        <div
+          css={`
+            ${tw`grid w-full  gap-4 p-4 md:p-8 max-w-screen-xl mx-auto relative`}
+            grid-template-columns: 50% repeat(auto-fill, minmax(25%, 1fr));
+            grid-auto-flow: column;
+            grid-template-rows: 15rem 15rem;
+            animation: ${slidein} 1s ease-in;
+            @media ${MQ_MOBILE} {
+              grid-template-columns: calc(85vw);
+              grid-auto-columns: calc(85vw);
+              grid-template-rows: calc(45vh);
+            }
+          `}
+        >
+          {photos.slice(0, 5).map((s, i) => (
+            <Img
+              css={[
+                i === 0 && tw`md:row-span-2 rounded-l-xl `,
+                i === 3 && tw`rounded-tr-xl`,
+                i === 4 && tw`rounded-br-xl`,
+              ]}
+              key={i}
+              id={s.id}
+              alt={s.caption}
+              src={s.picture}
+              loading="lazy"
+              onClick={() => setShow(i)}
+              height={500}
+              width={650}
+            />
+          ))}
           <MdInsertPhoto
             css={`
               ${tw`absolute h-10 w-10 cursor-pointer p-2 bg-white`}
@@ -127,7 +123,7 @@ export const Hero: React.FC<{
             `}
             onClick={() => setShow(0)}
           />
-        </Section>
+        </div>
       </div>
 
       <Modal isOpen={show !== -1} shouldCloseOnOverlayClick={true}>
