@@ -31,6 +31,16 @@ export const theme = (apartment: GlobalType) => {
       light: `rgba(${r},${g},${b},${a})`,
       lighter: `rgba(${r2},${g2},${b2},${a2})`,
     },
+    background: {
+      jpg:
+        apartment.apartment === "VR"
+          ? "/images/cover.jpg"
+          : "/images/cover-garda.jpg",
+      webp:
+        apartment.apartment === "VR"
+          ? "/images/cover.webp"
+          : "/images/cover-garda.webp",
+    },
   };
 };
 

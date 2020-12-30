@@ -7,8 +7,8 @@ import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
 import styled, { keyframes } from "styled-components";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { MdInsertPhoto } from "react-icons/md";
-import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
+import { BrandBackground } from "./BrandBackground";
 
 const Img = styled.img`
   padding: 2px;
@@ -30,8 +30,6 @@ export const Hero: React.FC<{
 }> = ({ photos }) => {
   const [show, setShow] = useState(-1);
   const global = useGlobal();
-  const { name, sponsor } = useGlobal();
-  const translate = useTranslations();
 
   if (global.apartment === "VR") {
     photos = [
@@ -45,41 +43,13 @@ export const Hero: React.FC<{
 
   return (
     <>
-      <div
-        css={`
-          ${tw`bg-repeat-x h-20 w-screen`}
-          @media ${MQ_MOBILE} {
-            margin-top: 40px;
-          }
-          margin-top: 5px;
-          background-size: auto 100%;
-          background-image: url(${global.apartment === "VR"
-            ? "/images/cover.jpg"
-            : "/images/cover-garda.jpg"});
-
-          @supports (background-image: url("image.webp")) {
-            background-image: url(${global.apartment === "VR"
-              ? "/images/cover.webp"
-              : "/images/cover-garda.webp"});
-          }
-        `}
-      ></div>
+      <BrandBackground />
 
       <div
         css={`
           ${tw`flex flex-row items-center w-screen`}
         `}
       >
-        <div
-          css={`
-            ${tw`md:hidden fixed bg-white w-full`}
-            top:77px;
-            left: 0px;
-          `}
-        >
-          <Contacts direction="row" />
-        </div>
-
         <div
           css={`
             ${tw`grid w-full  gap-4 p-4 md:p-8 max-w-screen-xl mx-auto relative`}

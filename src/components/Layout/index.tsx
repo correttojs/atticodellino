@@ -8,6 +8,7 @@ import { Footer } from "./Footer";
 import { GlobalContext, theme } from "./useGlobal";
 import tw from "twin.macro";
 import { MQ_MOBILE } from "./MediaQueries";
+import { Contacts } from "./Contact";
 
 export const GlobalStyle = createGlobalStyle`
     html, body {
@@ -60,7 +61,19 @@ export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
               <Header />
               <div
                 css={`
-                  margin-top: 80px;
+                  ${tw`md:hidden fixed bg-white w-full`}
+                  top:77px;
+                  left: 0px;
+                `}
+              >
+                <Contacts direction="row" />
+              </div>
+              <div
+                css={`
+                  margin-top: 85px;
+                  @media ${MQ_MOBILE} {
+                    margin-top: 120px;
+                  }
                 `}
               >
                 <Comp {...props}></Comp>

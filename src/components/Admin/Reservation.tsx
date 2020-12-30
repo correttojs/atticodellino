@@ -69,12 +69,12 @@ export const Reservation: React.FC<{
                 <FaRegIdCard style={{ display: "inline" }} /> register
               </span>
             </a>
-            {" - "}
-            <a css={tw`underline`} href={reservation.faqUrl} target="_blank">
+            {/* {" - "} */}
+            {/* <a css={tw`underline`} href={reservation.faqUrl} target="_blank">
               <span>
                 <MdHelpOutline style={{ display: "inline" }} /> faq
               </span>
-            </a>
+            </a> */}
           </p>
         </div>
         <H3 css={tw`mt-4 mb-2 text-red-900`}>Guests</H3>

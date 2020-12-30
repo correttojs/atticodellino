@@ -8,9 +8,16 @@ import {
   ButtonInverted,
   ButtonSkinned,
   ButtonSmall,
+  ButtonSmallInverted,
   ButtonWithIcon,
 } from "../@UI/Buttons";
-import { MdNewReleases, MdDone, MdDoneAll, MdSync } from "react-icons/md";
+import {
+  MdNewReleases,
+  MdDone,
+  MdDoneAll,
+  MdSync,
+  MdMoreVert,
+} from "react-icons/md";
 import { Loading } from "../@UI/Loading";
 import { IoLogInSharp } from "react-icons/io5";
 
@@ -162,13 +169,13 @@ export const AdminComponent: React.FC = () => {
                 (item, key) => (
                   <BodyStyle key={`user${key}`}>
                     <tr>
-                      <td scope="row">
-                        <b
-                          css={tw`underline`}
-                          onClick={() => setReservationDetails(item)}
-                        >
-                          {item.guest_name}
-                        </b>
+                      <td
+                        scope="row"
+                        css={tw`cursor-pointer flex items-center justify-between`}
+                        onClick={() => setReservationDetails(item)}
+                      >
+                        <b css={tw`underline `}>{item.guest_name}</b>
+                        <MdMoreVert />
                       </td>
 
                       <td>{item.check_in}</td>

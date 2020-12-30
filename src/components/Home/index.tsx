@@ -18,6 +18,7 @@ import { Summary } from "./Summary";
 import { Collapsible } from "../@UI/Collapsible";
 import { CardHorizontal } from "../@UI/Card";
 import { useInView } from "react-intersection-observer";
+import { BrandBackground } from "./BrandBackground";
 
 Modal.setAppElement("#__next");
 
@@ -102,6 +103,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
 
             <Map title={pdp_listing_detail.name} />
 
+            <BrandBackground />
             <Host
               srcImage={pdp_listing_detail.primary_host.profile_pic_path}
               about={pdp_listing_detail.primary_host.about}
