@@ -38,6 +38,10 @@ export default class MyDocument extends Document<{
               name="viewport"
               content="initial-scale=1.0, width=device-width"
             ></meta>
+            <meta
+              name="google-site-verification"
+              content="KdtvkyxtNp0Msw0A01kGAFCDxasV6K58QyV9Qy_oXZ8"
+            ></meta>
             <meta name="theme-color" content={this.props.color} />
             <link
               rel="preload"
