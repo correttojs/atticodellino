@@ -1,7 +1,0 @@
-query getLangs {
-  getLanguageList {
-    items {
-      code
-    }
-  }
-}

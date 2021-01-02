@@ -1,14 +1,15 @@
-import { takeShapeGQLClient } from "./takeShapeClient";
+import { GetLangsApartmentListDocument } from "../../generated/graphql-takeshape-doc";
+import { takeShapeRequest } from "./takeShapeClient";
 
 export const getLangsApartmentsPaths = async () => {
-  const dataLang = await takeShapeGQLClient.getLangs();
-  const dataApartment = await takeShapeGQLClient.getApartmentsKey();
+  const data = await takeShapeRequest(GetLangsApartmentListDocument);
+
   return {
-    paths: dataLang.getLanguageList.items.reduce(
+    paths: data.getLanguageList.items.reduce(
       (acc, current) => {
         return [
           ...acc,
-          ...dataApartment.getApartmentList.items.map((a) => {
+          ...data.getApartmentList.items.map((a) => {
             return {
               params: {
                 lang: current.code,

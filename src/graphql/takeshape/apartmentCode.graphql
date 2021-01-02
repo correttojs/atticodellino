@@ -1,10 +1,13 @@
-query ApartmentCode($key: String!) {
+query ApartmentSecret($key: String!) {
   getApartmentList(where: { key: { eq: $key } }) {
     items {
+      airbnbIcal
+      bookingIcal
       code
     }
   }
 }
+
 query ApartmentCodeById($key: String!) {
   getApartmentList(where: { airBnb: { eq: $key } }) {
     items {

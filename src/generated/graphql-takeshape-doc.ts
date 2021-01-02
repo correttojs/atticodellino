@@ -1,6 +1,4 @@
-import { GraphQLClient } from 'graphql-request';
-import { print } from 'graphql';
-import gql from 'graphql-tag';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -4646,15 +4644,13 @@ export type ApartmentQuery = (
         )> }
       )>>> }
     )>>> }
-  )> }
-);
-
-export type GetApartmentsKeyQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetApartmentsKeyQuery = (
-  { __typename?: 'Root' }
-  & { getApartmentList?: Maybe<(
+  )>, getLanguageList?: Maybe<(
+    { __typename?: 'LanguagePaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Language' }
+      & Pick<Language, 'code'>
+    )>>> }
+  )>, ApartmentKeys?: Maybe<(
     { __typename?: 'ApartmentPaginatedList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
@@ -4663,18 +4659,38 @@ export type GetApartmentsKeyQuery = (
   )> }
 );
 
-export type ApartmentCodeQueryVariables = Exact<{
+export type GetLangsApartmentListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLangsApartmentListQuery = (
+  { __typename?: 'Root' }
+  & { getLanguageList?: Maybe<(
+    { __typename?: 'LanguagePaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Language' }
+      & Pick<Language, 'code'>
+    )>>> }
+  )>, getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'key'>
+    )>>> }
+  )> }
+);
+
+export type ApartmentSecretQueryVariables = Exact<{
   key: Scalars['String'];
 }>;
 
 
-export type ApartmentCodeQuery = (
+export type ApartmentSecretQuery = (
   { __typename?: 'Root' }
   & { getApartmentList?: Maybe<(
     { __typename?: 'ApartmentPaginatedList' }
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
-      & Pick<Apartment, 'code'>
+      & Pick<Apartment, 'airbnbIcal' | 'bookingIcal' | 'code'>
     )>>> }
   )> }
 );
@@ -4691,22 +4707,6 @@ export type ApartmentCodeByIdQuery = (
     & { items?: Maybe<Array<Maybe<(
       { __typename?: 'Apartment' }
       & Pick<Apartment, 'code' | 'key' | 'address' | 'name' | 'airbnbLink' | 'mapLink'>
-    )>>> }
-  )> }
-);
-
-export type ApartmentSecretQueryVariables = Exact<{
-  key: Scalars['String'];
-}>;
-
-
-export type ApartmentSecretQuery = (
-  { __typename?: 'Root' }
-  & { getApartmentList?: Maybe<(
-    { __typename?: 'ApartmentPaginatedList' }
-    & { items?: Maybe<Array<Maybe<(
-      { __typename?: 'Apartment' }
-      & Pick<Apartment, 'airbnbIcal' | 'bookingIcal'>
     )>>> }
   )> }
 );
@@ -4744,20 +4744,6 @@ export type FaqsQuery = (
         { __typename?: 'Asset' }
         & Pick<Asset, 'path' | 'mimeType'>
       )> }
-    )>>> }
-  )> }
-);
-
-export type GetLangsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetLangsQuery = (
-  { __typename?: 'Root' }
-  & { getLanguageList?: Maybe<(
-    { __typename?: 'LanguagePaginatedList' }
-    & { items?: Maybe<Array<Maybe<(
-      { __typename?: 'Language' }
-      & Pick<Language, 'code'>
     )>>> }
   )> }
 );
@@ -4838,245 +4824,13 @@ export type GetRegistrationsQuery = (
 );
 
 
-export const ApartmentDocument = gql`
-    query Apartment($key: String!) {
-  getApartmentList(where: {key: {eq: $key}}) {
-    items {
-      airBnb
-      latitude
-      longitude
-      name
-      brandColor {
-        hex
-      }
-      lightColor {
-        rgb {
-          a
-          b
-          g
-          r
-        }
-      }
-      lighterColor {
-        rgb {
-          a
-          b
-          g
-          r
-        }
-      }
-      coverJpg {
-        path
-      }
-      coverWebp {
-        path
-      }
-      address
-      airbnbLink
-      facebookLink
-      sponsor {
-        brandColor {
-          hex
-        }
-        location
-        key
-      }
-      mapLink
-    }
-  }
-}
-    `;
-export const GetApartmentsKeyDocument = gql`
-    query getApartmentsKey {
-  getApartmentList {
-    items {
-      key
-    }
-  }
-}
-    `;
-export const ApartmentCodeDocument = gql`
-    query ApartmentCode($key: String!) {
-  getApartmentList(where: {key: {eq: $key}}) {
-    items {
-      code
-    }
-  }
-}
-    `;
-export const ApartmentCodeByIdDocument = gql`
-    query ApartmentCodeById($key: String!) {
-  getApartmentList(where: {airBnb: {eq: $key}}) {
-    items {
-      code
-      key
-      address
-      name
-      airbnbLink
-      mapLink
-    }
-  }
-}
-    `;
-export const ApartmentSecretDocument = gql`
-    query ApartmentSecret($key: String!) {
-  getApartmentList(where: {key: {eq: $key}}) {
-    items {
-      airbnbIcal
-      bookingIcal
-    }
-  }
-}
-    `;
-export const GetArticleByPathDocument = gql`
-    query getArticleByPath($path: String!) {
-  getArticleList(where: {path: {eq: $path}}) {
-    items {
-      contentHtml
-      title
-    }
-  }
-}
-    `;
-export const FaqsDocument = gql`
-    query Faqs($apartment: String!, $lang: String!) {
-  getFaqList(
-    where: {AND: [{apartment: {key: {match: $apartment}}}, {language: {code: {match: $lang}}}]}
-  ) {
-    items {
-      answerHtml
-      question
-      asset {
-        path
-        mimeType
-      }
-      linkVideo
-    }
-  }
-}
-    `;
-export const GetLangsDocument = gql`
-    query getLangs {
-  getLanguageList {
-    items {
-      code
-    }
-  }
-}
-    `;
-export const SendRegistrationDocument = gql`
-    mutation sendRegistration($input: CreateRegistrationsInput!) {
-  createRegistrations(input: $input) {
-    result {
-      email
-      guests {
-        firstName
-        lastName
-      }
-      _id
-      registrationStatus
-    }
-  }
-}
-    `;
-export const UpdateRegistrationsDocument = gql`
-    mutation updateRegistrations($input: UpdateRegistrationsInput!) {
-  updateRegistrations(input: $input) {
-    result {
-      email
-      guests {
-        firstName
-        lastName
-      }
-      _id
-      registrationStatus
-    }
-  }
-}
-    `;
-export const GetRegistrationDocument = gql`
-    query getRegistration($id: ID!) {
-  getRegistrations(_id: $id) {
-    _id
-    apartmentKey
-    email
-    registrationStatus
-    guests {
-      birthDate
-      documentNumber
-      documentType
-      firstName
-      lastName
-      nationality
-      placeOfBirth
-    }
-  }
-}
-    `;
-export const GetRegistrationsDocument = gql`
-    query getRegistrations {
-  getRegistrationsList(onlyEnabled: false) {
-    items {
-      _id
-      apartmentKey
-      email
-      registrationStatus
-      guests {
-        birthDate
-        documentNumber
-        documentType
-        firstName
-        lastName
-        nationality
-        placeOfBirth
-      }
-    }
-  }
-}
-    `;
-
-export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
-
-
-const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    Apartment(variables: ApartmentQueryVariables, requestHeaders?: Headers): Promise<ApartmentQuery> {
-      return withWrapper(() => client.request<ApartmentQuery>(print(ApartmentDocument), variables, requestHeaders));
-    },
-    getApartmentsKey(variables?: GetApartmentsKeyQueryVariables, requestHeaders?: Headers): Promise<GetApartmentsKeyQuery> {
-      return withWrapper(() => client.request<GetApartmentsKeyQuery>(print(GetApartmentsKeyDocument), variables, requestHeaders));
-    },
-    ApartmentCode(variables: ApartmentCodeQueryVariables, requestHeaders?: Headers): Promise<ApartmentCodeQuery> {
-      return withWrapper(() => client.request<ApartmentCodeQuery>(print(ApartmentCodeDocument), variables, requestHeaders));
-    },
-    ApartmentCodeById(variables: ApartmentCodeByIdQueryVariables, requestHeaders?: Headers): Promise<ApartmentCodeByIdQuery> {
-      return withWrapper(() => client.request<ApartmentCodeByIdQuery>(print(ApartmentCodeByIdDocument), variables, requestHeaders));
-    },
-    ApartmentSecret(variables: ApartmentSecretQueryVariables, requestHeaders?: Headers): Promise<ApartmentSecretQuery> {
-      return withWrapper(() => client.request<ApartmentSecretQuery>(print(ApartmentSecretDocument), variables, requestHeaders));
-    },
-    getArticleByPath(variables: GetArticleByPathQueryVariables, requestHeaders?: Headers): Promise<GetArticleByPathQuery> {
-      return withWrapper(() => client.request<GetArticleByPathQuery>(print(GetArticleByPathDocument), variables, requestHeaders));
-    },
-    Faqs(variables: FaqsQueryVariables, requestHeaders?: Headers): Promise<FaqsQuery> {
-      return withWrapper(() => client.request<FaqsQuery>(print(FaqsDocument), variables, requestHeaders));
-    },
-    getLangs(variables?: GetLangsQueryVariables, requestHeaders?: Headers): Promise<GetLangsQuery> {
-      return withWrapper(() => client.request<GetLangsQuery>(print(GetLangsDocument), variables, requestHeaders));
-    },
-    sendRegistration(variables: SendRegistrationMutationVariables, requestHeaders?: Headers): Promise<SendRegistrationMutation> {
-      return withWrapper(() => client.request<SendRegistrationMutation>(print(SendRegistrationDocument), variables, requestHeaders));
-    },
-    updateRegistrations(variables: UpdateRegistrationsMutationVariables, requestHeaders?: Headers): Promise<UpdateRegistrationsMutation> {
-      return withWrapper(() => client.request<UpdateRegistrationsMutation>(print(UpdateRegistrationsDocument), variables, requestHeaders));
-    },
-    getRegistration(variables: GetRegistrationQueryVariables, requestHeaders?: Headers): Promise<GetRegistrationQuery> {
-      return withWrapper(() => client.request<GetRegistrationQuery>(print(GetRegistrationDocument), variables, requestHeaders));
-    },
-    getRegistrations(variables?: GetRegistrationsQueryVariables, requestHeaders?: Headers): Promise<GetRegistrationsQuery> {
-      return withWrapper(() => client.request<GetRegistrationsQuery>(print(GetRegistrationsDocument), variables, requestHeaders));
-    }
-  };
-}
-export type Sdk = ReturnType<typeof getSdk>;
+export const ApartmentDocument: DocumentNode<ApartmentQuery, ApartmentQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Apartment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"key"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"key"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"airBnb"}},{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"brandColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rgb"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"a"}},{"kind":"Field","name":{"kind":"Name","value":"b"}},{"kind":"Field","name":{"kind":"Name","value":"g"}},{"kind":"Field","name":{"kind":"Name","value":"r"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"lighterColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rgb"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"a"}},{"kind":"Field","name":{"kind":"Name","value":"b"}},{"kind":"Field","name":{"kind":"Name","value":"g"}},{"kind":"Field","name":{"kind":"Name","value":"r"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverJpg"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverWebp"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"airbnbLink"}},{"kind":"Field","name":{"kind":"Name","value":"facebookLink"}},{"kind":"Field","name":{"kind":"Name","value":"sponsor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"brandColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"mapLink"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"getLanguageList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"ApartmentKeys"},"name":{"kind":"Name","value":"getApartmentList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}}]}}]}}]};
+export const GetLangsApartmentListDocument: DocumentNode<GetLangsApartmentListQuery, GetLangsApartmentListQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLangsApartmentList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getLanguageList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}}]}}]}}]};
+export const ApartmentSecretDocument: DocumentNode<ApartmentSecretQuery, ApartmentSecretQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ApartmentSecret"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"key"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"key"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"airbnbIcal"}},{"kind":"Field","name":{"kind":"Name","value":"bookingIcal"}},{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}}]}}]};
+export const ApartmentCodeByIdDocument: DocumentNode<ApartmentCodeByIdQuery, ApartmentCodeByIdQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ApartmentCodeById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"key"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"airBnb"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"key"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"airbnbLink"}},{"kind":"Field","name":{"kind":"Name","value":"mapLink"}}]}}]}}]}}]};
+export const GetArticleByPathDocument: DocumentNode<GetArticleByPathQuery, GetArticleByPathQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getArticleByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticleList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contentHtml"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]};
+export const FaqsDocument: DocumentNode<FaqsQuery, FaqsQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Faqs"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"apartment"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lang"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFaqList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"AND"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"apartment"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"airBnb"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"match"},"value":{"kind":"Variable","name":{"kind":"Name","value":"apartment"}}}]}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"match"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lang"}}}]}}]}}]}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"answerHtml"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"asset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkVideo"}}]}}]}}]}}]};
+export const SendRegistrationDocument: DocumentNode<SendRegistrationMutation, SendRegistrationMutationVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"sendRegistration"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CreateRegistrationsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createRegistrations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"registrationStatus"}}]}}]}}]}}]};
+export const UpdateRegistrationsDocument: DocumentNode<UpdateRegistrationsMutation, UpdateRegistrationsMutationVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateRegistrations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdateRegistrationsInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateRegistrations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"result"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}},{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"registrationStatus"}}]}}]}}]}}]};
+export const GetRegistrationDocument: DocumentNode<GetRegistrationQuery, GetRegistrationQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getRegistration"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getRegistrations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"_id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"apartmentKey"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"registrationStatus"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"documentNumber"}},{"kind":"Field","name":{"kind":"Name","value":"documentType"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"nationality"}},{"kind":"Field","name":{"kind":"Name","value":"placeOfBirth"}}]}}]}}]}}]};
+export const GetRegistrationsDocument: DocumentNode<GetRegistrationsQuery, GetRegistrationsQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getRegistrations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getRegistrationsList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"onlyEnabled"},"value":{"kind":"BooleanValue","value":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"apartmentKey"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"registrationStatus"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"documentNumber"}},{"kind":"Field","name":{"kind":"Name","value":"documentType"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"nationality"}},{"kind":"Field","name":{"kind":"Name","value":"placeOfBirth"}}]}}]}}]}}]}}]};

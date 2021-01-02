@@ -1,6 +1,10 @@
 import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
+import {
+  ApartmentCodeByIdDocument,
+  FaqsDocument,
+} from "../generated/graphql-takeshape-doc";
 import { graphcmsGQLClient } from "./graphcms/client";
-import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
+import { takeShapeRequest } from "./takeshape/takeShapeClient";
 import { getLangByPhone } from "./_util";
 
 export const faq = async (parent, args: ReservationQueryVariables, context) => {
@@ -8,12 +12,9 @@ export const faq = async (parent, args: ReservationQueryVariables, context) => {
     input: args.hash,
   });
   const reservation = result.reservations?.[0];
-  const apartment = await takeShapeGQLClient.ApartmentCodeById({
-    key: reservation?.home,
-  });
 
-  const data = await takeShapeGQLClient.Faqs({
-    apartment: apartment?.getApartmentList?.items?.[0]?.key,
+  const data = await takeShapeRequest(FaqsDocument, {
+    apartment: reservation?.home,
     lang: getLangByPhone(reservation?.phone),
   });
 

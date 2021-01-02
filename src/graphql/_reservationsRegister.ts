@@ -3,9 +3,10 @@ import { MutationRegisterGuestsArgs } from "../generated/graphql";
 import { streamTo64 } from "./_streamToBase64";
 import { GuestStatus } from "../generated/graphql-graphcms";
 import { smsConfirmLink, smsReminderLink } from "./_sms";
-import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
+import { takeShapeRequest } from "./takeshape/takeShapeClient";
 import { faqLink, getLangByPhone } from "./_util";
 import { upload } from "./upload";
+import { ApartmentCodeByIdDocument } from "../generated/graphql-takeshape-doc";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
@@ -75,7 +76,9 @@ export const registerGuests = async (
   const files = await Promise.all(file);
   const { guests, phone, home, check_out, ...input } = user;
 
-  const apartment = await takeShapeGQLClient.ApartmentCodeById({ key: home });
+  const apartment = await takeShapeRequest(ApartmentCodeByIdDocument, {
+    key: home,
+  });
   const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code;
   await sendEmail({ files, user, apartmentCode });
 

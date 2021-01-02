@@ -6,7 +6,8 @@ import {
 import { smsRegisterLink } from "./_sms";
 import { faqLink, getLangByPhone, registerLink } from "./_util";
 import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
-import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
+import { takeShapeRequest } from "./takeshape/takeShapeClient";
+import { ApartmentCodeByIdDocument } from "../generated/graphql-takeshape-doc";
 
 export const reservations = async (parent, args, context) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
@@ -35,7 +36,7 @@ export const reservation = async (
     input: args.hash,
   });
   const result = storedReservations.reservations?.[0];
-  const apartments = await takeShapeGQLClient.ApartmentCodeById({
+  const apartments = await takeShapeRequest(ApartmentCodeByIdDocument, {
     key: result?.home,
   });
   const apartment = apartments?.getApartmentList?.items?.[0];

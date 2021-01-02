@@ -43,9 +43,25 @@ query Apartment($key: String!) {
       mapLink
     }
   }
+
+  getLanguageList {
+    items {
+      code
+    }
+  }
+  ApartmentKeys: getApartmentList {
+    items {
+      key
+    }
+  }
 }
 
-query getApartmentsKey {
+query getLangsApartmentList {
+  getLanguageList {
+    items {
+      code
+    }
+  }
   getApartmentList {
     items {
       key

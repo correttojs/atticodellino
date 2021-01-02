@@ -1,6 +1,5 @@
+import { TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { GraphQLClient } from "graphql-request";
-
-import { getSdk, FaqsQuery } from "../../generated/graphql-takeshape";
 
 const client = new GraphQLClient(
   `https://api.takeshape.io/project/${process.env.TAKESHAPE_PROJECT}/graphql`,
@@ -11,4 +10,7 @@ const client = new GraphQLClient(
   }
 );
 
-export const takeShapeGQLClient = getSdk(client);
+export const takeShapeRequest = <TData, TVariables>(
+  document: TypedDocumentNode<TData, TVariables>,
+  variables?: TVariables
+) => client.request<TData, TVariables>(document, variables);

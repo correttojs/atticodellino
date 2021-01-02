@@ -1,4 +1,8 @@
-import { takeShapeGQLClient } from "./takeShapeClient";
+import {
+  ApartmentDocument,
+  GetLangsApartmentListDocument,
+} from "../../generated/graphql-takeshape-doc";
+import { takeShapeRequest } from "./takeShapeClient";
 
 export type AsyncReturnType<T extends (...args: any) => any> = T extends (
   ...args: any
@@ -19,12 +23,9 @@ export async function getGlobalProps({
   }
   params.apartment = params.apartment.toUpperCase();
 
-  const apartmentObj = await takeShapeGQLClient.Apartment({
+  const apartmentObj = await takeShapeRequest(ApartmentDocument, {
     key: params.apartment,
   });
-
-  const dataLang = await takeShapeGQLClient.getLangs();
-  const dataApartment = await takeShapeGQLClient.getApartmentsKey();
 
   const currentApartment = apartmentObj.getApartmentList.items[0];
   return {
@@ -33,22 +34,22 @@ export async function getGlobalProps({
         ...params,
         lang: locale,
         ...currentApartment,
-        langs: dataLang.getLanguageList.items.map((l) => l.code),
-        apartments: dataApartment.getApartmentList.items.map((a) => a.key),
+        langs: apartmentObj.getLanguageList.items.map((l) => l.code),
+        apartments: apartmentObj.ApartmentKeys.items.map((a) => a.key),
       },
     },
   };
 }
 
 export const getGlobalPaths = async ({ locales }) => {
-  const dataLang = await takeShapeGQLClient.getLangs();
-  const dataApartment = await takeShapeGQLClient.getApartmentsKey();
+  const data = await takeShapeRequest(GetLangsApartmentListDocument);
+
   return {
     paths: locales.reduce(
       (acc, current) => {
         return [
           ...acc,
-          ...dataApartment.getApartmentList.items.map((a) => {
+          ...data.getApartmentList.items.map((a) => {
             return {
               params: {
                 lang: current.toLowerCase(),
