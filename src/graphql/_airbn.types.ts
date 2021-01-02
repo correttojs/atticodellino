@@ -1,4 +1,4 @@
-import { Apartment, ApartmentQuery } from "../generated/graphql-takeshape";
+import { Apartment, ApartmentQuery } from "../generated/graphql-takeshape-doc";
 
 export type AirBnbUser = {
   deleted: boolean;

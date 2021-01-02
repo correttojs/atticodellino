@@ -68,3 +68,25 @@ query getLangsApartmentList {
     }
   }
 }
+
+query ApartmentSecret($key: String!) {
+  getApartmentList(where: { key: { eq: $key } }) {
+    items {
+      airbnbIcal
+      bookingIcal
+    }
+  }
+}
+
+query ApartmentCodeByAirBnbId($key: String!) {
+  getApartmentList(where: { airBnb: { eq: $key } }) {
+    items {
+      code
+      key
+      address
+      name
+      airbnbLink
+      mapLink
+    }
+  }
+}

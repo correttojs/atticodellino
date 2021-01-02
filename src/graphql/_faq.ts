@@ -1,14 +1,12 @@
 import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
-import {
-  ApartmentCodeByIdDocument,
-  FaqsDocument,
-} from "../generated/graphql-takeshape-doc";
-import { graphcmsGQLClient } from "./graphcms/client";
+import { GetReservationDocument } from "../generated/graphql-graphcms";
+import { FaqsDocument } from "../generated/graphql-takeshape-doc";
+import { graphCmsRequest } from "./graphcms";
 import { takeShapeRequest } from "./takeshape/takeShapeClient";
 import { getLangByPhone } from "./_util";
 
 export const faq = async (parent, args: ReservationQueryVariables, context) => {
-  const result = await graphcmsGQLClient.getReservation({
+  const result = await graphCmsRequest(GetReservationDocument, {
     input: args.hash,
   });
   const reservation = result.reservations?.[0];

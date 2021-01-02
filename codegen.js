@@ -67,7 +67,7 @@ async function run() {
           plugins: [
             "typescript",
             "typescript-operations",
-            "typescript-graphql-request",
+            "typed-document-node",
           ],
         },
       },
