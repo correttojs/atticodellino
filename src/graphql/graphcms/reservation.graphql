@@ -8,6 +8,11 @@ query getReservations($input: Date!) {
   reservations(where: { check_out_gt: $input }, orderBy: check_out_DESC) {
     ...Reservation
   }
+  apartments {
+    code
+    name
+    enterCode
+  }
 }
 
 fragment Reservation on Reservation {

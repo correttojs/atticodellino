@@ -1,8 +1,12 @@
-import { graphcmsGQLClient } from "./graphcms/client";
+import { graphCmsRequest } from "./graphcms";
 import { AirBnbClient } from "airbnb-private-api";
 import * as crypto from "crypto";
 import { reservations } from "./_reservations";
-import { GuestStatus } from "../generated/graphql-graphcms";
+import {
+  CreateReservationDocument,
+  GetTokenDocument,
+  GuestStatus,
+} from "../generated/graphql-graphcms";
 
 const getAirBnbReservations = async () => {
   let airbnb = new AirBnbClient({
@@ -11,7 +15,7 @@ const getAirBnbReservations = async () => {
     session_store: null,
   });
 
-  const token = await graphcmsGQLClient.getToken();
+  const token = await graphCmsRequest(GetTokenDocument);
 
   airbnb.session = token.tokens[0].token;
   airbnb.auth_token = airbnb.session.token;
@@ -65,7 +69,9 @@ export const syncReservations = async (parent, args, context) => {
   const toBeAdded = result.filter((r) => !hashes.includes(r.hash));
   console.log(toBeAdded);
   const added = await Promise.all(
-    toBeAdded.map((r) => graphcmsGQLClient.createReservation({ input: r }))
+    toBeAdded.map((r) =>
+      graphCmsRequest(CreateReservationDocument, { input: r })
+    )
   );
 
   return [...added.map((r) => r.createReservation), ...storedReservations];

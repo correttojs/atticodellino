@@ -1,12 +1,15 @@
-import { graphcmsGQLClient } from "./graphcms/client";
+import { graphCmsRequest } from "./graphcms";
 import { MutationRegisterGuestsArgs } from "../generated/graphql";
 import { streamTo64 } from "./_streamToBase64";
-import { GuestStatus } from "../generated/graphql-graphcms";
+import {
+  GuestStatus,
+  UpdateReservationDocument,
+} from "../generated/graphql-graphcms";
 import { smsConfirmLink, smsReminderLink } from "./_sms";
 import { takeShapeRequest } from "./takeshape/takeShapeClient";
 import { faqLink, getLangByPhone } from "./_util";
 import { upload } from "./upload";
-import { ApartmentCodeByIdDocument } from "../generated/graphql-takeshape-doc";
+import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
@@ -76,7 +79,7 @@ export const registerGuests = async (
   const files = await Promise.all(file);
   const { guests, phone, home, check_out, ...input } = user;
 
-  const apartment = await takeShapeRequest(ApartmentCodeByIdDocument, {
+  const apartment = await takeShapeRequest(ApartmentCodeByAirBnbIdDocument, {
     key: home,
   });
   const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code;
@@ -92,7 +95,7 @@ export const registerGuests = async (
     })
   );
 
-  const data = await graphcmsGQLClient.updateReservation({
+  const data = await graphCmsRequest(UpdateReservationDocument, {
     input,
     data: {
       guests: {

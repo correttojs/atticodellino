@@ -1,6 +1,4 @@
-import { GraphQLClient } from 'graphql-request';
-import { print } from 'graphql';
-import gql from 'graphql-tag';
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -3839,17 +3837,6 @@ export enum _SystemDateTimeFieldVariation {
   Combined = 'combined'
 }
 
-export type GetApartmentsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetApartmentsQuery = (
-  { __typename?: 'Query' }
-  & { apartments: Array<(
-    { __typename?: 'Apartment' }
-    & Pick<Apartment, 'code' | 'name' | 'enterCode'>
-  )> }
-);
-
 export type CreateReservationMutationVariables = Exact<{
   input: ReservationCreateInput;
 }>;
@@ -3873,6 +3860,9 @@ export type GetReservationsQuery = (
   & { reservations: Array<(
     { __typename?: 'Reservation' }
     & ReservationFragment
+  )>, apartments: Array<(
+    { __typename?: 'Apartment' }
+    & Pick<Apartment, 'code' | 'name' | 'enterCode'>
   )> }
 );
 
@@ -3927,107 +3917,9 @@ export type GetTokenQuery = (
   )> }
 );
 
-export const ReservationFragmentDoc = gql`
-    fragment Reservation on Reservation {
-  id
-  guest_name
-  check_out
-  check_in
-  hash
-  phone
-  home
-  reservationStatus
-  guests {
-    birthDate
-    documentNumber
-    documentPlace
-    docFile
-    documentType
-    firstName
-    lastName
-    nationality
-    placeOfBirth
-  }
-}
-    `;
-export const GetApartmentsDocument = gql`
-    query getApartments {
-  apartments {
-    code
-    name
-    enterCode
-  }
-}
-    `;
-export const CreateReservationDocument = gql`
-    mutation createReservation($input: ReservationCreateInput!) {
-  createReservation(data: $input) {
-    ...Reservation
-  }
-}
-    ${ReservationFragmentDoc}`;
-export const GetReservationsDocument = gql`
-    query getReservations($input: Date!) {
-  reservations(where: {check_out_gt: $input}, orderBy: check_out_DESC) {
-    ...Reservation
-  }
-}
-    ${ReservationFragmentDoc}`;
-export const UpdateReservationDocument = gql`
-    mutation updateReservation($input: ReservationWhereUniqueInput!, $data: ReservationUpdateInput!) {
-  updateReservation(where: $input, data: $data) {
-    reservationStatus
-    phone
-  }
-}
-    `;
-export const GetReservationDocument = gql`
-    query getReservation($input: String!) {
-  reservations(where: {hash: $input}, orderBy: check_out_DESC) {
-    guest_name
-    check_out
-    check_in
-    home
-    phone
-    guests {
-      firstName
-      lastName
-    }
-  }
-}
-    `;
-export const GetTokenDocument = gql`
-    query getToken {
-  tokens {
-    token
-  }
-}
-    `;
-
-export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
-
-
-const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
-export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
-  return {
-    getApartments(variables?: GetApartmentsQueryVariables, requestHeaders?: Headers): Promise<GetApartmentsQuery> {
-      return withWrapper(() => client.request<GetApartmentsQuery>(print(GetApartmentsDocument), variables, requestHeaders));
-    },
-    createReservation(variables: CreateReservationMutationVariables, requestHeaders?: Headers): Promise<CreateReservationMutation> {
-      return withWrapper(() => client.request<CreateReservationMutation>(print(CreateReservationDocument), variables, requestHeaders));
-    },
-    getReservations(variables: GetReservationsQueryVariables, requestHeaders?: Headers): Promise<GetReservationsQuery> {
-      return withWrapper(() => client.request<GetReservationsQuery>(print(GetReservationsDocument), variables, requestHeaders));
-    },
-    updateReservation(variables: UpdateReservationMutationVariables, requestHeaders?: Headers): Promise<UpdateReservationMutation> {
-      return withWrapper(() => client.request<UpdateReservationMutation>(print(UpdateReservationDocument), variables, requestHeaders));
-    },
-    getReservation(variables: GetReservationQueryVariables, requestHeaders?: Headers): Promise<GetReservationQuery> {
-      return withWrapper(() => client.request<GetReservationQuery>(print(GetReservationDocument), variables, requestHeaders));
-    },
-    getToken(variables?: GetTokenQueryVariables, requestHeaders?: Headers): Promise<GetTokenQuery> {
-      return withWrapper(() => client.request<GetTokenQuery>(print(GetTokenDocument), variables, requestHeaders));
-    }
-  };
-}
-export type Sdk = ReturnType<typeof getSdk>;
+export const ReservationFragmentDoc: DocumentNode<ReservationFragment, unknown> = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Reservation"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Reservation"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"guest_name"}},{"kind":"Field","name":{"kind":"Name","value":"check_out"}},{"kind":"Field","name":{"kind":"Name","value":"check_in"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"home"}},{"kind":"Field","name":{"kind":"Name","value":"reservationStatus"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"documentNumber"}},{"kind":"Field","name":{"kind":"Name","value":"documentPlace"}},{"kind":"Field","name":{"kind":"Name","value":"docFile"}},{"kind":"Field","name":{"kind":"Name","value":"documentType"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"nationality"}},{"kind":"Field","name":{"kind":"Name","value":"placeOfBirth"}}]}}]}}]};
+export const CreateReservationDocument: DocumentNode<CreateReservationMutation, CreateReservationMutationVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createReservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ReservationCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createReservation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Reservation"}}]}}]}},...ReservationFragmentDoc.definitions]};
+export const GetReservationsDocument: DocumentNode<GetReservationsQuery, GetReservationsQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getReservations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Date"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"check_out_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"check_out_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Reservation"}}]}},{"kind":"Field","name":{"kind":"Name","value":"apartments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"enterCode"}}]}}]}},...ReservationFragmentDoc.definitions]};
+export const UpdateReservationDocument: DocumentNode<UpdateReservationMutation, UpdateReservationMutationVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateReservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ReservationWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ReservationUpdateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateReservation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservationStatus"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]};
+export const GetReservationDocument: DocumentNode<GetReservationQuery, GetReservationQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getReservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"hash"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"check_out_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"guest_name"}},{"kind":"Field","name":{"kind":"Name","value":"check_out"}},{"kind":"Field","name":{"kind":"Name","value":"check_in"}},{"kind":"Field","name":{"kind":"Name","value":"home"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}}]}}]}}]}}]};
+export const GetTokenDocument: DocumentNode<GetTokenQuery, GetTokenQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getToken"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tokens"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]};
