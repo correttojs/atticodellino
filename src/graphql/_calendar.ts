@@ -1,6 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import * as ical from "ical";
-import { takeShapeGQLClient } from "./takeshape/takeShapeClient";
+import { takeShapeRequest } from "./takeshape/takeShapeClient";
+import { ApartmentSecretDocument } from "../generated/graphql-takeshape-doc";
 
 const fetchIcal = async (icalUrl, summary: string) => {
   let data = await fetch(icalUrl).then((r) => r.text());
@@ -14,7 +15,7 @@ const fetchIcal = async (icalUrl, summary: string) => {
 };
 
 export const calendarResolver = async (_, { apartment }) => {
-  const apartmentObj = await takeShapeGQLClient.ApartmentSecret({
+  const apartmentObj = await takeShapeRequest(ApartmentSecretDocument, {
     key: apartment,
   });
 

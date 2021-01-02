@@ -2,7 +2,7 @@ query Faqs($apartment: String!, $lang: String!) {
   getFaqList(
     where: {
       AND: [
-        { apartment: { key: { match: $apartment } } }
+        { apartment: { airBnb: { match: $apartment } } }
         { language: { code: { match: $lang } } }
       ]
     }

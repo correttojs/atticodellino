@@ -29,6 +29,7 @@ async function run() {
     },
     true
   );
+
   await generate(
     {
       schema: {
@@ -40,11 +41,11 @@ async function run() {
       },
       documents: "src/graphql/takeshape/*.graphql",
       generates: {
-        [process.cwd() + "/src/generated/graphql-takeshape.ts"]: {
+        [process.cwd() + "/src/generated/graphql-takeshape-doc.ts"]: {
           plugins: [
             "typescript",
             "typescript-operations",
-            "typescript-graphql-request",
+            "typed-document-node",
           ],
         },
       },
