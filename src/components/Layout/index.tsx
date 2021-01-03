@@ -1,6 +1,5 @@
 import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { ApolloProvider } from "@apollo/client";
-import { gqlClient } from "./gqlClient";
+
 import React, { useState } from "react";
 import { GlobalType } from "../../graphql/_airbn.types";
 import { Header } from "./Header";
@@ -56,31 +55,29 @@ export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
         }
       >
         <ThemeProvider theme={theme(props.global)}>
-          <ApolloProvider client={gqlClient}>
-            <div css={tw`flex flex-col items-center`}>
-              <Header />
-              <div
-                css={`
-                  ${tw`md:hidden fixed bg-white w-full`}
-                  top:77px;
-                  left: 0px;
-                `}
-              >
-                <Contacts direction="row" />
-              </div>
-              <div
-                css={`
-                  margin-top: 85px;
-                  @media ${MQ_MOBILE} {
-                    margin-top: 120px;
-                  }
-                `}
-              >
-                <Comp {...props}></Comp>
-              </div>
-              <Footer />
+          <div css={tw`flex flex-col items-center`}>
+            <Header />
+            <div
+              css={`
+                ${tw`md:hidden fixed bg-white w-full`}
+                top:77px;
+                left: 0px;
+              `}
+            >
+              <Contacts direction="row" />
             </div>
-          </ApolloProvider>
+            <div
+              css={`
+                margin-top: 85px;
+                @media ${MQ_MOBILE} {
+                  margin-top: 120px;
+                }
+              `}
+            >
+              <Comp {...props}></Comp>
+            </div>
+            <Footer />
+          </div>
         </ThemeProvider>
       </GlobalContext.Provider>
     </>

@@ -10,7 +10,7 @@ export const useTranslations = () => {
     if (params && translatedRawString) {
       return translatedRawString.replace(
         /\[\s*(\w+)\s*\]/g,
-        ($0, $1) => params[$1].toString() ?? ""
+        ($0, $1) => params[$1]?.toString() ?? ""
       );
     }
     if (!translatedRawString) {

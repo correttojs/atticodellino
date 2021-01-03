@@ -1,6 +1,7 @@
 import { withGrommetTheme } from "../components/Layout";
 import { getGlobalProps } from "../graphql/takeshape/getGlobal";
 import { FaqPage } from "../components/Faq";
+import { withApolloClient } from "../components/Layout/withApolloClient";
 
 export async function getStaticProps({ locale }) {
   const params = { lang: locale, apartment: "VR" };
@@ -11,4 +12,4 @@ export async function getStaticProps({ locale }) {
   };
 }
 
-export default withGrommetTheme()(FaqPage);
+export default withApolloClient(withGrommetTheme()(FaqPage));

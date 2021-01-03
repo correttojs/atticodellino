@@ -1,43 +1,14 @@
-import ReactCalendar from "react-calendar";
-
-import styled from "styled-components";
 import { FormBook } from "./FormBook";
 import React, { useState } from "react";
 import { useTranslations } from "../Translations/useTranslations";
 import { useGlobal } from "../Layout";
 import { H2 } from "../@UI/Texts";
 import tw from "twin.macro";
-import { MQ_MOBILE, MQ_NOT_MOBILE } from "../Layout/MediaQueries";
-import { ThemeType } from "../Layout/useGlobal";
-import { useLazyQuery, useQuery } from "@apollo/client";
+
 import { CalendarDocument } from "./calendar.generated";
 import { PriceDocument } from "./price.generated";
-
-const StyledCalendar = styled(ReactCalendar)`
-  @media ${MQ_NOT_MOBILE} {
-    min-width: 350px;
-  }
-  @media ${MQ_MOBILE} {
-    width: unset !important;
-  }
-
-  .react-calendar__tile--now {
-    background: #fff;
-    border: solid 1px;
-    &:hover {
-    }
-  }
-  .react-calendar__tile--now:enabled:hover {
-    background-color: #e6e6e6;
-  }
-  .react-calendar__tile--active {
-    background: ${({ theme }: ThemeType) => theme.colors.brand};
-  }
-  .react-calendar__tile--active:enabled:focus,
-  .react-calendar__tile--active:enabled:hover {
-    background: ${({ theme }: ThemeType) => theme.colors.active};
-  }
-`;
+import { Calendar } from "./Calendar.css";
+import { useSwrMutation, useSwrQuery } from "../useSwrQuery";
 
 const formatDate = (date: Date) => {
   return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${(
@@ -48,8 +19,9 @@ const formatDate = (date: Date) => {
 
 export const BookingCalendar = () => {
   const { apartment, airBnb } = useGlobal();
-  const { data } = useQuery(CalendarDocument, { variables: { apartment } });
-  const [calcPrice, { data: price }] = useLazyQuery(PriceDocument);
+  const { data } = useSwrQuery("cal", CalendarDocument, { apartment });
+
+  const [calcPrice, { data: price }] = useSwrMutation("/price", PriceDocument);
   const t = useTranslations();
 
   const [selection, setSelection] = useState([]);
@@ -64,7 +36,7 @@ export const BookingCalendar = () => {
       <div
         css={tw`md:m-4 flex flex-col justify-center items-center md:flex-row`}
       >
-        <StyledCalendar
+        <Calendar
           tileDisabled={(e) => {
             if (!data) {
               return false;
@@ -85,11 +57,9 @@ export const BookingCalendar = () => {
           onChange={(e) => {
             setSelection(e);
             calcPrice({
-              variables: {
-                from: formatDate(e[0]),
-                to: formatDate(e[1]),
-                airBnb,
-              },
+              from: formatDate(e[0]),
+              to: formatDate(e[1]),
+              airBnb,
             });
           }}
         />
