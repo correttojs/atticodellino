@@ -10,6 +10,7 @@ import {
   GetArticleByPathDocument,
   GetArticleByPathQuery,
 } from "../../generated/graphql-takeshape-doc";
+import { withApolloClient } from "../../components/Layout/withApolloClient";
 
 export const getStaticProps = async ({ params, locale }) => {
   const globalProps = await getGlobalProps({ params, locale });

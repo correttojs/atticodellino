@@ -1,5 +1,6 @@
 import { AdminComponent } from "../components/Admin/AdminComponent";
 import { withGrommetTheme } from "../components/Layout";
+import { withApolloClient } from "../components/Layout/withApolloClient";
 import { getGlobalProps } from "../graphql/takeshape/getGlobal";
 
 export async function getStaticProps({ locale }) {
@@ -9,4 +10,4 @@ export async function getStaticProps({ locale }) {
   return globalProps;
 }
 
-export default withGrommetTheme()(AdminComponent);
+export default withApolloClient(withGrommetTheme()(AdminComponent));

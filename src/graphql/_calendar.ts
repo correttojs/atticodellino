@@ -7,11 +7,15 @@ const fetchIcal = async (icalUrl, summary: string) => {
   let data = await fetch(icalUrl).then((r) => r.text());
   data = ical.parseICS(data);
 
-  return Object.keys(data).map((item) => ({
-    start: new Date(data[item].start).toISOString(),
-    end: new Date(data[item].end).toISOString(),
-    summary,
-  }));
+  return Object.keys(data)
+    .filter((i) => data[i]?.start)
+    .map((item) => {
+      return {
+        start: new Date(data[item].start).toISOString(),
+        end: new Date(data[item].end).toISOString(),
+        summary,
+      };
+    });
 };
 
 export const calendarResolver = async (_, { apartment }) => {
@@ -33,8 +37,6 @@ export const calendarResolver = async (_, { apartment }) => {
       )
     );
   }
-
   const result = await Promise.all(promises);
-
   return result.reduce((acc, curr) => [...acc, ...curr], []);
 };
