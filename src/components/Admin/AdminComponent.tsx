@@ -29,9 +29,9 @@ import {
   ReservationStatus,
   SyncRegistrationsDocument,
   UpdateReservationStatusDocument,
+  UpdateReservationStatusMutationVariables,
 } from "./reservations.generated";
-import { useSwrMutation, useSwrQuery } from "../useSwrQuery";
-import { mutate } from "swr";
+import { gqlRequest, useSwrMutation, useSwrQuery } from "../useSwrQuery";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;
@@ -54,27 +54,27 @@ export const GlobalStyle = createGlobalStyle`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
-  const { data, isValidating } = useSwrQuery(
+  const { data, isValidating, mutate } = useSwrQuery(
     "reservations",
     ReservationsDocument,
     {
       isPast,
     }
   );
-  const [updateStaus] = useSwrMutation(
-    "updateStatus",
-    UpdateReservationStatusDocument,
-    {
-      onCompleted: ({ hash, reservationStatus }) => {
-        setIsSmsOpen(null);
-        mutate("reservations", {
-          reservations: data?.reservations?.map((i) => {
-            return hash === i.hash ? { ...i, reservationStatus } : i;
-          }),
-        });
-      },
-    }
-  );
+
+  const handleStateUpdated = async (
+    args: UpdateReservationStatusMutationVariables
+  ) => {
+    setIsSmsOpen(null);
+    await gqlRequest(UpdateReservationStatusDocument, args);
+    const { hash, reservationStatus } = args;
+    mutate({
+      reservations: data?.reservations?.map((i) => {
+        return hash === i.hash ? { ...i, reservationStatus } : i;
+      }),
+    });
+  };
+
   const [
     sync,
     { data: syncedData, error: syncError, isLoading: syncLoading },
@@ -115,7 +115,7 @@ export const AdminComponent: React.FC = () => {
           <p>Send SMS?</p>
           <Button
             onClick={() => {
-              updateStaus({
+              handleStateUpdated({
                 ...isSmsOpen,
                 reservationStatus: ReservationStatus.LinkSent,
               });
@@ -197,7 +197,7 @@ export const AdminComponent: React.FC = () => {
                                 hash: item.hash,
                               });
                             } else {
-                              updateStaus({
+                              handleStateUpdated({
                                 userId: item.id,
                                 hash: item.hash,
                                 reservationStatus:

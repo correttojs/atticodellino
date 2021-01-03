@@ -6,7 +6,7 @@ import {
   UpdateReservationDocument,
 } from "../generated/graphql-graphcms";
 import { smsConfirmLink, smsReminderLink } from "./_sms";
-import { takeShapeRequest } from "./takeshape/takeShapeClient";
+import { takeShapeRequest } from "./takeshape";
 import { faqLink, getLangByPhone } from "./_util";
 import { upload } from "./upload";
 import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";

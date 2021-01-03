@@ -1,4 +1,3 @@
-// Render Prop
 import React, { useState } from "react";
 import { useFormik, FieldArray, FormikProvider } from "formik";
 import { initialValues, validationSchema, guestValue } from "./data";
@@ -18,20 +17,14 @@ import { Section } from "../@UI/Section";
 import { Loading } from "../@UI/Loading";
 
 import { RegisterDocument, ReservationQuery } from "./register.generated";
-import { useSwrMutation } from "../useSwrQuery";
+import { gqlRequest } from "../useSwrQuery";
 
 export const FormRegister: React.FC<{
   reservation: ReservationQuery["reservation"];
   onSuccess: () => void;
 }> = ({ reservation, onSuccess }) => {
-  const [register, { data, isLoading, error }] = useSwrMutation(
-    "register",
-    RegisterDocument,
-    {
-      onCompleted: onSuccess,
-    }
-  );
-
+  const [isLoading, setIsLoading] = useState(null);
+  const [error, setError] = useState(null);
   const router = useRouter();
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const t = useTranslations();
@@ -44,16 +37,22 @@ export const FormRegister: React.FC<{
         ...rest,
         birthDate: birthDate.toISOString().split("T")[0],
       }));
-      register({
-        user: {
-          check_out: reservation?.check_out,
-          home: reservation?.home,
-          phone: reservation?.phone,
-          hash: router.query.hash as string,
-          guests,
-        },
-        file: guestsForm.map((g) => g.file),
-      });
+      try {
+        setIsLoading(true);
+        await gqlRequest(RegisterDocument, {
+          user: {
+            check_out: reservation?.check_out,
+            home: reservation?.home,
+            phone: reservation?.phone,
+            hash: router.query.hash as string,
+            guests,
+          },
+          file: guestsForm.map((g) => g.file),
+        });
+        onSuccess();
+      } catch (e) {
+        setError(e);
+      }
     },
     validationSchema,
   });
@@ -66,7 +65,7 @@ export const FormRegister: React.FC<{
           <Loading />
         </div>
       )}
-      {!data && !error && !isLoading && (
+      {!error && !isLoading && (
         <>
           <Section css={tw`p-0`}>
             <H1 css={tw`mb-4`}>{t("REGISTER")}</H1>

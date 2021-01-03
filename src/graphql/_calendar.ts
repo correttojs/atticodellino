@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import * as ical from "ical";
-import { takeShapeRequest } from "./takeshape/takeShapeClient";
+import { takeShapeRequest } from "./takeshape";
 import { ApartmentSecretDocument } from "../generated/graphql-takeshape-doc";
 
 const fetchIcal = async (icalUrl, summary: string) => {
