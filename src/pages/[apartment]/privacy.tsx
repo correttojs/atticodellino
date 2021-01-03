@@ -3,7 +3,7 @@ import {
   getGlobalProps,
   getGlobalPaths,
 } from "../../graphql/takeshape/getGlobal";
-import { takeShapeRequest } from "../../graphql/takeshape/takeShapeClient";
+import { takeShapeRequest } from "../../graphql/takeshape";
 
 import { Section } from "../../components/@UI/Section";
 import {

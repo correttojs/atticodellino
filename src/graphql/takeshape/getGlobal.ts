@@ -2,7 +2,7 @@ import {
   ApartmentDocument,
   GetLangsApartmentListDocument,
 } from "../../generated/graphql-takeshape-doc";
-import { takeShapeRequest } from "./takeShapeClient";
+import { takeShapeRequest } from ".";
 
 export type AsyncReturnType<T extends (...args: any) => any> = T extends (
   ...args: any

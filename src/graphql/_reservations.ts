@@ -6,7 +6,7 @@ import {
 import { smsRegisterLink } from "./_sms";
 import { faqLink, getLangByPhone, registerLink } from "./_util";
 import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
-import { takeShapeRequest } from "./takeshape/takeShapeClient";
+import { takeShapeRequest } from "./takeshape";
 import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
 import {
   GetReservationDocument,
