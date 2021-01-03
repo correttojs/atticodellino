@@ -16,25 +16,22 @@ import { FormUpload } from "../@UI/FormUpload";
 import { useRouter } from "next/router";
 import { Section } from "../@UI/Section";
 import { Loading } from "../@UI/Loading";
-import { useMutation } from "@apollo/client";
-import {
-  RegisterDocument,
-  ReservationDocument,
-  ReservationQuery,
-} from "./register.generated";
+
+import { RegisterDocument, ReservationQuery } from "./register.generated";
+import { useSwrMutation } from "../useSwrQuery";
 
 export const FormRegister: React.FC<{
   reservation: ReservationQuery["reservation"];
-  hash: string;
-}> = ({ reservation, hash }) => {
-  const [register, { data, loading, error }] = useMutation(RegisterDocument, {
-    refetchQueries: [
-      {
-        query: ReservationDocument,
-        variables: { hash },
-      },
-    ],
-  });
+  onSuccess: () => void;
+}> = ({ reservation, onSuccess }) => {
+  const [register, { data, isLoading, error }] = useSwrMutation(
+    "register",
+    RegisterDocument,
+    {
+      onCompleted: onSuccess,
+    }
+  );
+
   const router = useRouter();
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const t = useTranslations();
@@ -48,16 +45,14 @@ export const FormRegister: React.FC<{
         birthDate: birthDate.toISOString().split("T")[0],
       }));
       register({
-        variables: {
-          user: {
-            check_out: reservation?.check_out,
-            home: reservation?.home,
-            phone: reservation?.phone,
-            hash: router.query.hash as string,
-            guests,
-          },
-          file: guestsForm.map((g) => g.file),
+        user: {
+          check_out: reservation?.check_out,
+          home: reservation?.home,
+          phone: reservation?.phone,
+          hash: router.query.hash as string,
+          guests,
         },
+        file: guestsForm.map((g) => g.file),
       });
     },
     validationSchema,
@@ -66,12 +61,12 @@ export const FormRegister: React.FC<{
   return (
     <div css={tw`p-2 md:p-8 max-w-screen-lg mx-auto `}>
       {error && <FormError />}
-      {loading && (
+      {isLoading && (
         <div css={tw`flex justify-center`}>
           <Loading />
         </div>
       )}
-      {!data && !error && !loading && (
+      {!data && !error && !isLoading && (
         <>
           <Section css={tw`p-0`}>
             <H1 css={tw`mb-4`}>{t("REGISTER")}</H1>

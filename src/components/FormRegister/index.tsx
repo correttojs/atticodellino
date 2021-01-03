@@ -7,7 +7,6 @@ import tw from "twin.macro";
 import { useRouter } from "next/router";
 import { Section } from "../@UI/Section";
 import { Loading } from "../@UI/Loading";
-import { useQuery } from "@apollo/client";
 import { ReservationDocument } from "./register.generated";
 import { Detail } from "./Detail";
 import { Sponsor } from "./Sponsor";
@@ -15,20 +14,23 @@ import { FaqPage } from "../Faq";
 import { FormRegister } from "./FormRegister";
 import { SiGooglestreetview } from "react-icons/si";
 import { FaAirbnb } from "react-icons/fa";
-import { reservation } from "../../graphql/_reservations";
+import { useSwrQuery } from "../useSwrQuery";
 
 export const Register: React.FC = () => {
   const router = useRouter();
 
   const t = useTranslations();
+  const [isRegistered, setIsRegistered] = useState(false);
 
-  const { data, loading, error } = useQuery(ReservationDocument, {
-    variables: {
+  const { data, isValidating, error } = useSwrQuery(
+    router.query.hash ? "reservation" : null,
+    ReservationDocument,
+    {
       hash: router.query.hash as string,
-    },
-  });
+    }
+  );
 
-  if (loading) {
+  if (isValidating) {
     return (
       <div css={tw`flex justify-center`}>
         <Loading />
@@ -73,7 +75,7 @@ export const Register: React.FC = () => {
     );
   }
 
-  if (data?.reservation?.guests?.length) {
+  if (data?.reservation?.guests?.length || isRegistered) {
     return (
       <div css={tw`p-2 md:p-8 max-w-screen-lg mx-auto `}>
         {
@@ -100,8 +102,8 @@ export const Register: React.FC = () => {
         <Detail reservation={data?.reservation} />
       </Section>
       <FormRegister
+        onSuccess={() => setIsRegistered(true)}
         reservation={data?.reservation}
-        hash={router.query.hash as string}
       />
     </div>
   );

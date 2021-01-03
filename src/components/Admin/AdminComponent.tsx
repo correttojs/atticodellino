@@ -8,7 +8,6 @@ import {
   ButtonInverted,
   ButtonSkinned,
   ButtonSmall,
-  ButtonSmallInverted,
   ButtonWithIcon,
 } from "../@UI/Buttons";
 import {
@@ -24,7 +23,6 @@ import { IoLogInSharp } from "react-icons/io5";
 import Modal from "react-modal";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { Reservation } from "./Reservation";
-import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import {
   ReservationsDocument,
   ReservationsQuery,
@@ -32,6 +30,8 @@ import {
   SyncRegistrationsDocument,
   UpdateReservationStatusDocument,
 } from "./reservations.generated";
+import { useSwrMutation, useSwrQuery } from "../useSwrQuery";
+import { mutate } from "swr";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;
@@ -54,24 +54,31 @@ export const GlobalStyle = createGlobalStyle`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
-  const { data, loading } = useQuery(ReservationsDocument, {
-    variables: { isPast },
-  });
-  const [updateStaus] = useMutation(UpdateReservationStatusDocument, {
-    refetchQueries: [
-      {
-        query: ReservationsDocument,
-        variables: { isPast },
+  const { data, isValidating } = useSwrQuery(
+    "reservations",
+    ReservationsDocument,
+    {
+      isPast,
+    }
+  );
+  const [updateStaus] = useSwrMutation(
+    "updateStatus",
+    UpdateReservationStatusDocument,
+    {
+      onCompleted: ({ hash, reservationStatus }) => {
+        setIsSmsOpen(null);
+        mutate("reservations", {
+          reservations: data?.reservations?.map((i) => {
+            return hash === i.hash ? { ...i, reservationStatus } : i;
+          }),
+        });
       },
-    ],
-    onCompleted: () => {
-      setIsSmsOpen(null);
-    },
-  });
+    }
+  );
   const [
     sync,
-    { data: syncedData, error: syncError, loading: syncLoading },
-  ] = useLazyQuery(SyncRegistrationsDocument);
+    { data: syncedData, error: syncError, isLoading: syncLoading },
+  ] = useSwrMutation("sync", SyncRegistrationsDocument);
 
   const [isSmsOpen, setIsSmsOpen] = useState<{
     userId: string;
@@ -109,10 +116,8 @@ export const AdminComponent: React.FC = () => {
           <Button
             onClick={() => {
               updateStaus({
-                variables: {
-                  ...isSmsOpen,
-                  reservationStatus: ReservationStatus.LinkSent,
-                },
+                ...isSmsOpen,
+                reservationStatus: ReservationStatus.LinkSent,
               });
             }}
             css={tw`m-4`}
@@ -124,14 +129,14 @@ export const AdminComponent: React.FC = () => {
           </ButtonInverted>
         </div>
       </Modal>
-      {!loading && !session && (
+      {!isValidating && !session && (
         <div css={tw`p-4`}>
           <ButtonWithIcon onClick={signIn} Icon={<IoLogInSharp />}>
             Sign in
           </ButtonWithIcon>
         </div>
       )}
-      {loading && <Loading />}
+      {isValidating && <Loading />}
       {session && (
         <div css={tw`p-4`}>
           {syncLoading ? (
@@ -193,14 +198,12 @@ export const AdminComponent: React.FC = () => {
                               });
                             } else {
                               updateStaus({
-                                variables: {
-                                  userId: item.id,
-                                  hash: item.hash,
-                                  reservationStatus:
-                                    item.reservationStatus === "link_sent"
-                                      ? ReservationStatus.Registered
-                                      : ReservationStatus.New,
-                                },
+                                userId: item.id,
+                                hash: item.hash,
+                                reservationStatus:
+                                  item.reservationStatus === "link_sent"
+                                    ? ReservationStatus.Registered
+                                    : ReservationStatus.New,
                               });
                             }
                           }}

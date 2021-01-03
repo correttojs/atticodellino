@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
@@ -6,16 +5,15 @@ import { Loading } from "../@UI/Loading";
 
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
+import { useSwrQuery } from "../useSwrQuery";
 import { FaqDocument } from "./faq.generated";
 
 export const FaqPage: React.FC = () => {
   const router = useRouter();
-  const { data, loading } = useQuery(FaqDocument, {
-    variables: {
-      hash: router.query.hash as string,
-    },
+  const { data, isValidating } = useSwrQuery("faq", FaqDocument, {
+    hash: router.query.hash as string,
   });
-  if (loading) {
+  if (isValidating) {
     return <Loading />;
   }
 
