@@ -9,6 +9,7 @@ import {
 } from "../generated/graphql-graphcms";
 import { QueryResolvers } from "../generated/resolvers-types";
 import { Reservation } from "../components/Admin/reservations.generated";
+import { ResolverContext } from "./resolvers";
 
 const getAirBnbReservations = async () => {
   let airbnb = new AirBnbClient({
@@ -61,12 +62,13 @@ const getAirBnbReservations = async () => {
   });
 };
 
-export const syncReservations: QueryResolvers["syncReservations"] = async (
+export const syncReservations: QueryResolvers<ResolverContext>["syncReservations"] = async (
   parent,
   args,
   context
 ) => {
-  if (context.session.user.name !== "lino") throw new Error("Invalid session");
+  if (context?.session?.user?.name !== "lino")
+    throw new Error("Invalid session");
   const result = await getAirBnbReservations();
 
   const storedReservations: Reservation[] = await (reservations as any)(

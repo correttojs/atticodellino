@@ -16,13 +16,15 @@ import {
   Reservation,
   ReservationStatus,
 } from "../generated/resolvers-types";
+import { ResolverContext } from "./resolvers";
 
-export const reservations: QueryResolvers["reservations"] = async (
+export const reservations: QueryResolvers<ResolverContext>["reservations"] = async (
   parent,
   args,
   context
 ) => {
-  if (context.session.user.name !== "lino") throw new Error("Invalid session");
+  if (context?.session?.user?.name !== "lino")
+    throw new Error("Invalid session");
   const storedReservations = await graphCmsRequest(GetReservationsDocument, {
     input: args.isPast
       ? new Date("2020-01-01").toISOString()
@@ -38,7 +40,7 @@ export const reservations: QueryResolvers["reservations"] = async (
   }) as Reservation[];
 };
 
-export const reservation: QueryResolvers["reservation"] = async (
+export const reservation: QueryResolvers<ResolverContext>["reservation"] = async (
   parent,
   args,
   context
@@ -68,12 +70,13 @@ export const reservation: QueryResolvers["reservation"] = async (
   } as Reservation;
 };
 
-export const updateReservationStatus: MutationResolvers["updateReservationStatus"] = async (
+export const updateReservationStatus: MutationResolvers<ResolverContext>["updateReservationStatus"] = async (
   parent,
   args,
   context
 ) => {
-  if (context.session.user.name !== "lino") throw new Error("Invalid session");
+  if (context?.session?.user?.name !== "lino")
+    throw new Error("Invalid session");
   const { reservationStatus, ...rest } = args;
 
   const storedReservations = await graphCmsRequest(UpdateReservationDocument, {

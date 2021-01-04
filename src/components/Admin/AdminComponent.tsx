@@ -55,11 +55,14 @@ export const GlobalStyle = createGlobalStyle`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
-  const { data, isLoading } = useReactQuery(
+  const { data, isLoading, error } = useReactQuery(
     `reservations${isPast}`,
     ReservationsDocument,
     {
       isPast,
+    },
+    {
+      enabled: !!session,
     }
   );
   const queryClient = useQueryClient();
@@ -136,7 +139,7 @@ export const AdminComponent: React.FC = () => {
           </ButtonInverted>
         </div>
       </Modal>
-      {!isLoading && !session && (
+      {!session && (
         <div css={tw`p-4`}>
           <ButtonWithIcon onClick={() => signIn()} Icon={<IoLogInSharp />}>
             Sign in

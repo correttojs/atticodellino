@@ -3,6 +3,7 @@ import * as ical from "ical";
 import { takeShapeRequest } from "./takeshape";
 import { ApartmentSecretDocument } from "../generated/graphql-takeshape-doc";
 import { QueryResolvers } from "../generated/resolvers-types";
+import { ResolverContext } from "./resolvers";
 
 const fetchIcal = async (icalUrl: string, summary: string) => {
   let data: any = await fetch(icalUrl).then((r) => r.text());
@@ -19,7 +20,7 @@ const fetchIcal = async (icalUrl: string, summary: string) => {
     });
 };
 
-export const calendarResolver: QueryResolvers["calendar"] = async (
+export const calendarResolver: QueryResolvers<ResolverContext>["calendar"] = async (
   _,
   { apartment }
 ) => {

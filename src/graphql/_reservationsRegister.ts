@@ -15,6 +15,7 @@ import {
   MutationResolvers,
   ReservationStatus,
 } from "../generated/resolvers-types";
+import { ResolverContext } from "./resolvers";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
@@ -77,7 +78,7 @@ const sendEmail = async ({
   }
 };
 
-export const registerGuests: MutationResolvers["registerGuests"] = async (
+export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"] = async (
   _,
   { file, user }
 ) => {
