@@ -21,7 +21,7 @@ import { Loading } from "../@UI/Loading";
 import { IoLogInSharp } from "react-icons/io5";
 
 import Modal from "react-modal";
-import { MQ_MOBILE } from "../Layout/MediaQueries";
+import { MQ_MOBILE } from "../Layout";
 import { Reservation } from "./Reservation";
 import {
   ReservationsDocument,
@@ -31,7 +31,8 @@ import {
   UpdateReservationStatusDocument,
   UpdateReservationStatusMutationVariables,
 } from "./reservations.generated";
-import { gqlRequest, useSwrMutation, useSwrQuery } from "../useSwrQuery";
+import { useReactMutation, useReactQuery } from "../useReactQuery";
+import { useQueryClient } from "react-query";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;
@@ -54,31 +55,34 @@ export const GlobalStyle = createGlobalStyle`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
-  const { data, isValidating, mutate } = useSwrQuery(
+  const { data, isLoading } = useReactQuery(
     `reservations${isPast}`,
     ReservationsDocument,
     {
       isPast,
     }
   );
+  const queryClient = useQueryClient();
+
+  const mutation = useReactMutation(UpdateReservationStatusDocument, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(`reservations${isPast}`);
+    },
+  });
 
   const handleStateUpdated = async (
     args: UpdateReservationStatusMutationVariables
   ) => {
     setIsSmsOpen(null);
-    await gqlRequest(UpdateReservationStatusDocument, args);
-    const { hash, reservationStatus } = args;
-    mutate({
-      reservations: data?.reservations?.map((i) => {
-        return hash === i?.hash ? { ...i, reservationStatus } : i;
-      }),
-    });
+    mutation.mutate(args);
   };
 
-  const [
-    sync,
-    { data: syncedData, error: syncError, isLoading: syncLoading },
-  ] = useSwrMutation("sync", SyncRegistrationsDocument);
+  const {
+    mutate: sync,
+    data: syncedData,
+    error: syncError,
+    isLoading: syncLoading,
+  } = useReactMutation(SyncRegistrationsDocument);
 
   const [isSmsOpen, setIsSmsOpen] = useState<{
     userId: string;
@@ -132,14 +136,14 @@ export const AdminComponent: React.FC = () => {
           </ButtonInverted>
         </div>
       </Modal>
-      {!isValidating && !session && (
+      {!isLoading && !session && (
         <div css={tw`p-4`}>
           <ButtonWithIcon onClick={() => signIn()} Icon={<IoLogInSharp />}>
             Sign in
           </ButtonWithIcon>
         </div>
       )}
-      {isValidating && <Loading />}
+      {isLoading && <Loading />}
       {session && (
         <div css={tw`p-4`}>
           {syncLoading ? (
@@ -147,7 +151,7 @@ export const AdminComponent: React.FC = () => {
           ) : (
             <ButtonWithIcon
               css={tw`m-2`}
-              onClick={() => sync()}
+              onClick={() => sync({})}
               Icon={<MdSync />}
             >
               Sync with Airbnb

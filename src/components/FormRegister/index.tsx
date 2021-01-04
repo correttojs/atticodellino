@@ -14,7 +14,7 @@ import { FaqPage } from "../Faq";
 import { FormRegister } from "./FormRegister";
 import { SiGooglestreetview } from "react-icons/si";
 import { FaAirbnb } from "react-icons/fa";
-import { useSwrQuery } from "../useSwrQuery";
+import { useReactQuery } from "../useReactQuery";
 
 export const Register: React.FC = () => {
   const router = useRouter();
@@ -22,15 +22,16 @@ export const Register: React.FC = () => {
   const t = useTranslations();
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const { data, isValidating, error } = useSwrQuery(
-    router.query.hash ? "reservation" : null,
+  const { data, isLoading, error } = useReactQuery(
+    "reservation",
     ReservationDocument,
     {
       hash: router.query.hash as string,
-    }
+    },
+    { enabled: !!router.query.hash }
   );
 
-  if (isValidating) {
+  if (isLoading) {
     return (
       <div css={tw`flex justify-center`}>
         <Loading />
