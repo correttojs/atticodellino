@@ -6,7 +6,7 @@ import { ButtonInverted } from "../@UI/Buttons";
 import { MdAccountCircle } from "react-icons/md";
 import { FaRegIdCard } from "react-icons/fa";
 import styled from "styled-components";
-import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
+import { MQ_NOT_MOBILE } from "../Layout";
 import { ReservationsQuery } from "./reservations.generated";
 
 const DescStyle = styled.i`

@@ -8,7 +8,7 @@ import tw from "twin.macro";
 import { CalendarDocument } from "./calendar.generated";
 import { PriceDocument } from "./price.generated";
 import { Calendar } from "./Calendar.css";
-import { useSwrMutation, useSwrQuery } from "../useSwrQuery";
+import { useReactQuery, useReactMutation } from "../useReactQuery";
 
 const formatDate = (date: Date) => {
   return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${(
@@ -19,9 +19,9 @@ const formatDate = (date: Date) => {
 
 export const BookingCalendar = () => {
   const { apartment, airBnb } = useGlobal();
-  const { data } = useSwrQuery("cal", CalendarDocument, { apartment });
+  const { data } = useReactQuery("cal", CalendarDocument, { apartment });
 
-  const [calcPrice, { data: price }] = useSwrMutation("/price", PriceDocument);
+  const { mutate: calcPrice, data: price } = useReactMutation(PriceDocument);
   const t = useTranslations();
 
   const [selection, setSelection] = useState<Date[]>([]);

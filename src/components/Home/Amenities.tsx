@@ -4,7 +4,7 @@ import { Section } from "../@UI/Section";
 import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
 import { H2, P } from "../@UI/Texts";
 import tw from "twin.macro";
-import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
+import { MQ_NOT_MOBILE } from "../Layout";
 
 export const Amenities: React.FC<{
   amenities: { name: string }[];

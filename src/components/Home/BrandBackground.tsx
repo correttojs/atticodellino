@@ -1,5 +1,4 @@
 import tw from "twin.macro";
-import { MQ_MOBILE } from "../Layout/MediaQueries";
 import { ThemeType } from "../Layout/useGlobal";
 
 export const BrandBackground = () => (

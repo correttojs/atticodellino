@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { MQ_NOT_MOBILE, MQ_MOBILE } from "../Layout/MediaQueries";
+import { MQ_NOT_MOBILE, MQ_MOBILE } from "../Layout";
 import { ThemeType } from "../Layout/useGlobal";
 import ReactCalendar from "react-calendar";
 

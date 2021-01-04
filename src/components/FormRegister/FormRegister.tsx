@@ -17,17 +17,18 @@ import { Section } from "../@UI/Section";
 import { Loading } from "../@UI/Loading";
 
 import { RegisterDocument, ReservationQuery } from "./register.generated";
-import { gqlRequest } from "../useSwrQuery";
+import { useReactMutation } from "../useReactQuery";
 
 export const FormRegister: React.FC<{
   reservation: ReservationQuery["reservation"];
   onSuccess: () => void;
 }> = ({ reservation, onSuccess }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
   const router = useRouter();
   const [isCalendarOpen, setCalendarOpen] = useState(false);
   const t = useTranslations();
+  const { mutate, isLoading, error } = useReactMutation(RegisterDocument, {
+    onSuccess,
+  });
 
   const formik = useFormik({
     initialValues,
@@ -37,22 +38,17 @@ export const FormRegister: React.FC<{
         ...rest,
         birthDate: (birthDate ?? new Date()).toISOString().split("T")[0],
       }));
-      try {
-        setIsLoading(true);
-        await gqlRequest(RegisterDocument, {
-          user: {
-            check_out: reservation?.check_out ?? "",
-            home: reservation?.home ?? "",
-            phone: reservation?.phone ?? "",
-            hash: router.query.hash as string,
-            guests,
-          },
-          file: guestsForm.map((g) => g.file),
-        });
-        onSuccess();
-      } catch (e) {
-        setError(e);
-      }
+
+      mutate({
+        user: {
+          check_out: reservation?.check_out ?? "",
+          home: reservation?.home ?? "",
+          phone: reservation?.phone ?? "",
+          hash: router.query.hash as string,
+          guests,
+        },
+        file: guestsForm.map((g) => g.file),
+      });
     },
     validationSchema,
   });

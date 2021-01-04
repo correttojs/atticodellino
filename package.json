@@ -42,8 +42,8 @@
     "react-icons": "^4.1.0",
     "react-intersection-observer": "^8.31.0",
     "react-modal": "^3.12.1",
+    "react-query": "^3.5.9",
     "styled-components": "^5.2.1",
-    "swr": "^0.3.11",
     "tailwindcss": "^2.0.2",
     "twin.macro": "^1.12.1",
     "yup": "^0.32.8"

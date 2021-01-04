@@ -8,19 +8,18 @@ import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
 import { Button } from "../@UI/Buttons";
 import { FormError } from "../@UI/FormError";
-import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
+import { MQ_NOT_MOBILE } from "../Layout";
 import { Loading } from "../@UI/Loading";
 
 import { BookNowDocument } from "./bookNow.generated";
-import { useSwrMutation } from "../useSwrQuery";
+import { useReactMutation } from "../useReactQuery";
 
 export const FormBook: React.FC<{
   from: string;
   to: string;
   price: number;
 }> = ({ from, to, price }) => {
-  const [bookNow, { data, isValidating, error }] = useSwrMutation(
-    "book",
+  const { mutate: bookNow, data, isLoading, error } = useReactMutation(
     BookNowDocument
   );
 
@@ -56,8 +55,8 @@ export const FormBook: React.FC<{
         </div>
       )}
       {error && <FormError />}
-      {isValidating && <Loading />}
-      {!data && !error && !isValidating && (
+      {isLoading && <Loading />}
+      {!data && !error && !isLoading && (
         <>
           <form
             onSubmit={(e) => {

@@ -4,7 +4,7 @@ import Modal from "react-modal";
 import { useGlobal } from "../Layout";
 import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
 import styled, { keyframes } from "styled-components";
-import { MQ_MOBILE } from "../Layout/MediaQueries";
+import { MQ_MOBILE } from "../Layout";
 import { MdInsertPhoto } from "react-icons/md";
 import tw from "twin.macro";
 import { BrandBackground } from "./BrandBackground";

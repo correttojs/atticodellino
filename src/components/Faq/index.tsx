@@ -5,15 +5,15 @@ import { Loading } from "../@UI/Loading";
 
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
-import { useSwrQuery } from "../useSwrQuery";
+import { useReactQuery } from "../useReactQuery";
 import { FaqDocument } from "./faq.generated";
 
 export const FaqPage: React.FC = () => {
   const router = useRouter();
-  const { data, isValidating } = useSwrQuery("faq", FaqDocument, {
+  const { data, isLoading } = useReactQuery("faq", FaqDocument, {
     hash: router.query.hash as string,
   });
-  if (isValidating) {
+  if (isLoading) {
     return <Loading />;
   }
 
