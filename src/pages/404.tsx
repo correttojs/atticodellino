@@ -1,6 +1,7 @@
-import { withGrommetTheme } from "../components/Layout";
+import { withLayout } from "../components/Layout";
 import { getGlobalProps } from "../graphql/takeshape/getGlobal";
 import tw from "twin.macro";
+import { GetStaticProps } from "next";
 
 const PageError = () => (
   <div
@@ -13,9 +14,10 @@ const PageError = () => (
   </div>
 );
 
-export async function getStaticProps({ locale }) {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const params = { lang: "en", apartment: "VR" };
-  return getGlobalProps({ params, locale });
-}
+  const globalProps = await getGlobalProps({ params, locale });
+  return globalProps ?? { props: {} };
+};
 
-export default withGrommetTheme()(PageError);
+export default withLayout(PageError);

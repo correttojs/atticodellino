@@ -44,21 +44,21 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
 
       <Section css={tw`flex justify-end `}>
         <CardHorizontal
-          title={sponsor?.[0]?.location}
+          title={sponsor?.[0]?.location ?? ""}
           message={translate("ALSO", {
             c: sponsor?.[0]?.location,
           })}
           onClick={() =>
-            (window.location.href = `/${sponsor?.[0]?.key.toLowerCase()}`.replace(
+            (window.location.href = `/${sponsor?.[0]?.key?.toLowerCase()}`.replace(
               "//",
               "/"
             ))
           }
         >
           <Image
-            src={`/images/promo-${sponsor?.[0]?.key.toLowerCase()}.webp`}
-            title={sponsor?.[0]?.location}
-            alt={sponsor?.[0]?.location}
+            src={`/images/promo-${sponsor?.[0]?.key?.toLowerCase()}.webp`}
+            title={sponsor?.[0]?.location ?? ""}
+            alt={sponsor?.[0]?.location ?? ""}
             width={128}
             height={128}
             css={tw`w-32 h-32  object-cover `}
@@ -110,7 +110,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
               reviews={
                 pdp_listing_detail.primary_host.badges.find(
                   (r) => r.id === "reviews"
-                ).count
+                )?.count ?? 0
               }
             />
             <Reviews

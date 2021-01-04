@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { GlobalType } from "../../graphql/_airbn.types";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
-import { GlobalContext, theme } from "./useGlobal";
+import { defaultGlobal, GlobalContext, theme } from "./useGlobal";
 import tw from "twin.macro";
 import { MQ_MOBILE } from "./MediaQueries";
 import { Contacts } from "./Contact";
@@ -36,24 +36,11 @@ export const GlobalStyle = createGlobalStyle`
     }
 `;
 
-export const withGrommetTheme = (global?: GlobalType) => (Comp) => (props: {
-  global?: GlobalType;
-}) => {
-  const [currentLang, setLang] = useState(global?.lang);
-
-  if (!props.global ?? global) {
-    console.log(props);
-    return null;
-  }
-
+export const withLayout = (Comp: any) => (props: { global: GlobalType }) => {
   return (
     <>
       <GlobalStyle />
-      <GlobalContext.Provider
-        value={
-          global ? { ...global, lang: currentLang, setLang } : props.global
-        }
-      >
+      <GlobalContext.Provider value={props.global}>
         <ThemeProvider theme={theme(props.global)}>
           <div css={tw`flex flex-col items-center`}>
             <Header />

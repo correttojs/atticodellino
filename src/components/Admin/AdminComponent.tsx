@@ -55,7 +55,7 @@ export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
   const { data, isValidating, mutate } = useSwrQuery(
-    "reservations",
+    `reservations${isPast}`,
     ReservationsDocument,
     {
       isPast,
@@ -70,7 +70,7 @@ export const AdminComponent: React.FC = () => {
     const { hash, reservationStatus } = args;
     mutate({
       reservations: data?.reservations?.map((i) => {
-        return hash === i.hash ? { ...i, reservationStatus } : i;
+        return hash === i?.hash ? { ...i, reservationStatus } : i;
       }),
     });
   };
@@ -86,7 +86,7 @@ export const AdminComponent: React.FC = () => {
   } | null>(null);
 
   const [reservationDetails, setReservationDetails] = useState<
-    ReservationsQuery["reservations"][0] | null
+    NonNullable<ReservationsQuery["reservations"]>[0] | null
   >(null);
 
   return (
@@ -115,6 +115,9 @@ export const AdminComponent: React.FC = () => {
           <p>Send SMS?</p>
           <Button
             onClick={() => {
+              if (!isSmsOpen) {
+                return;
+              }
               handleStateUpdated({
                 ...isSmsOpen,
                 reservationStatus: ReservationStatus.LinkSent,
@@ -131,7 +134,7 @@ export const AdminComponent: React.FC = () => {
       </Modal>
       {!isValidating && !session && (
         <div css={tw`p-4`}>
-          <ButtonWithIcon onClick={signIn} Icon={<IoLogInSharp />}>
+          <ButtonWithIcon onClick={() => signIn()} Icon={<IoLogInSharp />}>
             Sign in
           </ButtonWithIcon>
         </div>
@@ -170,56 +173,57 @@ export const AdminComponent: React.FC = () => {
 
           {data && (
             <table>
-              {(syncedData?.syncReservations ?? data.reservations).map(
-                (item, key) => (
-                  <BodyStyle key={`user${key}`}>
-                    <tr>
-                      <td
-                        scope="row"
-                        css={tw`cursor-pointer flex items-center justify-between`}
-                        onClick={() => setReservationDetails(item)}
-                      >
-                        <b css={tw`underline `}>{item.guest_name}</b>
-                        <MdMoreVert />
-                      </td>
-
-                      <td>{item.check_in}</td>
-                      <td>{item.home}</td>
-                      <td>
-                        <ButtonSmall
-                          title={item.reservationStatus}
-                          style={{ float: "right" }}
-                          type="button"
-                          onClick={() => {
-                            if (item.reservationStatus === "new") {
-                              setIsSmsOpen({
-                                userId: item.id,
-                                hash: item.hash,
-                              });
-                            } else {
-                              handleStateUpdated({
-                                userId: item.id,
-                                hash: item.hash,
-                                reservationStatus:
-                                  item.reservationStatus === "link_sent"
-                                    ? ReservationStatus.Registered
-                                    : ReservationStatus.New,
-                              });
-                            }
-                          }}
+              {(syncedData?.syncReservations ?? data?.reservations)?.map(
+                (item, key) =>
+                  !item ? null : (
+                    <BodyStyle key={`user${key}`}>
+                      <tr>
+                        <td
+                          scope="row"
+                          css={tw`cursor-pointer flex items-center justify-between`}
+                          onClick={() => setReservationDetails(item)}
                         >
-                          {item.reservationStatus === "link_sent" ? (
-                            <MdDone color="#fff" />
-                          ) : item.reservationStatus === "new" ? (
-                            <MdNewReleases color="#fff" />
-                          ) : (
-                            <MdDoneAll color="#fff" />
-                          )}
-                        </ButtonSmall>
-                      </td>
-                    </tr>
-                  </BodyStyle>
-                )
+                          <b css={tw`underline `}>{item.guest_name}</b>
+                          <MdMoreVert />
+                        </td>
+
+                        <td>{item.check_in}</td>
+                        <td>{item.home}</td>
+                        <td>
+                          <ButtonSmall
+                            title={item.reservationStatus ?? ""}
+                            style={{ float: "right" }}
+                            type="button"
+                            onClick={() => {
+                              if (item.reservationStatus === "new") {
+                                setIsSmsOpen({
+                                  userId: item.id ?? "",
+                                  hash: item.hash ?? "",
+                                });
+                              } else {
+                                handleStateUpdated({
+                                  userId: item.id ?? "",
+                                  hash: item.hash ?? "",
+                                  reservationStatus:
+                                    item.reservationStatus === "link_sent"
+                                      ? ReservationStatus.Registered
+                                      : ReservationStatus.New,
+                                });
+                              }
+                            }}
+                          >
+                            {item.reservationStatus === "link_sent" ? (
+                              <MdDone color="#fff" />
+                            ) : item.reservationStatus === "new" ? (
+                              <MdNewReleases color="#fff" />
+                            ) : (
+                              <MdDoneAll color="#fff" />
+                            )}
+                          </ButtonSmall>
+                        </td>
+                      </tr>
+                    </BodyStyle>
+                  )
               )}
             </table>
           )}

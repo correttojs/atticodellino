@@ -24,7 +24,7 @@ export const BookingCalendar = () => {
   const [calcPrice, { data: price }] = useSwrMutation("/price", PriceDocument);
   const t = useTranslations();
 
-  const [selection, setSelection] = useState([]);
+  const [selection, setSelection] = useState<Date[]>([]);
 
   return (
     <section
@@ -45,25 +45,31 @@ export const BookingCalendar = () => {
             if (e.date.getTime() < new Date().getTime()) {
               return true;
             }
-            data.calendar.forEach((event) => {
+            (data?.calendar ?? []).forEach((event) => {
               booked =
                 booked ||
-                (new Date(event.start).getTime() <= e.date.getTime() &&
-                  new Date(event.end).getTime() >= e.date.getTime());
+                (new Date(event?.start ?? "").getTime() <= e.date.getTime() &&
+                  new Date(event?.end ?? "").getTime() >= e.date.getTime());
             });
             return booked;
           }}
           selectRange={true}
           onChange={(e) => {
-            setSelection(e);
-            calcPrice({
-              from: formatDate(e[0]),
-              to: formatDate(e[1]),
-              airBnb,
-            });
+            if (Array.isArray(e)) {
+              setSelection(e);
+              calcPrice({
+                from: formatDate(e[0]),
+                to: formatDate(e[1]),
+                airBnb: airBnb ?? "",
+              });
+            }
           }}
         />
-        <FormBook from={selection[0]} to={selection[1]} price={price?.price} />
+        <FormBook
+          from={selection[0]?.toISOString()}
+          to={selection[1]?.toISOString()}
+          price={price?.price ?? 0}
+        />
       </div>
     </section>
   );

@@ -4,16 +4,15 @@ import { ServerStyleSheet } from "styled-components";
 import { getGlobalProps } from "../graphql/takeshape/getGlobal";
 
 export default class MyDocument extends Document<{
-  styleTags;
-  lang;
-  apartment;
+  styleTags: any;
+  apartment: string;
   cover: string;
   color: string;
 }> {
-  static async getInitialProps(ctx) {
+  static async getInitialProps(ctx: any) {
     const sheet = new ServerStyleSheet();
 
-    const page = ctx.renderPage((App) => (props) =>
+    const page = ctx.renderPage((App: any) => (props: any) =>
       sheet.collectStyles(<App {...props} />)
     );
 

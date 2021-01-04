@@ -25,7 +25,7 @@ const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
         }}
       >
         <FormSelect
-          formik={formik}
+          formik={formik as any}
           field={`lastName`}
           label="Last name"
           options={["Test1", "Test2"]}

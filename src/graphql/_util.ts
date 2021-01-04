@@ -1,12 +1,18 @@
 export const getLangByPhone = (phone: string) =>
   /\+39/.test(phone) ? "it" : "en";
 
-type Props = { phone?: string; hash?: string; id?: string };
+type Props = {
+  phone?: string | null;
+  hash?: string | null;
+  id?: string | null;
+};
 
 export const faqLink = ({ phone, hash, id }: Props) =>
-  `https://www.atticodellino.com/${getLangByPhone(phone)}/faq?hash=${hash}`;
+  `https://www.atticodellino.com/${getLangByPhone(
+    phone ?? ""
+  )}/faq?hash=${hash}`;
 
 export const registerLink = ({ phone, hash, id }: Props) =>
   `https://www.atticodellino.com/${getLangByPhone(
-    phone
+    phone ?? ""
   )}/register?hash=${hash}`;

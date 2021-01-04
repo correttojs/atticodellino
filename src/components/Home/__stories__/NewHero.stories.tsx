@@ -13,7 +13,7 @@ export default {
   title: "Home/NewHero",
 } as Meta;
 
-const photos = [];
+const photos: any[] = [];
 for (let i = 1; i < 12; i++) {
   photos.push({
     id: i,

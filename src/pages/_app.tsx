@@ -3,6 +3,12 @@ import Router from "next/router";
 import "tailwindcss/dist/base.min.css";
 import { useEffect } from "react";
 
+declare global {
+  interface Window {
+    gtag: any;
+  }
+}
+
 const loadedScripts: string[] = [];
 const loadScript = async (src: HTMLScriptElement["src"]): Promise<void> =>
   new Promise((resolve, reject) => {
@@ -20,11 +26,11 @@ const loadScript = async (src: HTMLScriptElement["src"]): Promise<void> =>
     document.body.appendChild(script);
   });
 
-export function reportWebVitals(metric) {
+export function reportWebVitals(metric: any) {
   console.log(metric);
 }
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: any) {
   useEffect(() => {
     loadScript(
       `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_UA}`

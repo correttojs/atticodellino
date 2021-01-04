@@ -1,23 +1,24 @@
 import { getDetails } from "../../graphql/_airbnb";
 import { Home } from "../../components/Home";
-import { withGrommetTheme } from "../../components/Layout";
+import { withLayout } from "../../components/Layout";
 import {
   getGlobalPaths,
   getGlobalProps,
 } from "../../graphql/takeshape/getGlobal";
+import { GetStaticProps } from "next";
 
-export async function getStaticProps({ params, locale }) {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const globalProps = await getGlobalProps({ params, locale });
   const res = await getDetails(
-    globalProps.props.global.apartment,
-    locale,
-    globalProps.props.global.airBnb
+    globalProps?.props.global.apartment ?? "",
+    locale ?? "en",
+    globalProps?.props.global.airBnb ?? ""
   );
   return {
-    props: { ...res, ...globalProps.props },
+    props: { ...res, ...globalProps?.props },
   };
-}
+};
 
 export const getStaticPaths = getGlobalPaths;
 
-export default withGrommetTheme()(Home);
+export default withLayout(Home);

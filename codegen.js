@@ -74,6 +74,18 @@ async function run() {
     },
     true
   );
+  await generate(
+    {
+      schema: ["http://localhost:3000/api/graphql"],
+      documents: "src/components/**/*.graphql",
+      generates: {
+        [process.cwd() + "/src/generated/resolvers-types.ts"]: {
+          plugins: ["typescript", "typescript-resolvers"],
+        },
+      },
+    },
+    true
+  );
 }
 
 run();

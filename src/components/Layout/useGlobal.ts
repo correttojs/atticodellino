@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { GlobalType } from "../../graphql/_airbn.types";
 
-export const GlobalContext = React.createContext<GlobalType & { setLang? }>({
+export const defaultGlobal = {
   apartment: "VR",
   lang: "en",
   langs: ["en", "de"],
@@ -14,30 +14,32 @@ export const GlobalContext = React.createContext<GlobalType & { setLang? }>({
   },
   name: `L'attico del lino`,
   address: `San Nazaro st., 60, 4th floor, 37129, Verona - Italy`,
-});
+};
 
-export const theme = (apartment: GlobalType) => {
+export const GlobalContext = React.createContext<GlobalType>(defaultGlobal);
+
+export const theme = (global: GlobalType) => {
   const {
     rgb: { r, g, b, a },
-  } = apartment.lightColor;
+  } = global.lightColor as any;
   const {
     rgb: { r: r2, g: g2, b: b2, a: a2 },
-  } = apartment.lightColor;
+  } = global.lightColor as any;
   return {
     colors: {
-      brand: apartment.brandColor.hex,
-      focus: apartment.brandColor.hex,
+      brand: global?.brandColor?.hex ?? "",
+      focus: global?.brandColor?.hex ?? "",
       active: "#290012e8",
       light: `rgba(${r},${g},${b},${a})`,
       lighter: `rgba(${r2},${g2},${b2},${a2})`,
     },
     background: {
       jpg:
-        apartment.apartment === "VR"
+        global.apartment === "VR"
           ? "/images/cover.jpg"
           : "/images/cover-garda.jpg",
       webp:
-        apartment.apartment === "VR"
+        global.apartment === "VR"
           ? "/images/cover.webp"
           : "/images/cover-garda.webp",
     },

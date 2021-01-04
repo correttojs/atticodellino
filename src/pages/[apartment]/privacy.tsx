@@ -1,4 +1,4 @@
-import { withGrommetTheme } from "../../components/Layout";
+import { withLayout } from "../../components/Layout";
 import {
   getGlobalProps,
   getGlobalPaths,
@@ -10,14 +10,15 @@ import {
   GetArticleByPathDocument,
   GetArticleByPathQuery,
 } from "../../generated/graphql-takeshape-doc";
+import { GetStaticProps } from "next";
 
-export const getStaticProps = async ({ params, locale }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const globalProps = await getGlobalProps({ params, locale });
   const data = await takeShapeRequest(GetArticleByPathDocument, {
     path: "/privacy",
   });
   return {
-    props: { ...globalProps.props, data: data },
+    props: { ...globalProps?.props, data: data },
   };
 };
 
@@ -28,9 +29,11 @@ const Privacy = ({ data }: { data: GetArticleByPathQuery }) => {
   return (
     <Section>
       <h1>{article?.title}</h1>{" "}
-      <div dangerouslySetInnerHTML={{ __html: article?.contentHtml }}></div>
+      <div
+        dangerouslySetInnerHTML={{ __html: article?.contentHtml ?? "" }}
+      ></div>
     </Section>
   );
 };
 
-export default withGrommetTheme()(Privacy);
+export default withLayout(Privacy);

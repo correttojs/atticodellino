@@ -27,7 +27,7 @@ export const sendSms = ({ recipient, message, schedule, orderId }: Payload) => {
     recipient,
     message,
     message.length,
-    parseInt(schedule?.replace(/-/g, "")),
+    parseInt((schedule ?? "").replace(/-/g, "")),
     orderId
   );
 
@@ -51,8 +51,8 @@ export const sendSms = ({ recipient, message, schedule, orderId }: Payload) => {
   return fetch("https://api.trendoo.net/API/v1.0/REST/sms", {
     method: "POST",
     headers: {
-      user_key: process.env.TRENDOO_ID,
-      Access_token: process.env.TRENDOO_PWD,
+      user_key: process.env.TRENDOO_ID ?? "",
+      Access_token: process.env.TRENDOO_PWD ?? "",
       "Content-Type": "application/json",
     },
     body: JSON.stringify(body),
