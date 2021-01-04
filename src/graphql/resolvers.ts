@@ -12,6 +12,15 @@ import { faq } from "./_faq";
 import { upload } from "./upload";
 import { Resolvers } from "../generated/resolvers-types";
 
+export type ResolverContext = {
+  session?: {
+    user?: {
+      name: string;
+      password: string;
+    };
+  };
+};
+
 export const resolvers: Resolvers = {
   Mutation: {
     book: bookMutation,

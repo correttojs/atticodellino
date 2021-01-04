@@ -1,13 +1,14 @@
 import fetch from "isomorphic-unfetch";
 import queryString from "query-string";
 import { QueryResolvers } from "../generated/resolvers-types";
+import { ResolverContext } from "./resolvers";
 import { pdp_listing_detail, Review, GlobalType } from "./_airbn.types";
 
 const BASE_URL = process.env.AIRBNB_BASEURL;
 const LOCALE = "it";
 const KEY = process.env.AIRBNB_KEY;
 
-export const priceResolver: QueryResolvers["price"] = async (
+export const priceResolver: QueryResolvers<ResolverContext>["price"] = async (
   _,
   { from, to, airBnb }
 ) => {
@@ -18,7 +19,7 @@ export const priceResolver: QueryResolvers["price"] = async (
   return Math.round(parseInt(price, 10) * 0.9 * 100) / 100;
 };
 
-export const reviewsResolver: QueryResolvers["reviews"] = async (
+export const reviewsResolver: QueryResolvers<ResolverContext>["reviews"] = async (
   _,
   { airBnb }
 ) => {

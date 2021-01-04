@@ -1,4 +1,5 @@
 import { MutationResolvers } from "../generated/resolvers-types";
+import { ResolverContext } from "./resolvers";
 
 const sgMail = require("@sendgrid/mail");
 
@@ -6,7 +7,10 @@ sgMail.setApiKey(process.env.SEND_GRID_API);
 
 const FROM = `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`;
 
-export const bookMutation: MutationResolvers["book"] = async (_, { user }) => {
+export const bookMutation: MutationResolvers<ResolverContext>["book"] = async (
+  _,
+  { user }
+) => {
   const content = {
     to: process.env.NEXT_PUBLIC_FROM_EMAIL,
     from: FROM, // sender address
