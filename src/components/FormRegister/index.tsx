@@ -23,7 +23,6 @@ export const Register: React.FC = () => {
   const [isRegistered, setIsRegistered] = useState(false);
 
   const { data, isLoading, error } = useReactQuery(
-    "reservation",
     ReservationDocument,
     {
       hash: router.query.hash as string,

@@ -15,13 +15,14 @@ export const gqlRequest = <TData, TVariables>(
 ) => client.request<TData, TVariables>(document, variables);
 
 export const useReactQuery = <TData, TVariables>(
-  key: string,
   document: TypedDocumentNode<TData, TVariables>,
   variables?: TVariables,
   options?: UseQueryOptions<TData, any, TData>
 ) =>
   useQuery<TData>(
-    key,
+    `${(document.definitions[0] as any)?.name?.value}${JSON.stringify(
+      variables
+    )}`,
     () => {
       return gqlRequest(document, variables);
     },

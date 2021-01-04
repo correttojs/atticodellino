@@ -10,7 +10,7 @@ import { FaqDocument } from "./faq.generated";
 
 export const FaqPage: React.FC = () => {
   const router = useRouter();
-  const { data, isLoading } = useReactQuery("faq", FaqDocument, {
+  const { data, isLoading } = useReactQuery(FaqDocument, {
     hash: router.query.hash as string,
   });
   if (isLoading) {

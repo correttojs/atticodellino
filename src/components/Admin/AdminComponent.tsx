@@ -56,7 +56,6 @@ export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
   const { data, isLoading, error } = useReactQuery(
-    `reservations${isPast}`,
     ReservationsDocument,
     {
       isPast,
