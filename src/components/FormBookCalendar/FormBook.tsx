@@ -17,7 +17,7 @@ import { useReactMutation } from "../useReactQuery";
 export const FormBook: React.FC<{
   from: string;
   to: string;
-  price: number;
+  price?: number | null;
 }> = ({ from, to, price }) => {
   const { mutate: bookNow, data, isLoading, error } = useReactMutation(
     BookNowDocument
