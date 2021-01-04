@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import Modal from "react-modal";
 import { useGlobal } from "../Layout";
-import { Contacts } from "../Layout/Contact";
 import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
 import styled, { keyframes } from "styled-components";
 import { MQ_MOBILE } from "../Layout/MediaQueries";
@@ -26,17 +25,20 @@ const slidein = keyframes`
 `;
 
 export const Hero: React.FC<{
-  photos: { id; picture: string; x_large_cover: string; caption: string }[];
+  photos: Array<
+    | { id: number; picture: string; x_large_cover: string; caption: string }
+    | undefined
+  >;
 }> = ({ photos }) => {
   const [show, setShow] = useState(-1);
   const global = useGlobal();
 
   if (global.apartment === "VR") {
     photos = [
-      photos.find((p) => p.id === 406200537),
-      photos.find((p) => p.id === 406200123),
+      photos.find((p) => p?.id === 406200537),
+      photos.find((p) => p?.id === 406200123),
       ...photos.filter(
-        (p) => p.id !== 406200537 && p.id !== 278532343 && p.id !== 406200123
+        (p) => p?.id !== 406200537 && p?.id !== 278532343 && p?.id !== 406200123
       ),
     ];
   }
@@ -72,9 +74,8 @@ export const Hero: React.FC<{
                 i === 4 && tw`rounded-br-xl`,
               ]}
               key={i}
-              id={s.id}
-              alt={s.caption}
-              src={s.picture}
+              alt={s?.caption}
+              src={s?.picture}
               loading="lazy"
               onClick={() => setShow(i)}
               height={500}

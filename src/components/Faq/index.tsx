@@ -19,7 +19,7 @@ export const FaqPage: React.FC = () => {
 
   return (
     <Section>
-      {data?.faq.map((item, i) => (
+      {(data?.faq ?? []).map((item, i) => (
         <div
           css={tw`m-4`}
           style={{ marginTop: "-80px", paddingTop: "80px" }}
@@ -27,12 +27,12 @@ export const FaqPage: React.FC = () => {
           id={"faq" + i}
         >
           <H2>{item?.question}</H2>
-          <div dangerouslySetInnerHTML={{ __html: item?.answerHtml }} />
-          {item.asset?.path && (
+          <div dangerouslySetInnerHTML={{ __html: item?.answerHtml ?? "" }} />
+          {item?.asset?.path && (
             <video width="320" height="240" controls>
               <source
-                src={`https://assets.takeshape.io/${item.asset.path}`}
-                type={item.asset?.mimeType}
+                src={`https://assets.takeshape.io/${item?.asset?.path}`}
+                type={item?.asset?.mimeType ?? ""}
               />
               Your browser does not support the video tag.
             </video>

@@ -24,7 +24,12 @@ const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
           formik.handleSubmit();
         }}
       >
-        <FormUpload formik={formik} field={`file`} label="Upload" />
+        <FormUpload
+          index={0}
+          formik={formik as any}
+          field={`file`}
+          label="Upload"
+        />
         <Button type="submit">Submit</Button>
       </form>
     </div>

@@ -9,7 +9,7 @@ export type AirBnbUser = {
   picture_url: string;
   profile_path: string;
   about: string;
-  profile_pic_path;
+  profile_pic_path: string;
   badges: [{ count: number; id: "reviews" }];
 };
 
@@ -77,7 +77,7 @@ export type GlobalType = {
   lang: string;
   langs: string[];
   apartments: string[];
-} & ApartmentQuery["getApartmentList"]["items"][0];
+} & NonNullable<NonNullable<ApartmentQuery["getApartmentList"]>["items"]>[0];
 
 export type pdp_listing_detail = {
   global: GlobalType;

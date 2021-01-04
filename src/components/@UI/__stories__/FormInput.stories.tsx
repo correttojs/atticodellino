@@ -17,7 +17,7 @@ const Template: Story<React.ButtonHTMLAttributes<any>> = (args) => {
   });
   return (
     <div>
-      <FormInput formik={formik} field={`lastName`} label="Last name" />
+      <FormInput formik={formik as any} field={`lastName`} label="Last name" />
     </div>
   );
 };

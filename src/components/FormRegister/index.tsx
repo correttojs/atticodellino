@@ -53,7 +53,7 @@ export const Register: React.FC = () => {
         <H2 css={tw`p-4 text-center`}>{t("RATE_US")}</H2>
         <div css={tw`flex justify-center`}>
           <a
-            href={data?.reservation?.mapLink}
+            href={data?.reservation?.mapLink ?? ""}
             css={tw`m-2 flex items-center cursor-pointer`}
             target="_blank"
             rel="noopener"
@@ -61,7 +61,7 @@ export const Register: React.FC = () => {
             <SiGooglestreetview css={tw`inline`} /> Google
           </a>
           <a
-            href={data?.reservation?.airbnbLink}
+            href={data?.reservation?.airbnbLink ?? ""}
             css={tw`m-2 flex items-center cursor-pointer`}
             target="_blank"
             rel="noopener"

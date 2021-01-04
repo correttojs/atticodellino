@@ -7,12 +7,14 @@ import {
   GetTokenDocument,
   GuestStatus,
 } from "../generated/graphql-graphcms";
+import { QueryResolvers } from "../generated/resolvers-types";
+import { Reservation } from "../components/Admin/reservations.generated";
 
 const getAirBnbReservations = async () => {
   let airbnb = new AirBnbClient({
     email: process.env.AIRBNB_EMAIL,
     password: process.env.AIRBNB_PASSWORD,
-    session_store: null,
+    session_store: null as any,
   });
 
   const token = await graphCmsRequest(GetTokenDocument);
@@ -21,7 +23,7 @@ const getAirBnbReservations = async () => {
   airbnb.auth_token = airbnb.session.token;
   airbnb.authenticated = true;
 
-  const res = await airbnb._get_reservations({
+  const res: any = await airbnb._get_reservations({
     _limit: 50,
     include_canceled: false,
     // start_date: "2020-01-01",
@@ -29,8 +31,8 @@ const getAirBnbReservations = async () => {
 
   const reservationDetails = await Promise.all(
     res.reservations
-      .filter((r) => r.status !== "cancelled")
-      .map((r) => airbnb._get_reservation_details(r.thread_id))
+      .filter((r: any) => r.status !== "cancelled")
+      .map((r: any) => airbnb._get_reservation_details(r.thread_id))
   );
 
   return reservationDetails.map((detail: any) => {
@@ -59,11 +61,19 @@ const getAirBnbReservations = async () => {
   });
 };
 
-export const syncReservations = async (parent, args, context) => {
+export const syncReservations: QueryResolvers["syncReservations"] = async (
+  parent,
+  args,
+  context
+) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const result = await getAirBnbReservations();
 
-  const storedReservations = await reservations(parent, args, context);
+  const storedReservations: Reservation[] = await (reservations as any)(
+    parent,
+    args,
+    context
+  );
 
   const hashes = storedReservations.map((r) => r.hash);
   const toBeAdded = result.filter((r) => !hashes.includes(r.hash));
@@ -74,5 +84,8 @@ export const syncReservations = async (parent, args, context) => {
     )
   );
 
-  return [...added.map((r) => r.createReservation), ...storedReservations];
+  return [
+    ...added.map((r) => r.createReservation),
+    ...storedReservations,
+  ] as Reservation[];
 };

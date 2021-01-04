@@ -1,5 +1,5 @@
 import { graphCmsRequest } from "./graphcms";
-import { MutationRegisterGuestsArgs } from "../generated/graphql";
+
 import { streamTo64 } from "./_streamToBase64";
 import {
   GuestStatus,
@@ -10,6 +10,11 @@ import { takeShapeRequest } from "./takeshape";
 import { faqLink, getLangByPhone } from "./_util";
 import { upload } from "./upload";
 import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
+import {
+  MutationRegisterGuestsArgs,
+  MutationResolvers,
+  ReservationStatus,
+} from "../generated/resolvers-types";
 const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SEND_GRID_API);
@@ -24,7 +29,7 @@ const sendEmail = async ({
   apartmentCode: string;
 }) => {
   console.log(files, user);
-  let attachments = [];
+  let attachments: any[] = [];
   if (files?.[0]) {
     const streams = await Promise.all(
       files?.map((item) => {
@@ -52,15 +57,15 @@ const sendEmail = async ({
     from: `info@atticodellino.com`, // sender address
     subject: `Registration request from L'attico del Lino`, // Subject line
     html: `
-        <h1>Registration Request ${user.phone}</h1>
-        <p>Phone: ${user.phone}</p>
+        <h1>Registration Request ${user?.phone}</h1>
+        <p>Phone: ${user?.phone}</p>
         <p>Apartment: ${apartmentCode}</p>
         <p>Checkout: ${user.check_out}</p>
-        ${user.guests.map((item) => {
+        ${user.guests?.map((item) => {
           return `
-             <p>User: ${item.firstName} ${item.lastName}</p>
-            <p>Document: ${item.documentType} - ${item.documentNumber}</p>
-            <p>Birth: ${item.birthDate} - ${item.nationality} - ${item.placeOfBirth}</p>`;
+             <p>User: ${item?.firstName} ${item?.lastName}</p>
+            <p>Document: ${item?.documentType} - ${item?.documentNumber}</p>
+            <p>Birth: ${item?.birthDate} - ${item?.nationality} - ${item?.placeOfBirth}</p>`;
         })}
     `,
     attachments,
@@ -72,9 +77,9 @@ const sendEmail = async ({
   }
 };
 
-export const registerGuests = async (
+export const registerGuests: MutationResolvers["registerGuests"] = async (
   _,
-  { file, user }: MutationRegisterGuestsArgs
+  { file, user }
 ) => {
   const files = await Promise.all(file);
   const { guests, phone, home, check_out, ...input } = user;
@@ -82,7 +87,7 @@ export const registerGuests = async (
   const apartment = await takeShapeRequest(ApartmentCodeByAirBnbIdDocument, {
     key: home,
   });
-  const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code;
+  const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code ?? "";
   await sendEmail({ files, user, apartmentCode });
 
   const urls = await Promise.all(
@@ -99,7 +104,7 @@ export const registerGuests = async (
     input,
     data: {
       guests: {
-        create: guests.map((g, i) => ({ ...g, docFile: urls[i] })),
+        create: guests?.map((g, i) => ({ ...g, docFile: urls[i] })),
       },
       reservationStatus: GuestStatus.Registered,
     },
@@ -118,5 +123,6 @@ export const registerGuests = async (
     hash: input.hash,
   });
 
-  return data?.updateReservation?.reservationStatus;
+  return (data?.updateReservation
+    ?.reservationStatus as any) as ReservationStatus;
 };

@@ -28,7 +28,7 @@ type PropType = {
   field: string;
   formik: ReturnType<typeof useFormik>;
   label: string;
-  index?: number;
+  index: number;
 };
 
 export const FormUpload: React.FC<PropType> = ({
@@ -41,10 +41,10 @@ export const FormUpload: React.FC<PropType> = ({
   const filedPart = field.split(".")[1];
   return (
     <div css={tw`flex flex-col my-4 mx-2`}>
-      {formik.errors?.guests?.[index]?.[filedPart] &&
-        formik.touched?.guests?.[index]?.[filedPart] && (
+      {(formik.errors?.guests as any)?.[index]?.[filedPart] &&
+        (formik.touched?.guests as any)?.[index]?.[filedPart] && (
           <p css={tw`text-red-500 text-xs italic`}>
-            {formik.errors?.guests?.[index]?.[filedPart]}
+            {(formik.errors?.guests as any)?.[index]?.[filedPart]}
           </p>
         )}
       <p css={tw`text-gray-700`}>{label}</p>
@@ -55,7 +55,7 @@ export const FormUpload: React.FC<PropType> = ({
           name={field}
           type="file"
           onChange={(event) => {
-            const file = event.currentTarget.files[0];
+            const file = event?.currentTarget?.files?.[0];
             console.log(file, field);
             formik.setFieldValue(field, file);
             console.log(formik.values.guests[index].file?.name);
@@ -63,7 +63,7 @@ export const FormUpload: React.FC<PropType> = ({
           className="form-control"
         />
         <span css={tw`mx-4`}>
-          {formik?.values?.guests?.[index]?.file?.name}
+          {(formik?.values?.guests as any)?.[index]?.file?.name}
         </span>
       </UploadStyle>
     </div>

@@ -11,7 +11,7 @@ export const gqlRequest = <TData, TVariables>(
 ) => client.request<TData, TVariables>(document, variables);
 
 export const useSwrQuery = <TData, TVariables>(
-  key: string,
+  key: string | null,
   document: TypedDocumentNode<TData, TVariables>,
   variables?: TVariables
 ) =>
@@ -34,9 +34,13 @@ export const useSwrMutation = <TData, TVariables>(
   responseInterface<TData, any> & { isLoading: boolean }
 ] => {
   const [isLoading, setIsLoading] = useState(false);
-  const swrResult = useSWR<TData>(key, () => swrResult.data, {
-    revalidateOnFocus: false,
-  });
+  const swrResult: responseInterface<TData, any> = useSWR<TData>(
+    key,
+    () => swrResult.data as any,
+    {
+      revalidateOnFocus: false,
+    }
+  );
   const exec = async (variables?: TVariables) => {
     setIsLoading(true);
     const data = await client.request(document, variables);

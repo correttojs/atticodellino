@@ -12,7 +12,7 @@ export const Header: React.FC = () => {
   return (
     <header
       css={`
-        background-color: ${brandColor.hex};
+        background-color: ${brandColor?.hex};
         ${tw`fixed z-10 flex items-center justify-between flex-wrap p-4 w-full text-white`};
       `}
     >

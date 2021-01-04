@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import tw from "twin.macro";
 import Modal from "react-modal";
-import { H3, P } from "../@UI/Texts";
+import { H3 } from "../@UI/Texts";
 import { ButtonInverted } from "../@UI/Buttons";
-import { MdAccountCircle, MdHelpOutline } from "react-icons/md";
+import { MdAccountCircle } from "react-icons/md";
 import { FaRegIdCard } from "react-icons/fa";
 import styled from "styled-components";
-import { ThemeType } from "../Layout/useGlobal";
 import { MQ_NOT_MOBILE } from "../Layout/MediaQueries";
 import { ReservationsQuery } from "./reservations.generated";
 
@@ -15,8 +14,8 @@ const DescStyle = styled.i`
 `;
 
 export const Reservation: React.FC<{
-  reservation: ReservationsQuery["reservations"][0];
-  onClose: (e) => void;
+  reservation: NonNullable<ReservationsQuery["reservations"]>[0];
+  onClose: (e: any) => void;
 }> = ({ reservation, onClose }) => {
   if (!reservation) {
     return null;
@@ -62,7 +61,7 @@ export const Reservation: React.FC<{
           <p>
             <a
               css={tw`underline`}
-              href={reservation.registrationUrl}
+              href={reservation.registrationUrl ?? ""}
               target="_blank"
             >
               <span>
@@ -79,7 +78,10 @@ export const Reservation: React.FC<{
         </div>
         <H3 css={tw`mt-4 mb-2 text-red-900`}>Guests</H3>
         <div css={tw`flex flex-col md:flex-row`}>
-          {reservation.guests.map((guest, k) => {
+          {reservation?.guests?.map((guest, k) => {
+            if (!guest) {
+              return null;
+            }
             return (
               <div key={`guest${k}`} css={[tw`my-2`, k > 0 && tw`md:ml-2`]}>
                 <p>

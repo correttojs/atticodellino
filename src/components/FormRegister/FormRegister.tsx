@@ -23,7 +23,7 @@ export const FormRegister: React.FC<{
   reservation: ReservationQuery["reservation"];
   onSuccess: () => void;
 }> = ({ reservation, onSuccess }) => {
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
   const [isCalendarOpen, setCalendarOpen] = useState(false);
@@ -35,15 +35,15 @@ export const FormRegister: React.FC<{
       const { guests: guestsForm } = values;
       const guests = guestsForm.map(({ file, birthDate, ...rest }) => ({
         ...rest,
-        birthDate: birthDate.toISOString().split("T")[0],
+        birthDate: (birthDate ?? new Date()).toISOString().split("T")[0],
       }));
       try {
         setIsLoading(true);
         await gqlRequest(RegisterDocument, {
           user: {
-            check_out: reservation?.check_out,
-            home: reservation?.home,
-            phone: reservation?.phone,
+            check_out: reservation?.check_out ?? "",
+            home: reservation?.home ?? "",
+            phone: reservation?.phone ?? "",
             hash: router.query.hash as string,
             guests,
           },
@@ -100,7 +100,7 @@ export const FormRegister: React.FC<{
                               </div>
                             )}
                             <FormInput
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}].firstName`}
                               label={t("FIRST_NAME")}
                               index={index}
@@ -109,7 +109,7 @@ export const FormRegister: React.FC<{
                               }
                             />
                             <FormInput
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}].lastName`}
                               label={t("LAST_NAME")}
                               index={index}
@@ -119,7 +119,7 @@ export const FormRegister: React.FC<{
                             />
 
                             <FormSelect
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}]["documentType"]`}
                               options={[
                                 "Passport",
@@ -131,25 +131,27 @@ export const FormRegister: React.FC<{
 
                             <FormInput
                               index={index}
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}].documentNumber`}
                               label={t("DOC_NUMBER")}
                             />
                             <FormInput
                               index={index}
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}].documentPlace`}
                               label={t("DOC_PLACE")}
                             />
 
                             <div css={tw`mx-2 my-4 `}>
-                              {formik.errors?.guests?.[index]?.["birthDate"] &&
+                              {(formik.errors?.guests as any)?.[index]?.[
+                                "birthDate"
+                              ] &&
                                 formik.touched?.guests?.[index]?.[
                                   "birthDate"
                                 ] && (
                                   <p css={tw`text-red-500 text-xs italic`}>
                                     {
-                                      formik.errors?.guests?.[index]?.[
+                                      (formik.errors?.guests as any)?.[index]?.[
                                         "birthDate"
                                       ]
                                     }
@@ -166,7 +168,10 @@ export const FormRegister: React.FC<{
                               )}
                               <span css={tw`mx-4`}>
                                 {
-                                  formik.values?.guests?.[index]?.birthDate
+                                  (
+                                    formik.values?.guests?.[index]?.birthDate ??
+                                    new Date()
+                                  )
                                     ?.toISOString()
                                     ?.split("T")?.[0]
                                 }
@@ -187,7 +192,7 @@ export const FormRegister: React.FC<{
                             </div>
 
                             <FormInput
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}].nationality`}
                               label={t("NATIONALITY")}
                               index={index}
@@ -195,13 +200,13 @@ export const FormRegister: React.FC<{
 
                             <FormInput
                               index={index}
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}].placeOfBirth`}
                               label={t("PLACE_BIRTH")}
                             />
 
                             <FormUpload
-                              formik={formik}
+                              formik={formik as any}
                               field={`guests[${index}].file`}
                               label={t("UPLOAD_DOC")}
                               index={index}

@@ -30,7 +30,7 @@ export const Footer: React.FC = () => {
       {inView && (
         <footer
           css={`
-            background-color: ${brandColor.hex};
+            background-color: ${brandColor?.hex};
             ${tw` flex flex-col items-center justify-between flex-wrap md:p-4 w-full text-white`};
           `}
         >
@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
             <Contacts direction="row" />
             <a
               css={tw`flex flex-row justify-center m-2 items-center`}
-              href={mapLink}
+              href={mapLink ?? ""}
               target="_blank"
               rel="noopener"
             >
@@ -48,7 +48,7 @@ export const Footer: React.FC = () => {
             <div css={tw`flex flex-row justify-center m-2 items-center`}>
               <FaFacebookSquare />
               <a
-                href={facebookLink}
+                href={facebookLink ?? ""}
                 target="_blank"
                 css={tw`self-center mr-4 ml-1`}
                 rel="noopener"
@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
               </a>
               <FaAirbnb />
               <a
-                href={airbnbLink}
+                href={airbnbLink ?? ""}
                 target="_blank"
                 rel="noopener"
                 css={tw`self-center  ml-1`}

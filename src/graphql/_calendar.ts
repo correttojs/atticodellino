@@ -2,9 +2,10 @@ import fetch from "isomorphic-unfetch";
 import * as ical from "ical";
 import { takeShapeRequest } from "./takeshape";
 import { ApartmentSecretDocument } from "../generated/graphql-takeshape-doc";
+import { QueryResolvers } from "../generated/resolvers-types";
 
-const fetchIcal = async (icalUrl, summary: string) => {
-  let data = await fetch(icalUrl).then((r) => r.text());
+const fetchIcal = async (icalUrl: string, summary: string) => {
+  let data: any = await fetch(icalUrl).then((r) => r.text());
   data = ical.parseICS(data);
 
   return Object.keys(data)
@@ -18,18 +19,21 @@ const fetchIcal = async (icalUrl, summary: string) => {
     });
 };
 
-export const calendarResolver = async (_, { apartment }) => {
+export const calendarResolver: QueryResolvers["calendar"] = async (
+  _,
+  { apartment }
+) => {
   const apartmentObj = await takeShapeRequest(ApartmentSecretDocument, {
     key: apartment,
   });
 
   const promises = [];
-  if (apartmentObj.getApartmentList.items?.[0]?.airbnbIcal) {
+  if (apartmentObj?.getApartmentList?.items?.[0]?.airbnbIcal) {
     promises.push(
       fetchIcal(apartmentObj.getApartmentList.items?.[0]?.airbnbIcal, "AIRBNB")
     );
   }
-  if (apartmentObj.getApartmentList.items?.[0]?.bookingIcal) {
+  if (apartmentObj?.getApartmentList?.items?.[0]?.bookingIcal) {
     promises.push(
       fetchIcal(
         apartmentObj.getApartmentList.items?.[0]?.bookingIcal,

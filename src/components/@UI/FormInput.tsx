@@ -2,9 +2,11 @@ import { useFormik } from "formik";
 import React from "react";
 import tw from "twin.macro";
 
+type FormikReturn = ReturnType<typeof useFormik>;
+
 type PropType = {
   field: string;
-  formik: ReturnType<typeof useFormik>;
+  formik: FormikReturn;
   type?: "text" | "number" | "email";
   label?: string;
   index?: number;
@@ -32,8 +34,8 @@ export const FormInput: React.FC<PropType> = ({
   let error = formik.errors[field];
   let touched = formik.touched[field];
   if (typeof index !== "undefined") {
-    error = formik.errors?.guests?.[index]?.[filedPart];
-    touched = formik.touched?.guests?.[index]?.[filedPart];
+    error = (formik.errors?.guests as any)?.[index]?.[filedPart];
+    touched = (formik.touched?.guests as any)?.[index]?.[filedPart];
   }
   return (
     <div css={tw`my-4 mx-2`}>

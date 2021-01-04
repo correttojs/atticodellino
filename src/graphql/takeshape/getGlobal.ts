@@ -1,59 +1,57 @@
 import {
   ApartmentDocument,
+  ApartmentQuery,
   GetLangsApartmentListDocument,
 } from "../../generated/graphql-takeshape-doc";
 import { takeShapeRequest } from ".";
+import { GetStaticPaths, GetStaticProps } from "next";
+import { ParsedUrlQuery } from "querystring";
 
-export type AsyncReturnType<T extends (...args: any) => any> = T extends (
-  ...args: any
-) => Promise<infer U>
-  ? U
-  : T extends (...args: any) => infer U
-  ? U
-  : any;
-
-type ParamType = AsyncReturnType<typeof getGlobalPaths>["paths"][0];
-
-export async function getGlobalProps({
+export const getGlobalProps = async ({
   params,
   locale,
-}: ParamType & { locale: string }) {
-  if (!params.apartment) {
+}: {
+  params?: { apartment?: string };
+  locale?: string;
+}) => {
+  if (!params?.apartment) {
     return null;
   }
-  params.apartment = params.apartment.toUpperCase();
+  params.apartment = params.apartment?.toString().toUpperCase();
 
   const apartmentObj = await takeShapeRequest(ApartmentDocument, {
     key: params.apartment,
   });
 
-  const currentApartment = apartmentObj.getApartmentList.items[0];
+  const currentApartment = apartmentObj?.getApartmentList?.items?.[0];
   return {
     props: {
       global: {
         ...params,
         lang: locale,
-        ...currentApartment,
-        langs: apartmentObj.getLanguageList.items.map((l) => l.code),
-        apartments: apartmentObj.ApartmentKeys.items.map((a) => a.key),
+        ...(currentApartment as NonNullable<
+          NonNullable<ApartmentQuery["getApartmentList"]>["items"]
+        >[0]),
+        langs: apartmentObj?.getLanguageList?.items?.map((l) => l?.code),
+        apartments: apartmentObj?.ApartmentKeys?.items?.map((a) => a?.key),
       },
     },
   };
-}
+};
 
-export const getGlobalPaths = async ({ locales }) => {
+export const getGlobalPaths: GetStaticPaths = async ({ locales }) => {
   const data = await takeShapeRequest(GetLangsApartmentListDocument);
 
   return {
-    paths: locales.reduce(
+    paths: (locales ?? []).reduce(
       (acc, current) => {
         return [
           ...acc,
-          ...data.getApartmentList.items.map((a) => {
+          ...(data?.getApartmentList?.items ?? []).map((a) => {
             return {
               params: {
-                lang: current.toLowerCase(),
-                apartment: a.key.toLowerCase(),
+                lang: current.toLowerCase() ?? "",
+                apartment: a?.key?.toLowerCase() ?? "",
               },
               locale: current,
             };

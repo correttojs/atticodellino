@@ -10,8 +10,9 @@ import {
 import { registerGuests } from "./_reservationsRegister";
 import { faq } from "./_faq";
 import { upload } from "./upload";
+import { Resolvers } from "../generated/resolvers-types";
 
-export const resolvers = {
+export const resolvers: Resolvers = {
   Mutation: {
     book: bookMutation,
     updateReservationStatus,

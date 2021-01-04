@@ -1,11 +1,8 @@
 import { graphCmsRequest } from "./graphcms";
-import {
-  MutationUpdateReservationStatusArgs,
-  ReservationStatus,
-} from "../generated/graphql";
+
 import { smsRegisterLink } from "./_sms";
 import { faqLink, getLangByPhone, registerLink } from "./_util";
-import { ReservationQueryVariables } from "../components/FormRegister/register.generated";
+
 import { takeShapeRequest } from "./takeshape";
 import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
 import {
@@ -13,8 +10,18 @@ import {
   GetReservationsDocument,
   UpdateReservationDocument,
 } from "../generated/graphql-graphcms";
+import {
+  MutationResolvers,
+  QueryResolvers,
+  Reservation,
+  ReservationStatus,
+} from "../generated/resolvers-types";
 
-export const reservations = async (parent, args, context) => {
+export const reservations: QueryResolvers["reservations"] = async (
+  parent,
+  args,
+  context
+) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
   const storedReservations = await graphCmsRequest(GetReservationsDocument, {
     input: args.isPast
@@ -24,16 +31,16 @@ export const reservations = async (parent, args, context) => {
   return storedReservations.reservations.map((r) => {
     return {
       ...r,
-      home: storedReservations.apartments.find((a) => a.code === r.home).name,
+      home: storedReservations.apartments.find((a) => a.code === r.home)?.name,
       registrationUrl: registerLink(r),
       faqUrl: faqLink(r),
     };
-  });
+  }) as Reservation[];
 };
 
-export const reservation = async (
+export const reservation: QueryResolvers["reservation"] = async (
   parent,
-  args: ReservationQueryVariables,
+  args,
   context
 ) => {
   const storedReservations = await graphCmsRequest(GetReservationDocument, {
@@ -58,12 +65,12 @@ export const reservation = async (
     isExpired,
     airbnbLink: apartment?.airbnbLink,
     mapLink: apartment?.mapLink,
-  };
+  } as Reservation;
 };
 
-export const updateReservationStatus = async (
+export const updateReservationStatus: MutationResolvers["updateReservationStatus"] = async (
   parent,
-  args: MutationUpdateReservationStatusArgs,
+  args,
   context
 ) => {
   if (context.session.user.name !== "lino") throw new Error("Invalid session");
@@ -77,11 +84,12 @@ export const updateReservationStatus = async (
   if (args.reservationStatus === ReservationStatus.LinkSent) {
     const phone = storedReservations?.updateReservation?.phone;
     await smsRegisterLink({
-      phone,
+      phone: phone ?? "",
       link: registerLink({ ...rest, phone }),
       hash: rest.hash,
     });
   }
 
-  return storedReservations.updateReservation.reservationStatus;
+  return (storedReservations?.updateReservation
+    ?.reservationStatus as any) as ReservationStatus;
 };

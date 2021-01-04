@@ -48,8 +48,8 @@ export const FormBook: React.FC<{
         <div>
           <h3>
             {t("THANKYOU", {
-              name: data.book.firstName,
-              lastName: data.book.lastName,
+              name: data?.book?.firstName,
+              lastName: data?.book?.lastName,
             })}
           </h3>
           <p>{t("BOOK_RESPONSE")}</p>
@@ -65,10 +65,10 @@ export const FormBook: React.FC<{
               formik.handleSubmit();
             }}
           >
-            <FormInput formik={formik} field={"firstName"} />
-            <FormInput formik={formik} field={"lastName"} />
+            <FormInput formik={formik as any} field={"firstName"} />
+            <FormInput formik={formik as any} field={"lastName"} />
 
-            <FormInput formik={formik} field={"email"} />
+            <FormInput formik={formik as any} field={"email"} />
             <div css={tw`m-2`}>{price && <p>{price} euros</p>}</div>
 
             <div css={tw`flex justify-end`}>
