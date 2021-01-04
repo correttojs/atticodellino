@@ -68,7 +68,7 @@ export const BookingCalendar = () => {
         <FormBook
           from={selection[0]?.toISOString()}
           to={selection[1]?.toISOString()}
-          price={price?.price ?? 0}
+          price={price?.price}
         />
       </div>
     </section>
