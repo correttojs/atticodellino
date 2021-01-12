@@ -64,7 +64,7 @@
     "@storybook/addon-actions": "^6.1.11",
     "@storybook/addon-essentials": "^6.1.11",
     "@storybook/addon-links": "^6.1.11",
-    "@storybook/react": "^6.1.11",
+    "@storybook/react": "^6.1.14",
     "@types/apollo-upload-client": "^14.1.0",
     "@types/google-map-react": "^2.1.0",
     "@types/ical": "^0.6.2",
