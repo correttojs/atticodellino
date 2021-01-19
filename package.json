@@ -17,9 +17,11 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
     "@tailwindcss/custom-forms": "^0.2.1",
+    "@tailwindcss/postcss7-compat": "^2.0.2",
     "airbnb-private-api": "^1.0.7",
     "airbnbapijs": "^0.10.5",
     "apollo-server-micro": "^2.19.2",
+    "autoprefixer": "^9.8.6",
     "form-data": "^3.0.0",
     "formik": "^2.2.6",
     "google-map-react": "^2.1.9",
@@ -34,6 +36,7 @@
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.4.17",
     "polished": "^4.0.5",
+    "postcss": "^7.0.35",
     "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-calendar": "^3.3.0",
@@ -44,8 +47,8 @@
     "react-modal": "^3.12.1",
     "react-query": "^3.5.16",
     "styled-components": "^5.2.1",
-    "tailwindcss": "^2.0.2",
-    "twin.macro": "^1.12.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+    "twin.macro": "^2.0.8",
     "yup": "^0.32.8"
   },
   "devDependencies": {

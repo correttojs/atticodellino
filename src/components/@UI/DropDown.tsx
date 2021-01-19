@@ -17,7 +17,7 @@ export const DropDownItem: React.FC<{
   onClick: () => void;
 }> = ({ text, onClick }) => (
   <li
-    css={tw`cursor-pointer bg-gray-100 hover:bg-gray-200 py-2 px-4 block whitespace-no-wrap`}
+    css={tw`cursor-pointer bg-gray-100 hover:bg-gray-200 py-2 px-4 block whitespace-nowrap`}
     onClick={onClick}
   >
     {text}
