@@ -48,7 +48,7 @@
     "react-query": "^3.5.16",
     "styled-components": "^5.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
-    "twin.macro": "^2.0.8",
+    "twin.macro": "^2.1.0",
     "yup": "^0.32.8"
   },
   "devDependencies": {
