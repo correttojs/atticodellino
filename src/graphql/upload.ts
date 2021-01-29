@@ -1,10 +1,10 @@
 import fetch from "node-fetch";
 import * as fs from "fs";
 
-var FormData = require("form-data");
+import FormData from "form-data";
 
 export const upload = async (fileStream: fs.ReadStream) => {
-  var form = new FormData();
+  const form = new FormData();
   form.append("fileUpload", fileStream);
 
   try {

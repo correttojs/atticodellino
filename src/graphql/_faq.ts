@@ -8,8 +8,7 @@ import { getLangByPhone } from "./_util";
 
 export const faq: QueryResolvers<ResolverContext>["faq"] = async (
   parent,
-  args,
-  context
+  args
 ) => {
   const result = await graphCmsRequest(GetReservationDocument, {
     input: args.hash,
