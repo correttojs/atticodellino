@@ -9,6 +9,9 @@ export const defaultGlobal = {
   lightColor: {
     rgb: { a: 0.2, b: 18, g: 0, r: 41 },
   },
+  lighterColor: {
+    rgb: { a: 0.2, b: 18, g: 0, r: 41 },
+  },
   brandColor: {
     hex: "#290012",
   },
