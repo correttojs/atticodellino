@@ -1,9 +1,9 @@
 import { MutationResolvers } from "../generated/resolvers-types";
 import { ResolverContext } from "./resolvers";
 
-const sgMail = require("@sendgrid/mail");
+import sgMail from "@sendgrid/mail";
 
-sgMail.setApiKey(process.env.SEND_GRID_API);
+sgMail.setApiKey(process.env.SEND_GRID_API ?? "");
 
 const FROM = `"L'attico del Lino" <${process.env.NEXT_PUBLIC_FROM_EMAIL}>`;
 

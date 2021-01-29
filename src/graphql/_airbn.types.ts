@@ -1,4 +1,4 @@
-import { Apartment, ApartmentQuery } from "../generated/graphql-takeshape-doc";
+import { ApartmentQuery } from "../generated/graphql-takeshape-doc";
 
 export type AirBnbUser = {
   deleted: boolean;
@@ -138,5 +138,6 @@ export type pdp_listing_detail = {
       structured_house_rules: string[];
     };
   };
+  // eslint-disable-next-line @typescript-eslint/ban-types
   metadata: {};
 };

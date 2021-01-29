@@ -5,7 +5,7 @@ export type BookFormValues = keyof typeof bookInitialValues;
 export const bookInitialValues = {
   firstName: "",
   lastName: "",
-  email: ""
+  email: "",
 };
 
 export const bookValidationSchema = Yup.object().shape({
@@ -17,7 +17,5 @@ export const bookValidationSchema = Yup.object().shape({
     .min(2, "Too Short!")
     .max(50, "Too Long!")
     .required("Required"),
-  email: Yup.string()
-    .email("Invalid email")
-    .required("Required")
+  email: Yup.string().email("Invalid email").required("Required"),
 });

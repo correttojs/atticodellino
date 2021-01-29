@@ -5,9 +5,8 @@ import {
   GuestStatus,
   UpdateReservationDocument,
 } from "../generated/graphql-graphcms";
-import { smsConfirmLink, smsReminderLink } from "./_sms";
+import { smsReminderLink } from "./_sms";
 import { takeShapeRequest } from "./takeshape";
-import { faqLink, getLangByPhone } from "./_util";
 import { upload } from "./upload";
 import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
 import {
@@ -16,9 +15,9 @@ import {
   ReservationStatus,
 } from "../generated/resolvers-types";
 import { ResolverContext } from "./resolvers";
-const sgMail = require("@sendgrid/mail");
+import sgMail from "@sendgrid/mail";
 
-sgMail.setApiKey(process.env.SEND_GRID_API);
+sgMail.setApiKey(process.env.SEND_GRID_API ?? "");
 
 const sendEmail = async ({
   files,

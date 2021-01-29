@@ -12,7 +12,7 @@ import { Reservation } from "../components/Admin/reservations.generated";
 import { ResolverContext } from "./resolvers";
 
 const getAirBnbReservations = async () => {
-  let airbnb = new AirBnbClient({
+  const airbnb = new AirBnbClient({
     email: process.env.AIRBNB_EMAIL,
     password: process.env.AIRBNB_PASSWORD,
     session_store: null as any,

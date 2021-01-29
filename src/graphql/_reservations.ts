@@ -1,7 +1,7 @@
 import { graphCmsRequest } from "./graphcms";
 
 import { smsRegisterLink } from "./_sms";
-import { faqLink, getLangByPhone, registerLink } from "./_util";
+import { faqLink, registerLink } from "./_util";
 
 import { takeShapeRequest } from "./takeshape";
 import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
