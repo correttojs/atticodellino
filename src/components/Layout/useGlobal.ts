@@ -24,7 +24,7 @@ export const theme = (global: GlobalType) => {
   } = global.lightColor as any;
   const {
     rgb: { r: r2, g: g2, b: b2, a: a2 },
-  } = global.lightColor as any;
+  } = global.lighterColor as any;
   return {
     colors: {
       brand: global?.brandColor?.hex ?? "",
