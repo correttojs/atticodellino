@@ -19,7 +19,7 @@ jobs:
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
       - name: Checkout 🛎
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
       - name: Run Cypress 🌲 Master
         uses: cypress-io/github-action@v2
         env:
