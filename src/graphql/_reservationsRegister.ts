@@ -1,15 +1,15 @@
-import sgMail from "@sendgrid/mail";
-
 import {
   GuestStatus,
   UpdateReservationDocument,
-} from "../generated/graphql-graphcms";
-import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
+} from "@/generated/graphql-graphcms";
+import { ApartmentCodeByAirBnbIdDocument } from "@/generated/graphql-takeshape-doc";
 import {
   MutationRegisterGuestsArgs,
   MutationResolvers,
   ReservationStatus,
-} from "../generated/resolvers-types";
+} from "@/generated/resolvers-types";
+import sgMail from "@sendgrid/mail";
+
 import { smsReminderLink } from "./_sms";
 import { streamTo64 } from "./_streamToBase64";
 import { graphCmsRequest } from "./graphcms";

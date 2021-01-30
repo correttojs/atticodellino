@@ -1,6 +1,7 @@
-import { GetReservationDocument } from "../generated/graphql-graphcms";
-import { FaqsDocument } from "../generated/graphql-takeshape-doc";
-import { Faq, QueryResolvers } from "../generated/resolvers-types";
+import { GetReservationDocument } from "@/generated/graphql-graphcms";
+import { FaqsDocument } from "@/generated/graphql-takeshape-doc";
+import { Faq, QueryResolvers } from "@/generated/resolvers-types";
+
 import { getLangByPhone } from "./_util";
 import { graphCmsRequest } from "./graphcms";
 import { ResolverContext } from "./resolvers";

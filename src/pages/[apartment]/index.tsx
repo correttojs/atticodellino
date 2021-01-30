@@ -1,12 +1,8 @@
+import { Home } from "@/components/Home";
+import { withLayout } from "@/components/Layout";
+import { getDetails } from "@/graphql/_airbnb";
+import { getGlobalPaths, getGlobalProps } from "@/graphql/takeshape/getGlobal";
 import { GetStaticProps } from "next";
-
-import { Home } from "../../components/Home";
-import { withLayout } from "../../components/Layout";
-import { getDetails } from "../../graphql/_airbnb";
-import {
-  getGlobalPaths,
-  getGlobalProps,
-} from "../../graphql/takeshape/getGlobal";
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const globalProps = await getGlobalProps({ params, locale });
