@@ -1,24 +1,23 @@
 name: Lighthouse
 on: [pull_request]
 jobs:
-  lighthouse-check:
+ lighthouse-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Lighthouse Master
-        id: LHCIAction
-        uses: treosh/lighthouse-ci-action@v3
+      - uses: actions/checkout@master
+      - run: mkdir /tmp/artifacts
+      - name: Run Lighthouse
+        uses: foo-software/lighthouse-check-action@master
         with:
-          urls: |
-            https://www.atticodellino.com
-#           budgetPath: ./budget.json # test performance budgets
-          uploadArtifacts: true # save results as an action artifacts
-          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
-      - name: comment PR
-        uses: unsplash/comment-on-pr@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+          author: ${{ github.actor }}
+          branch: ${{ github.ref }}
+          outputDirectory: /tmp/artifacts
+          urls: 'https://www.foo.software,https://www.foo.software/contact'
+          sha: ${{ github.sha }}
+          slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@master
         with:
-          msg: "Lighthouse report: ${{ fromJson(steps.LHCIAction.outputs.links)['https://www.atticodellino.com/']}}" 
-          check_for_duplicate_msg: true  # OPTIONAL 
-         # ${{steps.LHCIAction.outputs.links}}
+          name: Lighthouse reports
+          path: /tmp/artifacts
