@@ -8,7 +8,7 @@ export default {
   title: "Home/Amenities",
 } as Meta;
 
-const Template: Story = (args) => (
+const Template: Story = () => (
   <>
     <Amenities
       amenities={[

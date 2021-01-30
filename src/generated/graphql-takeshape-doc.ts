@@ -1,12 +1,8 @@
-import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/core";
+import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]?: Maybe<T[SubKey]> };
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> &
-  { [SubKey in K]: Maybe<T[SubKey]> };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -22,7 +18,7 @@ export type Scalars = {
 
 /** Root of the Schema */
 export type Root = {
-  __typename?: "Root";
+  __typename?: 'Root';
   /** List of Projects */
   tsGetProjectList?: Maybe<Array<Maybe<TsProjectListItem>>>;
   /** List of project templates available for import. */
@@ -40,7 +36,7 @@ export type Root = {
   /** List potential preview paths */
   tsGetPreviewPathList?: Maybe<Array<Maybe<TsContentTypePreviewPaths>>>;
   /** Get static site preview token */
-  tsGetSitePreviewToken?: Maybe<Scalars["String"]>;
+  tsGetSitePreviewToken?: Maybe<Scalars['String']>;
   /** Get a Lock by id */
   tsIsLocked?: Maybe<TsLock>;
   /** Get an API key by key and project */
@@ -60,12 +56,18 @@ export type Root = {
   /** Get Locales for Project */
   tsGetLocales?: Maybe<TsLocales>;
   /** Get all available Shapes, Queries, and Mutations for connected Services */
-  tsGetAvailableSchema?: Maybe<Scalars["JSONObject"]>;
+  tsGetAvailableSchema?: Maybe<Scalars['JSONObject']>;
+  /** Get all available Shapes, Queries, and Mutations for a single Service */
+  tsGetServiceSchema?: Maybe<Scalars['JSONObject']>;
   /** Get upcoming scheduled content status updates */
   tsGetStatusUpdateList?: Maybe<TsStatusUpdateList>;
   tsGetUsage?: Maybe<TsUsageType>;
   /** Retrieve a project export. If the export is completed, you'll be provided with a path to it. */
   tsGetProjectExport?: Maybe<TsProjectExport>;
+  /** Get the full Schema by version */
+  tsGetSchemaVersion?: Maybe<TsSchemaVersionResponse>;
+  /** List the schema Versions */
+  tsGetSchemaVersionList?: Maybe<TsSchemaVersionsPaginatedList>;
   /** Get a Project by id */
   tsGetProject?: Maybe<TsProject>;
   /** List of Project Members */
@@ -122,806 +124,898 @@ export type Root = {
   withContext?: Maybe<WithContext>;
 };
 
+
 /** Root of the Schema */
 export type RootTsGetProjectImportArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
 
 /** Root of the Schema */
 export type RootTsGetActivityLogArgs = {
-  filters?: Maybe<Scalars["JSON"]>;
+  filters?: Maybe<Scalars['JSON']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsSiteDeployStatusArgs = {
-  siteId?: Maybe<Scalars["ID"]>;
+  siteId?: Maybe<Scalars['ID']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsGetContentUsageArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 /** Root of the Schema */
 export type RootTsGetSitePreviewTokenArgs = {
-  siteId: Scalars["String"];
+  siteId: Scalars['String'];
 };
+
 
 /** Root of the Schema */
 export type RootTsIsLockedArgs = {
-  contentTypeId?: Maybe<Scalars["ID"]>;
-  id?: Maybe<Scalars["ID"]>;
+  contentTypeId?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsGetApiKeyArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsGetRoleArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
+
 
 /** Root of the Schema */
 export type RootTsGetWebhookHistoryItemArgs = {
-  webhookUrl: Scalars["String"];
-  invocationTime?: Maybe<Scalars["String"]>;
+  webhookUrl: Scalars['String'];
+  invocationTime?: Maybe<Scalars['String']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsGetWebhookHistoryArgs = {
-  webhookUrl: Scalars["String"];
-  from?: Maybe<Scalars["String"]>;
-  to?: Maybe<Scalars["String"]>;
+  webhookUrl: Scalars['String'];
+  from?: Maybe<Scalars['String']>;
+  to?: Maybe<Scalars['String']>;
 };
+
+
+/** Root of the Schema */
+export type RootTsGetServiceSchemaArgs = {
+  serviceId: Scalars['String'];
+};
+
 
 /** Root of the Schema */
 export type RootTsGetStatusUpdateListArgs = {
-  contentId: Scalars["String"];
-  shapeName?: Maybe<Scalars["String"]>;
-  contentTypeName?: Maybe<Scalars["String"]>;
+  contentId: Scalars['String'];
+  shapeName?: Maybe<Scalars['String']>;
+  contentTypeName?: Maybe<Scalars['String']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsGetProjectExportArgs = {
-  id: Scalars["String"];
+  id: Scalars['String'];
 };
+
+
+/** Root of the Schema */
+export type RootTsGetSchemaVersionArgs = {
+  version: Scalars['Int'];
+  includeDefaults?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** Root of the Schema */
+export type RootTsGetSchemaVersionListArgs = {
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+};
+
 
 /** Root of the Schema */
 export type RootTsGetProjectArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsGetProjectMembersArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 /** Root of the Schema */
 export type RootTsGetPaymentListArgs = {
-  cursor?: Maybe<Scalars["ID"]>;
+  cursor?: Maybe<Scalars['ID']>;
 };
+
 
 /** Root of the Schema */
 export type RootSearchArgs = {
-  shapeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  shapeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  shapeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  shapeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereInput>;
 };
 
+
 /** Root of the Schema */
 export type RootTaxonomySuggestArgs = {
-  shapeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  shapeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  terms?: Maybe<Scalars["String"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  shapeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  shapeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  terms?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
+
 
 /** Root of the Schema */
 export type RootGetContentVersionArgs = {
-  id: Scalars["ID"];
-  version: Scalars["Int"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  id: Scalars['ID'];
+  version: Scalars['Int'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetContentVersionListArgs = {
-  id: Scalars["ID"];
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
+  id: Scalars['ID'];
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
 };
+
 
 /** Root of the Schema */
 export type RootSearchAssetIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereAssetInput>;
 };
+
 
 /** Root of the Schema */
 export type RootSearchTsStaticSiteIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereTsStaticSiteInput>;
 };
 
+
 /** Root of the Schema */
 export type RootSearchApartmentIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereApartmentInput>;
 };
 
+
 /** Root of the Schema */
 export type RootSearchArticleIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereArticleInput>;
 };
 
+
 /** Root of the Schema */
 export type RootSearchFaqIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereFaqInput>;
 };
 
+
 /** Root of the Schema */
 export type RootSearchRegistrationsIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereRegistrationsInput>;
 };
 
+
 /** Root of the Schema */
 export type RootSearchLanguageIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereLanguageInput>;
 };
 
+
 /** Root of the Schema */
 export type RootGetAssetArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetAssetListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereAssetInput>;
 };
 
+
 /** Root of the Schema */
 export type RootGetTsStaticSiteArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetTsStaticSiteListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereTsStaticSiteInput>;
 };
 
+
 /** Root of the Schema */
 export type RootGetApartmentArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetApartmentListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereApartmentInput>;
 };
 
+
 /** Root of the Schema */
 export type RootGetArticleArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetArticleListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereArticleInput>;
 };
 
+
 /** Root of the Schema */
 export type RootGetFaqArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetFaqListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereFaqInput>;
 };
 
+
 /** Root of the Schema */
 export type RootGetRegistrationsArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetRegistrationsListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereRegistrationsInput>;
 };
 
+
 /** Root of the Schema */
 export type RootGetLanguageArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** Root of the Schema */
 export type RootGetLanguageListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereLanguageInput>;
 };
 
+
 /** Root of the Schema */
 export type RootWithContextArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
 
 /** A Project is you main workspace it stores the content that powers your API */
 export type TsProjectListItem = {
-  __typename?: "TSProjectListItem";
-  id?: Maybe<Scalars["ID"]>;
-  name?: Maybe<Scalars["String"]>;
-  invite?: Maybe<Scalars["String"]>;
-  type?: Maybe<Scalars["String"]>;
+  __typename?: 'TSProjectListItem';
+  id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  invite?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
   /** Project status object */
-  status?: Maybe<Scalars["JSON"]>;
+  status?: Maybe<Scalars['JSON']>;
   /** Project avatar */
   avatar?: Maybe<BaseAsset>;
   /** Default project timezone */
-  defaultTimezone: Scalars["String"];
+  defaultTimezone: Scalars['String'];
 };
+
 
 export type BaseAsset = TsSearchable & {
-  __typename?: "BaseAsset";
-  title?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  filename: Scalars["String"];
-  caption?: Maybe<Scalars["JSON"]>;
-  captionHtml?: Maybe<Scalars["String"]>;
-  credit?: Maybe<Scalars["JSON"]>;
-  creditHtml?: Maybe<Scalars["String"]>;
-  path: Scalars["String"];
-  mimeType?: Maybe<Scalars["String"]>;
-  sourceUrl?: Maybe<Scalars["String"]>;
-  uploadStatus?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  __typename?: 'BaseAsset';
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  filename: Scalars['String'];
+  caption?: Maybe<Scalars['JSON']>;
+  captionHtml?: Maybe<Scalars['String']>;
+  credit?: Maybe<Scalars['JSON']>;
+  creditHtml?: Maybe<Scalars['String']>;
+  path: Scalars['String'];
+  mimeType?: Maybe<Scalars['String']>;
+  sourceUrl?: Maybe<Scalars['String']>;
+  uploadStatus?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
 };
+
 
 export type BaseAssetCaptionHtmlArgs = {
-  imageConfig?: Maybe<Scalars["JSON"]>;
+  imageConfig?: Maybe<Scalars['JSON']>;
   images?: Maybe<TsImagesConfig>;
-  classPrefix?: Maybe<Scalars["String"]>;
+  classPrefix?: Maybe<Scalars['String']>;
 };
 
+
 export type BaseAssetCreditHtmlArgs = {
-  imageConfig?: Maybe<Scalars["JSON"]>;
+  imageConfig?: Maybe<Scalars['JSON']>;
   images?: Maybe<TsImagesConfig>;
-  classPrefix?: Maybe<Scalars["String"]>;
+  classPrefix?: Maybe<Scalars['String']>;
 };
 
 export type TsSearchable = {
-  _id?: Maybe<Scalars["ID"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
 };
 
 export type TsImagesConfig = {
   /** Default image parameters. See https://docs.imgix.com/apis/url  */
-  default?: Maybe<Scalars["JSON"]>;
+  default?: Maybe<Scalars['JSON']>;
   /** Small image parameters. See https://docs.imgix.com/apis/url  */
-  small?: Maybe<Scalars["JSON"]>;
+  small?: Maybe<Scalars['JSON']>;
   /** Medium image parameters. See https://docs.imgix.com/apis/url  */
-  medium?: Maybe<Scalars["JSON"]>;
+  medium?: Maybe<Scalars['JSON']>;
   /** Large image parameters. See https://docs.imgix.com/apis/url  */
-  large?: Maybe<Scalars["JSON"]>;
+  large?: Maybe<Scalars['JSON']>;
 };
 
 export type TsUser = {
-  __typename?: "TSUser";
-  id?: Maybe<Scalars["ID"]>;
-  email?: Maybe<Scalars["String"]>;
-  fullName?: Maybe<Scalars["String"]>;
-  role?: Maybe<Scalars["String"]>;
-  avatarPath?: Maybe<Scalars["String"]>;
+  __typename?: 'TSUser';
+  id?: Maybe<Scalars['ID']>;
+  email?: Maybe<Scalars['String']>;
+  fullName?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+  avatarPath?: Maybe<Scalars['String']>;
 };
 
 export enum DefaultWorkflow {
-  Disabled = "disabled",
-  Enabled = "enabled",
+  Disabled = 'disabled',
+  Enabled = 'enabled'
 }
 
 /** A project template available for import. */
 export type TsProjectTemplate = {
-  __typename?: "TSProjectTemplate";
-  id: Scalars["String"];
-  name: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  avatarPath?: Maybe<Scalars["String"]>;
-  glitchProjectName?: Maybe<Scalars["String"]>;
-  sourcePath: Scalars["String"];
-  uri?: Maybe<Scalars["String"]>;
+  __typename?: 'TSProjectTemplate';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  avatarPath?: Maybe<Scalars['String']>;
+  glitchProjectName?: Maybe<Scalars['String']>;
+  sourcePath: Scalars['String'];
+  uri?: Maybe<Scalars['String']>;
 };
 
 export type TsProjectImport = {
-  __typename?: "TSProjectImport";
-  id?: Maybe<Scalars["String"]>;
-  status?: Maybe<Scalars["String"]>;
-  message?: Maybe<Scalars["String"]>;
-  projectId?: Maybe<Scalars["String"]>;
+  __typename?: 'TSProjectImport';
+  id?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['String']>;
 };
 
 export type TsActivityLogItem = {
-  __typename?: "TSActivityLogItem";
-  activityType?: Maybe<Scalars["String"]>;
-  userId?: Maybe<Scalars["ID"]>;
-  username?: Maybe<Scalars["String"]>;
-  projectId?: Maybe<Scalars["ID"]>;
-  siteId?: Maybe<Scalars["ID"]>;
-  stage?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  timestamp?: Maybe<Scalars["String"]>;
-  metadata?: Maybe<Scalars["JSON"]>;
+  __typename?: 'TSActivityLogItem';
+  activityType?: Maybe<Scalars['String']>;
+  userId?: Maybe<Scalars['ID']>;
+  username?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['ID']>;
+  siteId?: Maybe<Scalars['ID']>;
+  stage?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  timestamp?: Maybe<Scalars['String']>;
+  metadata?: Maybe<Scalars['JSON']>;
 };
 
 export type TsSite = {
-  __typename?: "TSSite";
-  siteId?: Maybe<Scalars["ID"]>;
-  status?: Maybe<Scalars["String"]>;
-  message?: Maybe<Scalars["String"]>;
+  __typename?: 'TSSite';
+  siteId?: Maybe<Scalars['ID']>;
+  status?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
 };
 
 export type TsContentUsage = {
-  __typename?: "TSContentUsage";
-  siteId?: Maybe<Scalars["ID"]>;
-  siteTitle?: Maybe<Scalars["String"]>;
-  deployedAt?: Maybe<Scalars["String"]>;
-  baseUrl?: Maybe<Scalars["String"]>;
+  __typename?: 'TSContentUsage';
+  siteId?: Maybe<Scalars['ID']>;
+  siteTitle?: Maybe<Scalars['String']>;
+  deployedAt?: Maybe<Scalars['String']>;
+  baseUrl?: Maybe<Scalars['String']>;
   usages?: Maybe<Array<Maybe<TsPathUsage>>>;
 };
 
 export type TsPathUsage = {
-  __typename?: "TSPathUsage";
-  path?: Maybe<Scalars["String"]>;
-  depth?: Maybe<Scalars["Int"]>;
+  __typename?: 'TSPathUsage';
+  path?: Maybe<Scalars['String']>;
+  depth?: Maybe<Scalars['Int']>;
 };
 
 export type TsContentTypePreviewPaths = {
-  __typename?: "TSContentTypePreviewPaths";
-  contentTypeId: Scalars["String"];
-  contentTypeName: Scalars["String"];
-  shapeName: Scalars["String"];
+  __typename?: 'TSContentTypePreviewPaths';
+  contentTypeId: Scalars['String'];
+  contentTypeName: Scalars['String'];
+  shapeName: Scalars['String'];
   sites: Array<Maybe<TsSitePreviewPaths>>;
 };
 
 export type TsSitePreviewPaths = {
-  __typename?: "TSSitePreviewPaths";
-  siteTitle: Scalars["String"];
-  siteId: Scalars["String"];
-  token?: Maybe<Scalars["String"]>;
+  __typename?: 'TSSitePreviewPaths';
+  siteTitle: Scalars['String'];
+  siteId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
   routes: Array<Maybe<TsPreviewRoute>>;
 };
 
 export type TsPreviewRoute = {
-  __typename?: "TSPreviewRoute";
-  routeName: Scalars["String"];
-  isPaginated?: Maybe<Scalars["Boolean"]>;
-  path: Scalars["String"];
+  __typename?: 'TSPreviewRoute';
+  routeName: Scalars['String'];
+  isPaginated?: Maybe<Scalars['Boolean']>;
+  path: Scalars['String'];
 };
 
 export type TsLock = {
-  __typename?: "TSLock";
+  __typename?: 'TSLock';
   user?: Maybe<TsUser>;
-  expires?: Maybe<Scalars["String"]>;
+  expires?: Maybe<Scalars['String']>;
 };
 
 export type TsApiKey = {
-  __typename?: "TSApiKey";
-  projectId?: Maybe<Scalars["ID"]>;
-  name?: Maybe<Scalars["String"]>;
-  role?: Maybe<Scalars["String"]>;
-  permissions?: Maybe<Scalars["JSON"]>;
-  lastUsed?: Maybe<Scalars["String"]>;
-  apiKey?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["ID"]>;
+  __typename?: 'TSApiKey';
+  projectId?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
+  permissions?: Maybe<Scalars['JSON']>;
+  lastUsed?: Maybe<Scalars['String']>;
+  apiKey?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
 };
 
 export type TsRole = {
-  __typename?: "TSRole";
-  name: Scalars["String"];
-  permissions: Scalars["JSONObject"];
-  created?: Maybe<Scalars["String"]>;
-  updated?: Maybe<Scalars["String"]>;
-  builtIn?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'TSRole';
+  name: Scalars['String'];
+  permissions: Scalars['JSONObject'];
+  created?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
+  builtIn?: Maybe<Scalars['Boolean']>;
 };
 
+
 export type TsRolePaginatedList = {
-  __typename?: "TSRolePaginatedList";
+  __typename?: 'TSRolePaginatedList';
   items?: Maybe<Array<Maybe<TsRole>>>;
-  total?: Maybe<Scalars["Int"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
 };
 
 export type TsWebhooks = {
-  __typename?: "TSWebhooks";
-  secret?: Maybe<Scalars["String"]>;
+  __typename?: 'TSWebhooks';
+  secret?: Maybe<Scalars['String']>;
   webhooks?: Maybe<Array<Maybe<TsWebhook>>>;
 };
 
 export type TsWebhook = {
-  __typename?: "TSWebhook";
-  webhookUrl: Scalars["String"];
+  __typename?: 'TSWebhook';
+  webhookUrl: Scalars['String'];
   headers?: Maybe<Array<Maybe<HttpHeader>>>;
   resourceActions?: Maybe<Array<Maybe<TsResourceActions>>>;
 };
 
 export type HttpHeader = {
-  __typename?: "HttpHeader";
-  key?: Maybe<Scalars["String"]>;
-  value?: Maybe<Scalars["String"]>;
+  __typename?: 'HttpHeader';
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type TsResourceActions = {
-  __typename?: "TSResourceActions";
-  resource: Scalars["String"];
-  actions?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  __typename?: 'TSResourceActions';
+  resource: Scalars['String'];
+  actions?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type TsWebhookHistory = {
-  __typename?: "TSWebhookHistory";
-  _invocationTime: Scalars["String"];
-  projectId: Scalars["ID"];
-  webhookUrl: Scalars["String"];
+  __typename?: 'TSWebhookHistory';
+  _invocationTime: Scalars['String'];
+  projectId: Scalars['ID'];
+  webhookUrl: Scalars['String'];
   stats: TsWebhookHistoryStats;
 };
 
 export type TsWebhookHistoryStats = {
-  __typename?: "TSWebhookHistoryStats";
-  succeeded: Scalars["Boolean"];
-  retrying: Scalars["Boolean"];
-  invocationStartTime: Scalars["String"];
-  invocationDuration: Scalars["Int"];
+  __typename?: 'TSWebhookHistoryStats';
+  succeeded: Scalars['Boolean'];
+  retrying: Scalars['Boolean'];
+  invocationStartTime: Scalars['String'];
+  invocationDuration: Scalars['Int'];
   request: TsWebhookHistoryRequest;
   response?: Maybe<TsWebhookHistoryResponse>;
   error?: Maybe<TsWebhookHistoryError>;
 };
 
 export type TsWebhookHistoryRequest = {
-  __typename?: "TSWebhookHistoryRequest";
-  url: Scalars["String"];
-  headers?: Maybe<Scalars["JSON"]>;
-  body?: Maybe<Scalars["JSON"]>;
+  __typename?: 'TSWebhookHistoryRequest';
+  url: Scalars['String'];
+  headers?: Maybe<Scalars['JSON']>;
+  body?: Maybe<Scalars['JSON']>;
 };
 
 export type TsWebhookHistoryResponse = {
-  __typename?: "TSWebhookHistoryResponse";
-  status: Scalars["String"];
-  statusText?: Maybe<Scalars["String"]>;
-  url: Scalars["String"];
-  headers?: Maybe<Scalars["JSON"]>;
-  body?: Maybe<Scalars["JSON"]>;
+  __typename?: 'TSWebhookHistoryResponse';
+  status: Scalars['String'];
+  statusText?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
+  headers?: Maybe<Scalars['JSON']>;
+  body?: Maybe<Scalars['JSON']>;
 };
 
 export type TsWebhookHistoryError = {
-  __typename?: "TSWebhookHistoryError";
-  name?: Maybe<Scalars["String"]>;
-  message?: Maybe<Scalars["String"]>;
+  __typename?: 'TSWebhookHistoryError';
+  name?: Maybe<Scalars['String']>;
+  message?: Maybe<Scalars['String']>;
 };
 
 export type TsLocales = {
-  __typename?: "TSLocales";
-  defaultLocale: Scalars["String"];
-  locales?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  version: Scalars["Int"];
+  __typename?: 'TSLocales';
+  defaultLocale: Scalars['String'];
+  locales?: Maybe<Array<Maybe<Scalars['String']>>>;
+  version: Scalars['Int'];
 };
 
 export type TsStatusUpdateList = {
-  __typename?: "TSStatusUpdateList";
+  __typename?: 'TSStatusUpdateList';
   items?: Maybe<Array<Maybe<TsStatusUpdate>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsStatusUpdate = {
-  __typename?: "TSStatusUpdate";
-  id: Scalars["String"];
-  timestamp: Scalars["String"];
-  type: Scalars["String"];
-  payload?: Maybe<Scalars["JSONObject"]>;
+  __typename?: 'TSStatusUpdate';
+  id: Scalars['String'];
+  timestamp: Scalars['String'];
+  type: Scalars['String'];
+  payload?: Maybe<Scalars['JSONObject']>;
 };
 
 export type TsUsageType = {
-  __typename?: "TSUsageType";
+  __typename?: 'TSUsageType';
   /** The usage period start time */
-  startTime?: Maybe<Scalars["String"]>;
+  startTime?: Maybe<Scalars['String']>;
   /** The usage period end time */
-  endTime?: Maybe<Scalars["String"]>;
+  endTime?: Maybe<Scalars['String']>;
   /** Get members for project */
-  users?: Maybe<Scalars["Int"]>;
+  users?: Maybe<Scalars['Int']>;
   /** Get user bandwidth */
-  bandwidth?: Maybe<Scalars["Int"]>;
+  bandwidth?: Maybe<Scalars['Int']>;
   /** Get user roles */
-  roles?: Maybe<Scalars["Int"]>;
+  roles?: Maybe<Scalars['Int']>;
   /** Get user workflows */
-  workflows?: Maybe<Scalars["Int"]>;
+  workflows?: Maybe<Scalars['Int']>;
   /** Get user sites */
-  deployTargets?: Maybe<Scalars["Int"]>;
+  deployTargets?: Maybe<Scalars['Int']>;
   /** Get user locales */
-  locales?: Maybe<Scalars["Int"]>;
+  locales?: Maybe<Scalars['Int']>;
   /** Get user api calls */
-  apiRequests?: Maybe<Scalars["Int"]>;
+  apiRequests?: Maybe<Scalars['Int']>;
   /** Get user content entries */
-  contentEntries?: Maybe<Scalars["Int"]>;
+  contentEntries?: Maybe<Scalars['Int']>;
 };
 
 /** Projects are exported to downloadable ZIP files. */
 export type TsProjectExport = {
-  __typename?: "TSProjectExport";
-  id?: Maybe<Scalars["String"]>;
-  status?: Maybe<Scalars["String"]>;
-  file?: Maybe<Scalars["String"]>;
+  __typename?: 'TSProjectExport';
+  id?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
+  file?: Maybe<Scalars['String']>;
+};
+
+export type TsSchemaVersionResponse = {
+  __typename?: 'TSSchemaVersionResponse';
+  status?: Maybe<Scalars['String']>;
+  schema?: Maybe<Scalars['JSONObject']>;
+};
+
+export type TsSchemaVersionsPaginatedList = {
+  __typename?: 'TSSchemaVersionsPaginatedList';
+  items?: Maybe<Array<Maybe<TsSchemaVersion>>>;
+  total?: Maybe<Scalars['Int']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+};
+
+export type TsSchemaVersion = {
+  __typename?: 'TSSchemaVersion';
+  updated?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['Int']>;
+  schemaVersion?: Maybe<Scalars['String']>;
+  mutationCount?: Maybe<Scalars['Int']>;
+  queryCount?: Maybe<Scalars['Int']>;
+  workflowCount?: Maybe<Scalars['Int']>;
+  shapeCount?: Maybe<Scalars['Int']>;
+  defaultLocale?: Maybe<Scalars['String']>;
+  locales?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** A Project is you main workspace it stores the content that powers your API */
 export type TsProject = {
-  __typename?: "TSProject";
-  id?: Maybe<Scalars["ID"]>;
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'TSProject';
+  id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
   template?: Maybe<TsProjectTemplate>;
-  invite?: Maybe<Scalars["String"]>;
+  invite?: Maybe<Scalars['String']>;
   users?: Maybe<Array<Maybe<TsUser>>>;
   /** Takeshape project schema */
-  schema?: Maybe<Scalars["JSON"]>;
+  schema?: Maybe<Scalars['JSON']>;
   /** Takeshape project schema */
   billing?: Maybe<TsBilling>;
   /** Project status object */
-  status?: Maybe<Scalars["JSON"]>;
+  status?: Maybe<Scalars['JSON']>;
   /** Project avatar */
   avatar?: Maybe<BaseAsset>;
   /** Default project timezone */
-  defaultTimezone: Scalars["String"];
+  defaultTimezone: Scalars['String'];
   integrationTokens?: Maybe<Array<Maybe<TsIntegrationToken>>>;
 };
 
 export type TsBilling = {
-  __typename?: "TSBilling";
-  enterprise?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'TSBilling';
+  enterprise?: Maybe<Scalars['Boolean']>;
   cardDetails?: Maybe<TsBillingCardDetails>;
   plan?: Maybe<TsBillingPlan>;
   discount?: Maybe<TsBillingDiscount>;
-  trialEnd?: Maybe<Scalars["String"]>;
-  email?: Maybe<Scalars["String"]>;
+  trialEnd?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
 
 export type TsBillingCardDetails = {
-  __typename?: "TSBillingCardDetails";
-  brand?: Maybe<Scalars["String"]>;
-  cvcCheck?: Maybe<Scalars["String"]>;
-  expMonth?: Maybe<Scalars["Int"]>;
-  expYear?: Maybe<Scalars["Int"]>;
-  last4?: Maybe<Scalars["String"]>;
+  __typename?: 'TSBillingCardDetails';
+  brand?: Maybe<Scalars['String']>;
+  cvcCheck?: Maybe<Scalars['String']>;
+  expMonth?: Maybe<Scalars['Int']>;
+  expYear?: Maybe<Scalars['Int']>;
+  last4?: Maybe<Scalars['String']>;
 };
 
 export type TsBillingPlan = {
-  __typename?: "TSBillingPlan";
-  id?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
-  amount?: Maybe<Scalars["Int"]>;
-  created?: Maybe<Scalars["String"]>;
-  currency?: Maybe<Scalars["String"]>;
-  interval?: Maybe<Scalars["String"]>;
-  intervalCount?: Maybe<Scalars["Int"]>;
+  __typename?: 'TSBillingPlan';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  amount?: Maybe<Scalars['Int']>;
+  created?: Maybe<Scalars['String']>;
+  currency?: Maybe<Scalars['String']>;
+  interval?: Maybe<Scalars['String']>;
+  intervalCount?: Maybe<Scalars['Int']>;
   entitlements?: Maybe<TsBillingEntitlements>;
-  trialPeriodDays?: Maybe<Scalars["String"]>;
+  trialPeriodDays?: Maybe<Scalars['String']>;
 };
 
 export type TsBillingEntitlements = {
-  __typename?: "TSBillingEntitlements";
-  users?: Maybe<Scalars["Int"]>;
-  apiRequests?: Maybe<Scalars["Int"]>;
-  apiRateLimit?: Maybe<Scalars["Int"]>;
-  contentEntries?: Maybe<Scalars["Int"]>;
-  bandwidth?: Maybe<Scalars["Int"]>;
-  deployTargets?: Maybe<Scalars["Int"]>;
-  webhooks?: Maybe<Scalars["Boolean"]>;
-  locales?: Maybe<Scalars["Int"]>;
-  roles?: Maybe<Scalars["Int"]>;
-  workflows?: Maybe<Scalars["Int"]>;
+  __typename?: 'TSBillingEntitlements';
+  users?: Maybe<Scalars['Int']>;
+  apiRequests?: Maybe<Scalars['Int']>;
+  apiRateLimit?: Maybe<Scalars['Int']>;
+  contentEntries?: Maybe<Scalars['Int']>;
+  bandwidth?: Maybe<Scalars['Int']>;
+  deployTargets?: Maybe<Scalars['Int']>;
+  webhooks?: Maybe<Scalars['Boolean']>;
+  locales?: Maybe<Scalars['Int']>;
+  roles?: Maybe<Scalars['Int']>;
+  workflows?: Maybe<Scalars['Int']>;
 };
 
 export type TsBillingDiscount = {
-  __typename?: "TSBillingDiscount";
-  percentOff?: Maybe<Scalars["Int"]>;
-  amountOff?: Maybe<Scalars["Int"]>;
-  duration?: Maybe<Scalars["String"]>;
-  code?: Maybe<Scalars["String"]>;
+  __typename?: 'TSBillingDiscount';
+  percentOff?: Maybe<Scalars['Int']>;
+  amountOff?: Maybe<Scalars['Int']>;
+  duration?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
 };
 
 export type TsIntegrationToken = {
-  __typename?: "TSIntegrationToken";
-  provider: Scalars["String"];
-  token?: Maybe<Scalars["String"]>;
+  __typename?: 'TSIntegrationToken';
+  provider: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
 };
 
 export type TsBillingPaymentCursorPaginatedList = {
-  __typename?: "TSBillingPaymentCursorPaginatedList";
+  __typename?: 'TSBillingPaymentCursorPaginatedList';
   items?: Maybe<Array<Maybe<TsBillingPayment>>>;
-  cursor?: Maybe<Scalars["ID"]>;
-  hasMore?: Maybe<Scalars["Boolean"]>;
+  cursor?: Maybe<Scalars['ID']>;
+  hasMore?: Maybe<Scalars['Boolean']>;
 };
 
 export type TsBillingPayment = {
-  __typename?: "TSBillingPayment";
-  date?: Maybe<Scalars["String"]>;
-  plan?: Maybe<Scalars["String"]>;
-  status?: Maybe<Scalars["String"]>;
+  __typename?: 'TSBillingPayment';
+  date?: Maybe<Scalars['String']>;
+  plan?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
   amount?: Maybe<TsBillingAmount>;
-  method?: Maybe<Scalars["String"]>;
+  method?: Maybe<Scalars['String']>;
 };
 
 export type TsBillingAmount = {
-  __typename?: "TSBillingAmount";
-  total?: Maybe<Scalars["Int"]>;
-  subtotal?: Maybe<Scalars["Int"]>;
-  refund?: Maybe<Scalars["Int"]>;
+  __typename?: 'TSBillingAmount';
+  total?: Maybe<Scalars['Int']>;
+  subtotal?: Maybe<Scalars['Int']>;
+  refund?: Maybe<Scalars['Int']>;
   discount?: Maybe<TsBillingDiscount>;
 };
 
 export type TsMemberLocation = {
-  __typename?: "TSMemberLocation";
-  userId: Scalars["String"];
+  __typename?: 'TSMemberLocation';
+  userId: Scalars['String'];
   contentList?: Maybe<Array<Maybe<TsContentLocation>>>;
 };
 
 export type TsContentLocation = {
-  __typename?: "TSContentLocation";
-  contentId?: Maybe<Scalars["String"]>;
-  contentTypeId?: Maybe<Scalars["String"]>;
-  hasLock?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'TSContentLocation';
+  contentId?: Maybe<Scalars['String']>;
+  contentTypeId?: Maybe<Scalars['String']>;
+  hasLock?: Maybe<Scalars['Boolean']>;
 };
 
 export type TsSearchSort = {
-  field: Scalars["String"];
+  field: Scalars['String'];
   /** "asc" for ascending or "desc" for descending */
-  order: Scalars["String"];
+  order: Scalars['String'];
 };
 
 export type TsWhereInput = {
@@ -991,83 +1085,83 @@ export type TsWhereInput = {
 
 export type TsWhereString = {
   /** Exact match */
-  eq?: Maybe<Scalars["String"]>;
+  eq?: Maybe<Scalars['String']>;
   /** Array of possible exact match values. */
-  in?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  in?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Full text searching with fuzzy matching. */
-  match?: Maybe<Scalars["String"]>;
+  match?: Maybe<Scalars['String']>;
   /** Regular expression string matching. Use of * wildcards could degrade performance. */
-  regexp?: Maybe<Scalars["String"]>;
+  regexp?: Maybe<Scalars['String']>;
 };
 
 export type TsWhereDraftjs = {
   /** Full text searching with fuzzy matching. */
-  match?: Maybe<Scalars["String"]>;
+  match?: Maybe<Scalars['String']>;
 };
 
 export type TsWhereId = {
   /** Exact match */
-  eq?: Maybe<Scalars["ID"]>;
+  eq?: Maybe<Scalars['ID']>;
   /** Array of possible exact match values. */
-  in?: Maybe<Array<Maybe<Scalars["ID"]>>>;
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
 };
 
 export type TsWhereInteger = {
   /** Exact match */
-  eq?: Maybe<Scalars["Int"]>;
+  eq?: Maybe<Scalars['Int']>;
   /** Less than */
-  lt?: Maybe<Scalars["Int"]>;
+  lt?: Maybe<Scalars['Int']>;
   /** Less than or equal */
-  lte?: Maybe<Scalars["Int"]>;
+  lte?: Maybe<Scalars['Int']>;
   /** Greater than */
-  gt?: Maybe<Scalars["Int"]>;
+  gt?: Maybe<Scalars['Int']>;
   /** Greater than or equal */
-  gte?: Maybe<Scalars["Int"]>;
+  gte?: Maybe<Scalars['Int']>;
   /** Array of possible exact match values. */
-  in?: Maybe<Array<Maybe<Scalars["Int"]>>>;
+  in?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
 export type TsWhereDate = {
   /** Exact match */
-  eq?: Maybe<Scalars["String"]>;
+  eq?: Maybe<Scalars['String']>;
   /** Less than */
-  lt?: Maybe<Scalars["String"]>;
+  lt?: Maybe<Scalars['String']>;
   /** Less than or equal */
-  lte?: Maybe<Scalars["String"]>;
+  lte?: Maybe<Scalars['String']>;
   /** Greater than */
-  gt?: Maybe<Scalars["String"]>;
+  gt?: Maybe<Scalars['String']>;
   /** Greater than or equal */
-  gte?: Maybe<Scalars["String"]>;
+  gte?: Maybe<Scalars['String']>;
 };
 
 export type TsWhereNumber = {
   /** Exact match */
-  eq?: Maybe<Scalars["Float"]>;
+  eq?: Maybe<Scalars['Float']>;
   /** Less than */
-  lt?: Maybe<Scalars["Float"]>;
+  lt?: Maybe<Scalars['Float']>;
   /** Less than or equal */
-  lte?: Maybe<Scalars["Float"]>;
+  lte?: Maybe<Scalars['Float']>;
   /** Greater than */
-  gt?: Maybe<Scalars["Float"]>;
+  gt?: Maybe<Scalars['Float']>;
   /** Greater than or equal */
-  gte?: Maybe<Scalars["Float"]>;
+  gte?: Maybe<Scalars['Float']>;
   /** Array of possible exact match values. */
-  in?: Maybe<Array<Maybe<Scalars["Float"]>>>;
+  in?: Maybe<Array<Maybe<Scalars['Float']>>>;
 };
 
 export type TsWhereWorkflow = {
   /** Exact match */
-  eq?: Maybe<Scalars["String"]>;
+  eq?: Maybe<Scalars['String']>;
   /** Less than */
-  lt?: Maybe<Scalars["String"]>;
+  lt?: Maybe<Scalars['String']>;
   /** Less than or equal */
-  lte?: Maybe<Scalars["String"]>;
+  lte?: Maybe<Scalars['String']>;
   /** Greater than */
-  gt?: Maybe<Scalars["String"]>;
+  gt?: Maybe<Scalars['String']>;
   /** Greater than or equal */
-  gte?: Maybe<Scalars["String"]>;
+  gte?: Maybe<Scalars['String']>;
   /** Array of possible exact match values. */
-  in?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  in?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 /** AND takes an array of conditions that must appear in the matching results. Nested boolean operators can be used to create complex filters. */
@@ -1321,7 +1415,7 @@ export type TsLanguageNotOperator = {
 
 export type TsWhereBoolean = {
   /** Exact match */
-  eq?: Maybe<Scalars["Boolean"]>;
+  eq?: Maybe<Scalars['Boolean']>;
 };
 
 export type TsWhereTsStaticSiteEnvironmentVariables = {
@@ -1468,55 +1562,56 @@ export type TsWhereRegistrationsGuests = {
 
 /** TS search results */
 export type TsSearchResults = {
-  __typename?: "TSSearchResults";
+  __typename?: 'TSSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsSuggestionPaginatedList = {
-  __typename?: "TSSuggestionPaginatedList";
+  __typename?: 'TSSuggestionPaginatedList';
   items?: Maybe<Array<Maybe<TsSuggestion>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsSuggestion = {
-  __typename?: "TSSuggestion";
-  _id?: Maybe<Scalars["ID"]>;
-  _shapeId?: Maybe<Scalars["ID"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  text?: Maybe<Scalars["String"]>;
-  summary?: Maybe<Scalars["String"]>;
+  __typename?: 'TSSuggestion';
+  _id?: Maybe<Scalars['ID']>;
+  _shapeId?: Maybe<Scalars['ID']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  text?: Maybe<Scalars['String']>;
+  summary?: Maybe<Scalars['String']>;
 };
 
 export type TsVersionResponse = {
-  __typename?: "TSVersionResponse";
-  content?: Maybe<Scalars["JSONObject"]>;
-  schema?: Maybe<Scalars["JSONObject"]>;
+  __typename?: 'TSVersionResponse';
+  content?: Maybe<Scalars['JSONObject']>;
+  schema?: Maybe<Scalars['JSONObject']>;
 };
 
 export type TsVersionsPaginatedList = {
-  __typename?: "TSVersionsPaginatedList";
+  __typename?: 'TSVersionsPaginatedList';
   items?: Maybe<Array<Maybe<TsVersion>>>;
-  total?: Maybe<Scalars["Int"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
 };
 
 export type TsVersion = {
-  __typename?: "TSVersion";
-  id?: Maybe<Scalars["String"]>;
-  version?: Maybe<Scalars["Int"]>;
-  status?: Maybe<Scalars["String"]>;
-  enabled?: Maybe<Scalars["Boolean"]>;
-  color?: Maybe<Scalars["String"]>;
-  updatedAt?: Maybe<Scalars["String"]>;
+  __typename?: 'TSVersion';
+  id?: Maybe<Scalars['String']>;
+  version?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+  enabled?: Maybe<Scalars['Boolean']>;
+  color?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['String']>;
   updatedBy?: Maybe<TsUser>;
   item?: Maybe<TsVersionResponse>;
 };
 
+
 export type TsVersionItemArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
 
 export type TsWhereAssetInput = {
@@ -1625,9 +1720,9 @@ export type TsAssetNotOperator = {
 
 /** Asset search results */
 export type AssetSearchResults = {
-  __typename?: "AssetSearchResults";
+  __typename?: 'AssetSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsWhereTsStaticSiteInput = {
@@ -1732,9 +1827,9 @@ export type TsTsStaticSiteNotOperator = {
 
 /** TsStaticSite search results */
 export type TsStaticSiteSearchResults = {
-  __typename?: "TsStaticSiteSearchResults";
+  __typename?: 'TsStaticSiteSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsWhereApartmentInput = {
@@ -1879,9 +1974,9 @@ export type TsApartmentNotOperator = {
 
 /** Apartment search results */
 export type ApartmentSearchResults = {
-  __typename?: "ApartmentSearchResults";
+  __typename?: 'ApartmentSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsWhereArticleInput = {
@@ -1966,9 +2061,9 @@ export type TsArticleNotOperator = {
 
 /** Article search results */
 export type ArticleSearchResults = {
-  __typename?: "ArticleSearchResults";
+  __typename?: 'ArticleSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsWhereFaqInput = {
@@ -2061,9 +2156,9 @@ export type TsFaqNotOperator = {
 
 /** Faq search results */
 export type FaqSearchResults = {
-  __typename?: "FaqSearchResults";
+  __typename?: 'FaqSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsWhereRegistrationsInput = {
@@ -2148,9 +2243,9 @@ export type TsRegistrationsNotOperator = {
 
 /** Registrations search results */
 export type RegistrationsSearchResults = {
-  __typename?: "RegistrationsSearchResults";
+  __typename?: 'RegistrationsSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsWhereLanguageInput = {
@@ -2172,506 +2267,526 @@ export type TsWhereLanguageInput = {
 
 /** Language search results */
 export type LanguageSearchResults = {
-  __typename?: "LanguageSearchResults";
+  __typename?: 'LanguageSearchResults';
   results?: Maybe<Array<Maybe<TsSearchable>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type Asset = TsSearchable & {
-  __typename?: "Asset";
-  sourceUrl?: Maybe<Scalars["String"]>;
-  path: Scalars["String"];
-  filename: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  caption?: Maybe<Scalars["JSON"]>;
-  captionHtml?: Maybe<Scalars["String"]>;
-  uploadStatus?: Maybe<Scalars["String"]>;
-  mimeType?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-  credit?: Maybe<Scalars["JSON"]>;
-  creditHtml?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  __typename?: 'Asset';
+  sourceUrl?: Maybe<Scalars['String']>;
+  path: Scalars['String'];
+  filename: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['JSON']>;
+  captionHtml?: Maybe<Scalars['String']>;
+  uploadStatus?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  credit?: Maybe<Scalars['JSON']>;
+  creditHtml?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
   /** @deprecated Use path instead */
-  s3Key?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  s3Key?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
   _references?: Maybe<AssetReferencePaginatedList>;
   apartmentSet?: Maybe<ApartmentPaginatedList>;
   faqSet?: Maybe<FaqPaginatedList>;
 };
 
+
 export type AssetCaptionHtmlArgs = {
-  imageConfig?: Maybe<Scalars["JSON"]>;
+  imageConfig?: Maybe<Scalars['JSON']>;
   images?: Maybe<TsImagesConfig>;
-  classPrefix?: Maybe<Scalars["String"]>;
+  classPrefix?: Maybe<Scalars['String']>;
 };
+
 
 export type AssetCreditHtmlArgs = {
-  imageConfig?: Maybe<Scalars["JSON"]>;
+  imageConfig?: Maybe<Scalars['JSON']>;
   images?: Maybe<TsImagesConfig>;
-  classPrefix?: Maybe<Scalars["String"]>;
+  classPrefix?: Maybe<Scalars['String']>;
 };
+
 
 export type Asset_ReferencesArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
+
 
 export type AssetApartmentSetArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
 
+
 export type AssetFaqSetArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
 
 export type AssetReferencePaginatedList = {
-  __typename?: "AssetReferencePaginatedList";
+  __typename?: 'AssetReferencePaginatedList';
   items?: Maybe<Array<Maybe<AssetReference>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type AssetReference = Apartment | Faq;
 
 export type Apartment = TsSearchable & {
-  __typename?: "Apartment";
-  name?: Maybe<Scalars["String"]>;
+  __typename?: 'Apartment';
+  name?: Maybe<Scalars['String']>;
   brandColor?: Maybe<TsColor>;
-  key?: Maybe<Scalars["String"]>;
-  location?: Maybe<Scalars["String"]>;
-  airBnb?: Maybe<Scalars["String"]>;
-  latitude?: Maybe<Scalars["String"]>;
-  longitude?: Maybe<Scalars["String"]>;
-  code?: Maybe<Scalars["String"]>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   lightColor?: Maybe<TsColor>;
   lighterColor?: Maybe<TsColor>;
   coverWebp?: Maybe<Asset>;
   coverJpg?: Maybe<Asset>;
-  address?: Maybe<Scalars["String"]>;
-  airbnbLink?: Maybe<Scalars["String"]>;
-  facebookLink?: Maybe<Scalars["String"]>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
   sponsor?: Maybe<Array<Maybe<Apartment>>>;
-  airbnbIcal?: Maybe<Scalars["String"]>;
-  bookingIcal?: Maybe<Scalars["String"]>;
-  mapLink?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
   _references?: Maybe<ApartmentReferencePaginatedList>;
   apartmentSet?: Maybe<ApartmentPaginatedList>;
   faqSet?: Maybe<FaqPaginatedList>;
 };
 
+
 export type ApartmentCoverWebpArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type ApartmentCoverJpgArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type ApartmentSponsorArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type Apartment_ReferencesArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
+
 
 export type ApartmentApartmentSetArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
 
+
 export type ApartmentFaqSetArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
 
 export type TsColor = {
-  __typename?: "TSColor";
-  hex?: Maybe<Scalars["String"]>;
+  __typename?: 'TSColor';
+  hex?: Maybe<Scalars['String']>;
   hsl?: Maybe<TsColorHsl>;
   hsv?: Maybe<TsColorHsv>;
   rgb?: Maybe<TsColorRgb>;
 };
 
 export type TsColorHsl = {
-  __typename?: "TSColorHsl";
-  h?: Maybe<Scalars["Float"]>;
-  a?: Maybe<Scalars["Float"]>;
-  s?: Maybe<Scalars["Float"]>;
-  l?: Maybe<Scalars["Float"]>;
+  __typename?: 'TSColorHsl';
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  l?: Maybe<Scalars['Float']>;
 };
 
 export type TsColorHsv = {
-  __typename?: "TSColorHsv";
-  h?: Maybe<Scalars["Float"]>;
-  a?: Maybe<Scalars["Float"]>;
-  s?: Maybe<Scalars["Float"]>;
-  v?: Maybe<Scalars["Float"]>;
+  __typename?: 'TSColorHsv';
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  v?: Maybe<Scalars['Float']>;
 };
 
 export type TsColorRgb = {
-  __typename?: "TSColorRgb";
-  a?: Maybe<Scalars["Float"]>;
-  b?: Maybe<Scalars["Float"]>;
-  r?: Maybe<Scalars["Float"]>;
-  g?: Maybe<Scalars["Float"]>;
+  __typename?: 'TSColorRgb';
+  a?: Maybe<Scalars['Float']>;
+  b?: Maybe<Scalars['Float']>;
+  r?: Maybe<Scalars['Float']>;
+  g?: Maybe<Scalars['Float']>;
 };
 
 export type ApartmentReferencePaginatedList = {
-  __typename?: "ApartmentReferencePaginatedList";
+  __typename?: 'ApartmentReferencePaginatedList';
   items?: Maybe<Array<Maybe<ApartmentReference>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type ApartmentReference = Apartment | Faq;
 
 export type Faq = TsSearchable & {
-  __typename?: "Faq";
+  __typename?: 'Faq';
   apartment?: Maybe<Apartment>;
   language?: Maybe<Language>;
-  question: Scalars["String"];
-  answer: Scalars["JSON"];
-  answerHtml?: Maybe<Scalars["String"]>;
-  linkVideo?: Maybe<Scalars["String"]>;
+  question: Scalars['String'];
+  answer: Scalars['JSON'];
+  answerHtml?: Maybe<Scalars['String']>;
+  linkVideo?: Maybe<Scalars['String']>;
   asset?: Maybe<Asset>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
 };
+
 
 export type FaqApartmentArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type FaqLanguageArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type FaqAnswerHtmlArgs = {
-  imageConfig?: Maybe<Scalars["JSON"]>;
+  imageConfig?: Maybe<Scalars['JSON']>;
   images?: Maybe<TsImagesConfig>;
-  classPrefix?: Maybe<Scalars["String"]>;
+  classPrefix?: Maybe<Scalars['String']>;
 };
 
+
 export type FaqAssetArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
 
 export type Language = TsSearchable & {
-  __typename?: "Language";
-  code?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  __typename?: 'Language';
+  code?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
   _references?: Maybe<LanguageReferencePaginatedList>;
   articleSet?: Maybe<ArticlePaginatedList>;
   faqSet?: Maybe<FaqPaginatedList>;
 };
 
+
 export type Language_ReferencesArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
+
 
 export type LanguageArticleSetArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
 
+
 export type LanguageFaqSetArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
 
 export type LanguageReferencePaginatedList = {
-  __typename?: "LanguageReferencePaginatedList";
+  __typename?: 'LanguageReferencePaginatedList';
   items?: Maybe<Array<Maybe<LanguageReference>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type LanguageReference = Article | Faq;
 
 export type Article = TsSearchable & {
-  __typename?: "Article";
-  path?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
+  __typename?: 'Article';
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   relationship?: Maybe<Language>;
-  content?: Maybe<Scalars["JSON"]>;
-  contentHtml?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  content?: Maybe<Scalars['JSON']>;
+  contentHtml?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
 };
+
 
 export type ArticleRelationshipArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
 
+
 export type ArticleContentHtmlArgs = {
-  imageConfig?: Maybe<Scalars["JSON"]>;
+  imageConfig?: Maybe<Scalars['JSON']>;
   images?: Maybe<TsImagesConfig>;
-  classPrefix?: Maybe<Scalars["String"]>;
+  classPrefix?: Maybe<Scalars['String']>;
 };
 
 /** Returns a Article list in natural order. */
 export type ArticlePaginatedList = {
-  __typename?: "ArticlePaginatedList";
+  __typename?: 'ArticlePaginatedList';
   items?: Maybe<Array<Maybe<Article>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 /** Returns a Faq list in natural order. */
 export type FaqPaginatedList = {
-  __typename?: "FaqPaginatedList";
+  __typename?: 'FaqPaginatedList';
   items?: Maybe<Array<Maybe<Faq>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 /** Returns a Apartment list in natural order. */
 export type ApartmentPaginatedList = {
-  __typename?: "ApartmentPaginatedList";
+  __typename?: 'ApartmentPaginatedList';
   items?: Maybe<Array<Maybe<Apartment>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 /** Returns a Asset list in natural order. */
 export type AssetPaginatedList = {
-  __typename?: "AssetPaginatedList";
+  __typename?: 'AssetPaginatedList';
   items?: Maybe<Array<Maybe<Asset>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type TsStaticSite = TsSearchable & {
-  __typename?: "TsStaticSite";
-  title: Scalars["String"];
-  baseUrl?: Maybe<Scalars["String"]>;
-  provider: Scalars["String"];
-  idKey?: Maybe<Scalars["String"]>;
-  secretKey?: Maybe<Scalars["String"]>;
-  destination: Scalars["String"];
-  privateAcl?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'TsStaticSite';
+  title: Scalars['String'];
+  baseUrl?: Maybe<Scalars['String']>;
+  provider: Scalars['String'];
+  idKey?: Maybe<Scalars['String']>;
+  secretKey?: Maybe<Scalars['String']>;
+  destination: Scalars['String'];
+  privateAcl?: Maybe<Scalars['Boolean']>;
   environmentVariables?: Maybe<Array<Maybe<TsStaticSiteEnvironmentVariables>>>;
   triggers?: Maybe<Array<Maybe<TsStaticSiteTriggers>>>;
-  templateHash?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  templateHash?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
 };
 
 export type TsStaticSiteEnvironmentVariables = {
-  __typename?: "TsStaticSiteEnvironmentVariables";
-  name?: Maybe<Scalars["String"]>;
-  value?: Maybe<Scalars["String"]>;
+  __typename?: 'TsStaticSiteEnvironmentVariables';
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type TsStaticSiteTriggers = {
-  __typename?: "TsStaticSiteTriggers";
-  contentTypeId?: Maybe<Scalars["String"]>;
-  status?: Maybe<Scalars["String"]>;
+  __typename?: 'TsStaticSiteTriggers';
+  contentTypeId?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
 };
 
 /** Returns a TsStaticSite list in natural order. */
 export type TsStaticSitePaginatedList = {
-  __typename?: "TsStaticSitePaginatedList";
+  __typename?: 'TsStaticSitePaginatedList';
   items?: Maybe<Array<Maybe<TsStaticSite>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 export type Registrations = TsSearchable & {
-  __typename?: "Registrations";
+  __typename?: 'Registrations';
   guests?: Maybe<Array<Maybe<RegistrationsGuests>>>;
-  registrationStatus?: Maybe<Scalars["String"]>;
-  apartmentKey: Scalars["String"];
-  email: Scalars["String"];
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
+  registrationStatus?: Maybe<Scalars['String']>;
+  apartmentKey: Scalars['String'];
+  email: Scalars['String'];
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
   _createdBy?: Maybe<TsUser>;
-  _updatedAt?: Maybe<Scalars["String"]>;
+  _updatedAt?: Maybe<Scalars['String']>;
   _updatedBy?: Maybe<TsUser>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
   /** @deprecated Use _status instead */
-  _enabled?: Maybe<Scalars["Boolean"]>;
+  _enabled?: Maybe<Scalars['Boolean']>;
   /** @deprecated Use a custom date field instead */
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  searchSummary?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  searchSummary?: Maybe<Scalars['String']>;
 };
 
 export type RegistrationsGuests = {
-  __typename?: "RegistrationsGuests";
-  lastName: Scalars["String"];
-  firstName: Scalars["String"];
-  placeOfBirth: Scalars["String"];
-  nationality: Scalars["String"];
-  documentType: Scalars["String"];
-  documentNumber: Scalars["String"];
-  birthDate: Scalars["String"];
+  __typename?: 'RegistrationsGuests';
+  lastName: Scalars['String'];
+  firstName: Scalars['String'];
+  placeOfBirth: Scalars['String'];
+  nationality: Scalars['String'];
+  documentType: Scalars['String'];
+  documentNumber: Scalars['String'];
+  birthDate: Scalars['String'];
 };
 
 /** Returns a Registrations list in natural order. */
 export type RegistrationsPaginatedList = {
-  __typename?: "RegistrationsPaginatedList";
+  __typename?: 'RegistrationsPaginatedList';
   items?: Maybe<Array<Maybe<Registrations>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 /** Returns a Language list in natural order. */
 export type LanguagePaginatedList = {
-  __typename?: "LanguagePaginatedList";
+  __typename?: 'LanguagePaginatedList';
   items?: Maybe<Array<Maybe<Language>>>;
-  total?: Maybe<Scalars["Int"]>;
+  total?: Maybe<Scalars['Int']>;
 };
 
 /** This query allow you to pass context to your queries */
 export type WithContext = {
-  __typename?: "WithContext";
+  __typename?: 'WithContext';
   search?: Maybe<TsSearchResults>;
   taxonomySuggest?: Maybe<TsSuggestionPaginatedList>;
   /** List Versions for a piece of content */
@@ -2715,282 +2830,307 @@ export type WithContext = {
   getLanguageList?: Maybe<LanguagePaginatedList>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextSearchArgs = {
-  shapeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  shapeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  shapeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  shapeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextTaxonomySuggestArgs = {
-  shapeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  shapeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeNames?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  contentTypeIds?: Maybe<Array<Maybe<Scalars["String"]>>>;
-  terms?: Maybe<Scalars["String"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  shapeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  shapeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeNames?: Maybe<Array<Maybe<Scalars['String']>>>;
+  contentTypeIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+  terms?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetContentVersionArgs = {
-  id: Scalars["ID"];
-  version: Scalars["Int"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  id: Scalars['ID'];
+  version: Scalars['Int'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetContentVersionListArgs = {
-  id: Scalars["ID"];
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
+  id: Scalars['ID'];
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextSearchAssetIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereAssetInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextSearchTsStaticSiteIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereTsStaticSiteInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextSearchApartmentIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereApartmentInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextSearchArticleIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereArticleInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextSearchFaqIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereFaqInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextSearchRegistrationsIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereRegistrationsInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextSearchLanguageIndexArgs = {
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereLanguageInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetAssetArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetAssetListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereAssetInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetTsStaticSiteArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetTsStaticSiteListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereTsStaticSiteInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetApartmentArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetApartmentListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereApartmentInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetArticleArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetArticleListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereArticleInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetFaqArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetFaqListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereFaqInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetRegistrationsArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetRegistrationsListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereRegistrationsInput>;
 };
 
+
 /** This query allow you to pass context to your queries */
 export type WithContextGetLanguageArgs = {
-  _id: Scalars["ID"];
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  _id: Scalars['ID'];
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 /** This query allow you to pass context to your queries */
 export type WithContextGetLanguageListArgs = {
-  onlyEnabled?: Maybe<Scalars["Boolean"]>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
-  terms?: Maybe<Scalars["String"]>;
-  from?: Maybe<Scalars["Int"]>;
-  size?: Maybe<Scalars["Int"]>;
-  filter?: Maybe<Scalars["JSON"]>;
+  onlyEnabled?: Maybe<Scalars['Boolean']>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
+  terms?: Maybe<Scalars['String']>;
+  from?: Maybe<Scalars['Int']>;
+  size?: Maybe<Scalars['Int']>;
+  filter?: Maybe<Scalars['JSON']>;
   sort?: Maybe<Array<Maybe<TsSearchSort>>>;
   where?: Maybe<TsWhereLanguageInput>;
 };
 
 export type Mutations = {
-  __typename?: "Mutations";
+  __typename?: 'Mutations';
   /** Create Project */
   tsCreateProject?: Maybe<TsProjectListItem>;
   /** Imports a project from a specified URI. */
-  tsImportProject?: Maybe<Scalars["String"]>;
+  tsImportProject?: Maybe<Scalars['String']>;
   /** Get a URI to upload a project for import. */
   tsUploadProject?: Maybe<UploadProjectResult>;
   /** Create a Lock */
@@ -2998,33 +3138,33 @@ export type Mutations = {
   /** Extend a lock Project */
   tsExtendLock?: Maybe<TsLock>;
   /** Remove a Lock */
-  tsRemoveLock?: Maybe<Scalars["Boolean"]>;
+  tsRemoveLock?: Maybe<Scalars['Boolean']>;
   /** Remove a Lock */
-  tsBreakLock?: Maybe<Scalars["Boolean"]>;
+  tsBreakLock?: Maybe<Scalars['Boolean']>;
   /** Create an API Key */
   tsCreateApiKey?: Maybe<TsApiKey>;
   /** Delete an API Key */
-  tsDeleteApiKey?: Maybe<Scalars["Boolean"]>;
+  tsDeleteApiKey?: Maybe<Scalars['Boolean']>;
   /** Create role */
   tsCreateRole?: Maybe<TsRole>;
   /** Update role */
   tsUpdateRole?: Maybe<TsRole>;
   /** Delete role */
-  tsDeleteRole?: Maybe<Scalars["Boolean"]>;
+  tsDeleteRole?: Maybe<Scalars['Boolean']>;
   /** Update webhooks */
   tsUpdateWebhooks?: Maybe<TsWebhooks>;
   /** Update Default Locale for Project */
-  tsUpdateDefaultLocale?: Maybe<Scalars["JSONObject"]>;
+  tsUpdateDefaultLocale?: Maybe<Scalars['JSONObject']>;
   /** Add Locale to Project */
-  tsAddLocale?: Maybe<Scalars["JSONObject"]>;
+  tsAddLocale?: Maybe<Scalars['JSONObject']>;
   /** Remove Locale from Project */
-  tsRemoveLocale?: Maybe<Scalars["JSONObject"]>;
+  tsRemoveLocale?: Maybe<Scalars['JSONObject']>;
   /** Update the current project schema */
-  tsUpdateSchema?: Maybe<Scalars["JSONObject"]>;
+  tsUpdateSchema?: Maybe<Scalars['JSONObject']>;
   /** Create or update a service in the current project schema */
-  tsSaveService?: Maybe<Scalars["JSONObject"]>;
+  tsSaveService?: Maybe<Scalars['JSONObject']>;
   /** Remove a service from the current project schema */
-  tsRemoveService?: Maybe<Scalars["JSONObject"]>;
+  tsRemoveService?: Maybe<Scalars['JSONObject']>;
   /** Create Workflow */
   tsAddWorkflow?: Maybe<TsSaveWorkflowResponse>;
   /** Update Workflow */
@@ -3034,9 +3174,11 @@ export type Mutations = {
   /** Schedule content status update */
   tsScheduleStatusUpdate?: Maybe<TsStatusUpdate>;
   /** Cancel scheduled content status update */
-  tsCancelStatusUpdate?: Maybe<Scalars["Boolean"]>;
+  tsCancelStatusUpdate?: Maybe<Scalars['Boolean']>;
   /** Exports your project to a ZIP file, which you can then download */
-  tsExportProject?: Maybe<Scalars["String"]>;
+  tsExportProject?: Maybe<Scalars['String']>;
+  /** Set the specified version as the current schema version. */
+  tsRestoreSchemaVersion?: Maybe<SchemaVersionsRestorationResult>;
   /** Update Project */
   tsUpdateProject?: Maybe<TsProject>;
   /** Update Project Billing */
@@ -3050,13 +3192,13 @@ export type Mutations = {
   /** Remove Project Member */
   tsRemoveProjectMember?: Maybe<TsPermissions>;
   /** Deactivate project */
-  tsDeleteProject?: Maybe<Scalars["Boolean"]>;
+  tsDeleteProject?: Maybe<Scalars['Boolean']>;
   /** Register a setup step as completed */
-  tsCompleteSetupStep?: Maybe<Scalars["Boolean"]>;
+  tsCompleteSetupStep?: Maybe<Scalars['Boolean']>;
   /** Update a token for a integration provider */
   tsUpdateIntegrationToken?: Maybe<TsIntegrationToken>;
   /** Update service information */
-  tsUpdateService?: Maybe<Scalars["String"]>;
+  tsUpdateService?: Maybe<Scalars['String']>;
   /** Initiate upload process for asset(s) */
   uploadAssets?: Maybe<Array<Maybe<Upload>>>;
   /** Replace an asset file */
@@ -3119,1067 +3261,1129 @@ export type Mutations = {
   deleteLanguage?: Maybe<DeleteLanguageResult>;
 };
 
+
 export type MutationsTsCreateProjectArgs = {
-  name: Scalars["String"];
-  type?: Maybe<Scalars["String"]>;
-  defaultTimezone: Scalars["String"];
+  name: Scalars['String'];
+  type?: Maybe<Scalars['String']>;
+  defaultTimezone: Scalars['String'];
 };
+
 
 export type MutationsTsImportProjectArgs = {
-  uri: Scalars["String"];
-  name?: Maybe<Scalars["String"]>;
-  origin?: Maybe<Scalars["String"]>;
+  uri: Scalars['String'];
+  name?: Maybe<Scalars['String']>;
+  origin?: Maybe<Scalars['String']>;
 };
+
 
 export type MutationsTsUploadProjectArgs = {
-  name?: Maybe<Scalars["String"]>;
-  type?: Maybe<Scalars["String"]>;
-  origin?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  origin?: Maybe<Scalars['String']>;
 };
+
 
 export type MutationsTsCreateLockArgs = {
-  shapeId?: Maybe<Scalars["ID"]>;
-  id?: Maybe<Scalars["ID"]>;
+  shapeId?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationsTsExtendLockArgs = {
-  shapeId?: Maybe<Scalars["ID"]>;
-  id?: Maybe<Scalars["ID"]>;
+  shapeId?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationsTsRemoveLockArgs = {
-  shapeId?: Maybe<Scalars["ID"]>;
-  id?: Maybe<Scalars["ID"]>;
+  shapeId?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationsTsBreakLockArgs = {
-  shapeId?: Maybe<Scalars["ID"]>;
-  id?: Maybe<Scalars["ID"]>;
+  shapeId?: Maybe<Scalars['ID']>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationsTsCreateApiKeyArgs = {
-  name?: Maybe<Scalars["String"]>;
-  role?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
+  role?: Maybe<Scalars['String']>;
 };
 
+
 export type MutationsTsDeleteApiKeyArgs = {
-  id?: Maybe<Scalars["ID"]>;
+  id?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationsTsCreateRoleArgs = {
   input: TsRoleInput;
 };
 
+
 export type MutationsTsUpdateRoleArgs = {
   input: TsRoleInput;
 };
 
+
 export type MutationsTsDeleteRoleArgs = {
-  name: Scalars["String"];
+  name: Scalars['String'];
 };
+
 
 export type MutationsTsUpdateWebhooksArgs = {
   input: TsWebhooksInput;
 };
 
+
 export type MutationsTsUpdateDefaultLocaleArgs = {
-  defaultLocale: Scalars["String"];
-  version: Scalars["Int"];
+  defaultLocale: Scalars['String'];
+  version: Scalars['Int'];
 };
+
 
 export type MutationsTsAddLocaleArgs = {
-  locale: Scalars["String"];
-  version: Scalars["Int"];
+  locale: Scalars['String'];
+  version: Scalars['Int'];
 };
 
+
 export type MutationsTsRemoveLocaleArgs = {
-  locale: Scalars["String"];
-  version: Scalars["Int"];
+  locale: Scalars['String'];
+  version: Scalars['Int'];
 };
+
 
 export type MutationsTsUpdateSchemaArgs = {
   input: TsUpdateSchemaInput;
 };
 
+
 export type MutationsTsSaveServiceArgs = {
   input: TsUpdateSchemaServiceInput;
 };
 
+
 export type MutationsTsRemoveServiceArgs = {
-  serviceId: Scalars["String"];
+  serviceId: Scalars['String'];
 };
+
 
 export type MutationsTsAddWorkflowArgs = {
   input: TsSaveWorkflowInput;
 };
 
+
 export type MutationsTsUpdateWorkflowArgs = {
   input: TsUpdateWorkflowInput;
 };
+
 
 export type MutationsTsDeleteWorkflowArgs = {
   input?: Maybe<TsDeleteWorkflowInput>;
 };
 
+
 export type MutationsTsScheduleStatusUpdateArgs = {
   input: TsScheduleStatusUpdateInput;
 };
+
 
 export type MutationsTsCancelStatusUpdateArgs = {
   input: TsCancelStatusUpdateInput;
 };
 
+
 export type MutationsTsExportProjectArgs = {
-  empty?: Maybe<Scalars["Boolean"]>;
-  origin?: Maybe<Scalars["String"]>;
+  empty?: Maybe<Scalars['Boolean']>;
+  origin?: Maybe<Scalars['String']>;
 };
+
+
+export type MutationsTsRestoreSchemaVersionArgs = {
+  version: Scalars['Int'];
+};
+
 
 export type MutationsTsUpdateProjectArgs = {
-  id?: Maybe<Scalars["ID"]>;
-  name?: Maybe<Scalars["String"]>;
-  avatarId?: Maybe<Scalars["ID"]>;
-  defaultTimezone?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  avatarId?: Maybe<Scalars['ID']>;
+  defaultTimezone?: Maybe<Scalars['String']>;
 };
+
 
 export type MutationsTsUpdateProjectBillingArgs = {
-  id?: Maybe<Scalars["ID"]>;
-  token?: Maybe<Scalars["String"]>;
-  planId?: Maybe<Scalars["String"]>;
-  coupon?: Maybe<Scalars["String"]>;
-  email?: Maybe<Scalars["String"]>;
+  id?: Maybe<Scalars['ID']>;
+  token?: Maybe<Scalars['String']>;
+  planId?: Maybe<Scalars['String']>;
+  coupon?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
 };
+
 
 export type MutationsTsUpdateProjectPermissionsArgs = {
-  userId?: Maybe<Scalars["ID"]>;
-  role: Scalars["String"];
+  userId?: Maybe<Scalars['ID']>;
+  role: Scalars['String'];
 };
+
 
 export type MutationsTsUpdateInviteRoleArgs = {
-  email: Scalars["String"];
-  role: Scalars["String"];
+  email: Scalars['String'];
+  role: Scalars['String'];
 };
+
 
 export type MutationsTsCancelProjectInviteArgs = {
-  email: Scalars["String"];
+  email: Scalars['String'];
 };
+
 
 export type MutationsTsRemoveProjectMemberArgs = {
-  userId?: Maybe<Scalars["ID"]>;
+  userId?: Maybe<Scalars['ID']>;
 };
+
 
 export type MutationsTsDeleteProjectArgs = {
-  id: Scalars["ID"];
+  id: Scalars['ID'];
 };
+
 
 export type MutationsTsCompleteSetupStepArgs = {
-  stepKey: Scalars["String"];
+  stepKey: Scalars['String'];
 };
+
 
 export type MutationsTsUpdateIntegrationTokenArgs = {
-  provider: Scalars["String"];
-  token?: Maybe<Scalars["String"]>;
+  provider: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
 };
+
 
 export type MutationsTsUpdateServiceArgs = {
-  service?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
+  service?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
 };
 
+
 export type MutationsUploadAssetsArgs = {
-  projectId?: Maybe<Scalars["ID"]>;
+  projectId?: Maybe<Scalars['ID']>;
   files: Array<Maybe<TsFile>>;
 };
 
+
 export type MutationsReplaceAssetArgs = {
-  projectId?: Maybe<Scalars["ID"]>;
-  _id: Scalars["ID"];
-  _version: Scalars["Int"];
+  projectId?: Maybe<Scalars['ID']>;
+  _id: Scalars['ID'];
+  _version: Scalars['Int'];
   file: TsFile;
 };
+
 
 export type MutationsUpdateAssetArgs = {
   input: UpdateAssetInput;
   structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsCreateAssetArgs = {
   input: CreateAssetInput;
 };
 
+
 export type MutationsDuplicateAssetArgs = {
   input: DuplicateAssetInput;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsDeleteAssetArgs = {
   input: DeleteAssetInput;
 };
 
+
 export type MutationsUpdateTsStaticSiteArgs = {
   input: UpdateTsStaticSiteInput;
   structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsCreateTsStaticSiteArgs = {
   input: CreateTsStaticSiteInput;
 };
 
+
 export type MutationsDuplicateTsStaticSiteArgs = {
   input: DuplicateTsStaticSiteInput;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsDeleteTsStaticSiteArgs = {
   input: DeleteTsStaticSiteInput;
 };
 
+
 export type MutationsUpdateApartmentArgs = {
   input: UpdateApartmentInput;
   structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsCreateApartmentArgs = {
   input: CreateApartmentInput;
 };
 
+
 export type MutationsDuplicateApartmentArgs = {
   input: DuplicateApartmentInput;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsDeleteApartmentArgs = {
   input: DeleteApartmentInput;
 };
 
+
 export type MutationsUpdateArticleArgs = {
   input: UpdateArticleInput;
   structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsCreateArticleArgs = {
   input: CreateArticleInput;
 };
 
+
 export type MutationsDuplicateArticleArgs = {
   input: DuplicateArticleInput;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsDeleteArticleArgs = {
   input: DeleteArticleInput;
 };
 
+
 export type MutationsUpdateFaqArgs = {
   input: UpdateFaqInput;
   structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsCreateFaqArgs = {
   input: CreateFaqInput;
 };
 
+
 export type MutationsDuplicateFaqArgs = {
   input: DuplicateFaqInput;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsDeleteFaqArgs = {
   input: DeleteFaqInput;
 };
 
+
 export type MutationsUpdateRegistrationsArgs = {
   input: UpdateRegistrationsInput;
   structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsCreateRegistrationsArgs = {
   input: CreateRegistrationsInput;
 };
 
+
 export type MutationsDuplicateRegistrationsArgs = {
   input: DuplicateRegistrationsInput;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsDeleteRegistrationsArgs = {
   input: DeleteRegistrationsInput;
 };
 
+
 export type MutationsUpdateLanguageArgs = {
   input: UpdateLanguageInput;
   structure?: Maybe<Array<Maybe<ContentStructureInput>>>;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsCreateLanguageArgs = {
   input: CreateLanguageInput;
 };
 
+
 export type MutationsDuplicateLanguageArgs = {
   input: DuplicateLanguageInput;
-  locale?: Maybe<Scalars["String"]>;
-  enableLocaleFallback?: Maybe<Scalars["Boolean"]>;
+  locale?: Maybe<Scalars['String']>;
+  enableLocaleFallback?: Maybe<Scalars['Boolean']>;
 };
+
 
 export type MutationsDeleteLanguageArgs = {
   input: DeleteLanguageInput;
 };
 
 export type UploadProjectResult = {
-  __typename?: "UploadProjectResult";
-  uri?: Maybe<Scalars["String"]>;
-  importId?: Maybe<Scalars["String"]>;
+  __typename?: 'UploadProjectResult';
+  uri?: Maybe<Scalars['String']>;
+  importId?: Maybe<Scalars['String']>;
 };
 
 export type TsRoleInput = {
-  name: Scalars["String"];
-  permissions: Scalars["JSONObject"];
-  created?: Maybe<Scalars["String"]>;
-  updated?: Maybe<Scalars["String"]>;
+  name: Scalars['String'];
+  permissions: Scalars['JSONObject'];
+  created?: Maybe<Scalars['String']>;
+  updated?: Maybe<Scalars['String']>;
 };
 
 export type TsWebhooksInput = {
-  resetSecret?: Maybe<Scalars["Boolean"]>;
+  resetSecret?: Maybe<Scalars['Boolean']>;
   webhooks?: Maybe<Array<Maybe<TsWebhookInput>>>;
 };
 
 export type TsWebhookInput = {
-  webhookUrl: Scalars["String"];
+  webhookUrl: Scalars['String'];
   headers?: Maybe<Array<Maybe<HttpHeaderInput>>>;
   resourceActions?: Maybe<Array<Maybe<TsResourceActionsInput>>>;
 };
 
 export type HttpHeaderInput = {
-  key?: Maybe<Scalars["String"]>;
-  value?: Maybe<Scalars["String"]>;
+  key?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type TsResourceActionsInput = {
-  resource: Scalars["String"];
-  actions?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  resource: Scalars['String'];
+  actions?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type TsUpdateSchemaInput = {
-  version: Scalars["Int"];
-  schemaVersion: Scalars["String"];
-  queries?: Maybe<Scalars["JSONObject"]>;
-  mutations?: Maybe<Scalars["JSONObject"]>;
-  shapes?: Maybe<Scalars["JSONObject"]>;
-  forms?: Maybe<Scalars["JSONObject"]>;
+  version: Scalars['Int'];
+  schemaVersion: Scalars['String'];
+  queries?: Maybe<Scalars['JSONObject']>;
+  mutations?: Maybe<Scalars['JSONObject']>;
+  shapes?: Maybe<Scalars['JSONObject']>;
+  forms?: Maybe<Scalars['JSONObject']>;
 };
 
 export type TsUpdateSchemaServiceInput = {
-  serviceId: Scalars["String"];
+  serviceId: Scalars['String'];
   auth?: Maybe<TsServiceAuthInput>;
-  params?: Maybe<TsServiceParams>;
+  params?: Maybe<Scalars['JSONObject']>;
 };
 
 export type TsServiceAuthInput = {
-  accessToken: Scalars["String"];
-  refreshtoken?: Maybe<Scalars["String"]>;
-  scope?: Maybe<Scalars["String"]>;
-};
-
-export type TsServiceParams = {
-  type?: Maybe<Scalars["String"]>;
-  authHeader?: Maybe<Scalars["String"]>;
-  namespace?: Maybe<Scalars["String"]>;
-  endpoint?: Maybe<Scalars["String"]>;
-  name?: Maybe<Scalars["String"]>;
+  accessToken: Scalars['String'];
+  refreshToken?: Maybe<Scalars['String']>;
+  scope?: Maybe<Scalars['String']>;
 };
 
 export type TsSaveWorkflowInput = {
-  version: Scalars["Int"];
+  version: Scalars['Int'];
   workflow: TsWorkflowInput;
 };
 
 export type TsWorkflowInput = {
-  name: Scalars["String"];
-  title: Scalars["String"];
+  name: Scalars['String'];
+  title: Scalars['String'];
   steps?: Maybe<Array<Maybe<TsWorkflowStepInput>>>;
 };
 
 export type TsWorkflowStepInput = {
-  name: Scalars["String"];
-  title: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  color: Scalars["String"];
-  live: Scalars["Boolean"];
-  key: Scalars["String"];
-  canEdit?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  name: Scalars['String'];
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  color: Scalars['String'];
+  live: Scalars['Boolean'];
+  key: Scalars['String'];
+  canEdit?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type TsSaveWorkflowResponse = {
-  __typename?: "TSSaveWorkflowResponse";
-  projectId?: Maybe<Scalars["String"]>;
-  schemaVersion?: Maybe<Scalars["Int"]>;
+  __typename?: 'TSSaveWorkflowResponse';
+  projectId?: Maybe<Scalars['String']>;
+  schemaVersion?: Maybe<Scalars['Int']>;
   workflow?: Maybe<TsWorkflow>;
-  shapes?: Maybe<Scalars["JSONObject"]>;
+  shapes?: Maybe<Scalars['JSONObject']>;
 };
 
 export type TsWorkflow = {
-  __typename?: "TSWorkflow";
-  name: Scalars["String"];
-  title: Scalars["String"];
+  __typename?: 'TSWorkflow';
+  name: Scalars['String'];
+  title: Scalars['String'];
   steps?: Maybe<Array<Maybe<TsWorkflowStep>>>;
 };
 
 export type TsWorkflowStep = {
-  __typename?: "TSWorkflowStep";
-  name: Scalars["String"];
-  title: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  color: Scalars["String"];
-  live: Scalars["Boolean"];
-  key: Scalars["String"];
-  canEdit?: Maybe<Array<Maybe<Scalars["String"]>>>;
+  __typename?: 'TSWorkflowStep';
+  name: Scalars['String'];
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  color: Scalars['String'];
+  live: Scalars['Boolean'];
+  key: Scalars['String'];
+  canEdit?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type TsUpdateWorkflowInput = {
-  version: Scalars["Int"];
-  name: Scalars["String"];
+  version: Scalars['Int'];
+  name: Scalars['String'];
   workflow: TsWorkflowInput;
 };
 
 export type TsDeleteWorkflowInput = {
-  version: Scalars["Int"];
-  name: Scalars["String"];
+  version: Scalars['Int'];
+  name: Scalars['String'];
 };
 
 export type TsRemoveWorkflowResponse = {
-  __typename?: "TSRemoveWorkflowResponse";
-  name?: Maybe<Scalars["String"]>;
-  schemaVersion?: Maybe<Scalars["Int"]>;
-  removed?: Maybe<Scalars["Boolean"]>;
-  shapes?: Maybe<Scalars["JSONObject"]>;
+  __typename?: 'TSRemoveWorkflowResponse';
+  name?: Maybe<Scalars['String']>;
+  schemaVersion?: Maybe<Scalars['Int']>;
+  removed?: Maybe<Scalars['Boolean']>;
+  shapes?: Maybe<Scalars['JSONObject']>;
 };
 
 export type TsScheduleStatusUpdateInput = {
-  timestamp: Scalars["String"];
-  contentId: Scalars["String"];
-  status: Scalars["String"];
-  shapeName?: Maybe<Scalars["String"]>;
-  contentTypeName?: Maybe<Scalars["String"]>;
+  timestamp: Scalars['String'];
+  contentId: Scalars['String'];
+  status: Scalars['String'];
+  shapeName?: Maybe<Scalars['String']>;
+  contentTypeName?: Maybe<Scalars['String']>;
 };
 
 export type TsCancelStatusUpdateInput = {
-  contentId: Scalars["String"];
-  shapeName?: Maybe<Scalars["String"]>;
-  contentTypeName?: Maybe<Scalars["String"]>;
-  timestamp: Scalars["String"];
+  contentId: Scalars['String'];
+  shapeName?: Maybe<Scalars['String']>;
+  contentTypeName?: Maybe<Scalars['String']>;
+  timestamp: Scalars['String'];
+};
+
+export type SchemaVersionsRestorationResult = {
+  __typename?: 'SchemaVersionsRestorationResult';
+  version?: Maybe<Scalars['Int']>;
+  timestamp?: Maybe<Scalars['String']>;
 };
 
 export type TsPermissions = {
-  __typename?: "TSPermissions";
-  userId?: Maybe<Scalars["ID"]>;
-  projectId?: Maybe<Scalars["ID"]>;
-  role?: Maybe<Scalars["String"]>;
+  __typename?: 'TSPermissions';
+  userId?: Maybe<Scalars['ID']>;
+  projectId?: Maybe<Scalars['ID']>;
+  role?: Maybe<Scalars['String']>;
 };
 
 export type TsInvite = {
-  __typename?: "TSInvite";
-  inviteCode?: Maybe<Scalars["ID"]>;
-  email?: Maybe<Scalars["ID"]>;
-  role?: Maybe<Scalars["String"]>;
-  projectId?: Maybe<Scalars["ID"]>;
-  inviterUserId?: Maybe<Scalars["ID"]>;
-  status?: Maybe<Scalars["String"]>;
+  __typename?: 'TSInvite';
+  inviteCode?: Maybe<Scalars['ID']>;
+  email?: Maybe<Scalars['ID']>;
+  role?: Maybe<Scalars['String']>;
+  projectId?: Maybe<Scalars['ID']>;
+  inviterUserId?: Maybe<Scalars['ID']>;
+  status?: Maybe<Scalars['String']>;
 };
 
 export type TsFile = {
-  name: Scalars["String"];
-  type: Scalars["String"];
+  name: Scalars['String'];
+  type: Scalars['String'];
 };
 
 /** A project file stored on s3 */
 export type Upload = {
-  __typename?: "Upload";
-  uploadUrl?: Maybe<Scalars["ID"]>;
+  __typename?: 'Upload';
+  uploadUrl?: Maybe<Scalars['ID']>;
   asset?: Maybe<Asset>;
 };
 
 /** update Asset input */
 export type UpdateAssetInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  sourceUrl?: Maybe<Scalars["String"]>;
-  path?: Maybe<Scalars["String"]>;
-  filename?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  caption?: Maybe<Scalars["JSON"]>;
-  uploadStatus?: Maybe<Scalars["String"]>;
-  mimeType?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-  credit?: Maybe<Scalars["JSON"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  sourceUrl?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['JSON']>;
+  uploadStatus?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  credit?: Maybe<Scalars['JSON']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  s3Key?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  s3Key?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Describes a structural update to an array of data. */
 export type ContentStructureInput = {
   /** A deep path to the array being updated (e.g. a.b[1].c). */
-  path: Scalars["String"];
+  path: Scalars['String'];
   /** An array where the indices represent the to index, and the values represent the from index.For example to transform ["a","b","c","d"] into ["c","a"], this value would be [2,0]. */
-  structure?: Maybe<Array<Maybe<Scalars["Int"]>>>;
+  structure?: Maybe<Array<Maybe<Scalars['Int']>>>;
 };
 
 export type UpdateAssetResult = {
-  __typename?: "UpdateAssetResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'UpdateAssetResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Asset>;
 };
 
 /** create Asset input */
 export type CreateAssetInput = {
-  sourceUrl?: Maybe<Scalars["String"]>;
-  path: Scalars["String"];
-  filename: Scalars["String"];
-  description?: Maybe<Scalars["String"]>;
-  caption?: Maybe<Scalars["JSON"]>;
-  uploadStatus?: Maybe<Scalars["String"]>;
-  mimeType?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-  credit?: Maybe<Scalars["JSON"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  sourceUrl?: Maybe<Scalars['String']>;
+  path: Scalars['String'];
+  filename: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['JSON']>;
+  uploadStatus?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  credit?: Maybe<Scalars['JSON']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  s3Key?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  s3Key?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateAssetResult = {
-  __typename?: "CreateAssetResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'CreateAssetResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Asset>;
 };
 
 /** duplicate Asset input */
 export type DuplicateAssetInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  sourceUrl?: Maybe<Scalars["String"]>;
-  path?: Maybe<Scalars["String"]>;
-  filename?: Maybe<Scalars["String"]>;
-  description?: Maybe<Scalars["String"]>;
-  caption?: Maybe<Scalars["JSON"]>;
-  uploadStatus?: Maybe<Scalars["String"]>;
-  mimeType?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
-  credit?: Maybe<Scalars["JSON"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  sourceUrl?: Maybe<Scalars['String']>;
+  path?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  caption?: Maybe<Scalars['JSON']>;
+  uploadStatus?: Maybe<Scalars['String']>;
+  mimeType?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  credit?: Maybe<Scalars['JSON']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  s3Key?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  s3Key?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DuplicateAssetResult = {
-  __typename?: "DuplicateAssetResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'DuplicateAssetResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Asset>;
 };
 
 /** delete Asset input */
 export type DeleteAssetInput = {
-  _id: Scalars["ID"];
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteAssetResult = {
-  __typename?: "DeleteAssetResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
-  result?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'DeleteAssetResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
 };
 
 /** update TsStaticSite input */
 export type UpdateTsStaticSiteInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  title?: Maybe<Scalars["String"]>;
-  baseUrl?: Maybe<Scalars["String"]>;
-  provider?: Maybe<Scalars["String"]>;
-  idKey?: Maybe<Scalars["String"]>;
-  secretKey?: Maybe<Scalars["String"]>;
-  destination?: Maybe<Scalars["String"]>;
-  privateAcl?: Maybe<Scalars["Boolean"]>;
-  environmentVariables?: Maybe<
-    Array<Maybe<TsStaticSiteEnvironmentVariablesInput>>
-  >;
+  _id?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+  baseUrl?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
+  idKey?: Maybe<Scalars['String']>;
+  secretKey?: Maybe<Scalars['String']>;
+  destination?: Maybe<Scalars['String']>;
+  privateAcl?: Maybe<Scalars['Boolean']>;
+  environmentVariables?: Maybe<Array<Maybe<TsStaticSiteEnvironmentVariablesInput>>>;
   triggers?: Maybe<Array<Maybe<TsStaticSiteTriggersInput>>>;
-  templateHash?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  templateHash?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type TsStaticSiteEnvironmentVariablesInput = {
-  name?: Maybe<Scalars["String"]>;
-  value?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
+  value?: Maybe<Scalars['String']>;
 };
 
 export type TsStaticSiteTriggersInput = {
-  contentTypeId?: Maybe<Scalars["String"]>;
-  status?: Maybe<Scalars["String"]>;
+  contentTypeId?: Maybe<Scalars['String']>;
+  status?: Maybe<Scalars['String']>;
 };
 
 export type UpdateTsStaticSiteResult = {
-  __typename?: "UpdateTsStaticSiteResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'UpdateTsStaticSiteResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<TsStaticSite>;
 };
 
 /** create TsStaticSite input */
 export type CreateTsStaticSiteInput = {
-  title: Scalars["String"];
-  baseUrl?: Maybe<Scalars["String"]>;
-  provider: Scalars["String"];
-  idKey?: Maybe<Scalars["String"]>;
-  secretKey?: Maybe<Scalars["String"]>;
-  destination: Scalars["String"];
-  privateAcl?: Maybe<Scalars["Boolean"]>;
-  environmentVariables?: Maybe<
-    Array<Maybe<TsStaticSiteEnvironmentVariablesInput>>
-  >;
+  title: Scalars['String'];
+  baseUrl?: Maybe<Scalars['String']>;
+  provider: Scalars['String'];
+  idKey?: Maybe<Scalars['String']>;
+  secretKey?: Maybe<Scalars['String']>;
+  destination: Scalars['String'];
+  privateAcl?: Maybe<Scalars['Boolean']>;
+  environmentVariables?: Maybe<Array<Maybe<TsStaticSiteEnvironmentVariablesInput>>>;
   triggers?: Maybe<Array<Maybe<TsStaticSiteTriggersInput>>>;
-  templateHash?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  templateHash?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateTsStaticSiteResult = {
-  __typename?: "CreateTsStaticSiteResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'CreateTsStaticSiteResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<TsStaticSite>;
 };
 
 /** duplicate TsStaticSite input */
 export type DuplicateTsStaticSiteInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  title?: Maybe<Scalars["String"]>;
-  baseUrl?: Maybe<Scalars["String"]>;
-  provider?: Maybe<Scalars["String"]>;
-  idKey?: Maybe<Scalars["String"]>;
-  secretKey?: Maybe<Scalars["String"]>;
-  destination?: Maybe<Scalars["String"]>;
-  privateAcl?: Maybe<Scalars["Boolean"]>;
-  environmentVariables?: Maybe<
-    Array<Maybe<TsStaticSiteEnvironmentVariablesInput>>
-  >;
+  _id?: Maybe<Scalars['ID']>;
+  title?: Maybe<Scalars['String']>;
+  baseUrl?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
+  idKey?: Maybe<Scalars['String']>;
+  secretKey?: Maybe<Scalars['String']>;
+  destination?: Maybe<Scalars['String']>;
+  privateAcl?: Maybe<Scalars['Boolean']>;
+  environmentVariables?: Maybe<Array<Maybe<TsStaticSiteEnvironmentVariablesInput>>>;
   triggers?: Maybe<Array<Maybe<TsStaticSiteTriggersInput>>>;
-  templateHash?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  templateHash?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DuplicateTsStaticSiteResult = {
-  __typename?: "DuplicateTsStaticSiteResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'DuplicateTsStaticSiteResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<TsStaticSite>;
 };
 
 /** delete TsStaticSite input */
 export type DeleteTsStaticSiteInput = {
-  _id: Scalars["ID"];
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteTsStaticSiteResult = {
-  __typename?: "DeleteTsStaticSiteResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
-  result?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'DeleteTsStaticSiteResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
 };
 
 /** update Apartment input */
 export type UpdateApartmentInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  name?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
   brandColor?: Maybe<TsColorInput>;
-  key?: Maybe<Scalars["String"]>;
-  location?: Maybe<Scalars["String"]>;
-  airBnb?: Maybe<Scalars["String"]>;
-  latitude?: Maybe<Scalars["String"]>;
-  longitude?: Maybe<Scalars["String"]>;
-  code?: Maybe<Scalars["String"]>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   lightColor?: Maybe<TsColorInput>;
   lighterColor?: Maybe<TsColorInput>;
   coverWebp?: Maybe<TsRelationshipInput>;
   coverJpg?: Maybe<TsRelationshipInput>;
-  address?: Maybe<Scalars["String"]>;
-  airbnbLink?: Maybe<Scalars["String"]>;
-  facebookLink?: Maybe<Scalars["String"]>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
   sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  airbnbIcal?: Maybe<Scalars["String"]>;
-  bookingIcal?: Maybe<Scalars["String"]>;
-  mapLink?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type TsColorInput = {
-  hex?: Maybe<Scalars["String"]>;
+  hex?: Maybe<Scalars['String']>;
   hsl?: Maybe<TsColorHslInput>;
   hsv?: Maybe<TsColorHsvInput>;
   rgb?: Maybe<TsColorRgbInput>;
 };
 
 export type TsColorHslInput = {
-  h?: Maybe<Scalars["Float"]>;
-  a?: Maybe<Scalars["Float"]>;
-  s?: Maybe<Scalars["Float"]>;
-  l?: Maybe<Scalars["Float"]>;
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  l?: Maybe<Scalars['Float']>;
 };
 
 export type TsColorHsvInput = {
-  h?: Maybe<Scalars["Float"]>;
-  a?: Maybe<Scalars["Float"]>;
-  s?: Maybe<Scalars["Float"]>;
-  v?: Maybe<Scalars["Float"]>;
+  h?: Maybe<Scalars['Float']>;
+  a?: Maybe<Scalars['Float']>;
+  s?: Maybe<Scalars['Float']>;
+  v?: Maybe<Scalars['Float']>;
 };
 
 export type TsColorRgbInput = {
-  a?: Maybe<Scalars["Float"]>;
-  b?: Maybe<Scalars["Float"]>;
-  r?: Maybe<Scalars["Float"]>;
-  g?: Maybe<Scalars["Float"]>;
+  a?: Maybe<Scalars['Float']>;
+  b?: Maybe<Scalars['Float']>;
+  r?: Maybe<Scalars['Float']>;
+  g?: Maybe<Scalars['Float']>;
 };
 
 export type TsRelationshipInput = {
-  shapeId?: Maybe<Scalars["String"]>;
-  contentTypeId?: Maybe<Scalars["String"]>;
-  id?: Maybe<Scalars["String"]>;
+  shapeId?: Maybe<Scalars['String']>;
+  contentTypeId?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
 };
 
 export type UpdateApartmentResult = {
-  __typename?: "UpdateApartmentResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'UpdateApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Apartment>;
 };
 
 /** create Apartment input */
 export type CreateApartmentInput = {
-  name?: Maybe<Scalars["String"]>;
+  name?: Maybe<Scalars['String']>;
   brandColor?: Maybe<TsColorInput>;
-  key?: Maybe<Scalars["String"]>;
-  location?: Maybe<Scalars["String"]>;
-  airBnb?: Maybe<Scalars["String"]>;
-  latitude?: Maybe<Scalars["String"]>;
-  longitude?: Maybe<Scalars["String"]>;
-  code?: Maybe<Scalars["String"]>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   lightColor?: Maybe<TsColorInput>;
   lighterColor?: Maybe<TsColorInput>;
   coverWebp?: Maybe<TsRelationshipInput>;
   coverJpg?: Maybe<TsRelationshipInput>;
-  address?: Maybe<Scalars["String"]>;
-  airbnbLink?: Maybe<Scalars["String"]>;
-  facebookLink?: Maybe<Scalars["String"]>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
   sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  airbnbIcal?: Maybe<Scalars["String"]>;
-  bookingIcal?: Maybe<Scalars["String"]>;
-  mapLink?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateApartmentResult = {
-  __typename?: "CreateApartmentResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'CreateApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Apartment>;
 };
 
 /** duplicate Apartment input */
 export type DuplicateApartmentInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  name?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
   brandColor?: Maybe<TsColorInput>;
-  key?: Maybe<Scalars["String"]>;
-  location?: Maybe<Scalars["String"]>;
-  airBnb?: Maybe<Scalars["String"]>;
-  latitude?: Maybe<Scalars["String"]>;
-  longitude?: Maybe<Scalars["String"]>;
-  code?: Maybe<Scalars["String"]>;
+  key?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  airBnb?: Maybe<Scalars['String']>;
+  latitude?: Maybe<Scalars['String']>;
+  longitude?: Maybe<Scalars['String']>;
+  code?: Maybe<Scalars['String']>;
   lightColor?: Maybe<TsColorInput>;
   lighterColor?: Maybe<TsColorInput>;
   coverWebp?: Maybe<TsRelationshipInput>;
   coverJpg?: Maybe<TsRelationshipInput>;
-  address?: Maybe<Scalars["String"]>;
-  airbnbLink?: Maybe<Scalars["String"]>;
-  facebookLink?: Maybe<Scalars["String"]>;
+  address?: Maybe<Scalars['String']>;
+  airbnbLink?: Maybe<Scalars['String']>;
+  facebookLink?: Maybe<Scalars['String']>;
   sponsor?: Maybe<Array<Maybe<TsRelationshipInput>>>;
-  airbnbIcal?: Maybe<Scalars["String"]>;
-  bookingIcal?: Maybe<Scalars["String"]>;
-  mapLink?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  airbnbIcal?: Maybe<Scalars['String']>;
+  bookingIcal?: Maybe<Scalars['String']>;
+  mapLink?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DuplicateApartmentResult = {
-  __typename?: "DuplicateApartmentResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'DuplicateApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Apartment>;
 };
 
 /** delete Apartment input */
 export type DeleteApartmentInput = {
-  _id: Scalars["ID"];
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteApartmentResult = {
-  __typename?: "DeleteApartmentResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
-  result?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'DeleteApartmentResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
 };
 
 /** update Article input */
 export type UpdateArticleInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  path?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   relationship?: Maybe<TsRelationshipInput>;
-  content?: Maybe<Scalars["JSON"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  content?: Maybe<Scalars['JSON']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type UpdateArticleResult = {
-  __typename?: "UpdateArticleResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'UpdateArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Article>;
 };
 
 /** create Article input */
 export type CreateArticleInput = {
-  path?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   relationship: TsRelationshipInput;
-  content?: Maybe<Scalars["JSON"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  content?: Maybe<Scalars['JSON']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateArticleResult = {
-  __typename?: "CreateArticleResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'CreateArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Article>;
 };
 
 /** duplicate Article input */
 export type DuplicateArticleInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  path?: Maybe<Scalars["String"]>;
-  title?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  path?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
   relationship?: Maybe<TsRelationshipInput>;
-  content?: Maybe<Scalars["JSON"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  content?: Maybe<Scalars['JSON']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DuplicateArticleResult = {
-  __typename?: "DuplicateArticleResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'DuplicateArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Article>;
 };
 
 /** delete Article input */
 export type DeleteArticleInput = {
-  _id: Scalars["ID"];
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteArticleResult = {
-  __typename?: "DeleteArticleResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
-  result?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'DeleteArticleResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
 };
 
 /** update Faq input */
 export type UpdateFaqInput = {
-  _id?: Maybe<Scalars["ID"]>;
+  _id?: Maybe<Scalars['ID']>;
   apartment?: Maybe<TsRelationshipInput>;
   language?: Maybe<TsRelationshipInput>;
-  question?: Maybe<Scalars["String"]>;
-  answer?: Maybe<Scalars["JSON"]>;
-  linkVideo?: Maybe<Scalars["String"]>;
+  question?: Maybe<Scalars['String']>;
+  answer?: Maybe<Scalars['JSON']>;
+  linkVideo?: Maybe<Scalars['String']>;
   asset?: Maybe<TsRelationshipInput>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type UpdateFaqResult = {
-  __typename?: "UpdateFaqResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'UpdateFaqResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Faq>;
 };
 
@@ -4187,1245 +4391,425 @@ export type UpdateFaqResult = {
 export type CreateFaqInput = {
   apartment: TsRelationshipInput;
   language: TsRelationshipInput;
-  question: Scalars["String"];
-  answer: Scalars["JSON"];
-  linkVideo?: Maybe<Scalars["String"]>;
+  question: Scalars['String'];
+  answer: Scalars['JSON'];
+  linkVideo?: Maybe<Scalars['String']>;
   asset?: Maybe<TsRelationshipInput>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateFaqResult = {
-  __typename?: "CreateFaqResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'CreateFaqResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Faq>;
 };
 
 /** duplicate Faq input */
 export type DuplicateFaqInput = {
-  _id?: Maybe<Scalars["ID"]>;
+  _id?: Maybe<Scalars['ID']>;
   apartment?: Maybe<TsRelationshipInput>;
   language?: Maybe<TsRelationshipInput>;
-  question?: Maybe<Scalars["String"]>;
-  answer?: Maybe<Scalars["JSON"]>;
-  linkVideo?: Maybe<Scalars["String"]>;
+  question?: Maybe<Scalars['String']>;
+  answer?: Maybe<Scalars['JSON']>;
+  linkVideo?: Maybe<Scalars['String']>;
   asset?: Maybe<TsRelationshipInput>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DuplicateFaqResult = {
-  __typename?: "DuplicateFaqResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'DuplicateFaqResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Faq>;
 };
 
 /** delete Faq input */
 export type DeleteFaqInput = {
-  _id: Scalars["ID"];
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteFaqResult = {
-  __typename?: "DeleteFaqResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
-  result?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'DeleteFaqResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
 };
 
 /** update Registrations input */
 export type UpdateRegistrationsInput = {
-  _id?: Maybe<Scalars["ID"]>;
+  _id?: Maybe<Scalars['ID']>;
   guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
-  registrationStatus?: Maybe<Scalars["String"]>;
-  apartmentKey?: Maybe<Scalars["String"]>;
-  email?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  registrationStatus?: Maybe<Scalars['String']>;
+  apartmentKey?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type RegistrationsGuestsInput = {
-  lastName?: Maybe<Scalars["String"]>;
-  firstName?: Maybe<Scalars["String"]>;
-  placeOfBirth?: Maybe<Scalars["String"]>;
-  nationality?: Maybe<Scalars["String"]>;
-  documentType?: Maybe<Scalars["String"]>;
-  documentNumber?: Maybe<Scalars["String"]>;
-  birthDate?: Maybe<Scalars["String"]>;
+  lastName?: Maybe<Scalars['String']>;
+  firstName?: Maybe<Scalars['String']>;
+  placeOfBirth?: Maybe<Scalars['String']>;
+  nationality?: Maybe<Scalars['String']>;
+  documentType?: Maybe<Scalars['String']>;
+  documentNumber?: Maybe<Scalars['String']>;
+  birthDate?: Maybe<Scalars['String']>;
 };
 
 export type UpdateRegistrationsResult = {
-  __typename?: "UpdateRegistrationsResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'UpdateRegistrationsResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Registrations>;
 };
 
 /** create Registrations input */
 export type CreateRegistrationsInput = {
   guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
-  registrationStatus?: Maybe<Scalars["String"]>;
-  apartmentKey: Scalars["String"];
-  email: Scalars["String"];
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  registrationStatus?: Maybe<Scalars['String']>;
+  apartmentKey: Scalars['String'];
+  email: Scalars['String'];
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateRegistrationsResult = {
-  __typename?: "CreateRegistrationsResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'CreateRegistrationsResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Registrations>;
 };
 
 /** duplicate Registrations input */
 export type DuplicateRegistrationsInput = {
-  _id?: Maybe<Scalars["ID"]>;
+  _id?: Maybe<Scalars['ID']>;
   guests?: Maybe<Array<Maybe<RegistrationsGuestsInput>>>;
-  registrationStatus?: Maybe<Scalars["String"]>;
-  apartmentKey?: Maybe<Scalars["String"]>;
-  email?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  registrationStatus?: Maybe<Scalars['String']>;
+  apartmentKey?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DuplicateRegistrationsResult = {
-  __typename?: "DuplicateRegistrationsResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'DuplicateRegistrationsResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Registrations>;
 };
 
 /** delete Registrations input */
 export type DeleteRegistrationsInput = {
-  _id: Scalars["ID"];
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteRegistrationsResult = {
-  __typename?: "DeleteRegistrationsResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
-  result?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'DeleteRegistrationsResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
 };
 
 /** update Language input */
 export type UpdateLanguageInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  code?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  code?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type UpdateLanguageResult = {
-  __typename?: "UpdateLanguageResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'UpdateLanguageResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Language>;
 };
 
 /** create Language input */
 export type CreateLanguageInput = {
-  code?: Maybe<Scalars["String"]>;
-  _id?: Maybe<Scalars["ID"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  code?: Maybe<Scalars['String']>;
+  _id?: Maybe<Scalars['ID']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type CreateLanguageResult = {
-  __typename?: "CreateLanguageResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'CreateLanguageResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Language>;
 };
 
 /** duplicate Language input */
 export type DuplicateLanguageInput = {
-  _id?: Maybe<Scalars["ID"]>;
-  code?: Maybe<Scalars["String"]>;
-  _version?: Maybe<Scalars["Int"]>;
-  _shapeId?: Maybe<Scalars["String"]>;
-  _shapeName?: Maybe<Scalars["String"]>;
-  _createdAt?: Maybe<Scalars["String"]>;
-  _createdBy?: Maybe<Scalars["String"]>;
-  _updatedAt?: Maybe<Scalars["String"]>;
-  _updatedBy?: Maybe<Scalars["String"]>;
-  _schemaVersion?: Maybe<Scalars["Float"]>;
-  _enabled?: Maybe<Scalars["Boolean"]>;
-  _enabledAt?: Maybe<Scalars["String"]>;
+  _id?: Maybe<Scalars['ID']>;
+  code?: Maybe<Scalars['String']>;
+  _version?: Maybe<Scalars['Int']>;
+  _shapeId?: Maybe<Scalars['String']>;
+  _shapeName?: Maybe<Scalars['String']>;
+  _createdAt?: Maybe<Scalars['String']>;
+  _createdBy?: Maybe<Scalars['String']>;
+  _updatedAt?: Maybe<Scalars['String']>;
+  _updatedBy?: Maybe<Scalars['String']>;
+  _schemaVersion?: Maybe<Scalars['Float']>;
+  _enabled?: Maybe<Scalars['Boolean']>;
+  _enabledAt?: Maybe<Scalars['String']>;
   _status?: Maybe<DefaultWorkflow>;
-  _contentTypeId?: Maybe<Scalars["String"]>;
-  _contentTypeName?: Maybe<Scalars["String"]>;
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _contentTypeId?: Maybe<Scalars['String']>;
+  _contentTypeName?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DuplicateLanguageResult = {
-  __typename?: "DuplicateLanguageResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
+  __typename?: 'DuplicateLanguageResult';
+  clientMutationId?: Maybe<Scalars['String']>;
   result?: Maybe<Language>;
 };
 
 /** delete Language input */
 export type DeleteLanguageInput = {
-  _id: Scalars["ID"];
-  clientMutationId?: Maybe<Scalars["String"]>;
+  _id: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteLanguageResult = {
-  __typename?: "DeleteLanguageResult";
-  clientMutationId?: Maybe<Scalars["String"]>;
-  result?: Maybe<Scalars["Boolean"]>;
+  __typename?: 'DeleteLanguageResult';
+  clientMutationId?: Maybe<Scalars['String']>;
+  result?: Maybe<Scalars['Boolean']>;
 };
 
 export type ApartmentQueryVariables = Exact<{
-  key: Scalars["String"];
+  key: Scalars['String'];
 }>;
 
-export type ApartmentQuery = { __typename?: "Root" } & {
-  getApartmentList?: Maybe<
-    { __typename?: "ApartmentPaginatedList" } & {
-      items?: Maybe<
-        Array<
-          Maybe<
-            { __typename?: "Apartment" } & Pick<
-              Apartment,
-              | "airBnb"
-              | "latitude"
-              | "longitude"
-              | "name"
-              | "address"
-              | "airbnbLink"
-              | "facebookLink"
-              | "mapLink"
-            > & {
-                brandColor?: Maybe<
-                  { __typename?: "TSColor" } & Pick<TsColor, "hex">
-                >;
-                lightColor?: Maybe<
-                  { __typename?: "TSColor" } & {
-                    rgb?: Maybe<
-                      { __typename?: "TSColorRgb" } & Pick<
-                        TsColorRgb,
-                        "a" | "b" | "g" | "r"
-                      >
-                    >;
-                  }
-                >;
-                lighterColor?: Maybe<
-                  { __typename?: "TSColor" } & {
-                    rgb?: Maybe<
-                      { __typename?: "TSColorRgb" } & Pick<
-                        TsColorRgb,
-                        "a" | "b" | "g" | "r"
-                      >
-                    >;
-                  }
-                >;
-                coverJpg?: Maybe<
-                  { __typename?: "Asset" } & Pick<Asset, "path">
-                >;
-                coverWebp?: Maybe<
-                  { __typename?: "Asset" } & Pick<Asset, "path">
-                >;
-                sponsor?: Maybe<
-                  Array<
-                    Maybe<
-                      { __typename?: "Apartment" } & Pick<
-                        Apartment,
-                        "location" | "key"
-                      > & {
-                          brandColor?: Maybe<
-                            { __typename?: "TSColor" } & Pick<TsColor, "hex">
-                          >;
-                        }
-                    >
-                  >
-                >;
-              }
-          >
-        >
-      >;
-    }
-  >;
-  getLanguageList?: Maybe<
-    { __typename?: "LanguagePaginatedList" } & {
-      items?: Maybe<
-        Array<Maybe<{ __typename?: "Language" } & Pick<Language, "code">>>
-      >;
-    }
-  >;
-  ApartmentKeys?: Maybe<
-    { __typename?: "ApartmentPaginatedList" } & {
-      items?: Maybe<
-        Array<Maybe<{ __typename?: "Apartment" } & Pick<Apartment, "key">>>
-      >;
-    }
-  >;
-};
 
-export type GetLangsApartmentListQueryVariables = Exact<{
-  [key: string]: never;
-}>;
+export type ApartmentQuery = (
+  { __typename?: 'Root' }
+  & { getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'airBnb' | 'latitude' | 'longitude' | 'name' | 'address' | 'airbnbLink' | 'facebookLink' | 'mapLink'>
+      & { brandColor?: Maybe<(
+        { __typename?: 'TSColor' }
+        & Pick<TsColor, 'hex'>
+      )>, lightColor?: Maybe<(
+        { __typename?: 'TSColor' }
+        & { rgb?: Maybe<(
+          { __typename?: 'TSColorRgb' }
+          & Pick<TsColorRgb, 'a' | 'b' | 'g' | 'r'>
+        )> }
+      )>, lighterColor?: Maybe<(
+        { __typename?: 'TSColor' }
+        & { rgb?: Maybe<(
+          { __typename?: 'TSColorRgb' }
+          & Pick<TsColorRgb, 'a' | 'b' | 'g' | 'r'>
+        )> }
+      )>, coverJpg?: Maybe<(
+        { __typename?: 'Asset' }
+        & Pick<Asset, 'path'>
+      )>, coverWebp?: Maybe<(
+        { __typename?: 'Asset' }
+        & Pick<Asset, 'path'>
+      )>, sponsor?: Maybe<Array<Maybe<(
+        { __typename?: 'Apartment' }
+        & Pick<Apartment, 'location' | 'key'>
+        & { brandColor?: Maybe<(
+          { __typename?: 'TSColor' }
+          & Pick<TsColor, 'hex'>
+        )> }
+      )>>> }
+    )>>> }
+  )>, getLanguageList?: Maybe<(
+    { __typename?: 'LanguagePaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Language' }
+      & Pick<Language, 'code'>
+    )>>> }
+  )>, ApartmentKeys?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'key'>
+    )>>> }
+  )> }
+);
 
-export type GetLangsApartmentListQuery = { __typename?: "Root" } & {
-  getLanguageList?: Maybe<
-    { __typename?: "LanguagePaginatedList" } & {
-      items?: Maybe<
-        Array<Maybe<{ __typename?: "Language" } & Pick<Language, "code">>>
-      >;
-    }
-  >;
-  getApartmentList?: Maybe<
-    { __typename?: "ApartmentPaginatedList" } & {
-      items?: Maybe<
-        Array<Maybe<{ __typename?: "Apartment" } & Pick<Apartment, "key">>>
-      >;
-    }
-  >;
-};
+export type GetLangsApartmentListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLangsApartmentListQuery = (
+  { __typename?: 'Root' }
+  & { getLanguageList?: Maybe<(
+    { __typename?: 'LanguagePaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Language' }
+      & Pick<Language, 'code'>
+    )>>> }
+  )>, getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'key'>
+    )>>> }
+  )> }
+);
 
 export type ApartmentSecretQueryVariables = Exact<{
-  key: Scalars["String"];
+  key: Scalars['String'];
 }>;
 
-export type ApartmentSecretQuery = { __typename?: "Root" } & {
-  getApartmentList?: Maybe<
-    { __typename?: "ApartmentPaginatedList" } & {
-      items?: Maybe<
-        Array<
-          Maybe<
-            { __typename?: "Apartment" } & Pick<
-              Apartment,
-              "airbnbIcal" | "bookingIcal"
-            >
-          >
-        >
-      >;
-    }
-  >;
-};
+
+export type ApartmentSecretQuery = (
+  { __typename?: 'Root' }
+  & { getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'airbnbIcal' | 'bookingIcal'>
+    )>>> }
+  )> }
+);
 
 export type ApartmentCodeByAirBnbIdQueryVariables = Exact<{
-  key: Scalars["String"];
+  key: Scalars['String'];
 }>;
 
-export type ApartmentCodeByAirBnbIdQuery = { __typename?: "Root" } & {
-  getApartmentList?: Maybe<
-    { __typename?: "ApartmentPaginatedList" } & {
-      items?: Maybe<
-        Array<
-          Maybe<
-            { __typename?: "Apartment" } & Pick<
-              Apartment,
-              "code" | "key" | "address" | "name" | "airbnbLink" | "mapLink"
-            >
-          >
-        >
-      >;
-    }
-  >;
-};
+
+export type ApartmentCodeByAirBnbIdQuery = (
+  { __typename?: 'Root' }
+  & { getApartmentList?: Maybe<(
+    { __typename?: 'ApartmentPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Apartment' }
+      & Pick<Apartment, 'code' | 'key' | 'address' | 'name' | 'airbnbLink' | 'mapLink'>
+    )>>> }
+  )> }
+);
 
 export type GetArticleByPathQueryVariables = Exact<{
-  path: Scalars["String"];
+  path: Scalars['String'];
 }>;
 
-export type GetArticleByPathQuery = { __typename?: "Root" } & {
-  getArticleList?: Maybe<
-    { __typename?: "ArticlePaginatedList" } & {
-      items?: Maybe<
-        Array<
-          Maybe<
-            { __typename?: "Article" } & Pick<Article, "contentHtml" | "title">
-          >
-        >
-      >;
-    }
-  >;
-};
+
+export type GetArticleByPathQuery = (
+  { __typename?: 'Root' }
+  & { getArticleList?: Maybe<(
+    { __typename?: 'ArticlePaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Article' }
+      & Pick<Article, 'contentHtml' | 'title'>
+    )>>> }
+  )> }
+);
 
 export type FaqsQueryVariables = Exact<{
-  apartment: Scalars["String"];
-  lang: Scalars["String"];
+  apartment: Scalars['String'];
+  lang: Scalars['String'];
 }>;
 
-export type FaqsQuery = { __typename?: "Root" } & {
-  getFaqList?: Maybe<
-    { __typename?: "FaqPaginatedList" } & {
-      items?: Maybe<
-        Array<
-          Maybe<
-            { __typename?: "Faq" } & Pick<
-              Faq,
-              "answerHtml" | "question" | "linkVideo"
-            > & {
-                asset?: Maybe<
-                  { __typename?: "Asset" } & Pick<Asset, "path" | "mimeType">
-                >;
-              }
-          >
-        >
-      >;
-    }
-  >;
-};
 
-export const ApartmentDocument: DocumentNode<
-  ApartmentQuery,
-  ApartmentQueryVariables
-> = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "Apartment" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "key" } },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getApartmentList" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "key" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "eq" },
-                            value: {
-                              kind: "Variable",
-                              name: { kind: "Name", value: "key" },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "airBnb" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "latitude" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "longitude" },
-                      },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "brandColor" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "hex" },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "lightColor" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "rgb" },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "a" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "b" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "g" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "r" },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "lighterColor" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "rgb" },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "a" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "b" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "g" },
-                                  },
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "r" },
-                                  },
-                                ],
-                              },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "coverJpg" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "path" },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "coverWebp" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "path" },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "address" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "airbnbLink" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "facebookLink" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "sponsor" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "brandColor" },
-                              selectionSet: {
-                                kind: "SelectionSet",
-                                selections: [
-                                  {
-                                    kind: "Field",
-                                    name: { kind: "Name", value: "hex" },
-                                  },
-                                ],
-                              },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "location" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "key" },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "mapLink" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getLanguageList" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "code" } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: "Field",
-            alias: { kind: "Name", value: "ApartmentKeys" },
-            name: { kind: "Name", value: "getApartmentList" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "key" } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
-export const GetLangsApartmentListDocument: DocumentNode<
-  GetLangsApartmentListQuery,
-  GetLangsApartmentListQueryVariables
-> = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "getLangsApartmentList" },
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getLanguageList" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "code" } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getApartmentList" },
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "key" } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
-export const ApartmentSecretDocument: DocumentNode<
-  ApartmentSecretQuery,
-  ApartmentSecretQueryVariables
-> = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "ApartmentSecret" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "key" } },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getApartmentList" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "key" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "eq" },
-                            value: {
-                              kind: "Variable",
-                              name: { kind: "Name", value: "key" },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "airbnbIcal" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "bookingIcal" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
-export const ApartmentCodeByAirBnbIdDocument: DocumentNode<
-  ApartmentCodeByAirBnbIdQuery,
-  ApartmentCodeByAirBnbIdQueryVariables
-> = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "ApartmentCodeByAirBnbId" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "key" } },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getApartmentList" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "airBnb" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "eq" },
-                            value: {
-                              kind: "Variable",
-                              name: { kind: "Name", value: "key" },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      { kind: "Field", name: { kind: "Name", value: "code" } },
-                      { kind: "Field", name: { kind: "Name", value: "key" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "address" },
-                      },
-                      { kind: "Field", name: { kind: "Name", value: "name" } },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "airbnbLink" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "mapLink" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
-export const GetArticleByPathDocument: DocumentNode<
-  GetArticleByPathQuery,
-  GetArticleByPathQueryVariables
-> = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "getArticleByPath" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "path" } },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getArticleList" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "path" },
-                      value: {
-                        kind: "ObjectValue",
-                        fields: [
-                          {
-                            kind: "ObjectField",
-                            name: { kind: "Name", value: "eq" },
-                            value: {
-                              kind: "Variable",
-                              name: { kind: "Name", value: "path" },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "contentHtml" },
-                      },
-                      { kind: "Field", name: { kind: "Name", value: "title" } },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
-export const FaqsDocument: DocumentNode<FaqsQuery, FaqsQueryVariables> = {
-  kind: "Document",
-  definitions: [
-    {
-      kind: "OperationDefinition",
-      operation: "query",
-      name: { kind: "Name", value: "Faqs" },
-      variableDefinitions: [
-        {
-          kind: "VariableDefinition",
-          variable: {
-            kind: "Variable",
-            name: { kind: "Name", value: "apartment" },
-          },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-        {
-          kind: "VariableDefinition",
-          variable: { kind: "Variable", name: { kind: "Name", value: "lang" } },
-          type: {
-            kind: "NonNullType",
-            type: {
-              kind: "NamedType",
-              name: { kind: "Name", value: "String" },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: "SelectionSet",
-        selections: [
-          {
-            kind: "Field",
-            name: { kind: "Name", value: "getFaqList" },
-            arguments: [
-              {
-                kind: "Argument",
-                name: { kind: "Name", value: "where" },
-                value: {
-                  kind: "ObjectValue",
-                  fields: [
-                    {
-                      kind: "ObjectField",
-                      name: { kind: "Name", value: "AND" },
-                      value: {
-                        kind: "ListValue",
-                        values: [
-                          {
-                            kind: "ObjectValue",
-                            fields: [
-                              {
-                                kind: "ObjectField",
-                                name: { kind: "Name", value: "apartment" },
-                                value: {
-                                  kind: "ObjectValue",
-                                  fields: [
-                                    {
-                                      kind: "ObjectField",
-                                      name: { kind: "Name", value: "airBnb" },
-                                      value: {
-                                        kind: "ObjectValue",
-                                        fields: [
-                                          {
-                                            kind: "ObjectField",
-                                            name: {
-                                              kind: "Name",
-                                              value: "match",
-                                            },
-                                            value: {
-                                              kind: "Variable",
-                                              name: {
-                                                kind: "Name",
-                                                value: "apartment",
-                                              },
-                                            },
-                                          },
-                                        ],
-                                      },
-                                    },
-                                  ],
-                                },
-                              },
-                            ],
-                          },
-                          {
-                            kind: "ObjectValue",
-                            fields: [
-                              {
-                                kind: "ObjectField",
-                                name: { kind: "Name", value: "language" },
-                                value: {
-                                  kind: "ObjectValue",
-                                  fields: [
-                                    {
-                                      kind: "ObjectField",
-                                      name: { kind: "Name", value: "code" },
-                                      value: {
-                                        kind: "ObjectValue",
-                                        fields: [
-                                          {
-                                            kind: "ObjectField",
-                                            name: {
-                                              kind: "Name",
-                                              value: "match",
-                                            },
-                                            value: {
-                                              kind: "Variable",
-                                              name: {
-                                                kind: "Name",
-                                                value: "lang",
-                                              },
-                                            },
-                                          },
-                                        ],
-                                      },
-                                    },
-                                  ],
-                                },
-                              },
-                            ],
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: "SelectionSet",
-              selections: [
-                {
-                  kind: "Field",
-                  name: { kind: "Name", value: "items" },
-                  selectionSet: {
-                    kind: "SelectionSet",
-                    selections: [
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "answerHtml" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "question" },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "asset" },
-                        selectionSet: {
-                          kind: "SelectionSet",
-                          selections: [
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "path" },
-                            },
-                            {
-                              kind: "Field",
-                              name: { kind: "Name", value: "mimeType" },
-                            },
-                          ],
-                        },
-                      },
-                      {
-                        kind: "Field",
-                        name: { kind: "Name", value: "linkVideo" },
-                      },
-                    ],
-                  },
-                },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-};
+export type FaqsQuery = (
+  { __typename?: 'Root' }
+  & { getFaqList?: Maybe<(
+    { __typename?: 'FaqPaginatedList' }
+    & { items?: Maybe<Array<Maybe<(
+      { __typename?: 'Faq' }
+      & Pick<Faq, 'answerHtml' | 'question' | 'linkVideo'>
+      & { asset?: Maybe<(
+        { __typename?: 'Asset' }
+        & Pick<Asset, 'path' | 'mimeType'>
+      )> }
+    )>>> }
+  )> }
+);
+
+
+export const ApartmentDocument: DocumentNode<ApartmentQuery, ApartmentQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Apartment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"key"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"key"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"airBnb"}},{"kind":"Field","name":{"kind":"Name","value":"latitude"}},{"kind":"Field","name":{"kind":"Name","value":"longitude"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"brandColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"lightColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rgb"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"a"}},{"kind":"Field","name":{"kind":"Name","value":"b"}},{"kind":"Field","name":{"kind":"Name","value":"g"}},{"kind":"Field","name":{"kind":"Name","value":"r"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"lighterColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"rgb"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"a"}},{"kind":"Field","name":{"kind":"Name","value":"b"}},{"kind":"Field","name":{"kind":"Name","value":"g"}},{"kind":"Field","name":{"kind":"Name","value":"r"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverJpg"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}}]}},{"kind":"Field","name":{"kind":"Name","value":"coverWebp"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}}]}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"airbnbLink"}},{"kind":"Field","name":{"kind":"Name","value":"facebookLink"}},{"kind":"Field","name":{"kind":"Name","value":"sponsor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"brandColor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hex"}}]}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"key"}}]}},{"kind":"Field","name":{"kind":"Name","value":"mapLink"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"getLanguageList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}},{"kind":"Field","alias":{"kind":"Name","value":"ApartmentKeys"},"name":{"kind":"Name","value":"getApartmentList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}}]}}]}}]};
+export const GetLangsApartmentListDocument: DocumentNode<GetLangsApartmentListQuery, GetLangsApartmentListQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getLangsApartmentList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getLanguageList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"key"}}]}}]}}]}}]};
+export const ApartmentSecretDocument: DocumentNode<ApartmentSecretQuery, ApartmentSecretQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ApartmentSecret"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"key"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"key"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"key"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"airbnbIcal"}},{"kind":"Field","name":{"kind":"Name","value":"bookingIcal"}}]}}]}}]}}]};
+export const ApartmentCodeByAirBnbIdDocument: DocumentNode<ApartmentCodeByAirBnbIdQuery, ApartmentCodeByAirBnbIdQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"ApartmentCodeByAirBnbId"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"key"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getApartmentList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"airBnb"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"key"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"key"}},{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"airbnbLink"}},{"kind":"Field","name":{"kind":"Name","value":"mapLink"}}]}}]}}]}}]};
+export const GetArticleByPathDocument: DocumentNode<GetArticleByPathQuery, GetArticleByPathQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getArticleByPath"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"path"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getArticleList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"path"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"path"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"contentHtml"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]}}]};
+export const FaqsDocument: DocumentNode<FaqsQuery, FaqsQueryVariables> = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Faqs"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"apartment"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"lang"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"getFaqList"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"AND"},"value":{"kind":"ListValue","values":[{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"apartment"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"airBnb"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"match"},"value":{"kind":"Variable","name":{"kind":"Name","value":"apartment"}}}]}}]}}]},{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"language"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"code"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"match"},"value":{"kind":"Variable","name":{"kind":"Name","value":"lang"}}}]}}]}}]}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"items"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"answerHtml"}},{"kind":"Field","name":{"kind":"Name","value":"question"}},{"kind":"Field","name":{"kind":"Name","value":"asset"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}}]}},{"kind":"Field","name":{"kind":"Name","value":"linkVideo"}}]}}]}}]}}]};

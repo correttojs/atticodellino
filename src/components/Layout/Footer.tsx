@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
               css={tw`flex flex-row justify-center m-2 items-center`}
               href={mapLink ?? ""}
               target="_blank"
-              rel="noopener"
+              rel="noreferrer"
             >
               <FaMapMarker css={tw`inline`} />{" "}
               <span css={tw`m-1`}>{address}</span>
@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
                 href={facebookLink ?? ""}
                 target="_blank"
                 css={tw`self-center mr-4 ml-1`}
-                rel="noopener"
+                rel="noreferrer"
               >
                 Facebook
               </a>
@@ -59,7 +59,7 @@ export const Footer: React.FC = () => {
               <a
                 href={airbnbLink ?? ""}
                 target="_blank"
-                rel="noopener"
+                rel="noreferrer"
                 css={tw`self-center  ml-1`}
               >
                 Airbnb

@@ -42,8 +42,7 @@ export const reservations: QueryResolvers<ResolverContext>["reservations"] = asy
 
 export const reservation: QueryResolvers<ResolverContext>["reservation"] = async (
   parent,
-  args,
-  context
+  args
 ) => {
   const storedReservations = await graphCmsRequest(GetReservationDocument, {
     input: args.hash,
