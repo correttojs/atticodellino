@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
-import Modal from "react-modal";
-import { useGlobal } from "../Layout";
-import { GrPrevious, GrNext, GrClose } from "react-icons/gr";
-import styled, { keyframes } from "styled-components";
-import { MQ_MOBILE } from "../Layout";
+import { GrClose, GrNext, GrPrevious } from "react-icons/gr";
 import { MdInsertPhoto } from "react-icons/md";
+import Modal from "react-modal";
+import styled, { keyframes } from "styled-components";
 import tw from "twin.macro";
+
+import { useGlobal } from "../Layout";
+import { MQ_MOBILE } from "../Layout";
 import { BrandBackground } from "./BrandBackground";
 
 const Img = styled.img`

@@ -1,17 +1,16 @@
+import React from "react";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-
-import React from "react";
-import { GlobalType } from "../../graphql/_airbn.types";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { GlobalContext, theme } from "./useGlobal";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
-import { MQ_MOBILE } from "./MediaQueries";
-import { Contacts } from "./Contact";
+
+import { GlobalType } from "../../graphql/_airbn.types";
 import { queryClient } from "../useReactQuery";
+import { Contacts } from "./Contact";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
+import { MQ_MOBILE } from "./MediaQueries";
+import { GlobalContext, theme } from "./useGlobal";
 
 export const GlobalStyle = createGlobalStyle`
     html, body {

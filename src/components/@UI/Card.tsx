@@ -1,5 +1,6 @@
 import React from "react";
 import tw from "twin.macro";
+
 import { H2, H3 } from "./Texts";
 
 export const Card: React.FC<{

@@ -1,20 +1,20 @@
+import { useRouter } from "next/router";
 // Render Prop
 import React, { useState } from "react";
-
-import { useTranslations } from "../Translations/useTranslations";
-import { H2 } from "../@UI/Texts";
-import tw from "twin.macro";
-import { useRouter } from "next/router";
-import { Section } from "../@UI/Section";
-import { Loading } from "../@UI/Loading";
-import { ReservationDocument } from "./register.generated";
-import { Detail } from "./Detail";
-import { Sponsor } from "./Sponsor";
-import { FaqPage } from "../Faq";
-import { FormRegister } from "./FormRegister";
-import { SiGooglestreetview } from "react-icons/si";
 import { FaAirbnb } from "react-icons/fa";
+import { SiGooglestreetview } from "react-icons/si";
+import tw from "twin.macro";
+
+import { Loading } from "../@UI/Loading";
+import { Section } from "../@UI/Section";
+import { H2 } from "../@UI/Texts";
+import { FaqPage } from "../Faq";
+import { useTranslations } from "../Translations/useTranslations";
 import { useReactQuery } from "../useReactQuery";
+import { Detail } from "./Detail";
+import { FormRegister } from "./FormRegister";
+import { ReservationDocument } from "./register.generated";
+import { Sponsor } from "./Sponsor";
 
 export const Register: React.FC = () => {
   const router = useRouter();

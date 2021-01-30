@@ -1,14 +1,14 @@
-import { FormBook } from "./FormBook";
 import React, { useState } from "react";
-import { useTranslations } from "../Translations/useTranslations";
-import { useGlobal } from "../Layout";
-import { H2 } from "../@UI/Texts";
 import tw from "twin.macro";
 
-import { CalendarDocument } from "./calendar.generated";
-import { PriceDocument } from "./price.generated";
+import { H2 } from "../@UI/Texts";
+import { useGlobal } from "../Layout";
+import { useTranslations } from "../Translations/useTranslations";
+import { useReactMutation, useReactQuery } from "../useReactQuery";
 import { Calendar } from "./Calendar.css";
-import { useReactQuery, useReactMutation } from "../useReactQuery";
+import { CalendarDocument } from "./calendar.generated";
+import { FormBook } from "./FormBook";
+import { PriceDocument } from "./price.generated";
 
 const formatDate = (date: Date) => {
   return `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${(

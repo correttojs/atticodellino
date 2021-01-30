@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import tw from "twin.macro";
+
 import { ThemeType } from "../Layout/useGlobal";
 
 export const ButtonSmall = styled.button`

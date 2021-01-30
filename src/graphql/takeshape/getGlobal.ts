@@ -1,10 +1,11 @@
+import { GetStaticPaths } from "next";
+
 import {
   ApartmentDocument,
   ApartmentQuery,
   GetLangsApartmentListDocument,
 } from "../../generated/graphql-takeshape-doc";
 import { takeShapeRequest } from ".";
-import { GetStaticPaths } from "next";
 
 export const getGlobalProps = async ({
   params,

@@ -1,11 +1,11 @@
 import { TypedDocumentNode } from "@graphql-typed-document-node/core";
-import {
-  useMutation,
-  UseMutationOptions,
-  useQuery,
-  UseQueryOptions,
-} from "react-query";
 import { GraphQLClient } from "graphql-request";
+import {
+  UseMutationOptions,
+  UseQueryOptions,
+  useMutation,
+  useQuery,
+} from "react-query";
 
 const client = new GraphQLClient(`/api/graphql`);
 

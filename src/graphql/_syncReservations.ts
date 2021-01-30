@@ -1,14 +1,16 @@
-import { graphCmsRequest } from "./graphcms";
-import { AirBnbClient } from "airbnb-private-api";
 import * as crypto from "crypto";
-import { reservations } from "./_reservations";
+
+import { AirBnbClient } from "airbnb-private-api";
+
+import { Reservation } from "../components/Admin/reservations.generated";
 import {
   CreateReservationDocument,
   GetTokenDocument,
   GuestStatus,
 } from "../generated/graphql-graphcms";
 import { QueryResolvers } from "../generated/resolvers-types";
-import { Reservation } from "../components/Admin/reservations.generated";
+import { reservations } from "./_reservations";
+import { graphCmsRequest } from "./graphcms";
 import { ResolverContext } from "./resolvers";
 
 const getAirBnbReservations = async () => {

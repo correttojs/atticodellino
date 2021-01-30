@@ -1,11 +1,12 @@
 import React from "react";
-import tw from "twin.macro";
-import Modal from "react-modal";
-import { H3 } from "../@UI/Texts";
-import { ButtonInverted } from "../@UI/Buttons";
-import { MdAccountCircle } from "react-icons/md";
 import { FaRegIdCard } from "react-icons/fa";
+import { MdAccountCircle } from "react-icons/md";
+import Modal from "react-modal";
 import styled from "styled-components";
+import tw from "twin.macro";
+
+import { ButtonInverted } from "../@UI/Buttons";
+import { H3 } from "../@UI/Texts";
 import { MQ_NOT_MOBILE } from "../Layout";
 import { ReservationsQuery } from "./reservations.generated";
 

@@ -1,7 +1,7 @@
+import sgMail from "@sendgrid/mail";
+
 import { MutationResolvers } from "../generated/resolvers-types";
 import { ResolverContext } from "./resolvers";
-
-import sgMail from "@sendgrid/mail";
 
 sgMail.setApiKey(process.env.SEND_GRID_API ?? "");
 

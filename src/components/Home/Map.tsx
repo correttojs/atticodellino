@@ -1,8 +1,8 @@
 import GoogleMapReact from "google-map-react";
-
 import { FaMapMarker } from "react-icons/fa";
-import { useGlobal } from "../Layout";
 import { useInView } from "react-intersection-observer";
+
+import { useGlobal } from "../Layout";
 
 export const Map: React.FC<{ title: string }> = ({ title }) => {
   const { latitude, longitude } = useGlobal();

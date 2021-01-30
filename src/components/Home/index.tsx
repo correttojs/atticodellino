@@ -1,24 +1,25 @@
-import React from "react";
-import { pdp_listing_detail } from "../../graphql/_airbn.types";
-import { Map } from "./Map";
-import { BookingCalendar } from "../FormBookCalendar";
-import { Hero } from "./NewHero";
-import { Host } from "./Host";
-import { Reviews } from "./Reviews";
-import { Amenities } from "./Amenities";
-import { useTranslations } from "../Translations/useTranslations";
-import Image from "next/image";
-import Modal from "react-modal";
-import { useGlobal } from "../Layout";
 import Head from "next/head";
-import tw from "twin.macro";
-import { H2, P } from "../@UI/Texts";
-import { Section } from "../@UI/Section";
-import { Summary } from "./Summary";
-import { Collapsible } from "../@UI/Collapsible";
-import { CardHorizontal } from "../@UI/Card";
+import Image from "next/image";
+import React from "react";
 import { useInView } from "react-intersection-observer";
+import Modal from "react-modal";
+import tw from "twin.macro";
+
+import { pdp_listing_detail } from "../../graphql/_airbn.types";
+import { CardHorizontal } from "../@UI/Card";
+import { Collapsible } from "../@UI/Collapsible";
+import { Section } from "../@UI/Section";
+import { H2, P } from "../@UI/Texts";
+import { BookingCalendar } from "../FormBookCalendar";
+import { useGlobal } from "../Layout";
+import { useTranslations } from "../Translations/useTranslations";
+import { Amenities } from "./Amenities";
 import { BrandBackground } from "./BrandBackground";
+import { Host } from "./Host";
+import { Map } from "./Map";
+import { Hero } from "./NewHero";
+import { Reviews } from "./Reviews";
+import { Summary } from "./Summary";
 
 Modal.setAppElement("#__next");
 

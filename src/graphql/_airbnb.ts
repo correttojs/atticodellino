@@ -1,8 +1,9 @@
 import fetch from "isomorphic-unfetch";
 import queryString from "query-string";
+
 import { QueryResolvers } from "../generated/resolvers-types";
+import { GlobalType, Review, pdp_listing_detail } from "./_airbn.types";
 import { ResolverContext } from "./resolvers";
-import { pdp_listing_detail, Review, GlobalType } from "./_airbn.types";
 
 const BASE_URL = process.env.AIRBNB_BASEURL;
 const LOCALE = "it";

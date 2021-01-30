@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import tw from "twin.macro";
+
 import { MQ_MOBILE } from "../Layout";
 
 export const ApartmentLink = styled.a<{ backgroundColor: string }>`

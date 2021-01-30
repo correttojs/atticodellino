@@ -1,21 +1,21 @@
-import { graphCmsRequest } from "./graphcms";
+import sgMail from "@sendgrid/mail";
 
-import { streamTo64 } from "./_streamToBase64";
 import {
   GuestStatus,
   UpdateReservationDocument,
 } from "../generated/graphql-graphcms";
-import { smsReminderLink } from "./_sms";
-import { takeShapeRequest } from "./takeshape";
-import { upload } from "./upload";
 import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
 import {
   MutationRegisterGuestsArgs,
   MutationResolvers,
   ReservationStatus,
 } from "../generated/resolvers-types";
+import { smsReminderLink } from "./_sms";
+import { streamTo64 } from "./_streamToBase64";
+import { graphCmsRequest } from "./graphcms";
 import { ResolverContext } from "./resolvers";
-import sgMail from "@sendgrid/mail";
+import { takeShapeRequest } from "./takeshape";
+import { upload } from "./upload";
 
 sgMail.setApiKey(process.env.SEND_GRID_API ?? "");
 

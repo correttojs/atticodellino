@@ -1,13 +1,13 @@
-import React from "react";
-
-import { useGlobal } from ".";
-import { Contacts } from "./Contact";
 import Link from "next/link";
-import { useTranslations } from "../Translations/useTranslations";
 import { useRouter } from "next/router";
-import tw from "twin.macro";
+import React from "react";
 import { FaAirbnb, FaFacebookSquare, FaMapMarker } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
+import tw from "twin.macro";
+
+import { useTranslations } from "../Translations/useTranslations";
+import { Contacts } from "./Contact";
+import { useGlobal } from ".";
 
 export const Footer: React.FC = () => {
   const {

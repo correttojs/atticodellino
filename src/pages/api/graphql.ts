@@ -1,8 +1,9 @@
 import { ApolloServer } from "apollo-server-micro";
-import { getSession } from "next-auth/client";
-import { typeDefs } from "../../graphql/typeDefs";
-import { resolvers } from "../../graphql/resolvers";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { getSession } from "next-auth/client";
+
+import { resolvers } from "../../graphql/resolvers";
+import { typeDefs } from "../../graphql/typeDefs";
 
 const apolloServer = new ApolloServer({
   typeDefs,
