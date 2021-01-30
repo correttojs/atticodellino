@@ -1,4 +1,4 @@
-name: deploy website
+name: Vercel
 on: [pull_request]
 jobs:
   deploy:
@@ -9,7 +9,6 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
           github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
-          vercel-args: '--prod' #Optional
+#           vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
-          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required 
-          working-directory: ./sub-directory
+          vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
