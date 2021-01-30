@@ -10,7 +10,8 @@
     "codegen": "node codegen",
     "storybook": "start-storybook --no-dll -p 6006",
     "build-storybook": "build-storybook --no-dll",
-    "lint": "eslint \"src/**/*.{ts,tsx}\""
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "prettify": "prettier --write --ignore-path ./.eslintignore \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "keywords": [],
   "author": "Fabio Benedetti",
