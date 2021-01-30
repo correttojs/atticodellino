@@ -41,6 +41,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: "Lighthouse report: ${{ fromJson(steps.LHCIAction.outputs.links)[steps.now-deployment.outputs.preview-url'/']}}" 
+          msg: "Lighthouse report: ${{ fromJson(steps.LHCIAction.outputs.links)[steps.now-deployment.outputs.preview-url]}}" 
           check_for_duplicate_msg: true  # OPTIONAL 
          # ${{steps.LHCIAction.outputs.links}}
