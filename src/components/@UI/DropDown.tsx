@@ -19,6 +19,7 @@ export const DropDownItem: React.FC<{
   <li
     css={tw`cursor-pointer bg-gray-100 hover:bg-gray-200 py-2 px-4 block whitespace-nowrap`}
     onClick={onClick}
+    role="presentation"
   >
     {text}
   </li>

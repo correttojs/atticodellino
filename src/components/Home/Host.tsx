@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslations } from "../Translations/useTranslations";
-import { useGlobal } from "../Layout";
 import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
 import { Section } from "../@UI/Section";
 import tw from "twin.macro";
@@ -24,7 +23,6 @@ export const Host: React.FC<{
   reviews: number;
 }> = ({ srcImage, about, reviews }) => {
   const translate = useTranslations();
-  const { colors } = useGlobal();
   return (
     <BackgroundWrapper>
       <Section css={tw`flex flex-col-reverse md:flex-row`}>
@@ -39,7 +37,13 @@ export const Host: React.FC<{
           </div>
         </div>
         <ImgBox>
-          <img src={srcImage} width="150" height="150" loading="lazy" />
+          <img
+            src={srcImage}
+            alt="Loading"
+            width="150"
+            height="150"
+            loading="lazy"
+          />
         </ImgBox>
       </Section>
     </BackgroundWrapper>

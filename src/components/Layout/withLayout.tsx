@@ -40,40 +40,44 @@ export const GlobalStyle = createGlobalStyle`
     }
 `;
 
-export const withLayout = (Comp: any) => (props: { global: GlobalType }) => {
-  return (
-    <>
-      <GlobalStyle />
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
-        <GlobalContext.Provider value={props.global}>
-          <ThemeProvider theme={theme(props.global)}>
-            <div css={tw`flex flex-col items-center`}>
-              <Header />
-              <div
-                css={`
-                  ${tw`md:hidden fixed bg-white w-full`}
-                  top:77px;
-                  left: 0px;
-                `}
-              >
-                <Contacts direction="row" />
+export const withLayout = (Comp: any) => {
+  const Body = (props: { global: GlobalType }) => {
+    return (
+      <>
+        <GlobalStyle />
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
+          <GlobalContext.Provider value={props.global}>
+            <ThemeProvider theme={theme(props.global)}>
+              <div css={tw`flex flex-col items-center`}>
+                <Header />
+                <div
+                  css={`
+                    ${tw`md:hidden fixed bg-white w-full`}
+                    top:77px;
+                    left: 0px;
+                  `}
+                >
+                  <Contacts direction="row" />
+                </div>
+                <div
+                  css={`
+                    margin-top: 85px;
+                    @media ${MQ_MOBILE} {
+                      margin-top: 120px;
+                    }
+                  `}
+                >
+                  <Comp {...props}></Comp>
+                </div>
+                <Footer />
               </div>
-              <div
-                css={`
-                  margin-top: 85px;
-                  @media ${MQ_MOBILE} {
-                    margin-top: 120px;
-                  }
-                `}
-              >
-                <Comp {...props}></Comp>
-              </div>
-              <Footer />
-            </div>
-          </ThemeProvider>
-        </GlobalContext.Provider>
-      </QueryClientProvider>
-    </>
-  );
+            </ThemeProvider>
+          </GlobalContext.Provider>
+        </QueryClientProvider>
+      </>
+    );
+  };
+  Body.displayName = "Body";
+  return Body;
 };

@@ -63,6 +63,7 @@ export const Reservation: React.FC<{
               css={tw`underline`}
               href={reservation.registrationUrl ?? ""}
               target="_blank"
+              rel="noreferrer"
             >
               <span>
                 <FaRegIdCard style={{ display: "inline" }} /> register
@@ -91,7 +92,12 @@ export const Reservation: React.FC<{
                 <p>
                   <DescStyle>Document: </DescStyle>
                   {guest.docFile ? (
-                    <a css={tw`underline`} href={guest.docFile} target="_blank">
+                    <a
+                      css={tw`underline`}
+                      href={guest.docFile}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       {guest.documentType}
                     </a>
                   ) : (

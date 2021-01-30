@@ -28,7 +28,7 @@ export const FormSelect: React.FC<PropType> = ({
           value={formik.values[field]}
           id={field}
           name={field}
-          onChange={formik.handleChange}
+          onBlur={formik.handleChange}
           defaultValue={options[0]}
         >
           {options.map((option, k) => (

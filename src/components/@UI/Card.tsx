@@ -10,6 +10,7 @@ export const Card: React.FC<{
 }> = ({ img, onClick, title, message }) => {
   return (
     <div
+      role="presentation"
       onClick={onClick}
       css={[
         tw`max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden`,
@@ -37,6 +38,7 @@ export const CardHorizontal: React.FC<{
 }> = ({ img, onClick, title, message, children }) => {
   return (
     <div
+      role="presentation"
       onClick={onClick}
       css={[
         tw`max-w-2xl bg-white rounded-xl shadow-md overflow-hidden`,
@@ -45,7 +47,9 @@ export const CardHorizontal: React.FC<{
     >
       <div css={tw`flex`}>
         <div css={tw`flex-shrink-0`}>
-          {img && <img css={tw`w-32 h-32  object-cover `} src={img} />}
+          {img && (
+            <img alt="Card" css={tw`w-32 h-32  object-cover `} src={img} />
+          )}
           {children}
         </div>
         <div css={tw`p-4`}>

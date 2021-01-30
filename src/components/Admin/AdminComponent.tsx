@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signIn, useSession } from "next-auth/client";
 
 import styled, { createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
@@ -55,7 +55,7 @@ export const GlobalStyle = createGlobalStyle`
 export const AdminComponent: React.FC = () => {
   const [session] = useSession();
   const [isPast, setIsPast] = useState(false);
-  const { data, isLoading, error } = useReactQuery(
+  const { data, isLoading } = useReactQuery(
     ReservationsDocument,
     {
       isPast,
@@ -185,9 +185,9 @@ export const AdminComponent: React.FC = () => {
                     <BodyStyle key={`user${key}`}>
                       <tr>
                         <td
-                          scope="row"
                           css={tw`cursor-pointer flex items-center justify-between`}
                           onClick={() => setReservationDetails(item)}
+                          role="presentation"
                         >
                           <b css={tw`underline `}>{item.guest_name}</b>
                           <MdMoreVert />

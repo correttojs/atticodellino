@@ -29,6 +29,7 @@ export const FaqPage: React.FC = () => {
           <H2>{item?.question}</H2>
           <div dangerouslySetInnerHTML={{ __html: item?.answerHtml ?? "" }} />
           {item?.asset?.path && (
+            // eslint-disable-next-line jsx-a11y/media-has-caption
             <video width="320" height="240" controls>
               <source
                 src={`https://assets.takeshape.io/${item?.asset?.path}`}
