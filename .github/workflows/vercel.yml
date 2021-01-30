@@ -22,6 +22,7 @@ jobs:
         uses: cypress-io/github-action@v2
         env:
           CYPRESS_BASE_URL: ${{ steps.now-deployment.outputs.preview-url }}
+          CYPRESS_RECORD_KEY:  ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           start: npm start
           working-directory: cypress
