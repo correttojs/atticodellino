@@ -41,6 +41,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: " ${{ fromJson(steps.LHCIAction.outputs.links)}}" 
+          msg: " ${{ steps.LHCIAction.outputs.links}}" 
           check_for_duplicate_msg: true  # OPTIONAL 
          # ${{steps.LHCIAction.outputs.links}}
