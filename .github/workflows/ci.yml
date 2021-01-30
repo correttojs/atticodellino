@@ -20,5 +20,3 @@ jobs:
       run: npm run lint && npm run prettify     
     - name: Run typescript
       run: npx tsc   
-    - name: Run typescript
-      run: npm test
