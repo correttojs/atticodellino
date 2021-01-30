@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import tw from "twin.macro";
 import { ThemeType } from "../Layout/useGlobal";
-import { useTranslations } from "../Translations/useTranslations";
 
 const Spinner = styled.div`
   display: inline-block;
@@ -38,8 +37,6 @@ const Spinner = styled.div`
 `;
 
 export const Loading = () => {
-  const t = useTranslations();
-
   return (
     <Spinner css={tw`my-8`}>
       <div></div>

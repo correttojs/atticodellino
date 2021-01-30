@@ -56,7 +56,7 @@ export const Register: React.FC = () => {
             href={data?.reservation?.mapLink ?? ""}
             css={tw`m-2 flex items-center cursor-pointer`}
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
           >
             <SiGooglestreetview css={tw`inline`} /> Google
           </a>
@@ -64,7 +64,7 @@ export const Register: React.FC = () => {
             href={data?.reservation?.airbnbLink ?? ""}
             css={tw`m-2 flex items-center cursor-pointer`}
             target="_blank"
-            rel="noopener"
+            rel="noreferrer"
           >
             <FaAirbnb css={tw`inline`} /> Airbnb
           </a>

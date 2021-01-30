@@ -13,6 +13,7 @@ export const Collapsible: React.FC<{
       <Section css={tw`pt-0`}>
         {showReadMore && !isOpen && (
           <p
+            role="presentation"
             css={tw`text-lg font-semibold cursor-pointer pt-4`}
             onClick={() => setIsOpen(true)}
           >
@@ -24,6 +25,7 @@ export const Collapsible: React.FC<{
         <Section css={tw`pt-0`}>
           {children}
           <p
+            role="presentation"
             css={tw`text-lg font-semibold cursor-pointer pt-4`}
             onClick={() => setIsOpen(false)}
           >

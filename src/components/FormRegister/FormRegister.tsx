@@ -34,6 +34,7 @@ export const FormRegister: React.FC<{
     initialValues,
     onSubmit: async (values) => {
       const { guests: guestsForm } = values;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const guests = guestsForm.map(({ file, birthDate, ...rest }) => ({
         ...rest,
         birthDate: (birthDate ?? new Date()).toISOString().split("T")[0],
@@ -89,6 +90,7 @@ export const FormRegister: React.FC<{
                             </legend>
                             {formik.values.guests.length > 1 && (
                               <div
+                                role="presentation"
                                 style={{ float: "right" }}
                                 onClick={() => arrayHelpers.remove(index)}
                               >
@@ -209,6 +211,7 @@ export const FormRegister: React.FC<{
                             />
 
                             <div
+                              role="presentation"
                               onClick={() => {
                                 arrayHelpers.push({ ...guestValue });
                               }}
