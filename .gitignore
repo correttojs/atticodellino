@@ -11,3 +11,5 @@ public/sw.js
 public/sw.js.map
 public/workbox-*
 cypress/videos/home.ts.mp4
+
+.vercel
