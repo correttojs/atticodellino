@@ -1,24 +1,7 @@
 name: CI
 on: push
 jobs:
-  cypress-run:
-    runs-on: ubuntu-16.04
-    steps:
-      - uses: actions/checkout@v1
-      - uses: cypress-io/github-action@v2
-        with:
-          start: npm start
-          working-directory: cypress
-  chromatic:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - run: yarn
-      - uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
