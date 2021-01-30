@@ -1,4 +1,4 @@
-name: Vercel
+name: Vercel Master
 on:
   # Trigger the workflow on push or pull request,
   # but only for the main branch
@@ -21,12 +21,9 @@ jobs:
           vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
-      - name: Cypress
-        run: |
-          echo ${{ steps.now-deployment.outputs.preview-url }}
       - name: Checkout 🛎
         uses: actions/checkout@v1
-      - name: Run Cypress 🌲
+      - name: Run Cypress 🌲 Master
         uses: cypress-io/github-action@v2
         env:
           CYPRESS_BASE_URL: https://www.atticodellino.com
@@ -35,7 +32,7 @@ jobs:
           record: false
           start: npm start
           working-directory: cypress
-      - name: Lighthouse
+      - name: Lighthouse Master
         uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
