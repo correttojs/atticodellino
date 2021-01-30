@@ -22,5 +22,3 @@ jobs:
           msg: "Lighthouse report: ${{ steps.LHCIAction.outputs.links['https://www.atticodellino.com']}}" 
           check_for_duplicate_msg: true  # OPTIONAL 
          # ${{steps.LHCIAction.outputs.links}}
-            
-         
