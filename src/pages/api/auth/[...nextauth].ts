@@ -1,7 +1,6 @@
+import type { NextApiRequest, NextApiResponse } from "next";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-
-import type { NextApiRequest, NextApiResponse } from "next";
 
 const options = {
   // Configure one or more authentication providers

@@ -1,6 +1,7 @@
 import "react-calendar/dist/Calendar.css";
-import Router from "next/router";
 import "tailwindcss/dist/base.min.css";
+
+import Router from "next/router";
 import { useEffect } from "react";
 
 declare global {

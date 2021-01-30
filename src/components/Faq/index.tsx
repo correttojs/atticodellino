@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import React from "react";
 import tw from "twin.macro";
-import { Loading } from "../@UI/Loading";
 
+import { Loading } from "../@UI/Loading";
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
 import { useReactQuery } from "../useReactQuery";

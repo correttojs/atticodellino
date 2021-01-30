@@ -1,8 +1,18 @@
-import React, { useState } from "react";
 import { signIn, useSession } from "next-auth/client";
-
+import React, { useState } from "react";
+import { IoLogInSharp } from "react-icons/io5";
+import {
+  MdDone,
+  MdDoneAll,
+  MdMoreVert,
+  MdNewReleases,
+  MdSync,
+} from "react-icons/md";
+import Modal from "react-modal";
+import { useQueryClient } from "react-query";
 import styled, { createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
+
 import {
   Button,
   ButtonInverted,
@@ -10,29 +20,18 @@ import {
   ButtonSmall,
   ButtonWithIcon,
 } from "../@UI/Buttons";
-import {
-  MdNewReleases,
-  MdDone,
-  MdDoneAll,
-  MdSync,
-  MdMoreVert,
-} from "react-icons/md";
 import { Loading } from "../@UI/Loading";
-import { IoLogInSharp } from "react-icons/io5";
-
-import Modal from "react-modal";
 import { MQ_MOBILE } from "../Layout";
+import { useReactMutation, useReactQuery } from "../useReactQuery";
 import { Reservation } from "./Reservation";
 import {
+  ReservationStatus,
   ReservationsDocument,
   ReservationsQuery,
-  ReservationStatus,
   SyncRegistrationsDocument,
   UpdateReservationStatusDocument,
   UpdateReservationStatusMutationVariables,
 } from "./reservations.generated";
-import { useReactMutation, useReactQuery } from "../useReactQuery";
-import { useQueryClient } from "react-query";
 
 const BodyStyle = styled.tbody`
   border: 1px solid;

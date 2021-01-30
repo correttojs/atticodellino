@@ -1,4 +1,5 @@
 import tw from "twin.macro";
+
 import { ThemeType } from "../Layout/useGlobal";
 
 export const BrandBackground = () => (

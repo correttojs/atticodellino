@@ -1,7 +1,8 @@
-import styled from "styled-components";
-import { MQ_NOT_MOBILE, MQ_MOBILE } from "../Layout";
-import { ThemeType } from "../Layout/useGlobal";
 import ReactCalendar from "react-calendar";
+import styled from "styled-components";
+
+import { MQ_MOBILE, MQ_NOT_MOBILE } from "../Layout";
+import { ThemeType } from "../Layout/useGlobal";
 
 export const Calendar = styled(ReactCalendar)`
   @media ${MQ_NOT_MOBILE} {

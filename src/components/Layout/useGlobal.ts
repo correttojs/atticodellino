@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+
 import { GlobalType } from "../../graphql/_airbn.types";
 
 export const defaultGlobal = {

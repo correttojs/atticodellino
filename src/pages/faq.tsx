@@ -1,7 +1,8 @@
+import { GetStaticProps } from "next";
+
+import { FaqPage } from "../components/Faq";
 import { withLayout } from "../components/Layout";
 import { getGlobalProps } from "../graphql/takeshape/getGlobal";
-import { FaqPage } from "../components/Faq";
-import { GetStaticProps } from "next";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const params = { lang: locale, apartment: "VR" };

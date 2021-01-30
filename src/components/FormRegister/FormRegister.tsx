@@ -1,23 +1,22 @@
-import React, { useState } from "react";
-import { useFormik, FieldArray, FormikProvider } from "formik";
-import { initialValues, validationSchema, guestValue } from "./data";
-import { FormInput } from "../@UI/FormInput";
-import ReactCalendar from "react-calendar";
-
-import { useTranslations } from "../Translations/useTranslations";
-import { H1 } from "../@UI/Texts";
-import tw from "twin.macro";
-import { Button } from "../@UI/Buttons";
-import { GrUserAdd, GrTrash } from "react-icons/gr";
-import { FormSelect } from "../@UI/FormSelect";
-import { FormError } from "../@UI/FormError";
-import { FormUpload } from "../@UI/FormUpload";
+import { FieldArray, FormikProvider, useFormik } from "formik";
 import { useRouter } from "next/router";
-import { Section } from "../@UI/Section";
-import { Loading } from "../@UI/Loading";
+import React, { useState } from "react";
+import ReactCalendar from "react-calendar";
+import { GrTrash, GrUserAdd } from "react-icons/gr";
+import tw from "twin.macro";
 
-import { RegisterDocument, ReservationQuery } from "./register.generated";
+import { Button } from "../@UI/Buttons";
+import { FormError } from "../@UI/FormError";
+import { FormInput } from "../@UI/FormInput";
+import { FormSelect } from "../@UI/FormSelect";
+import { FormUpload } from "../@UI/FormUpload";
+import { Loading } from "../@UI/Loading";
+import { Section } from "../@UI/Section";
+import { H1 } from "../@UI/Texts";
+import { useTranslations } from "../Translations/useTranslations";
 import { useReactMutation } from "../useReactQuery";
+import { guestValue, initialValues, validationSchema } from "./data";
+import { RegisterDocument, ReservationQuery } from "./register.generated";
 
 export const FormRegister: React.FC<{
   reservation: ReservationQuery["reservation"];

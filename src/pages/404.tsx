@@ -1,7 +1,8 @@
+import { GetStaticProps } from "next";
+import tw from "twin.macro";
+
 import { withLayout } from "../components/Layout";
 import { getGlobalProps } from "../graphql/takeshape/getGlobal";
-import tw from "twin.macro";
-import { GetStaticProps } from "next";
 
 const PageError = () => (
   <div

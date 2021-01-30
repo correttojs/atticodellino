@@ -1,9 +1,10 @@
-import React from "react";
-import { useGlobal } from ".";
-import { Contacts } from "./Contact";
 import { useRouter } from "next/router";
+import React from "react";
 import tw from "twin.macro";
+
 import { DropDown, DropDownItem } from "../@UI/DropDown";
+import { Contacts } from "./Contact";
+import { useGlobal } from ".";
 
 export const Header: React.FC = () => {
   const { apartment, name, brandColor } = useGlobal();

@@ -1,7 +1,7 @@
 import React from "react";
-import tw from "twin.macro";
 import { FaPhoneSquare } from "react-icons/fa";
 import { MdMail } from "react-icons/md";
+import tw from "twin.macro";
 
 const EMAIL = process.env.NEXT_PUBLIC_FROM_EMAIL;
 const TEL = process.env.NEXT_PUBLIC_PHONE;

@@ -1,11 +1,12 @@
 import React from "react";
+import { FaAirbnb, FaTrophy } from "react-icons/fa";
 import styled from "styled-components";
-import { useTranslations } from "../Translations/useTranslations";
+import tw from "twin.macro";
+
 import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
 import { Section } from "../@UI/Section";
-import tw from "twin.macro";
 import { H2, P } from "../@UI/Texts";
-import { FaAirbnb, FaTrophy } from "react-icons/fa";
+import { useTranslations } from "../Translations/useTranslations";
 
 const ImgBox = styled.div`
   img {

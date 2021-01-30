@@ -1,6 +1,7 @@
 import React from "react";
 import { FaMapMarker } from "react-icons/fa";
 import tw from "twin.macro";
+
 import { H3 } from "../@UI/Texts";
 import { ThemeType } from "../Layout/useGlobal";
 import { useTranslations } from "../Translations/useTranslations";

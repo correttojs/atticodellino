@@ -1,15 +1,15 @@
-import { reviewsResolver, priceResolver } from "./_airbnb";
-import { calendarResolver } from "./_calendar";
+import { Resolvers } from "../generated/resolvers-types";
+import { priceResolver, reviewsResolver } from "./_airbnb";
 import { bookMutation } from "./_book";
-import { syncReservations } from "./_syncReservations";
+import { calendarResolver } from "./_calendar";
+import { faq } from "./_faq";
 import {
+  reservation,
   reservations,
   updateReservationStatus,
-  reservation,
 } from "./_reservations";
 import { registerGuests } from "./_reservationsRegister";
-import { faq } from "./_faq";
-import { Resolvers } from "../generated/resolvers-types";
+import { syncReservations } from "./_syncReservations";
 
 export type ResolverContext = {
   session?: {

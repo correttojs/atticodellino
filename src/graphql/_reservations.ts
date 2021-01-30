@@ -1,22 +1,20 @@
-import { graphCmsRequest } from "./graphcms";
-
-import { smsRegisterLink } from "./_sms";
-import { faqLink, registerLink } from "./_util";
-
-import { takeShapeRequest } from "./takeshape";
-import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
 import {
   GetReservationDocument,
   GetReservationsDocument,
   UpdateReservationDocument,
 } from "../generated/graphql-graphcms";
+import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
 import {
   MutationResolvers,
   QueryResolvers,
   Reservation,
   ReservationStatus,
 } from "../generated/resolvers-types";
+import { smsRegisterLink } from "./_sms";
+import { faqLink, registerLink } from "./_util";
+import { graphCmsRequest } from "./graphcms";
 import { ResolverContext } from "./resolvers";
+import { takeShapeRequest } from "./takeshape";
 
 export const reservations: QueryResolvers<ResolverContext>["reservations"] = async (
   parent,

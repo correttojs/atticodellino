@@ -1,18 +1,17 @@
+import { useFormik } from "formik";
 // Render Prop
 import React from "react";
-import { useFormik } from "formik";
-import { FormInput } from "../@UI/FormInput";
-
-import { bookInitialValues, bookValidationSchema } from "./bookData";
-import { useTranslations } from "../Translations/useTranslations";
 import tw from "twin.macro";
+
 import { Button } from "../@UI/Buttons";
 import { FormError } from "../@UI/FormError";
-import { MQ_NOT_MOBILE } from "../Layout";
+import { FormInput } from "../@UI/FormInput";
 import { Loading } from "../@UI/Loading";
-
-import { BookNowDocument } from "./bookNow.generated";
+import { MQ_NOT_MOBILE } from "../Layout";
+import { useTranslations } from "../Translations/useTranslations";
 import { useReactMutation } from "../useReactQuery";
+import { bookInitialValues, bookValidationSchema } from "./bookData";
+import { BookNowDocument } from "./bookNow.generated";
 
 export const FormBook: React.FC<{
   from: string;
