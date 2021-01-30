@@ -2,3 +2,5 @@ src/**/*.generated.ts
 src/generated/*.ts
 src/generated/*.tsx
 src/**/__stories__/*
+cypress/support/*
+cypress/plugins/*
