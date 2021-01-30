@@ -5,6 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Lighthouse Master
+        id: LHCIAction
         uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
@@ -18,5 +19,4 @@ jobs:
           issue-number: 1
           body: |
             Lighthouse report
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
+            ${{steps.LHCIAction.outputs.links}}
