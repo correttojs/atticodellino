@@ -17,6 +17,7 @@ export const Contacts: React.FC<{ direction?: "row" | "col" }> = ({
       ]}
     >
       <div
+        role="button"
         css={[tw`flex flex-row items-center`, direction === "row" && tw`mr-2`]}
         onClick={() => {
           window.open(`tel:${TEL}`, "emailWindow");

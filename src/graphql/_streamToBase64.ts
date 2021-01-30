@@ -1,7 +1,7 @@
 import { ReadStream } from "fs";
 
 export const streamTo64 = (stream: ReadStream) => {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const chunks: any[] = [];
 
     stream.on("data", function (chunk: any) {

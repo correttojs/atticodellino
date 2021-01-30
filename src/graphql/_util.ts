@@ -7,12 +7,12 @@ type Props = {
   id?: string | null;
 };
 
-export const faqLink = ({ phone, hash, id }: Props) =>
+export const faqLink = ({ phone, hash }: Props) =>
   `https://www.atticodellino.com/${getLangByPhone(
     phone ?? ""
   )}/faq?hash=${hash}`;
 
-export const registerLink = ({ phone, hash, id }: Props) =>
+export const registerLink = ({ phone, hash }: Props) =>
   `https://www.atticodellino.com/${getLangByPhone(
     phone ?? ""
   )}/register?hash=${hash}`;
