@@ -116,14 +116,13 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "npm run prettify",
-      "npm run lint -- --fix --rule 'react-hooks/exhaustive-deps: off'",
+      "npm run lint -- --fix",
       "git add"
     ]
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+      "pre-commit": "lint-staged"
     }
   },
   "importSort": {
