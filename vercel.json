@@ -1,4 +1,7 @@
 {
+  "github": {
+    "enabled": false
+  },
   "version": 2,
   "rewrites": [
     {
