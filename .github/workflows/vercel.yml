@@ -1,4 +1,4 @@
-name: Vercel
+name: Vercel PR
 on: [pull_request]
 jobs:
   deploy:
@@ -27,11 +27,20 @@ jobs:
           record: true
           start: npm start
           working-directory: cypress
-      - name: Lighthouse
-        uses: treosh/lighthouse-ci-action@v3
+      - run: mkdir /tmp/artifacts
+      - name: Run Lighthouse
+        uses: foo-software/lighthouse-check-action@master
         with:
-          urls: |
-            ${{ steps.now-deployment.outputs.preview-url }}
-#           budgetPath: ./budget.json # test performance budgets
-          uploadArtifacts: true # save results as an action artifacts
-          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+          accessToken: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+          author: ${{ github.actor }}
+          branch: ${{ github.ref }}
+          outputDirectory: /tmp/artifacts
+          urls:  ${{ steps.now-deployment.outputs.preview-url }}
+          sha: ${{ github.sha }}
+          slackWebhookUrl: ${{ secrets.LIGHTHOUSE_CHECK_WEBHOOK_URL }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@master
+        with:
+          name: Lighthouse reports
+          path: /tmp/artifacts
+
