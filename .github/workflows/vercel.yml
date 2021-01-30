@@ -6,6 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: amondnet/vercel-action@v20
+        id: now-deployment
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }} # Required
           github-token: ${{ secrets.GITHUB_TOKEN }} #Optional 
@@ -22,5 +23,5 @@ jobs:
         env:
           CYPRESS_BASE_URL: ${{ steps.now-deployment.outputs.preview-url }}
         with:
-          start: npm start
+          start: npx cypress
           working-directory: cypress
