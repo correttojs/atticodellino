@@ -1,6 +1,6 @@
+import { Home } from "@/components/Home";
 import { GetStaticProps } from "next";
 
-import { Home } from "../components/Home";
 import { withLayout } from "../components/Layout";
 import { getDetails } from "../graphql/_airbnb";
 import { getGlobalProps } from "../graphql/takeshape/getGlobal";
