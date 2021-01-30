@@ -6,7 +6,7 @@ import fetch from "isomorphic-unfetch";
 import { ResolverContext } from "./resolvers";
 import { takeShapeRequest } from "./takeshape";
 
-const fetchIcal = async (icalUrl: string, summary: string) => {
+export const fetchIcal = async (icalUrl: string, summary: string) => {
   let data: any = await fetch(icalUrl).then((r) => r.text());
   data = ical.parseICS(data);
 
