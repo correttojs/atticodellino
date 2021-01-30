@@ -14,16 +14,13 @@ jobs:
 #           budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
-      - name: Create Lighthouse comment
-        uses: peter-evans/create-or-update-comment@v1
+      - name: comment PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          issue-number: 1
-          body: |
-            This is a multi-line test comment
-            - With GitHub **Markdown** :sparkles:
-            - Created by [create-or-update-comment][1]
-
-            [1]: https://github.com/peter-evans/create-or-update-comment
+          msg: "Check out this message!"
+          check_for_duplicate_msg: false  # OPTIONAL 
          # ${{steps.LHCIAction.outputs.links}}
             
          
