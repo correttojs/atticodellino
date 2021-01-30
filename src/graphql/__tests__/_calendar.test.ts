@@ -29,18 +29,9 @@ describe("Calendar", () => {
     const data = await fetchIcal("https://url", "summay");
 
     expect(data.length).toEqual(2);
-    expect(data).toEqual([
-      {
-        start: "2021-01-27T23:00:00.000Z",
-        end: "2021-04-29T22:00:00.000Z",
-        summary: "summay",
-      },
-      {
-        start: "2021-07-28T22:00:00.000Z",
-        end: "2022-01-30T23:00:00.000Z",
-        summary: "summay",
-      },
-    ]);
+    expect(data[0].summary).toEqual("summary");
+    expect(data[0].start).toEqual("2021-01-27T23:00:00.000Z");
+    expect(data[0].end).toEqual("2021-04-29T22:00:00.000Z");
   });
 
   it("calendarResolver", async () => {
