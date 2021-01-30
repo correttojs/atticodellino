@@ -12,3 +12,15 @@ jobs:
 #           vercel-args: '--prod' #Optional
           vercel-org-id: ${{ secrets.ORG_ID}}  #Required
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
+      - name: Cypress
+        run: |
+          echo ${{ steps.now-deployment.outputs.preview-url }}
+      - name: Checkout 🛎
+        uses: actions/checkout@v1
+      - name: Run Cypress 🌲
+        uses: cypress-io/github-action@v2
+        env:
+          CYPRESS_BASE_URL: ${{ steps.now-deployment.outputs.preview-url }}
+        with:
+          start: npm start
+          working-directory: cypress
