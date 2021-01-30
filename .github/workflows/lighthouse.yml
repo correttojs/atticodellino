@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          msg: "Lighthouse report: ${{Object.keys(steps.LHCIAction.outputs.links)[0]}}" 
+          msg: "Lighthouse report: ${{ steps.LHCIAction.outputs.links 0}}" 
           check_for_duplicate_msg: true  # OPTIONAL 
          # ${{steps.LHCIAction.outputs.links}}
             
