@@ -4,6 +4,7 @@ jobs:
   lighthouse-check:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Lighthouse Master
         id: LHCIAction
         uses: treosh/lighthouse-ci-action@v3
@@ -13,10 +14,11 @@ jobs:
 #           budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
-      - name: Create Lighthouse comment
-        uses: peter-evans/create-or-update-comment@v1
+      - name: comment PR
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          issue-number: 1
-          body: |
-            Lighthouse report
-            ${{steps.LHCIAction.outputs.links}}
+          msg: "Lighthouse report: ${{ fromJson(steps.LHCIAction.outputs.links)['https://www.atticodellino.com/']}}" 
+          check_for_duplicate_msg: true  # OPTIONAL 
+         # ${{steps.LHCIAction.outputs.links}}
