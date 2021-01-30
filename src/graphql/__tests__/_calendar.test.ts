@@ -26,12 +26,12 @@ END:VCALENDAR`;
 describe("Calendar", () => {
   it("fetchIcal", async () => {
     fetch.mockResponseOnce(calendarMock);
-    const data = await fetchIcal("https://url", "summay");
+    const data = await fetchIcal("https://url", "summary");
 
     expect(data.length).toEqual(2);
     expect(data[0].summary).toEqual("summary");
-    expect(data[0].start).toEqual("2021-01-27T23:00:00.000Z");
-    expect(data[0].end).toEqual("2021-04-29T22:00:00.000Z");
+    expect(data[0].start).toMatch("2021-01-27");
+    expect(data[0].end).toMatch("2021-04-29");
   });
 
   it("calendarResolver", async () => {
@@ -55,9 +55,8 @@ describe("Calendar", () => {
 
     expect(data.length).toEqual(4);
     expect(data[0].summary).toEqual("AIRBNB");
-    expect(data[0].start).toEqual("2021-01-27T23:00:00.000Z");
-    expect(data[0].start).toEqual("2021-01-27T23:00:00.000Z");
-    expect(data[0].end).toEqual("2021-04-29T22:00:00.000Z");
+    expect(data[0].start).toMatch("2021-01-27");
+    expect(data[0].end).toMatch("2021-04-29");
 
     expect(data[3].summary).toEqual("BOOKING");
   });
