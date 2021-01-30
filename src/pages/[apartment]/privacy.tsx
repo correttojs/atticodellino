@@ -1,16 +1,12 @@
-import { GetStaticProps } from "next";
-
-import { Section } from "../../components/@UI/Section";
-import { withLayout } from "../../components/Layout";
+import { Section } from "@/components/@UI/Section";
+import { withLayout } from "@/components/Layout";
 import {
   GetArticleByPathDocument,
   GetArticleByPathQuery,
-} from "../../generated/graphql-takeshape-doc";
-import { takeShapeRequest } from "../../graphql/takeshape";
-import {
-  getGlobalPaths,
-  getGlobalProps,
-} from "../../graphql/takeshape/getGlobal";
+} from "@/generated/graphql-takeshape-doc";
+import { takeShapeRequest } from "@/graphql/takeshape";
+import { getGlobalPaths, getGlobalProps } from "@/graphql/takeshape/getGlobal";
+import { GetStaticProps } from "next";
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const globalProps = await getGlobalProps({ params, locale });

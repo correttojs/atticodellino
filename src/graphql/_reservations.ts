@@ -2,14 +2,15 @@ import {
   GetReservationDocument,
   GetReservationsDocument,
   UpdateReservationDocument,
-} from "../generated/graphql-graphcms";
-import { ApartmentCodeByAirBnbIdDocument } from "../generated/graphql-takeshape-doc";
+} from "@/generated/graphql-graphcms";
+import { ApartmentCodeByAirBnbIdDocument } from "@/generated/graphql-takeshape-doc";
 import {
   MutationResolvers,
   QueryResolvers,
   Reservation,
   ReservationStatus,
-} from "../generated/resolvers-types";
+} from "@/generated/resolvers-types";
+
 import { smsRegisterLink } from "./_sms";
 import { faqLink, registerLink } from "./_util";
 import { graphCmsRequest } from "./graphcms";

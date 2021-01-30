@@ -1,8 +1,8 @@
+import { pdp_listing_detail } from "@/graphql/_airbn.types";
 import React from "react";
 import { FaAirbnb } from "react-icons/fa";
 import tw from "twin.macro";
 
-import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
 import { MQ_NOT_MOBILE } from "../Layout";

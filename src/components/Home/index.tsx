@@ -1,3 +1,4 @@
+import { pdp_listing_detail } from "@/graphql/_airbn.types";
 import Head from "next/head";
 import Image from "next/image";
 import React from "react";
@@ -5,7 +6,6 @@ import { useInView } from "react-intersection-observer";
 import Modal from "react-modal";
 import tw from "twin.macro";
 
-import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { CardHorizontal } from "../@UI/Card";
 import { Collapsible } from "../@UI/Collapsible";
 import { Section } from "../@UI/Section";

@@ -1,9 +1,9 @@
+import { pdp_listing_detail } from "@/graphql/_airbn.types";
 import React from "react";
 import { FaBath, FaBed, FaFemale, FaPersonBooth } from "react-icons/fa";
 import { IconType } from "react-icons/lib";
 import tw from "twin.macro";
 
-import { pdp_listing_detail } from "../../graphql/_airbn.types";
 import { Span } from "../@UI/Texts";
 
 const Item: React.FC<{ Icon: IconType; label?: string }> = ({

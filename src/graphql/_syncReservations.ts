@@ -1,14 +1,14 @@
 import * as crypto from "crypto";
 
-import { AirBnbClient } from "airbnb-private-api";
-
-import { Reservation } from "../components/Admin/reservations.generated";
+import { Reservation } from "@/components/Admin/reservations.generated";
 import {
   CreateReservationDocument,
   GetTokenDocument,
   GuestStatus,
-} from "../generated/graphql-graphcms";
-import { QueryResolvers } from "../generated/resolvers-types";
+} from "@/generated/graphql-graphcms";
+import { QueryResolvers } from "@/generated/resolvers-types";
+import { AirBnbClient } from "airbnb-private-api";
+
 import { reservations } from "./_reservations";
 import { graphCmsRequest } from "./graphcms";
 import { ResolverContext } from "./resolvers";

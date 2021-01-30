@@ -1,10 +1,10 @@
+import { GlobalType } from "@/graphql/_airbn.types";
 import React from "react";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
 
-import { GlobalType } from "../../graphql/_airbn.types";
 import { queryClient } from "../useReactQuery";
 import { Contacts } from "./Contact";
 import { Footer } from "./Footer";

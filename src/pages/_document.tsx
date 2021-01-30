@@ -1,8 +1,7 @@
+import { getGlobalProps } from "@/graphql/takeshape/getGlobal";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 // Import styled components ServerStyleSheet
 import { ServerStyleSheet } from "styled-components";
-
-import { getGlobalProps } from "../graphql/takeshape/getGlobal";
 
 export default class MyDocument extends Document<{
   styleTags: any;

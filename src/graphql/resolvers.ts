@@ -1,4 +1,5 @@
-import { Resolvers } from "../generated/resolvers-types";
+import { Resolvers } from "@/generated/resolvers-types";
+
 import { priceResolver, reviewsResolver } from "./_airbnb";
 import { bookMutation } from "./_book";
 import { calendarResolver } from "./_calendar";

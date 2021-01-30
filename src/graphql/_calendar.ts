@@ -1,8 +1,8 @@
+import { ApartmentSecretDocument } from "@/generated/graphql-takeshape-doc";
+import { QueryResolvers } from "@/generated/resolvers-types";
 import * as ical from "ical";
 import fetch from "isomorphic-unfetch";
 
-import { ApartmentSecretDocument } from "../generated/graphql-takeshape-doc";
-import { QueryResolvers } from "../generated/resolvers-types";
 import { ResolverContext } from "./resolvers";
 import { takeShapeRequest } from "./takeshape";
 
