@@ -23,5 +23,5 @@ jobs:
         env:
           CYPRESS_BASE_URL: ${{ steps.now-deployment.outputs.preview-url }}
         with:
-          start: npx cypress
+          start: npm start
           working-directory: cypress
