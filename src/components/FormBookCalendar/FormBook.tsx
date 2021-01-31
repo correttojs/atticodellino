@@ -67,10 +67,16 @@ export const FormBook: React.FC<{
             <FormInput formik={formik as any} field={"lastName"} />
 
             <FormInput formik={formik as any} field={"email"} />
-            <div css={tw`m-2`}>{price && <p>{price} euros</p>}</div>
+            <div css={tw`m-2`}>
+              {price && <p data-cy="price">{price} euros</p>}
+            </div>
 
             <div css={tw`flex justify-end`}>
-              <Button disabled={!from || !to || !price} type="submit">
+              <Button
+                disabled={!from || !to || !price}
+                type="submit"
+                data-cy="book-submit"
+              >
                 Submit
               </Button>
             </div>

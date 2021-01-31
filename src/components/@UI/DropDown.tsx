@@ -17,6 +17,7 @@ export const DropDownItem: React.FC<{
   onClick: () => void;
 }> = ({ text, onClick }) => (
   <li
+    data-cy="dropdown-item"
     css={tw`cursor-pointer bg-gray-100 hover:bg-gray-200 py-2 px-4 block whitespace-nowrap`}
     onClick={onClick}
     role="presentation"
@@ -28,7 +29,10 @@ export const DropDownItem: React.FC<{
 export const DropDown: React.FC = ({ children }) => {
   return (
     <Control css={tw` inline-block relative `}>
-      <button css={tw`py-2 px-2 rounded inline-flex items-center`}>
+      <button
+        css={tw`py-2 px-2 rounded inline-flex items-center`}
+        data-cy="dropdown"
+      >
         <MdLanguage size={"1.6em"} />
       </button>
       <UL css={tw`absolute hidden text-gray-700 pt-1`}>{children}</UL>

@@ -53,6 +53,7 @@ export const Hero: React.FC<{
         `}
       >
         <div
+          data-cy="hero"
           css={`
             ${tw`grid w-full  gap-4 p-4 md:p-8 max-w-screen-xl mx-auto relative`}
             grid-template-columns: 50% repeat(auto-fill, minmax(25%, 1fr));
@@ -103,6 +104,7 @@ export const Hero: React.FC<{
         >
           {show > 0 && (
             <GrPrevious
+              data-cy="prev"
               // style={{ cursor: "pointer" }}
               // size="5rem"
               css={tw`cursor-pointer h-10 w-10 md:h-20 md:w-20`}
@@ -121,6 +123,7 @@ export const Hero: React.FC<{
 
           {show < photos.length - 1 && (
             <GrNext
+              data-cy="next"
               // style={{ cursor: "pointer" }}
               // size="5rem"
               css={tw`cursor-pointer h-10 w-10 md:h-20 md:w-20`}
@@ -136,6 +139,7 @@ export const Hero: React.FC<{
           `}
         >
           <GrClose
+            data-cy="close"
             style={{ cursor: "pointer" }}
             size="2rem"
             onClick={() => setShow(-1)}

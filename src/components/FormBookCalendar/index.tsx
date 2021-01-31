@@ -28,6 +28,7 @@ export const BookingCalendar = () => {
 
   return (
     <section
+      data-cy="book"
       css={`
         ${tw`p-2 md:p-8 max-w-screen-lg mx-auto `}
       `}

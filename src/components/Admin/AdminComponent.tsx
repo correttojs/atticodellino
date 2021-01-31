@@ -139,7 +139,11 @@ export const AdminComponent: React.FC = () => {
       </Modal>
       {!session && (
         <div css={tw`p-4`}>
-          <ButtonWithIcon onClick={() => signIn()} Icon={<IoLogInSharp />}>
+          <ButtonWithIcon
+            data-cy="signin"
+            onClick={() => signIn()}
+            Icon={<IoLogInSharp />}
+          >
             Sign in
           </ButtonWithIcon>
         </div>
