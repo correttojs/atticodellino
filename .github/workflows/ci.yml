@@ -12,9 +12,7 @@ jobs:
     - name: Run typescript
       run: npx tsc   
     - name: Run Tests
-      uses: mattallty/jest-github-action@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: ziishaned/jest-reporter-action@v0.0.1
       with:
-        # this is just an example, this could be any command that will trigger jest
-        test-command: "npm test"
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        test-command: "npm test -- --coverage"
