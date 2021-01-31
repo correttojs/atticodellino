@@ -23,7 +23,12 @@ type Payload = {
   schedule?: string;
   orderId: string;
 };
-export const sendSms = ({ recipient, message, schedule, orderId }: Payload) => {
+export const sendSms = ({
+  recipient,
+  message,
+  schedule,
+  orderId,
+}: Payload): Promise<any> => {
   console.log(
     recipient,
     message,
@@ -47,7 +52,7 @@ export const sendSms = ({ recipient, message, schedule, orderId }: Payload) => {
 
   console.log(body, process.env.VERCEL_ENV);
   if (process.env.VERCEL_ENV !== "production") {
-    return Promise.resolve();
+    return Promise.resolve(body);
   }
   return fetch("https://api.trendoo.net/API/v1.0/REST/sms", {
     method: "POST",
