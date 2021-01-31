@@ -12,4 +12,8 @@ jobs:
     - name: Run typescript
       run: npx tsc   
     - name: Run Tests
-      run: npm test
+    - uses: mattallty/jest-github-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        working-directory: "src/graphql"
