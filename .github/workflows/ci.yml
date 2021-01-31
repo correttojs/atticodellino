@@ -14,4 +14,7 @@ jobs:
     - name: Run Tests
       uses: mattallty/jest-github-action@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.LIGHTHOUSE_CHECK_GITHUB_ACCESS_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        # this is just an example, this could be any command that will trigger jest
+        test-command: "npm test"
