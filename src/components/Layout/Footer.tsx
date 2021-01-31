@@ -71,7 +71,9 @@ export const Footer: React.FC = () => {
                 as={`/${apartment.toLowerCase()}/privacy`}
                 locale={locale}
               >
-                <a css={tw`mx-2`}>{t("PRIVACY")}</a>
+                <a data-cy="policy" css={tw`mx-2`}>
+                  {t("PRIVACY")}
+                </a>
               </Link>
             </div>
           </div>

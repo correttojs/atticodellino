@@ -41,6 +41,7 @@ export const CardHorizontal: React.FC<{
     <div
       role="presentation"
       onClick={onClick}
+      data-cy="card"
       css={[
         tw`max-w-2xl bg-white rounded-xl shadow-md overflow-hidden`,
         onClick && tw`cursor-pointer`,
