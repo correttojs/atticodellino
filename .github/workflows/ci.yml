@@ -12,7 +12,7 @@ jobs:
     - name: Run typescript
       run: npx tsc   
     - name: Run Tests
-    - uses: mattallty/jest-github-action@v1
+      uses: mattallty/jest-github-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
