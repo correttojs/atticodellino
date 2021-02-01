@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "codegen": "node codegen",
-    "test": "jest",
+    "test": "jest --coverage",
     "storybook": "start-storybook --no-dll -p 6006",
     "build-storybook": "build-storybook --no-dll",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",

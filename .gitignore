@@ -10,6 +10,7 @@ build-storybook.log
 public/sw.js
 public/sw.js.map
 public/workbox-*
-cypress/videos/home.ts.mp4
 
 .vercel
+cypress/videos
+coverage
