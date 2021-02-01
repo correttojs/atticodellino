@@ -2,11 +2,10 @@
 describe("Book", () => {
   beforeEach(() => {
     cy.visit("/");
-    cy.scrollTo(0, 1000);
+    cy.get("[data-cy=lazy]").scrollIntoView();
     cy.get("[data-cy=book]").scrollIntoView();
   });
   it("Should contain book", () => {
-    cy.scrollTo(0, 1000);
     cy.get("[data-cy=book]")
       .scrollIntoView()
       .find(".react-calendar")

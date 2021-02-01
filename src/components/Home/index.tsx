@@ -71,7 +71,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
       <Section css={tw`pb-0`}>
         <P>{pdp_listing_detail.sectioned_description.summary}</P>
       </Section>
-      <div ref={ref}>
+      <div data-cy="lazy" ref={ref}>
         {inView && (
           <>
             <Collapsible
