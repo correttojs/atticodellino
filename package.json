@@ -9,6 +9,7 @@
     "start": "next start",
     "codegen": "node codegen",
     "test": "jest --coverage",
+    "test:ci": "jest --ci --reporters='default' --reporters='./github-actions-reporter'",
     "storybook": "start-storybook --no-dll -p 6006",
     "build-storybook": "build-storybook --no-dll",
     "lint": "eslint \"src/**/*.{ts,tsx}\"",
