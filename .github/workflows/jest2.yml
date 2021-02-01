@@ -5,9 +5,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Hello world action step
-      id: hello
-      uses: raulanatol/jest-coverage-comment-action@v1.0.0
+    - name: Comment with Test Coverage
+      uses: dkershner6/jest-coverage-commenter-action@v1
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        jest-command: 'npm test'
+          github_token: "${{ secrets.GITHUB_TOKEN }}"
+          test_command: "npm test"
