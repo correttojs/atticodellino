@@ -3,8 +3,8 @@ describe("Footer", () => {
   beforeEach(() => {
     cy.visit("/");
   });
-  it("Should contain book", () => {
-    cy.scrollTo(0, 2000);
+  it("Should contain policy url", () => {
+    cy.get("[data-cy=footer]").scrollIntoView();
     cy.get("[data-cy=policy]").click();
 
     cy.url().should("include", "privacy");

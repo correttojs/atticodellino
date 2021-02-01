@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
     rootMargin: "300px 0px 300px 0px",
   });
   return (
-    <div css={tw`w-full`} ref={ref}>
+    <div css={tw`w-full`} ref={ref} data-cy="footer">
       {inView && (
         <footer
           css={`
