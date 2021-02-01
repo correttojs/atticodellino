@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
     brandColor,
     mapLink,
   } = useGlobal();
-
+  const isCypress = typeof window !== "undefined" && (window as any).Cypress;
   const { locale } = useRouter();
   const t = useTranslations();
   const [ref, inView] = useInView({
@@ -27,7 +27,7 @@ export const Footer: React.FC = () => {
   });
   return (
     <div css={tw`w-full`} ref={ref} data-cy="footer">
-      {inView && (
+      {(inView || isCypress) && (
         <footer
           css={`
             background-color: ${brandColor?.hex};

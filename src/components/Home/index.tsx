@@ -27,6 +27,8 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
   const { name, sponsor } = useGlobal();
 
+  const isCypress = typeof window !== "undefined" && (window as any).Cypress;
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     rootMargin: "300px 0px 300px 0px",
@@ -72,7 +74,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
         <P>{pdp_listing_detail.sectioned_description.summary}</P>
       </Section>
       <div data-cy="lazy" ref={ref}>
-        {inView && (
+        {(inView || isCypress) && (
           <>
             <Collapsible
               showReadMore={
