@@ -5,9 +5,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Use Node.js 
+      - run: npm ci
+      - name: TestCoverage
+        id: testCovergae
+        uses: anuraag016/Jest-Coverage-Diff@master
         with:
-          # this is just an example, this could be any command that will trigger jest
-          test-command: "yarn test"
+          fullCoverageDiff: false // defaults to false, if made true whole coverage report is commented with the diff
+          runCommand: "npx jest --collectCoverageFrom='[\"src/**/*.{js,jsx,ts,tsx}\"]' --coverage --collectCoverage=true --coverageDirectory='./' --coverageReporters='json-summary' --forceExit --detectOpenHandles test/.*test.*"
+          delta: 0.5
