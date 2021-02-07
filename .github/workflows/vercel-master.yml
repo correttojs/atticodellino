@@ -29,6 +29,10 @@ jobs:
           record: false
           start: npm start
           working-directory: cypress
+      - uses: actions/upload-artifact@v2
+        with:
+          name: cypress-coverage
+          path: cypress-coverage
       - name: Lighthouse Master
         uses: treosh/lighthouse-ci-action@v7
         with:
