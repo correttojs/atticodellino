@@ -1,6 +1,6 @@
 const withPWA = require("next-pwa");
 
-module.exports = {
+module.exports = withPWA({
   target: "serverless",
   images: {
     domains: ["a0.muscache.com"],
@@ -13,4 +13,4 @@ module.exports = {
     locales: ["en", "it"],
     defaultLocale: "en",
   },
-};
+});
