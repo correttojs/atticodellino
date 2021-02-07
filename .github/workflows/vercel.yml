@@ -27,6 +27,10 @@ jobs:
           record: true
           start: npm start
           working-directory: cypress
+      - uses: actions/upload-artifact@v2
+        with:
+          name: cypress-coverage
+          path: cypress-coverage/
       - run: mkdir /tmp/artifacts
       - name: Run Lighthouse
         uses: foo-software/lighthouse-check-action@master
