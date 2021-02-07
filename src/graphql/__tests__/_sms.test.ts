@@ -4,7 +4,7 @@ import {
   smsRegisterLink,
   smsReminderLink,
 } from "@/graphql/_sms";
-
+console.log(process.env.NODE_ENV, "NODE_ENV");
 describe("Sms", () => {
   it("sendSms", async () => {
     const data = await sendSms({

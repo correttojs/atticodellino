@@ -14,3 +14,5 @@ public/workbox-*
 .vercel
 cypress/videos
 coverage
+cypress/.nyc_output
+cypress-coverage

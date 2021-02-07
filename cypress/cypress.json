@@ -1,6 +1,6 @@
 {
   "projectId": "uvjd3i",
-  "baseUrl": "https://www.atticodellino.com",
+  "baseUrl": "http://localhost:3000",
   "defaultCommandTimeout": 20000,
   "fixturesFolder": "./fixtures",
   "integrationFolder": "./e2e",

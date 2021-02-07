@@ -13,5 +13,11 @@
     "@types/cypress": "^1.1.3",
     "cypress": "^6.4.0",
     "typescript": "^4.1.3"
+  },
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.9.2"
+  },
+  "nyc": {
+    "report-dir": "../cypress-coverage"
   }
 }
