@@ -55,7 +55,7 @@
     "yup": "^0.32.8"
   },
   "devDependencies": {
-    "@babel/core": "7.13.1",
+    "@babel/core": "7.13.8",
     "@graphql-codegen/cli": "1.21.1",
     "@graphql-codegen/introspection": "1.18.1",
     "@graphql-codegen/near-operation-file-preset": "1.17.13",
