@@ -20,7 +20,7 @@
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
     "@tailwindcss/custom-forms": "^0.2.1",
-    "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@tailwindcss/postcss7-compat": "^2.0.3",
     "airbnb-private-api": "^1.0.7",
     "airbnbapijs": "^0.10.5",
     "apollo-server-micro": "^2.19.2",
