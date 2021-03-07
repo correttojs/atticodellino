@@ -25,6 +25,10 @@ export type Root = {
   tsGetProjectTemplateList?: Maybe<Array<Maybe<TsProjectTemplate>>>;
   /** Retrieve a project import. */
   tsGetProjectImport?: Maybe<TsProjectImport>;
+  /** Get an API key by key and project */
+  tsGetPersonalAccessToken?: Maybe<TsPersonalAccessToken>;
+  /** Get all personal access tokens for the current user */
+  tsGetPersonalAccessTokenList?: Maybe<Array<Maybe<TsPersonalAccessToken>>>;
   /** Activity Log */
   tsGetActivityLog?: Maybe<Array<Maybe<TsActivityLogItem>>>;
   /** Most Recent Static Site Deploys */
@@ -128,6 +132,12 @@ export type Root = {
 /** Root of the Schema */
 export type RootTsGetProjectImportArgs = {
   id: Scalars['String'];
+};
+
+
+/** Root of the Schema */
+export type RootTsGetPersonalAccessTokenArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -653,6 +663,15 @@ export type TsProjectImport = {
   status?: Maybe<Scalars['String']>;
   message?: Maybe<Scalars['String']>;
   projectId?: Maybe<Scalars['String']>;
+};
+
+export type TsPersonalAccessToken = {
+  __typename?: 'TSPersonalAccessToken';
+  userId?: Maybe<Scalars['ID']>;
+  name?: Maybe<Scalars['String']>;
+  lastUsed?: Maybe<Scalars['String']>;
+  accessToken?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
 };
 
 export type TsActivityLogItem = {
@@ -3133,6 +3152,10 @@ export type Mutations = {
   tsImportProject?: Maybe<Scalars['String']>;
   /** Get a URI to upload a project for import. */
   tsUploadProject?: Maybe<UploadProjectResult>;
+  /** Create an API Key */
+  tsCreatePersonalAccessToken?: Maybe<TsPersonalAccessToken>;
+  /** Delete an API Key */
+  tsDeletePersonalAccessToken?: Maybe<Scalars['Boolean']>;
   /** Create a Lock */
   tsCreateLock?: Maybe<TsLock>;
   /** Extend a lock Project */
@@ -3280,6 +3303,16 @@ export type MutationsTsUploadProjectArgs = {
   name?: Maybe<Scalars['String']>;
   type?: Maybe<Scalars['String']>;
   origin?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationsTsCreatePersonalAccessTokenArgs = {
+  name: Scalars['String'];
+};
+
+
+export type MutationsTsDeletePersonalAccessTokenArgs = {
+  id: Scalars['ID'];
 };
 
 
