@@ -1,6 +1,10 @@
+const compose = require("lodash/flowRight");
 const withPWA = require("next-pwa");
+const withGraphql = require("next-plugin-graphql");
 
-module.exports = withPWA({
+const plugins = [withGraphql, withPWA];
+
+module.exports = compose(plugins)({
   target: "serverless",
   images: {
     domains: ["a0.muscache.com"],
@@ -13,4 +17,7 @@ module.exports = withPWA({
     locales: ["en", "it"],
     defaultLocale: "en",
   },
+  // future: {
+  //   webpack5: true,
+  // },
 });
