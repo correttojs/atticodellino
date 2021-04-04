@@ -1,10 +1,12 @@
 require("dotenv").config({ path: ".env.local" });
 const { generate } = require("@graphql-codegen/cli");
 
+const schema = process.env.SCHEMA || "http://localhost:3000/api/graphql";
+
 async function run() {
   await generate(
     {
-      schema: "http://localhost:3000/api/graphql",
+      schema,
       documents: "src/components/**/*.graphql",
       generates: {
         [process.cwd() + "/src/generated/graphql.tsx"]: {
@@ -76,7 +78,7 @@ async function run() {
   );
   await generate(
     {
-      schema: ["http://localhost:3000/api/graphql"],
+      schema,
       documents: "src/components/**/*.graphql",
       generates: {
         [process.cwd() + "/src/generated/resolvers-types.ts"]: {
