@@ -13,3 +13,5 @@ jobs:
       run: npx tsc   
     - name: Run Tests
       run: npm test
+    - name: codege
+      run: SCHEMA=./src/graphql.schema.json npm run codegen
