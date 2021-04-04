@@ -1,7 +1,10 @@
 require("dotenv").config({ path: ".env.local" });
 const { generate } = require("@graphql-codegen/cli");
+const path = require("path");
 
-const schema = process.env.SCHEMA || "http://localhost:3000/api/graphql";
+const schema = process.env.SCHEMA
+  ? path.join(__dirname, process.env.SCHEMA)
+  : "http://localhost:3000/api/graphql";
 
 async function run() {
   await generate(
