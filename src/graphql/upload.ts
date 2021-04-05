@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import FormData from "form-data";
-import fetch from "node-fetch";
+import fetch from "isomorphic-unfetch";
 
 export const upload = async (fileStream: fs.ReadStream) => {
   const form = new FormData();
