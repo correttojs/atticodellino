@@ -1,4 +1,4 @@
-import fetch from "isomorphic-unfetch";
+import fetch from "node-fetch";
 
 import { getLangByPhone } from "./_util";
 
