@@ -1,5 +1,5 @@
 import { QueryResolvers } from "@/generated/resolvers-types";
-import fetch from "isomorphic-unfetch";
+import fetch from "node-fetch";
 import queryString from "query-string";
 
 import { GlobalType, Review, pdp_listing_detail } from "./_airbn.types";

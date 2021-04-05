@@ -1,5 +1,5 @@
 import * as ical from "ical";
-import fetch from "isomorphic-unfetch";
+import fetch from "node-fetch";
 
 import { ApartmentSecretDocument } from "../generated/graphql-takeshape-doc";
 import { QueryResolvers } from "../generated/resolvers-types";
