@@ -19,7 +19,6 @@
   "license": "ISC",
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
-    "@tailwindcss/custom-forms": "^0.2.1",
     "airbnb-private-api": "^1.0.7",
     "airbnbapijs": "^0.10.5",
     "apollo-server-micro": "^2.22.2",
