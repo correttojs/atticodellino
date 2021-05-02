@@ -69,6 +69,7 @@
     "@storybook/addon-links": "6.2.9",
     "@storybook/react": "6.2.9",
     "@testing-library/react": "^11.2.6",
+    "@testing-library/react-hooks": "^5.1.2",
     "@testing-library/user-event": "^13.1.8",
     "@types/apollo-upload-client": "14.1.0",
     "@types/google-map-react": "2.1.0",
