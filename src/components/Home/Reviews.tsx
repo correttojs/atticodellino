@@ -3,10 +3,10 @@ import React from "react";
 import { FaAirbnb } from "react-icons/fa";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
 import { MQ_NOT_MOBILE } from "../Layout";
-import { useTranslations } from "../Translations/useTranslations";
 
 export const Reviews: React.FC<{
   sorted_reviews: pdp_listing_detail["pdp_listing_detail"]["sorted_reviews"];

@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-import { useTranslations } from "../Translations/useTranslations";
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { Button } from "./Buttons";
 
 const UploadStyle = styled.div<{ error: boolean }>`
@@ -54,12 +54,11 @@ export const FormUpload: React.FC<PropType> = ({
         <input
           id={field}
           name={field}
+          data-testid="UPLOAD-DOC"
           type="file"
           onChange={(event) => {
             const file = event?.currentTarget?.files?.[0];
-            console.log(file, field);
             formik.setFieldValue(field, file);
-            console.log(formik.values.guests[index].file?.name);
           }}
           className="form-control"
         />

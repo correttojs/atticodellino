@@ -67,4 +67,5 @@ export const Translations = {
   UPLOAD_DOC: t("Upload your document", "Carica il tuo documento"),
   SUBMIT: t("Submit", "Invia"),
   BROWSE_FILE: t("Browse file", "Sfoglia file"),
+  EMAIL: t("Email", "Email"),
 } as const;

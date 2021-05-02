@@ -1,11 +1,11 @@
 import React from "react";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
 import { Section } from "../@UI/Section";
 import { H2, P } from "../@UI/Texts";
 import { MQ_NOT_MOBILE } from "../Layout";
-import { useTranslations } from "../Translations/useTranslations";
 
 export const Amenities: React.FC<{
   amenities: { name: string }[];

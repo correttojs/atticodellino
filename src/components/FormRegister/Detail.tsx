@@ -2,9 +2,9 @@ import React from "react";
 import { FaMapMarker } from "react-icons/fa";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { H3 } from "../@UI/Texts";
 import { ThemeType } from "../Layout/useGlobal";
-import { useTranslations } from "../Translations/useTranslations";
 import { ReservationQuery } from "./register.generated";
 
 const Red = tw.i`text-red-900`;

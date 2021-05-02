@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useReactMutation, useReactQuery } from "react-query-gql";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { H2 } from "../@UI/Texts";
 import { useGlobal } from "../Layout";
-import { useTranslations } from "../Translations/useTranslations";
 import { Calendar } from "./Calendar.css";
 import { CalendarDocument } from "./calendar.generated";
 import { FormBook } from "./FormBook";
