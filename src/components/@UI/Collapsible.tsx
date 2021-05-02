@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import tw from "twin.macro";
 
-import { useTranslations } from "../Translations/useTranslations";
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { Section } from "./Section";
 
 export const Collapsible: React.FC<{

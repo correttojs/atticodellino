@@ -6,13 +6,13 @@ import { useInView } from "react-intersection-observer";
 import Modal from "react-modal";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { CardHorizontal } from "../@UI/Card";
 import { Collapsible } from "../@UI/Collapsible";
 import { Section } from "../@UI/Section";
 import { H2, P } from "../@UI/Texts";
 import { BookingCalendar } from "../FormBookCalendar";
 import { useGlobal } from "../Layout";
-import { useTranslations } from "../Translations/useTranslations";
 import { Amenities } from "./Amenities";
 import { BrandBackground } from "./BrandBackground";
 import { Host } from "./Host";

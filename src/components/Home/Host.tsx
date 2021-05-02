@@ -3,10 +3,10 @@ import { FaAirbnb, FaTrophy } from "react-icons/fa";
 import styled from "styled-components";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { BackgroundWrapper } from "../@UI/BackgroundWrapper";
 import { Section } from "../@UI/Section";
 import { H2, P } from "../@UI/Texts";
-import { useTranslations } from "../Translations/useTranslations";
 
 const ImgBox = styled.div`
   img {

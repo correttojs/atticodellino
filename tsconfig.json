@@ -19,17 +19,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": [
-        "src/components/*"
-      ],
-      "@/graphql/*": [
-        "src/graphql/*"
-      ],
-      "@/generated/*": [
-        "src/generated/*"
-      ],
-      "@/pages/*": [
-        "src/pages/*"
+      "@/*": [
+        "src/*"
       ]
     }
   },

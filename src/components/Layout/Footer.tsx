@@ -5,7 +5,7 @@ import { FaAirbnb, FaFacebookSquare, FaMapMarker } from "react-icons/fa";
 import { useInView } from "react-intersection-observer";
 import tw from "twin.macro";
 
-import { useTranslations } from "../Translations/useTranslations";
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { Contacts } from "./Contact";
 import { useGlobal } from ".";
 

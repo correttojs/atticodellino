@@ -6,11 +6,11 @@ import { SiGooglestreetview } from "react-icons/si";
 import { useReactQuery } from "react-query-gql";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { Loading } from "../@UI/Loading";
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
 import { FaqPage } from "../Faq";
-import { useTranslations } from "../Translations/useTranslations";
 import { Detail } from "./Detail";
 import { FormRegister } from "./FormRegister";
 import { ReservationDocument } from "./register.generated";

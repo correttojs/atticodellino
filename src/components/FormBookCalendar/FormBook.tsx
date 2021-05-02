@@ -1,15 +1,14 @@
-import { useFormik } from "formik";
-// Render Prop
+import { FieldInput } from "@/components/@UI/FieldInput";
+import { Form, Formik } from "formik";
 import React from "react";
 import { useReactMutation } from "react-query-gql";
 import tw from "twin.macro";
 
+import { useTranslations } from "../../hooks/useTranslations/useTranslations";
 import { Button } from "../@UI/Buttons";
 import { FormError } from "../@UI/FormError";
-import { FormInput } from "../@UI/FormInput";
 import { Loading } from "../@UI/Loading";
 import { MQ_NOT_MOBILE } from "../Layout";
-import { useTranslations } from "../Translations/useTranslations";
 import { bookInitialValues, bookValidationSchema } from "./bookData";
 import { BookNowDocument } from "./bookNow.generated";
 
@@ -23,15 +22,6 @@ export const FormBook: React.FC<{
   );
 
   const t = useTranslations();
-  const formik = useFormik({
-    initialValues: bookInitialValues,
-    onSubmit: (values) => {
-      bookNow({
-        user: { ...values, from, to },
-      });
-    },
-    validationSchema: bookValidationSchema,
-  });
 
   return (
     <div
@@ -56,32 +46,37 @@ export const FormBook: React.FC<{
       {error && <FormError />}
       {isLoading && <Loading />}
       {!data && !error && !isLoading && (
-        <>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              formik.handleSubmit();
-            }}
-          >
-            <FormInput formik={formik as any} field={"firstName"} />
-            <FormInput formik={formik as any} field={"lastName"} />
+        <Formik
+          initialValues={bookInitialValues}
+          validationSchema={bookValidationSchema}
+          onSubmit={(values) => {
+            bookNow({
+              user: { ...values, from, to },
+            });
+          }}
+        >
+          {() => (
+            <Form>
+              <FieldInput label={t("FIRST_NAME")} field={"firstName"} />
+              <FieldInput label={t("LAST_NAME")} field={"lastName"} />
+              <FieldInput label={t("EMAIL")} field={"email"} />
 
-            <FormInput formik={formik as any} field={"email"} />
-            <div css={tw`m-2`}>
-              {price && <p data-cy="price">{price} euros</p>}
-            </div>
+              <div css={tw`m-2`}>
+                {price && <p data-cy="price">{price} euros</p>}
+              </div>
 
-            <div css={tw`flex justify-end`}>
-              <Button
-                disabled={!from || !to || !price}
-                type="submit"
-                data-cy="book-submit"
-              >
-                Submit
-              </Button>
-            </div>
-          </form>
-        </>
+              <div css={tw`flex justify-end`}>
+                <Button
+                  disabled={!from || !to || !price}
+                  type="submit"
+                  data-cy="book-submit"
+                >
+                  Submit
+                </Button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       )}
     </div>
   );
