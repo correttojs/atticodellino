@@ -54,7 +54,7 @@ export const FormUpload: React.FC<PropType> = ({
         <input
           id={field}
           name={field}
-          data-testid="UPLOAD-DOC"
+          data-testid={field}
           type="file"
           onChange={(event) => {
             const file = event?.currentTarget?.files?.[0];

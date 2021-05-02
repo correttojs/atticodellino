@@ -23,7 +23,9 @@ export const FormRegister: React.FC<{
   onSuccess: () => void;
 }> = ({ reservation, onSuccess }) => {
   const router = useRouter();
-  const [isCalendarOpen, setCalendarOpen] = useState(false);
+  const [isCalendarOpen, setCalendarOpen] = useState<{
+    [key: number]: boolean;
+  }>({ [0]: false });
   const t = useTranslations();
   const { mutate, isLoading, error } = useReactMutation(RegisterDocument, {
     onSuccess,
@@ -55,7 +57,6 @@ export const FormRegister: React.FC<{
                       .split("T")[0],
                   })
                 );
-
                 mutate({
                   user: {
                     check_out: reservation?.check_out ?? "",
@@ -131,11 +132,13 @@ export const FormRegister: React.FC<{
                                 />
 
                                 <p css={tw`text-gray-700`}>{t("BIRTH_DATE")}</p>
-                                {!isCalendarOpen && (
+                                {!isCalendarOpen[index] && (
                                   <Button
                                     type="button"
                                     css={tw`my-2`}
-                                    onClick={() => setCalendarOpen(true)}
+                                    onClick={() =>
+                                      setCalendarOpen({ [index]: true })
+                                    }
                                   >
                                     {t("BROWSE_CALENDAR")}
                                   </Button>
@@ -150,7 +153,7 @@ export const FormRegister: React.FC<{
                                       ?.split("T")?.[0]
                                   }
                                 </span>
-                                {isCalendarOpen && (
+                                {isCalendarOpen[index] && (
                                   <ReactCalendar
                                     data-testid="CALENDAR"
                                     onChange={(value) => {
@@ -158,7 +161,7 @@ export const FormRegister: React.FC<{
                                         `guests[${index}].birthDate`,
                                         value
                                       );
-                                      setCalendarOpen(false);
+                                      setCalendarOpen({ [index]: false });
                                     }}
                                     defaultView="decade"
                                     value={
