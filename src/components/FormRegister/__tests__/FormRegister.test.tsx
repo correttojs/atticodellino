@@ -1,5 +1,5 @@
 import * as RQ from "@/hooks/useReactQuery/useReactQuery";
-import * as TR from "@/hooks/useTranslations/useTranslations";
+// import { useTranslations } from "@/hooks/useTranslations/useTranslations";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
@@ -8,6 +8,8 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 
 import { FormRegister } from "../FormRegister";
+
+jest.mock("@/hooks/useTranslations/useTranslations");
 
 const router: NextRouter = {
   basePath: "",
@@ -32,7 +34,7 @@ const router: NextRouter = {
   isPreview: false,
 };
 
-const addGuest = (file: File, index: number) => {
+const addGuest = async (file: File, index: number): Promise<void> => {
   userEvent.type(
     screen.getAllByLabelText(/FIRST_NAME/i)[index],
     `John ${index}`
@@ -58,7 +60,7 @@ const addGuest = (file: File, index: number) => {
   userEvent.click(screen.getAllByRole("button", { name: "2021" })[0]);
   userEvent.click(screen.getAllByRole("button", { name: /December/ })[0]);
   userEvent.click(
-    screen.getAllByRole("button", { name: `December ${index + 1}, 2021` })[0]
+    screen.getAllByRole("button", { name: `December 23, 2021` })[0]
   );
 
   userEvent.type(
@@ -69,125 +71,121 @@ const addGuest = (file: File, index: number) => {
     screen.getAllByLabelText(/PLACE_BIRTH/i)[index],
     `Rome ${index}`
   );
-  userEvent.upload(screen.getAllByTestId("UPLOAD-DOC")[index], file);
+
+  userEvent.upload(screen.getByTestId(`guests[${index}].file`), file);
 };
 
-beforeEach(() => {
-  jest.resetAllMocks();
-});
+const mutate = jest.fn();
 
-test("FormRegister Should call with 1 guest", async () => {
-  const mutate = jest.fn();
-  jest.spyOn(RQ, "useReactMutation").mockImplementation(
-    () =>
-      ({
-        mutate,
-      } as any)
-  );
-  jest.spyOn(TR, "useTranslations").mockImplementation(() => (k: string) => k);
-  const handleSuccess = jest.fn();
-  render(
-    <ThemeProvider theme={{ colors: { brand: "red" } }}>
-      <RouterContext.Provider value={router}>
-        <FormRegister
-          reservation={{
-            check_in: "2021-12-01",
-            check_out: "2021-12-04",
-            phone: "123456",
-          }}
-          onSuccess={handleSuccess}
-        />
-      </RouterContext.Provider>
-    </ThemeProvider>
-  );
-  const file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
-  addGuest(file, 0);
+describe("Form register", () => {
+  beforeEach(() => {
+    jest.resetAllMocks();
+    jest.spyOn(RQ, "useReactMutation").mockImplementation(
+      () =>
+        ({
+          mutate,
+        } as any)
+    );
+  });
 
-  userEvent.click(screen.getByRole("button", { name: /SUBMIT/i }));
+  it("Should call with 1 guest", async () => {
+    render(
+      <ThemeProvider theme={{ colors: { brand: "red" } }}>
+        <RouterContext.Provider value={router}>
+          <FormRegister
+            reservation={{
+              check_in: "2021-12-01",
+              check_out: "2021-12-04",
+              phone: "123456",
+            }}
+            onSuccess={jest.fn()}
+          />
+        </RouterContext.Provider>
+      </ThemeProvider>
+    );
+    const file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
+    await addGuest(file, 0);
 
-  await waitFor(() =>
-    expect(mutate).toHaveBeenCalledWith({
-      file: [file],
-      user: {
-        check_out: "2021-12-04",
-        guests: [
-          expect.objectContaining({
-            documentNumber: "123-0",
-            documentPlace: "Milano 0",
-            documentType: "Passport",
-            firstName: "John 0",
-            lastName: "Done 0",
-            nationality: "Italian 0",
-            placeOfBirth: "Rome 0",
-          }),
-        ],
-        hash: "hashquery",
-        home: "",
-        phone: "123456",
-      },
-    })
-  );
-});
+    userEvent.click(screen.getByRole("button", { name: /SUBMIT/i }));
 
-test.skip("FormRegister Should call with 3 guest", async () => {
-  const mutate = jest.fn();
-  jest.spyOn(RQ, "useReactMutation").mockImplementation(
-    () =>
-      ({
-        mutate,
-      } as any)
-  );
-  jest.spyOn(TR, "useTranslations").mockImplementation(() => (k: string) => k);
-  const handleSuccess = jest.fn();
-  render(
-    <ThemeProvider theme={{ colors: { brand: "red" } }}>
-      <RouterContext.Provider value={router}>
-        <FormRegister
-          reservation={{
-            check_in: "2021-12-01",
-            check_out: "2021-12-04",
-            phone: "123456",
-          }}
-          onSuccess={handleSuccess}
-        />
-      </RouterContext.Provider>
-    </ThemeProvider>
-  );
-  const file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
-  addGuest(file, 0);
-  userEvent.click(screen.getByTestId("ADD_GUEST"));
-  addGuest(file, 1);
-  userEvent.click(screen.getByRole("button", { name: /SUBMIT/i }));
+    await waitFor(() =>
+      expect(mutate).toHaveBeenCalledWith({
+        file: [file],
+        user: {
+          check_out: "2021-12-04",
+          guests: [
+            expect.objectContaining({
+              documentNumber: "123-0",
+              documentPlace: "Milano 0",
+              documentType: "Passport",
+              firstName: "John 0",
+              lastName: "Done 0",
+              nationality: "Italian 0",
+              placeOfBirth: "Rome 0",
+            }),
+          ],
+          hash: "hashquery",
+          home: "",
+          phone: "123456",
+        },
+      })
+    );
+  });
 
-  await waitFor(() =>
-    expect(mutate).toHaveBeenCalledWith({
-      file: [file, file],
-      user: {
-        check_out: "2021-12-04",
-        guests: [
-          expect.objectContaining({
-            documentNumber: "123-0",
-            documentPlace: "Milano 0",
-            documentType: "Passport",
-            firstName: "John 0",
-            lastName: "Done 0",
-            nationality: "Italian 0",
-            placeOfBirth: "Rome 0",
-          }),
-          expect.objectContaining({
-            documentNumber: "123-1",
-            documentPlace: "Milano 1",
-            documentType: "Passport",
-            firstName: "John 1",
-            lastName: "Done 1",
-            nationality: "Italian 1",
-            placeOfBirth: "Rome 1",
-          }),
-        ],
-        hash: "hashquery",
-        home: "",
-        phone: "123456",
-      },
-    })
-  );
+  it("should call with 3 guest", async () => {
+    render(
+      <ThemeProvider theme={{ colors: { brand: "red" } }}>
+        <RouterContext.Provider value={router}>
+          <FormRegister
+            reservation={{
+              check_in: "2021-12-01",
+              check_out: "2021-12-04",
+              phone: "123456",
+            }}
+            onSuccess={jest.fn()}
+          />
+        </RouterContext.Provider>
+      </ThemeProvider>
+    );
+    const file = new File(["(⌐□_□)"], "chucknorris.png", { type: "image/png" });
+    await addGuest(file, 0);
+    userEvent.click(screen.getByTestId("ADD_GUEST"));
+    const file2 = new File(["(⌐□_□)"], "chucknorris2.png", {
+      type: "image/png",
+    });
+    await addGuest(file2, 1);
+    userEvent.click(screen.getByRole("button", { name: /SUBMIT/i }));
+
+    await waitFor(() =>
+      expect(mutate).toHaveBeenCalledWith({
+        file: [file, file2],
+        user: {
+          check_out: "2021-12-04",
+          guests: [
+            expect.objectContaining({
+              documentNumber: "123-0",
+              documentPlace: "Milano 0",
+              documentType: "Passport",
+              firstName: "John 0",
+              lastName: "Done 0",
+              nationality: "Italian 0",
+              placeOfBirth: "Rome 0",
+            }),
+            expect.objectContaining({
+              documentNumber: "123-1",
+              documentPlace: "Milano 1",
+              documentType: "Passport",
+              firstName: "John 1",
+              lastName: "Done 1",
+              nationality: "Italian 1",
+              placeOfBirth: "Rome 1",
+            }),
+          ],
+          hash: "hashquery",
+          home: "",
+          phone: "123456",
+        },
+      })
+    );
+  });
 });
