@@ -1,6 +1,6 @@
 import * as RQ from "@/hooks/useReactQuery/useReactQuery";
 // import { useTranslations } from "@/hooks/useTranslations/useTranslations";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, wait, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { RouterContext } from "next/dist/next-server/lib/router-context";
 import { NextRouter } from "next/router";
@@ -107,7 +107,7 @@ describe("Form register", () => {
     await addGuest(file, 0);
 
     userEvent.click(screen.getByRole("button", { name: /SUBMIT/i }));
-
+    await wait();
     await waitFor(() =>
       expect(mutate).toHaveBeenCalledWith({
         file: [file],
@@ -155,7 +155,7 @@ describe("Form register", () => {
     });
     await addGuest(file2, 1);
     userEvent.click(screen.getByRole("button", { name: /SUBMIT/i }));
-
+    await wait();
     await waitFor(() =>
       expect(mutate).toHaveBeenCalledWith({
         file: [file, file2],
