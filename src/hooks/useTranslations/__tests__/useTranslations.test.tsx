@@ -1,14 +1,14 @@
-import * as MockGlobal from "@/components/Layout/useGlobal";
 import { renderHook } from "@testing-library/react-hooks";
+import * as MockRouter from "next/router";
 
 import { useTranslations } from "../useTranslations";
 
 describe("useTranslations", () => {
   it("should translate to EN", () => {
-    jest.spyOn(MockGlobal, "useGlobal").mockImplementation(
+    jest.spyOn(MockRouter, "useRouter").mockImplementation(
       () =>
         ({
-          lang: "en",
+          locale: "en",
         } as any)
     );
     const Mock = ({ children }: any) => <div>{children}</div>;
@@ -18,10 +18,10 @@ describe("useTranslations", () => {
     expect(result.current("SPACE")).toEqual("The space");
   });
   it("should translate to IT", () => {
-    jest.spyOn(MockGlobal, "useGlobal").mockImplementation(
+    jest.spyOn(MockRouter, "useRouter").mockImplementation(
       () =>
         ({
-          lang: "it",
+          locale: "it",
         } as any)
     );
     const Mock = ({ children }: any) => <div>{children}</div>;
