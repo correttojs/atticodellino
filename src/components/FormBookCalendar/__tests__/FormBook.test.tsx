@@ -1,8 +1,8 @@
-import * as RQ from "@/hooks/useReactQuery/useReactQuery";
 import * as TR from "@/hooks/useTranslations/useTranslations";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
+import * as RQ from "react-query-gql";
 import { ThemeProvider } from "styled-components";
 
 import { FormBook } from "../FormBook";
