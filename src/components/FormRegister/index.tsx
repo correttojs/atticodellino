@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { FaAirbnb } from "react-icons/fa";
 import { SiGooglestreetview } from "react-icons/si";
+import { useReactQuery } from "react-query-gql";
 import tw from "twin.macro";
 
 import { Loading } from "../@UI/Loading";
@@ -10,7 +11,6 @@ import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
 import { FaqPage } from "../Faq";
 import { useTranslations } from "../Translations/useTranslations";
-import { useReactQuery } from "../useReactQuery";
 import { Detail } from "./Detail";
 import { FormRegister } from "./FormRegister";
 import { ReservationDocument } from "./register.generated";

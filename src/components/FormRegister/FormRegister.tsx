@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ReactCalendar from "react-calendar";
 import { GrTrash, GrUserAdd } from "react-icons/gr";
+import { useReactMutation } from "react-query-gql";
 import tw from "twin.macro";
 
 import { Button } from "../@UI/Buttons";
@@ -14,7 +15,6 @@ import { Loading } from "../@UI/Loading";
 import { Section } from "../@UI/Section";
 import { H1 } from "../@UI/Texts";
 import { useTranslations } from "../Translations/useTranslations";
-import { useReactMutation } from "../useReactQuery";
 import { guestValue, initialValues, validationSchema } from "./data";
 import { RegisterDocument, ReservationQuery } from "./register.generated";
 

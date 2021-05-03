@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 // Render Prop
 import React from "react";
+import { useReactMutation } from "react-query-gql";
 import tw from "twin.macro";
 
 import { Button } from "../@UI/Buttons";
@@ -9,7 +10,6 @@ import { FormInput } from "../@UI/FormInput";
 import { Loading } from "../@UI/Loading";
 import { MQ_NOT_MOBILE } from "../Layout";
 import { useTranslations } from "../Translations/useTranslations";
-import { useReactMutation } from "../useReactQuery";
 import { bookInitialValues, bookValidationSchema } from "./bookData";
 import { BookNowDocument } from "./bookNow.generated";
 

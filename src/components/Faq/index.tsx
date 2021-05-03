@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import React from "react";
+import { useReactQuery } from "react-query-gql";
 import tw from "twin.macro";
 
 import { Loading } from "../@UI/Loading";
 import { Section } from "../@UI/Section";
 import { H2 } from "../@UI/Texts";
-import { useReactQuery } from "../useReactQuery";
 import { FaqDocument } from "./faq.generated";
 
 export const FaqPage: React.FC = () => {

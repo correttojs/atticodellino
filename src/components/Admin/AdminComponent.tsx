@@ -10,6 +10,7 @@ import {
 } from "react-icons/md";
 import Modal from "react-modal";
 import { useQueryClient } from "react-query";
+import { useReactMutation, useReactQuery } from "react-query-gql";
 import styled, { createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
 
@@ -22,7 +23,6 @@ import {
 } from "../@UI/Buttons";
 import { Loading } from "../@UI/Loading";
 import { MQ_MOBILE } from "../Layout";
-import { useReactMutation, useReactQuery } from "../useReactQuery";
 import { Reservation } from "./Reservation";
 import {
   ReservationStatus,
