@@ -75,7 +75,6 @@
     "@types/google-map-react": "2.1.0",
     "@types/ical": "0.6.2",
     "@types/jest": "26.0.23",
-    "@types/next-auth": "^3.15.0",
     "@types/node": "15.0.1",
     "@types/react": "17.0.4",
     "@types/react-calendar": "3.1.4",
