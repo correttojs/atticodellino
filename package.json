@@ -45,7 +45,7 @@
     "react-intersection-observer": "^8.31.0",
     "react-modal": "^3.13.1",
     "react-query": "^3.13.4",
-    "react-query-gql": "0.0.5",
+    "react-query-gql": "0.0.8",
     "styled-components": "^5.2.3",
     "tailwindcss": "^2.1.2",
     "twin.macro": "^2.3.2",

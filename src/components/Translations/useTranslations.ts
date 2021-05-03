@@ -1,11 +1,13 @@
-import { useGlobal } from "../Layout";
+import { useRouter } from "next/router";
+
 import { Translations } from "./translations";
 
 export const useTranslations = () => {
-  const context = useGlobal();
+  const context = useRouter();
 
   return (key: keyof typeof Translations, params?: any) => {
-    const translatedRawString = Translations[key][context.lang as "en"];
+    const translatedRawString =
+      Translations[key][(context.locale ?? "en") as "en"];
 
     if (params && translatedRawString) {
       return translatedRawString.replace(
