@@ -15,7 +15,10 @@ const options = {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials: {
+        username: string;
+        password: string;
+      }) => {
         // Add logic here to look up the user from the credentials supplied
         const user = { id: 1, name: process.env.AUTH_LOGIN };
 
