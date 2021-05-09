@@ -22,5 +22,6 @@ export const upload = async (fileStream: fs.ReadStream) => {
     return res.url;
   } catch (e) {
     console.log(e);
+    return null;
   }
 };

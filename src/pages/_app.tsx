@@ -1,6 +1,8 @@
 import "react-calendar/dist/Calendar.css";
 import "tailwindcss/dist/base.min.css";
 
+import { AppProps } from "next/dist/next-server/lib/router/router";
+import { NextWebVitalsMetric } from "next/dist/next-server/lib/utils";
 import Router from "next/router";
 import { useEffect } from "react";
 
@@ -27,18 +29,18 @@ const loadScript = async (src: HTMLScriptElement["src"]): Promise<void> =>
     document.body.appendChild(script);
   });
 
-export function reportWebVitals(metric: any) {
+export function reportWebVitals(metric: NextWebVitalsMetric): void {
   console.log(metric);
 }
 
-function MyApp({ Component, pageProps }: any) {
+const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
   useEffect(() => {
     loadScript(
       `https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_UA}`
     );
   }, []);
   return <Component {...pageProps} />;
-}
+};
 Router.events.on("routeChangeComplete", (url) => {
   setTimeout(() => {
     window["gtag"]("config", process.env.NEXT_PUBLIC_UA, {
