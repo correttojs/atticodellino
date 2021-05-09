@@ -33,7 +33,7 @@ export const sendSms = ({
     recipient,
     message,
     message.length,
-    parseInt((schedule ?? "").replace(/-/g, "")),
+    parseInt((schedule ?? "").replace(/-/g, ""), 10),
     orderId
   );
 

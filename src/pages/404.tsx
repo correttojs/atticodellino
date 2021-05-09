@@ -1,9 +1,9 @@
 import { withLayout } from "@/components/Layout";
 import { getGlobalProps } from "@/graphql/takeshape/getGlobal";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 import tw from "twin.macro";
 
-const PageError = () => (
+const PageError: NextPage = () => (
   <div
     css={`
       ${tw`flex items-center`}

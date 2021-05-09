@@ -6,7 +6,7 @@ import {
 } from "@/generated/graphql-takeshape-doc";
 import { takeShapeRequest } from "@/graphql/takeshape";
 import { getGlobalPaths, getGlobalProps } from "@/graphql/takeshape/getGlobal";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const globalProps = await getGlobalProps({ params, locale });
@@ -14,13 +14,13 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     path: "/privacy",
   });
   return {
-    props: { ...globalProps?.props, data: data },
+    props: { ...globalProps?.props, data },
   };
 };
 
 export const getStaticPaths = getGlobalPaths;
 
-const Privacy = ({ data }: { data: GetArticleByPathQuery }) => {
+const Privacy: NextPage<{ data: GetArticleByPathQuery }> = ({ data }) => {
   const article = data?.getArticleList?.items?.[0];
   return (
     <Section>

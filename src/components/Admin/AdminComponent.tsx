@@ -221,13 +221,16 @@ export const AdminComponent: React.FC = () => {
                               }
                             }}
                           >
-                            {item.reservationStatus === "link_sent" ? (
-                              <MdDone color="#fff" />
-                            ) : item.reservationStatus === "new" ? (
-                              <MdNewReleases color="#fff" />
-                            ) : (
-                              <MdDoneAll color="#fff" />
-                            )}
+                            {
+                              // eslint-disable-next-line no-nested-ternary
+                              item.reservationStatus === "link_sent" ? (
+                                <MdDone color="#fff" />
+                              ) : item.reservationStatus === "new" ? (
+                                <MdNewReleases color="#fff" />
+                              ) : (
+                                <MdDoneAll color="#fff" />
+                              )
+                            }
                           </ButtonSmall>
                         </td>
                       </tr>

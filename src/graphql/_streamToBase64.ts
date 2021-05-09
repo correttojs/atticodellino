@@ -6,7 +6,7 @@ export const streamTo64 = (stream: ReadStream) => {
 
     stream.on("data", function (chunk: any) {
       chunks.push(chunk);
-      //data += stream.read().toString("base64");
+      // data += stream.read().toString("base64");
     });
     stream.on("end", function () {
       const result = Buffer.concat(chunks);
