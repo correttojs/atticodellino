@@ -1,7 +1,3 @@
-import {
-  useReactMutation,
-  useReactQuery,
-} from "@correttojs/next-utils/useReactQuery";
 import { signIn, useSession } from "next-auth/client";
 import React, { useState } from "react";
 import { IoLogInSharp } from "react-icons/io5";
@@ -14,6 +10,7 @@ import {
 } from "react-icons/md";
 import Modal from "react-modal";
 import { useQueryClient } from "react-query";
+import { useReactMutation, useReactQuery } from "react-query-gql";
 import styled, { createGlobalStyle } from "styled-components";
 import tw from "twin.macro";
 
