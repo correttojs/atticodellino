@@ -1,6 +1,6 @@
+import { useReactQuery } from "@correttojs/next-utils/useReactQuery";
 import { useRouter } from "next/router";
 import React from "react";
-import { useReactQuery } from "react-query-gql";
 import tw from "twin.macro";
 
 import { Loading } from "../@UI/Loading";

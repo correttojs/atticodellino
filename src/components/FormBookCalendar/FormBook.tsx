@@ -1,7 +1,7 @@
 import { FieldInput } from "@/components/@UI/FieldInput";
+import { useReactMutation } from "@correttojs/next-utils/useReactQuery";
 import { Form, Formik } from "formik";
 import React from "react";
-import { useReactMutation } from "react-query-gql";
 import tw from "twin.macro";
 
 import { useTranslations } from "../../hooks/useTranslations/useTranslations";

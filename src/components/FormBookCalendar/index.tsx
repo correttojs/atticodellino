@@ -1,5 +1,8 @@
+import {
+  useReactMutation,
+  useReactQuery,
+} from "@correttojs/next-utils/useReactQuery";
 import React, { useState } from "react";
-import { useReactMutation, useReactQuery } from "react-query-gql";
 import tw from "twin.macro";
 
 import { useTranslations } from "../../hooks/useTranslations/useTranslations";

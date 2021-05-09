@@ -1,9 +1,9 @@
+import { useReactQuery } from "@correttojs/next-utils/useReactQuery";
 import { useRouter } from "next/router";
 // Render Prop
 import React, { useState } from "react";
 import { FaAirbnb } from "react-icons/fa";
 import { SiGooglestreetview } from "react-icons/si";
-import { useReactQuery } from "react-query-gql";
 import tw from "twin.macro";
 
 import { useTranslations } from "../../hooks/useTranslations/useTranslations";

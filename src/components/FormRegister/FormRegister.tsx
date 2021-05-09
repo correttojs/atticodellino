@@ -1,10 +1,10 @@
 import { FieldInput } from "@/components/@UI/FieldInput";
+import { useReactMutation } from "@correttojs/next-utils/useReactQuery";
 import { ErrorMessage, FieldArray, Form, Formik } from "formik";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ReactCalendar from "react-calendar";
 import { GrTrash, GrUserAdd } from "react-icons/gr";
-import { useReactMutation } from "react-query-gql";
 import tw from "twin.macro";
 
 import { useTranslations } from "../../hooks/useTranslations/useTranslations";
