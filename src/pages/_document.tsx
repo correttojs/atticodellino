@@ -1,5 +1,11 @@
 import { getGlobalProps } from "@/graphql/takeshape/getGlobal";
-import Document, { Head, Html, Main, NextScript } from "next/document";
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from "next/document";
 // Import styled components ServerStyleSheet
 import { ServerStyleSheet } from "styled-components";
 
@@ -9,10 +15,10 @@ export default class MyDocument extends Document<{
   cover: string;
   color: string;
 }> {
-  static async getInitialProps(ctx: any) {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
 
-    const page = ctx.renderPage((App: any) => (props: any) =>
+    const page = ctx.renderPage((App) => (props) =>
       sheet.collectStyles(<App {...props} />)
     );
 
