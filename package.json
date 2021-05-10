@@ -18,7 +18,7 @@
   "author": "Fabio Benedetti",
   "license": "ISC",
   "dependencies": {
-    "@correttojs/eslint-config": "0.0.27",
+    "@correttojs/eslint-config": "0.0.29",
     "@sendgrid/mail": "^7.4.2",
     "airbnb-private-api": "^1.0.7",
     "airbnbapijs": "^0.10.5",
