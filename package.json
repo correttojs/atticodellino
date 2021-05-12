@@ -53,7 +53,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@babel/core": "7.14.0",
+    "@babel/core": "7.14.2",
     "@next/bundle-analyzer": "10.2.0",
     "@types/apollo-upload-client": "14.1.0",
     "@types/google-map-react": "2.1.0",
