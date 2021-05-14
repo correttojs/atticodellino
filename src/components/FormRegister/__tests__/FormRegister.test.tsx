@@ -10,7 +10,11 @@ import { ThemeProvider } from "styled-components";
 import { FormRegister } from "../FormRegister";
 
 jest.mock("@/hooks/useTranslations/useTranslations");
-
+jest.mock("@correttojs/next-utils/useReactQuery", () => {
+  return {
+    useReactMutation: jest.fn(),
+  };
+});
 const router: NextRouter = {
   basePath: "",
   pathname: "/",

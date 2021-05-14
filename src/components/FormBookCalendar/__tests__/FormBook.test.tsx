@@ -7,10 +7,14 @@ import { ThemeProvider } from "styled-components";
 
 import { FormBook } from "../FormBook";
 
+jest.mock("@correttojs/next-utils/useReactQuery", () => {
+  return {
+    useReactMutation: jest.fn(),
+  };
+});
 beforeEach(() => {
   jest.resetAllMocks();
 });
-
 test("FormBook Should call with 1 guest", async () => {
   const mutate = jest.fn();
   jest.spyOn(RQ, "useReactMutation").mockImplementation(
