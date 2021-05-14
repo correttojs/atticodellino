@@ -50,7 +50,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@correttojs/eslint-config": "0.0.29",
+    "@correttojs/eslint-config": "0.0.30",
     "@babel/core": "7.14.2",
     "@next/bundle-analyzer": "10.2.0",
     "@types/apollo-upload-client": "14.1.0",
