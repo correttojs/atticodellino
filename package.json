@@ -52,7 +52,7 @@
   "devDependencies": {
     "@correttojs/eslint-config": "0.0.31",
     "@babel/core": "7.14.3",
-    "@next/bundle-analyzer": "10.2.1",
+    "@next/bundle-analyzer": "10.2.2",
     "@types/apollo-upload-client": "14.1.0",
     "@types/google-map-react": "2.1.0",
     "@types/ical": "0.6.2",
