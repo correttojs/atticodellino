@@ -28,7 +28,7 @@ const sendEmail = async ({
   files: any[];
   apartmentCode: string;
 }) => {
-  console.log(files, user);
+  console.log("SENDING_EMAIL", user.guests?.[0]?.firstName);
   let attachments: any[] = [];
   if (files?.[0]) {
     const streams = await Promise.all(
@@ -83,11 +83,13 @@ export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"
 ) => {
   const files = await Promise.all(file);
   const { guests, phone, home, check_out, ...input } = user;
-
+  console.log("GUEST_NAME", guests?.[0]?.firstName);
   const apartment = await takeShapeRequest(ApartmentCodeByAirBnbIdDocument, {
     key: home,
   });
   const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code ?? "";
+  console.log("APARTMENT", apartmentCode);
+
   await sendEmail({ files, user, apartmentCode });
 
   const urls = await Promise.all(
@@ -100,6 +102,7 @@ export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"
     })
   );
 
+  console.log("URL", urls?.[0]);
   const data = await graphCmsRequest(UpdateReservationDocument, {
     input,
     data: {
@@ -109,6 +112,7 @@ export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"
       reservationStatus: GuestStatus.Registered,
     },
   });
+  console.log("GCMS UPDATED");
 
   // await smsConfirmLink({
   //   phone,
@@ -123,6 +127,7 @@ export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"
     hash: input.hash,
   });
 
+  console.log("SMS REMINDER");
   return (data?.updateReservation
     ?.reservationStatus as any) as ReservationStatus;
 };
