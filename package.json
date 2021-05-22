@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "dev": "next",
     "build": "next build",
     "start": "next start",
@@ -27,6 +28,7 @@
     "formik": "^2.2.6",
     "google-map-react": "^2.1.9",
     "graphql": "^15.5.0",
+    "graphql-upload": "^12.0.0",
     "ical": "^0.8.0",
     "lodash": "^4.17.21",
     "next": "^10.1.3",
@@ -50,11 +52,12 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@correttojs/eslint-config": "0.0.31",
     "@babel/core": "7.14.3",
+    "@correttojs/eslint-config": "0.0.31",
     "@next/bundle-analyzer": "10.2.2",
     "@types/apollo-upload-client": "14.1.0",
     "@types/google-map-react": "2.1.0",
+    "@types/graphql-upload": "^8.0.4",
     "@types/ical": "0.6.2",
     "@types/jest": "26.0.23",
     "@types/node": "15.3.1",
@@ -100,5 +103,8 @@
   },
   "eslintConfig": {
     "extends": "@correttojs"
+  },
+  "resolutions": {
+    "graphql-upload": "^11.0.0"
   }
 }
