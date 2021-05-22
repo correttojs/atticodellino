@@ -92,6 +92,7 @@ export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"
 
   await sendEmail({ files, user, apartmentCode });
 
+  console.log("UPLOAD URL TO GCMS", apartmentCode);
   const urls = await Promise.all(
     files?.map((item) => {
       if (item) {
