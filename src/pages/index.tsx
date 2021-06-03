@@ -5,7 +5,7 @@ import { getGlobalProps } from "@/graphql/takeshape/getGlobal";
 import { GetStaticProps } from "next";
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const params = { lang: locale, apartment: "VR" };
+  const params = { lang: locale, apartment: "GARDA" };
   const globalProps = await getGlobalProps({ params, locale });
 
   const res = await getDetails(

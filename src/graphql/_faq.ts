@@ -2,7 +2,6 @@ import { GetReservationDocument } from "@/generated/graphql-graphcms";
 import { FaqsDocument } from "@/generated/graphql-takeshape-doc";
 import { Faq, QueryResolvers } from "@/generated/resolvers-types";
 
-import { getLangByPhone } from "./_util";
 import { graphCmsRequest } from "./graphcms";
 import { ResolverContext } from "./resolvers";
 import { takeShapeRequest } from "./takeshape";
@@ -18,7 +17,7 @@ export const faq: QueryResolvers<ResolverContext>["faq"] = async (
 
   const data = await takeShapeRequest(FaqsDocument, {
     apartment: reservation?.home,
-    lang: getLangByPhone(reservation?.phone ?? ""),
+    lang: "en",
   });
 
   return data?.getFaqList?.items as Faq[];
