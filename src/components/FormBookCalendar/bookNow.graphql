@@ -1,6 +1,0 @@
-mutation bookNow($user: BookInput!) {
-  book(user: $user) {
-    firstName
-    lastName
-  }
-}

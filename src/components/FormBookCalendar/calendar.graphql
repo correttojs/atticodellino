@@ -1,6 +1,0 @@
-query Calendar($apartment: String!) {
-  calendar(apartment: $apartment) {
-    start
-    end
-  }
-}
