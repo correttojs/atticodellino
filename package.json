@@ -57,7 +57,7 @@
     "@next/bundle-analyzer": "10.2.3",
     "@types/apollo-upload-client": "14.1.0",
     "@types/google-map-react": "2.1.1",
-    "@types/graphql-upload": "8.0.4",
+    "@types/graphql-upload": "8.0.5",
     "@types/ical": "0.6.2",
     "@types/jest": "26.0.23",
     "@types/node": "15.3.1",
