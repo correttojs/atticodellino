@@ -60,7 +60,7 @@
     "@types/graphql-upload": "8.0.5",
     "@types/ical": "0.6.2",
     "@types/jest": "26.0.23",
-    "@types/node": "15.3.1",
+    "@types/node": "15.12.2",
     "@types/react": "17.0.11",
     "@types/react-calendar": "3.4.0",
     "@types/react-modal": "3.12.0",
