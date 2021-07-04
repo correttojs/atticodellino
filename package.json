@@ -90,7 +90,7 @@
     "babel-loader": "8.2.2",
     "babel-plugin-styled-components": "1.13.1",
     "dotenv": "9.0.2",
-    "eslint": "7.26.0",
+    "eslint": "7.30.0",
     "eslint-config-next": "0.2.4",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-jest": "24.3.6",
