@@ -107,7 +107,7 @@
     "jest-fetch-mock": "3.0.3",
     "jest-transform-graphql": "2.1.0",
     "lint-staged": "11.0.0",
-    "postcss": "8.2.15",
+    "postcss": "8.3.5",
     "prettier": "2.2.1",
     "prettier-plugin-import-sort": "0.0.7",
     "react-is": "17.0.2",
