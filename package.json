@@ -48,7 +48,7 @@
     "react-query": "^3.16.0",
     "styled-components": "^5.2.3",
     "tailwindcss": "^2.1.4",
-    "twin.macro": "^2.4.2",
+    "twin.macro": "^2.6.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {
