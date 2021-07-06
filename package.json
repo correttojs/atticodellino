@@ -76,7 +76,7 @@
     "@types/google-map-react": "2.1.2",
     "@types/graphql-upload": "8.0.6",
     "@types/ical": "0.6.2",
-    "@types/jest": "26.0.23",
+    "@types/jest": "26.0.24",
     "@types/node": "15.12.2",
     "@types/react": "17.0.13",
     "@types/react-calendar": "3.4.0",
