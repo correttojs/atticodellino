@@ -14,8 +14,8 @@ export default class MyDocument extends Document<{
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
 
-    const page = ctx.renderPage((App) => (props) =>
-      sheet.collectStyles(<App {...props} />)
+    const page = ctx.renderPage(
+      (App) => (props) => sheet.collectStyles(<App {...props} />)
     );
 
     const styleTags = sheet.getStyleElement();

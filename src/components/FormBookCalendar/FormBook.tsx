@@ -17,9 +17,12 @@ export const FormBook: React.FC<{
   to: string;
   price?: number | null;
 }> = ({ from, to, price }) => {
-  const { mutate: bookNow, data, isLoading, error } = useReactMutation(
-    BookNowDocument
-  );
+  const {
+    mutate: bookNow,
+    data,
+    isLoading,
+    error,
+  } = useReactMutation(BookNowDocument);
 
   const t = useTranslations();
 

@@ -77,58 +77,56 @@ const sendEmail = async ({
   }
 };
 
-export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"] = async (
-  _,
-  { file, user }
-) => {
-  const files = await Promise.all(file);
-  const { guests, phone, home, check_out, ...input } = user;
-  console.log("GUEST_NAME", guests?.[0]?.firstName);
-  const apartment = await takeShapeRequest(ApartmentCodeByAirBnbIdDocument, {
-    key: home,
-  });
-  const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code ?? "";
-  console.log("APARTMENT", apartmentCode);
+export const registerGuests: MutationResolvers<ResolverContext>["registerGuests"] =
+  async (_, { file, user }) => {
+    const files = await Promise.all(file);
+    const { guests, phone, home, check_out, ...input } = user;
+    console.log("GUEST_NAME", guests?.[0]?.firstName);
+    const apartment = await takeShapeRequest(ApartmentCodeByAirBnbIdDocument, {
+      key: home,
+    });
+    const apartmentCode = apartment?.getApartmentList?.items?.[0]?.code ?? "";
+    console.log("APARTMENT", apartmentCode);
 
-  await sendEmail({ files, user, apartmentCode });
+    await sendEmail({ files, user, apartmentCode });
 
-  console.log("UPLOAD URL TO GCMS", apartmentCode);
-  const urls = await Promise.all(
-    files?.map((item) => {
-      if (item) {
-        const { createReadStream } = item;
-        return upload(createReadStream());
-      }
-      return null;
-    })
-  );
+    console.log("UPLOAD URL TO GCMS", apartmentCode);
+    const urls = await Promise.all(
+      files?.map((item) => {
+        if (item) {
+          const { createReadStream } = item;
+          return upload(createReadStream());
+        }
+        return null;
+      })
+    );
 
-  console.log("URL", urls?.[0]);
-  const data = await graphCmsRequest(UpdateReservationDocument, {
-    input,
-    data: {
-      guests: {
-        create: guests?.map((g, i) => ({ ...g, docFile: urls[i] })),
+    console.log("URL", urls?.[0]);
+    const data = await graphCmsRequest(UpdateReservationDocument, {
+      input,
+      data: {
+        guests: {
+          create: guests?.map((g, i) => ({ ...g, docFile: urls[i] })),
+        },
+        reservationStatus: GuestStatus.Registered,
       },
-      reservationStatus: GuestStatus.Registered,
-    },
-  });
-  console.log("GCMS UPDATED");
+    });
+    console.log("GCMS UPDATED");
 
-  // await smsConfirmLink({
-  //   phone,
-  //   link: faqLink({ ...input, phone }),
-  //   code: apartment?.getApartmentList?.items?.[0]?.code,
-  //   hash: input.hash,
-  // });
+    // await smsConfirmLink({
+    //   phone,
+    //   link: faqLink({ ...input, phone }),
+    //   code: apartment?.getApartmentList?.items?.[0]?.code,
+    //   hash: input.hash,
+    // });
 
-  await smsReminderLink({
-    phone,
-    schedule: `${check_out}103010`,
-    hash: input.hash,
-  });
+    await smsReminderLink({
+      phone,
+      schedule: `${check_out}103010`,
+      hash: input.hash,
+    });
 
-  console.log("SMS REMINDER");
-  return (data?.updateReservation
-    ?.reservationStatus as any) as ReservationStatus;
-};
+    console.log("SMS REMINDER");
+    return data?.updateReservation
+      ?.reservationStatus as any as ReservationStatus;
+  };

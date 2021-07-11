@@ -64,32 +64,29 @@ const getAirBnbReservations = async () => {
   });
 };
 
-export const syncReservations: QueryResolvers<ResolverContext>["syncReservations"] = async (
-  parent,
-  args,
-  context
-) => {
-  if (context?.session?.user?.name !== "lino")
-    throw new Error("Invalid session");
-  const result = await getAirBnbReservations();
+export const syncReservations: QueryResolvers<ResolverContext>["syncReservations"] =
+  async (parent, args, context) => {
+    if (context?.session?.user?.name !== "lino")
+      throw new Error("Invalid session");
+    const result = await getAirBnbReservations();
 
-  const storedReservations: Reservation[] = await (reservations as any)(
-    parent,
-    args,
-    context
-  );
+    const storedReservations: Reservation[] = await (reservations as any)(
+      parent,
+      args,
+      context
+    );
 
-  const hashes = storedReservations.map((r) => r.hash);
-  const toBeAdded = result.filter((r) => !hashes.includes(r.hash));
-  console.log(toBeAdded);
-  const added = await Promise.all(
-    toBeAdded.map((r) =>
-      graphCmsRequest(CreateReservationDocument, { input: r })
-    )
-  );
+    const hashes = storedReservations.map((r) => r.hash);
+    const toBeAdded = result.filter((r) => !hashes.includes(r.hash));
+    console.log(toBeAdded);
+    const added = await Promise.all(
+      toBeAdded.map((r) =>
+        graphCmsRequest(CreateReservationDocument, { input: r })
+      )
+    );
 
-  return [
-    ...added.map((r) => r.createReservation),
-    ...storedReservations,
-  ] as Reservation[];
-};
+    return [
+      ...added.map((r) => r.createReservation),
+      ...storedReservations,
+    ] as Reservation[];
+  };
