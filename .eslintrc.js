@@ -11,10 +11,13 @@ module.exports = {
     "eslint:recommended",
     "next",
     "plugin:@typescript-eslint/recommended", // TypeScript rules
+    "plugin:react/recommended", // React rules
+    "plugin:react-hooks/recommended", // React hooks rules
     "plugin:jsx-a11y/recommended", // Accessibility rules
     "plugin:jest/recommended",
-    "plugin:prettier/recommended", // Prettier recommended rules
+    "prettier", // Prettier recommended rules
   ],
+  plugins: ["prettier"],
   parser: "@typescript-eslint/parser",
   settings: { react: { version: "detect" } },
   rules: {
