@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const compose = require("lodash/flowRight");
 const withPWA = require("next-pwa");
 const withGraphql = require("next-plugin-graphql");

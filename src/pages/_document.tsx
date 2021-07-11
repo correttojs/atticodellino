@@ -1,4 +1,3 @@
-import { getGlobalProps } from "@/graphql/takeshape/getGlobal";
 import Document, {
   DocumentContext,
   Head,
@@ -11,9 +10,6 @@ import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document<{
   styleTags: any;
-  apartment: string;
-  cover: string;
-  color: string;
 }> {
   static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
@@ -23,14 +19,10 @@ export default class MyDocument extends Document<{
     );
 
     const styleTags = sheet.getStyleElement();
-    const global = await getGlobalProps({ params: ctx.query, locale: "en" });
 
     return {
       ...page,
       styleTags,
-      apartment: global?.props?.global?.apartment,
-      cover: global?.props?.global?.coverWebp,
-      color: global?.props?.global?.brandColor,
     };
   }
 
@@ -47,13 +39,7 @@ export default class MyDocument extends Document<{
               name="google-site-verification"
               content="KdtvkyxtNp0Msw0A01kGAFCDxasV6K58QyV9Qy_oXZ8"
             ></meta>
-            <meta name="theme-color" content={this.props.color} />
-            <link
-              rel="preload"
-              href={this.props.cover}
-              as="image"
-              type="image/webp"
-            ></link>
+            <meta name="theme-color" content={`rgb(9, 54, 76)`} />
 
             <link
               href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Raleway&display=swap"
