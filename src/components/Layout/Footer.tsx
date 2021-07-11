@@ -10,14 +10,8 @@ import { Contacts } from "./Contact";
 import { useGlobal } from ".";
 
 export const Footer: React.FC = () => {
-  const {
-    address,
-    airbnbLink,
-    facebookLink,
-    apartment,
-    brandColor,
-    mapLink,
-  } = useGlobal();
+  const { address, airbnbLink, facebookLink, apartment, brandColor, mapLink } =
+    useGlobal();
   const isCypress = typeof window !== "undefined" && (window as any).Cypress;
   const { locale } = useRouter();
   const t = useTranslations();

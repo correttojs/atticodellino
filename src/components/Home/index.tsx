@@ -52,10 +52,8 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
             c: sponsor?.[0]?.location,
           })}
           onClick={() =>
-            (window.location.href = `/${sponsor?.[0]?.key?.toLowerCase()}`.replace(
-              "//",
-              "/"
-            ))
+            (window.location.href =
+              `/${sponsor?.[0]?.key?.toLowerCase()}`.replace("//", "/"))
           }
         >
           <Image

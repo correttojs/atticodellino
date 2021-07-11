@@ -20,21 +20,19 @@ export const priceResolver: QueryResolvers<ResolverContext>["price"] = async (
   return Math.round(parseInt(price, 10) * 0.9 * 100) / 100;
 };
 
-export const reviewsResolver: QueryResolvers<ResolverContext>["reviews"] = async (
-  _,
-  { airBnb }
-) => {
-  const res: { reviews: Review[] } = await fetch(
-    `${BASE_URL}reviews?key=${KEY}&currency=EUR&listing_id=${airBnb}&role=guest&_format=for_p3&_limit=15&_offset=7&_order=language_country`
-  ).then((r) => r.json());
-  return res.reviews.map((r) => ({
-    comments: r.comments,
-    date: r.localized_date,
-    language: r.language,
-    reviewer: r.reviewer.first_name,
-    id: r.id,
-  }));
-};
+export const reviewsResolver: QueryResolvers<ResolverContext>["reviews"] =
+  async (_, { airBnb }) => {
+    const res: { reviews: Review[] } = await fetch(
+      `${BASE_URL}reviews?key=${KEY}&currency=EUR&listing_id=${airBnb}&role=guest&_format=for_p3&_limit=15&_offset=7&_order=language_country`
+    ).then((r) => r.json());
+    return res.reviews.map((r) => ({
+      comments: r.comments,
+      date: r.localized_date,
+      language: r.language,
+      reviewer: r.reviewer.first_name,
+      id: r.id,
+    }));
+  };
 
 export const getDetails = async (
   apartment: GlobalType["apartment"],

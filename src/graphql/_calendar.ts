@@ -21,28 +21,29 @@ export const fetchIcal = async (icalUrl: string, summary: string) => {
     });
 };
 
-export const calendarResolver: QueryResolvers<ResolverContext>["calendar"] = async (
-  _,
-  { apartment }
-) => {
-  const apartmentObj = await takeShapeRequest(ApartmentSecretDocument, {
-    key: apartment,
-  });
+export const calendarResolver: QueryResolvers<ResolverContext>["calendar"] =
+  async (_, { apartment }) => {
+    const apartmentObj = await takeShapeRequest(ApartmentSecretDocument, {
+      key: apartment,
+    });
 
-  const promises = [];
-  if (apartmentObj?.getApartmentList?.items?.[0]?.airbnbIcal) {
-    promises.push(
-      fetchIcal(apartmentObj.getApartmentList.items?.[0]?.airbnbIcal, "AIRBNB")
-    );
-  }
-  if (apartmentObj?.getApartmentList?.items?.[0]?.bookingIcal) {
-    promises.push(
-      fetchIcal(
-        apartmentObj.getApartmentList.items?.[0]?.bookingIcal,
-        "BOOKING"
-      )
-    );
-  }
-  const result = await Promise.all(promises);
-  return result.reduce((acc, curr) => [...acc, ...curr], []);
-};
+    const promises = [];
+    if (apartmentObj?.getApartmentList?.items?.[0]?.airbnbIcal) {
+      promises.push(
+        fetchIcal(
+          apartmentObj.getApartmentList.items?.[0]?.airbnbIcal,
+          "AIRBNB"
+        )
+      );
+    }
+    if (apartmentObj?.getApartmentList?.items?.[0]?.bookingIcal) {
+      promises.push(
+        fetchIcal(
+          apartmentObj.getApartmentList.items?.[0]?.bookingIcal,
+          "BOOKING"
+        )
+      );
+    }
+    const result = await Promise.all(promises);
+    return result.reduce((acc, curr) => [...acc, ...curr], []);
+  };

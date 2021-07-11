@@ -9,13 +9,11 @@ module.exports = {
   ignorePatterns: ["node_modules/*", ".next/*", ".out/*", "!.prettierrc.js"], // We don't want to lint generated files nor node_modules, but we want to lint .prettierrc.js (ignored by default by eslint)
   extends: [
     "eslint:recommended",
-    "next",
-    "plugin:@typescript-eslint/recommended", // TypeScript rules
-    "plugin:react/recommended", // React rules
-    "plugin:react-hooks/recommended", // React hooks rules
     "plugin:jsx-a11y/recommended", // Accessibility rules
     "plugin:jest/recommended",
-    "prettier", // Prettier recommended rules
+    "next",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended", // Prettier recommended rules
   ],
   plugins: ["prettier"],
   parser: "@typescript-eslint/parser",
