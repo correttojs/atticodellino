@@ -30,7 +30,7 @@ jobs:
           start: npm start
           working-directory: cypress
       - name: Lighthouse Master
-        uses: treosh/lighthouse-ci-action@v7
+        uses: treosh/lighthouse-ci-action@v8
         with:
           urls: |
             https://www.atticodellino.com
