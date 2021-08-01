@@ -79,7 +79,7 @@
     "@types/jest": "26.0.24",
     "@types/node": "15.12.2",
     "@types/react": "17.0.15",
-    "@types/react-calendar": "3.4.1",
+    "@types/react-calendar": "3.4.2",
     "@types/react-modal": "3.12.1",
     "@types/styled-components": "5.1.11",
     "@types/yup": "0.29.13",
