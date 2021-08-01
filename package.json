@@ -20,7 +20,7 @@
   "license": "ISC",
   "dependencies": {
     "@correttojs/next-utils": "0.0.31",
-    "@sendgrid/mail": "^7.4.4",
+    "@sendgrid/mail": "^7.4.5",
     "airbnb-private-api": "^1.0.7",
     "airbnbapijs": "^0.10.5",
     "apollo-server-micro": "^2.24.0",
