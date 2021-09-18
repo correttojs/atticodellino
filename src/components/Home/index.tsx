@@ -45,7 +45,7 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
 
       <Hero photos={pdp_listing_detail.photos} />
 
-      <Section css={tw`flex justify-end `}>
+      {/* <Section css={tw`flex justify-end `}>
         <CardHorizontal
           title={sponsor?.[0]?.location ?? ""}
           message={translate("ALSO", {
@@ -62,10 +62,10 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
             alt={sponsor?.[0]?.location ?? ""}
             width={128}
             height={128}
-            css={tw`w-32 h-32  object-cover `}
+            css={tw`object-cover w-32 h-32 `}
           />
         </CardHorizontal>
-      </Section>
+      </Section> */}
 
       <Summary {...pdp_listing_detail} />
       <Section css={tw`pb-0`}>
