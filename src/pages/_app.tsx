@@ -1,8 +1,8 @@
 import "react-calendar/dist/Calendar.css";
 import "tailwindcss/dist/base.min.css";
 
-import { AppProps } from "next/dist/next-server/lib/router/router";
-import { NextWebVitalsMetric } from "next/dist/next-server/lib/utils";
+import { AppProps } from "next/dist/shared/lib/router/router";
+import { NextWebVitalsMetric } from "next/dist/shared/lib/utils";
 import Router from "next/router";
 import { useEffect } from "react";
 
