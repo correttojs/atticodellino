@@ -2,7 +2,7 @@ import * as RQ from "@correttojs/next-utils/useReactQuery";
 // import { useTranslations } from "@/hooks/useTranslations/useTranslations";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { RouterContext } from "next/dist/next-server/lib/router-context";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 import { NextRouter } from "next/router";
 import React from "react";
 import { ThemeProvider } from "styled-components";
