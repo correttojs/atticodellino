@@ -1,6 +1,7 @@
-import { useGlobal, GlobalStyle } from "../src/components/Layout";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 import { ThemeProvider } from "styled-components";
-import { RouterContext } from "next/dist/next-server/lib/router-context";
+
+import { GlobalStyle, useGlobal } from "../src/components/Layout";
 import { theme } from "../src/components/Layout/useGlobal";
 
 export const parameters = {
