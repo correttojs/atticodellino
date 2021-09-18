@@ -15,7 +15,7 @@ const PageError: NextPage = () => (
 );
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const params = { lang: "en", apartment: "VR" };
+  const params = { lang: "en", apartment: "GARDA" };
   const globalProps = await getGlobalProps({ params, locale });
   return globalProps ?? { props: {} };
 };
