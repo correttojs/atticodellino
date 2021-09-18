@@ -1,13 +1,11 @@
 import { pdp_listing_detail } from "@/graphql/_airbn.types";
 import Head from "next/head";
-import Image from "next/image";
 import React from "react";
 import { useInView } from "react-intersection-observer";
 import Modal from "react-modal";
 import tw from "twin.macro";
 
 import { useTranslations } from "../../hooks/useTranslations/useTranslations";
-import { CardHorizontal } from "../@UI/Card";
 import { Collapsible } from "../@UI/Collapsible";
 import { Section } from "../@UI/Section";
 import { H2, P } from "../@UI/Texts";
@@ -25,7 +23,7 @@ Modal.setAppElement("#__next");
 
 export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
   const translate = useTranslations();
-  const { name, sponsor } = useGlobal();
+  const { name } = useGlobal();
 
   const isCypress = typeof window !== "undefined" && (window as any).Cypress;
 
