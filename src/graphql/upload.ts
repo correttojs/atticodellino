@@ -8,7 +8,7 @@ export const upload = async (fileStream: fs.ReadStream) => {
   form.append("fileUpload", fileStream);
 
   try {
-    const res = await fetch(
+    const res = (await fetch(
       `https://api-eu-central-1.graphcms.com/v2/${process.env.GQL_CMS_ID}/master/upload`,
       {
         method: "POST",
@@ -17,7 +17,7 @@ export const upload = async (fileStream: fs.ReadStream) => {
           Authorization: `Bearer ${process.env.GQL_CMS_TOKEN}`,
         },
       }
-    ).then((r) => r.json());
+    ).then((r) => r.json())) as any;
 
     return res.url;
   } catch (e) {

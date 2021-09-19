@@ -16,15 +16,16 @@ export const priceResolver: QueryResolvers<ResolverContext>["price"] = async (
   // tslint:disable-next-line:max-line-length
   const url = `${BASE_URL}pdp_listing_booking_details?guests=2&listing_id=${airBnb}&_format=for_web_with_date&_interaction_type=dateChanged&_intents=p3_book_it&_parent_request_uuid=f567fc7f-3922-4c8a-8fc6-db8ee3f02d02&_p3_impression_id=p3_1505504996_%2BSBaBxbLCLhmc09Y&show_smart_promotion=0&check_in=${from}&check_out=${to}&number_of_adults=2&number_of_children=0&number_of_infants=0&key=${KEY}&currency=EUR&locale=${LOCALE}`;
   const response = await fetch(url).then((r) => r.json());
-  const price = response.pdp_listing_booking_details[0].price.total.amount;
+  const price = (response as any).pdp_listing_booking_details[0].price.total
+    .amount;
   return Math.round(parseInt(price, 10) * 0.9 * 100) / 100;
 };
 
 export const reviewsResolver: QueryResolvers<ResolverContext>["reviews"] =
   async (_, { airBnb }) => {
-    const res: { reviews: Review[] } = await fetch(
+    const res: { reviews: Review[] } = (await fetch(
       `${BASE_URL}reviews?key=${KEY}&currency=EUR&listing_id=${airBnb}&role=guest&_format=for_p3&_limit=15&_offset=7&_order=language_country`
-    ).then((r) => r.json());
+    ).then((r) => r.json())) as any;
     return res.reviews.map((r) => ({
       comments: r.comments,
       date: r.localized_date,
@@ -48,7 +49,9 @@ export const getDetails = async (
     },
   });
   console.log(url);
-  const res: pdp_listing_detail = await fetch(url).then((r) => r.json());
+  const res: pdp_listing_detail = (await fetch(url).then((r) =>
+    r.json()
+  )) as any;
 
   return res;
 };
