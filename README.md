@@ -1,3 +1,3 @@
 # atticodellino
 
-Nextjs project for a website apartment linked to GraphCMS
+Nextjs project for a website apartment linked to GraphCMS.
