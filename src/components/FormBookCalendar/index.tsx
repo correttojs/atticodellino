@@ -33,12 +33,12 @@ export const BookingCalendar = () => {
     <section
       data-cy="book"
       css={`
-        ${tw`p-2 md:p-8 max-w-screen-lg mx-auto `}
+        ${tw`max-w-screen-lg p-2 mx-auto md:p-8 `}
       `}
     >
       <H2>{t("BOOK")}</H2>
       <div
-        css={tw`md:m-4 flex flex-col justify-center items-center md:flex-row`}
+        css={tw`flex flex-col items-center justify-center md:m-4 md:flex-row`}
       >
         <Calendar
           tileDisabled={(e) => {
@@ -58,7 +58,7 @@ export const BookingCalendar = () => {
             return booked;
           }}
           selectRange={true}
-          onChange={(e) => {
+          onChange={(e: any) => {
             if (Array.isArray(e)) {
               setSelection(e);
               calcPrice({

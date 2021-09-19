@@ -32,7 +32,7 @@ export const FormRegister: React.FC<{
   });
 
   return (
-    <div css={tw`p-2 md:p-8 max-w-screen-lg mx-auto `}>
+    <div css={tw`max-w-screen-lg p-2 mx-auto md:p-8 `}>
       {error && <FormError />}
       {isLoading && (
         <div css={tw`flex justify-center`}>
@@ -78,7 +78,7 @@ export const FormRegister: React.FC<{
                         {formik.values.guests.map((guest, index) => {
                           return (
                             <fieldset
-                              css={tw`p-2 md:p-4 my-6 border-2 rounded-md`}
+                              css={tw`p-2 my-6 border-2 rounded-md md:p-4`}
                               key={`guest${index}`}
                             >
                               <legend>
@@ -124,7 +124,7 @@ export const FormRegister: React.FC<{
                               <div css={tw`mx-2 my-4 `}>
                                 <ErrorMessage
                                   render={(msg) => (
-                                    <p css={tw`text-red-500 text-xs italic`}>
+                                    <p css={tw`text-xs italic text-red-500`}>
                                       {msg}
                                     </p>
                                   )}
@@ -156,7 +156,7 @@ export const FormRegister: React.FC<{
                                 {isCalendarOpen[index] && (
                                   <ReactCalendar
                                     data-testid="CALENDAR"
-                                    onChange={(value) => {
+                                    onChange={(value: any) => {
                                       formik.setFieldValue(
                                         `guests[${index}].birthDate`,
                                         value
