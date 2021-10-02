@@ -130,9 +130,5 @@
     ".js, .jsx, .ts, .tsx": {
       "style": "module"
     }
-  },
-  "resolutions": {
-    "fs-capacitor": "^7.0.0",
-    "graphql-upload": "^12.0.0"
   }
 }
