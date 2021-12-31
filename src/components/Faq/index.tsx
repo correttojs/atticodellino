@@ -32,16 +32,24 @@ export const FaqPage: React.FC = () => {
         >
           <H2>{item?.title}</H2>
           <div dangerouslySetInnerHTML={{ __html: item?.content.html ?? "" }} />
-          {item?.media?.map(
-            (media, j) =>
-              media?.url && (
-                // eslint-disable-next-line jsx-a11y/media-has-caption
+          {item?.media?.map((media, j) => (
+            <>
+              {media?.url && /video/.test(media.mimeType ?? "") && (
                 <video key={"fm" + i + j} width="320" height="240" controls>
                   <source src={media?.url} type={media?.mimeType ?? ""} />
                   Your browser does not support the video tag.
                 </video>
-              )
-          )}
+              )}
+              {media?.url && /image/.test(media.mimeType ?? "") && (
+                <img
+                  key={"fm" + i + j}
+                  width="320"
+                  height="240"
+                  src={media.url}
+                ></img>
+              )}
+            </>
+          ))}
         </div>
       ))}
     </Section>
