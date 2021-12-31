@@ -35,6 +35,7 @@ export const FaqPage: React.FC = () => {
           {item?.media?.map((media, j) => (
             <>
               {media?.url && /video/.test(media.mimeType ?? "") && (
+                // eslint-disable-next-line jsx-a11y/media-has-caption
                 <video key={"fm" + i + j} width="320" height="240" controls>
                   <source src={media?.url} type={media?.mimeType ?? ""} />
                   Your browser does not support the video tag.
