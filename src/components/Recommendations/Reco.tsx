@@ -20,7 +20,7 @@ export const RecoPage: React.FC = () => {
     <div css={tw`pb-8`}>
       <Section>
         <AnchorPointer id="reco" />
-        <H2 css={tw`mr-2 `}>{translate("REVIEWS")}</H2>
+        <H2 css={tw`mr-2 `}>{translate("RECO")}</H2>
       </Section>
       {(data?.reco ?? []).map((item, i) => (
         <div key={"reco" + i}>
