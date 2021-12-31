@@ -58,7 +58,11 @@ export const FaqPage: React.FC = () => {
         <div
           key={"faqs" + i}
           style={
-            i % 2 === 1 ? { backgroundColor: global.colors.colors.lighter } : {}
+            i % 2 === 1
+              ? {
+                  background: `linear-gradient(${global.colors.colors.lighter}, ${global.colors.colors.lighter}, #fff)`,
+                }
+              : {}
           }
         >
           <Section
