@@ -17,17 +17,27 @@ export const RecoPage: React.FC = () => {
   }
 
   return (
-    <>
+    <div css={tw`pb-8`}>
       <Section>
         <AnchorPointer id="reco" />
-        <H2 css={tw`mr-2`}>{translate("REVIEWS")}</H2>
+        <H2 css={tw`mr-2 `}>{translate("REVIEWS")}</H2>
       </Section>
       {(data?.reco ?? []).map((item, i) => (
         <div key={"reco" + i}>
           <Section css={[tw` py-4  `]} id={"recos" + i}>
-            <a href={item?.link ?? ""} target="_blank" rel="noreferrer">
+            {item?.link ? (
+              <a
+                href={item?.link ?? ""}
+                css={tw`underline`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <H3>{item?.title}</H3>
+              </a>
+            ) : (
               <H3>{item?.title}</H3>
-            </a>
+            )}
+
             <div
               css={`
                 min-width: 320px;
@@ -39,6 +49,6 @@ export const RecoPage: React.FC = () => {
           </Section>
         </div>
       ))}
-    </>
+    </div>
   );
 };
