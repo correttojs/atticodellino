@@ -5,6 +5,7 @@ import tw from "twin.macro";
 import { DropDown, DropDownItem } from "../@UI/DropDown";
 import { Contacts } from "./Contact";
 import { useGlobal } from ".";
+import { MdHelpOutline } from "react-icons/md";
 
 export const Header: React.FC = () => {
   const { apartment, name, brandColor } = useGlobal();
@@ -25,10 +26,17 @@ export const Header: React.FC = () => {
           {name}
         </a>
       </div>
+
       <div css={tw`flex`}>
         <div css={tw` hidden md:block`}>
           <Contacts direction="row" />
         </div>
+        <button
+          css={tw`py-2 px-2 rounded inline-flex items-center`}
+          onClick={() => push("/faq")}
+        >
+          <MdHelpOutline size={"1.6em"} />
+        </button>
         <DropDown>
           <DropDownItem
             text="Italiano"

@@ -37,9 +37,10 @@ export const FaqPage: React.FC = () => {
           </label>
         </div>
         <Button
-          type="button"
+          type="submit"
           css={tw`m-2`}
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (ref.current?.value) {
               setKey(ref.current.value);
             }
