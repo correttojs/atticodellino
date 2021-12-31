@@ -32,7 +32,7 @@ export const theme = (global: GlobalType) => {
     colors: {
       brand: global?.brandColor?.hex ?? "",
       focus: global?.brandColor?.hex ?? "",
-      active: "#290012e8",
+      active: "#0e6189",
       light: `rgba(${r},${g},${b},${a})`,
       lighter: `rgba(${r2},${g2},${b2},${a2})`,
     },
