@@ -44,7 +44,7 @@ export const reservation: QueryResolvers<ResolverContext>["reservation"] =
     });
     const result = storedReservations.reservations?.[0];
     const apartments = await takeShapeRequest(ApartmentCodeByAirBnbIdDocument, {
-      key: result?.home,
+      key: result?.home ?? "",
     });
     const apartment = apartments?.getApartmentList?.items?.[0];
 

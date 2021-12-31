@@ -112,14 +112,16 @@ type ReservationShort {
 }
 
 type Asset {
-  path: String
+  url: String
   mimeType: String
 }
+type Content {
+  html: String
+}
 type Faq {
-  question: String!
-  answerHtml: String!
-  linkVideo: String
-  asset: Asset
+  title: String!
+  content: Content!
+  media: [Asset]
 }
 # type Upload {
 #   uploadUrl: ID

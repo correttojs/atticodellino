@@ -1,5 +1,5 @@
-query Faq($hash: String!) {
-  faq(hash: $hash) {
+query getFaqs {
+  faqs {
     title
     content {
       html
@@ -8,5 +8,8 @@ query Faq($hash: String!) {
       url
       mimeType
     }
+  }
+  apartments {
+    enterCode
   }
 }
