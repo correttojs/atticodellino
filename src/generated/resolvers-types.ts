@@ -137,6 +137,7 @@ export type Query = {
   calendar?: Maybe<Array<Maybe<Calendar>>>;
   faq?: Maybe<Array<Maybe<Faq>>>;
   price?: Maybe<Scalars['Float']>;
+  reco?: Maybe<Array<Maybe<Reco>>>;
   reservation?: Maybe<Reservation>;
   reservations?: Maybe<Array<Maybe<Reservation>>>;
   reviews?: Maybe<Array<Maybe<ReviewType>>>;
@@ -173,6 +174,13 @@ export type QueryReservationsArgs = {
 
 export type QueryReviewsArgs = {
   airBnb: Scalars['String'];
+};
+
+export type Reco = {
+  __typename?: 'Reco';
+  description: Content;
+  link?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type Reservation = {
@@ -315,6 +323,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  Reco: ResolverTypeWrapper<Reco>;
   Reservation: ResolverTypeWrapper<Reservation>;
   ReservationShort: ResolverTypeWrapper<ReservationShort>;
   ReservationStatus: ReservationStatus;
@@ -343,6 +352,7 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   Mutation: {};
   Query: {};
+  Reco: Reco;
   Reservation: Reservation;
   ReservationShort: ReservationShort;
   ReviewType: ReviewType;
@@ -436,10 +446,18 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   calendar?: Resolver<Maybe<Array<Maybe<ResolversTypes['Calendar']>>>, ParentType, ContextType, RequireFields<QueryCalendarArgs, 'apartment'>>;
   faq?: Resolver<Maybe<Array<Maybe<ResolversTypes['Faq']>>>, ParentType, ContextType, RequireFields<QueryFaqArgs, 'hash'>>;
   price?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType, RequireFields<QueryPriceArgs, 'airBnb' | 'from' | 'to'>>;
+  reco?: Resolver<Maybe<Array<Maybe<ResolversTypes['Reco']>>>, ParentType, ContextType>;
   reservation?: Resolver<Maybe<ResolversTypes['Reservation']>, ParentType, ContextType, RequireFields<QueryReservationArgs, 'hash'>>;
   reservations?: Resolver<Maybe<Array<Maybe<ResolversTypes['Reservation']>>>, ParentType, ContextType, RequireFields<QueryReservationsArgs, 'isPast'>>;
   reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['ReviewType']>>>, ParentType, ContextType, RequireFields<QueryReviewsArgs, 'airBnb'>>;
   syncReservations?: Resolver<Maybe<Array<Maybe<ResolversTypes['Reservation']>>>, ParentType, ContextType>;
+};
+
+export type RecoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Reco'] = ResolversParentTypes['Reco']> = {
+  description?: Resolver<ResolversTypes['Content'], ParentType, ContextType>;
+  link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ReservationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Reservation'] = ResolversParentTypes['Reservation']> = {
@@ -497,6 +515,7 @@ export type Resolvers<ContextType = any> = {
   IGuest?: IGuestResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Reco?: RecoResolvers<ContextType>;
   Reservation?: ReservationResolvers<ContextType>;
   ReservationShort?: ReservationShortResolvers<ContextType>;
   ReviewType?: ReviewTypeResolvers<ContextType>;

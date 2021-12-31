@@ -2592,6 +2592,8 @@ export type Mutation = {
   createFaq?: Maybe<Faq>;
   /** Create one guest */
   createGuest?: Maybe<Guest>;
+  /** Create one recommendation */
+  createRecommendation?: Maybe<Recommendation>;
   /** Create one reservation */
   createReservation?: Maybe<Reservation>;
   /** Create one scheduledRelease */
@@ -2635,6 +2637,13 @@ export type Mutation = {
   /** Delete many Guest documents, return deleted documents */
   deleteManyGuestsConnection: GuestConnection;
   /**
+   * Delete many Recommendation documents
+   * @deprecated Please use the new paginated many mutation (deleteManyRecommendationsConnection)
+   */
+  deleteManyRecommendations: BatchPayload;
+  /** Delete many Recommendation documents, return deleted documents */
+  deleteManyRecommendationsConnection: RecommendationConnection;
+  /**
    * Delete many Reservation documents
    * @deprecated Please use the new paginated many mutation (deleteManyReservationsConnection)
    */
@@ -2648,6 +2657,8 @@ export type Mutation = {
   deleteManyTokens: BatchPayload;
   /** Delete many Token documents, return deleted documents */
   deleteManyTokensConnection: TokenConnection;
+  /** Delete one recommendation from _all_ existing stages. Returns deleted document. */
+  deleteRecommendation?: Maybe<Recommendation>;
   /** Delete one reservation from _all_ existing stages. Returns deleted document. */
   deleteReservation?: Maybe<Reservation>;
   /** Delete and return scheduled operation */
@@ -2693,6 +2704,13 @@ export type Mutation = {
   /** Publish many Guest documents */
   publishManyGuestsConnection: GuestConnection;
   /**
+   * Publish many Recommendation documents
+   * @deprecated Please use the new paginated many mutation (publishManyRecommendationsConnection)
+   */
+  publishManyRecommendations: BatchPayload;
+  /** Publish many Recommendation documents */
+  publishManyRecommendationsConnection: RecommendationConnection;
+  /**
    * Publish many Reservation documents
    * @deprecated Please use the new paginated many mutation (publishManyReservationsConnection)
    */
@@ -2706,6 +2724,8 @@ export type Mutation = {
   publishManyTokens: BatchPayload;
   /** Publish many Token documents */
   publishManyTokensConnection: TokenConnection;
+  /** Publish one recommendation */
+  publishRecommendation?: Maybe<Recommendation>;
   /** Publish one reservation */
   publishReservation?: Maybe<Reservation>;
   /** Publish one token */
@@ -2718,6 +2738,8 @@ export type Mutation = {
   schedulePublishFaq?: Maybe<Faq>;
   /** Schedule to publish one guest */
   schedulePublishGuest?: Maybe<Guest>;
+  /** Schedule to publish one recommendation */
+  schedulePublishRecommendation?: Maybe<Recommendation>;
   /** Schedule to publish one reservation */
   schedulePublishReservation?: Maybe<Reservation>;
   /** Schedule to publish one token */
@@ -2730,6 +2752,8 @@ export type Mutation = {
   scheduleUnpublishFaq?: Maybe<Faq>;
   /** Unpublish one guest from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishGuest?: Maybe<Guest>;
+  /** Unpublish one recommendation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishRecommendation?: Maybe<Recommendation>;
   /** Unpublish one reservation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishReservation?: Maybe<Reservation>;
   /** Unpublish one token from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2771,6 +2795,13 @@ export type Mutation = {
   /** Find many Guest documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyGuestsConnection: GuestConnection;
   /**
+   * Unpublish many Recommendation documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyRecommendationsConnection)
+   */
+  unpublishManyRecommendations: BatchPayload;
+  /** Find many Recommendation documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyRecommendationsConnection: RecommendationConnection;
+  /**
    * Unpublish many Reservation documents
    * @deprecated Please use the new paginated many mutation (unpublishManyReservationsConnection)
    */
@@ -2784,6 +2815,8 @@ export type Mutation = {
   unpublishManyTokens: BatchPayload;
   /** Find many Token documents that match criteria in specified stage and unpublish from target stages */
   unpublishManyTokensConnection: TokenConnection;
+  /** Unpublish one recommendation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishRecommendation?: Maybe<Recommendation>;
   /** Unpublish one reservation from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishReservation?: Maybe<Reservation>;
   /** Unpublish one token from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2825,6 +2858,13 @@ export type Mutation = {
   /** Update many Guest documents */
   updateManyGuestsConnection: GuestConnection;
   /**
+   * Update many recommendations
+   * @deprecated Please use the new paginated many mutation (updateManyRecommendationsConnection)
+   */
+  updateManyRecommendations: BatchPayload;
+  /** Update many Recommendation documents */
+  updateManyRecommendationsConnection: RecommendationConnection;
+  /**
    * Update many reservations
    * @deprecated Please use the new paginated many mutation (updateManyReservationsConnection)
    */
@@ -2838,6 +2878,8 @@ export type Mutation = {
   updateManyTokens: BatchPayload;
   /** Update many Token documents */
   updateManyTokensConnection: TokenConnection;
+  /** Update one recommendation */
+  updateRecommendation?: Maybe<Recommendation>;
   /** Update one reservation */
   updateReservation?: Maybe<Reservation>;
   /** Update one scheduledRelease */
@@ -2852,6 +2894,8 @@ export type Mutation = {
   upsertFaq?: Maybe<Faq>;
   /** Upsert one guest */
   upsertGuest?: Maybe<Guest>;
+  /** Upsert one recommendation */
+  upsertRecommendation?: Maybe<Recommendation>;
   /** Upsert one reservation */
   upsertReservation?: Maybe<Reservation>;
   /** Upsert one token */
@@ -2876,6 +2920,11 @@ export type MutationCreateFaqArgs = {
 
 export type MutationCreateGuestArgs = {
   data: GuestCreateInput;
+};
+
+
+export type MutationCreateRecommendationArgs = {
+  data: RecommendationCreateInput;
 };
 
 
@@ -2974,6 +3023,21 @@ export type MutationDeleteManyGuestsConnectionArgs = {
 };
 
 
+export type MutationDeleteManyRecommendationsArgs = {
+  where?: InputMaybe<RecommendationManyWhereInput>;
+};
+
+
+export type MutationDeleteManyRecommendationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<RecommendationManyWhereInput>;
+};
+
+
 export type MutationDeleteManyReservationsArgs = {
   where?: InputMaybe<ReservationManyWhereInput>;
 };
@@ -3001,6 +3065,11 @@ export type MutationDeleteManyTokensConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<TokenManyWhereInput>;
+};
+
+
+export type MutationDeleteRecommendationArgs = {
+  where: RecommendationWhereUniqueInput;
 };
 
 
@@ -3138,6 +3207,30 @@ export type MutationPublishManyGuestsConnectionArgs = {
 };
 
 
+export type MutationPublishManyRecommendationsArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars['Boolean']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<RecommendationManyWhereInput>;
+  withDefaultLocale?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type MutationPublishManyRecommendationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars['Boolean']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<RecommendationManyWhereInput>;
+  withDefaultLocale?: InputMaybe<Scalars['Boolean']>;
+};
+
+
 export type MutationPublishManyReservationsArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<ReservationManyWhereInput>;
@@ -3171,6 +3264,15 @@ export type MutationPublishManyTokensConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   to?: Array<Stage>;
   where?: InputMaybe<TokenManyWhereInput>;
+};
+
+
+export type MutationPublishRecommendationArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars['Boolean']>;
+  to?: Array<Stage>;
+  where: RecommendationWhereUniqueInput;
+  withDefaultLocale?: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -3224,6 +3326,17 @@ export type MutationSchedulePublishGuestArgs = {
 };
 
 
+export type MutationSchedulePublishRecommendationArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+  publishBase?: InputMaybe<Scalars['Boolean']>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: RecommendationWhereUniqueInput;
+  withDefaultLocale?: InputMaybe<Scalars['Boolean']>;
+};
+
+
 export type MutationSchedulePublishReservationArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
@@ -3273,6 +3386,16 @@ export type MutationScheduleUnpublishGuestArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   where: GuestWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishRecommendationArgs = {
+  from?: Array<Stage>;
+  locales?: InputMaybe<Array<Locale>>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  unpublishBase?: InputMaybe<Scalars['Boolean']>;
+  where: RecommendationWhereUniqueInput;
 };
 
 
@@ -3400,6 +3523,28 @@ export type MutationUnpublishManyGuestsConnectionArgs = {
 };
 
 
+export type MutationUnpublishManyRecommendationsArgs = {
+  from?: Array<Stage>;
+  locales?: InputMaybe<Array<Locale>>;
+  unpublishBase?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<RecommendationManyWhereInput>;
+};
+
+
+export type MutationUnpublishManyRecommendationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  unpublishBase?: InputMaybe<Scalars['Boolean']>;
+  where?: InputMaybe<RecommendationManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyReservationsArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<ReservationManyWhereInput>;
@@ -3433,6 +3578,14 @@ export type MutationUnpublishManyTokensConnectionArgs = {
   skip?: InputMaybe<Scalars['Int']>;
   stage?: InputMaybe<Stage>;
   where?: InputMaybe<TokenManyWhereInput>;
+};
+
+
+export type MutationUnpublishRecommendationArgs = {
+  from?: Array<Stage>;
+  locales?: InputMaybe<Array<Locale>>;
+  unpublishBase?: InputMaybe<Scalars['Boolean']>;
+  where: RecommendationWhereUniqueInput;
 };
 
 
@@ -3540,6 +3693,23 @@ export type MutationUpdateManyGuestsConnectionArgs = {
 };
 
 
+export type MutationUpdateManyRecommendationsArgs = {
+  data: RecommendationUpdateManyInput;
+  where?: InputMaybe<RecommendationManyWhereInput>;
+};
+
+
+export type MutationUpdateManyRecommendationsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: RecommendationUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<RecommendationManyWhereInput>;
+};
+
+
 export type MutationUpdateManyReservationsArgs = {
   data: ReservationUpdateManyInput;
   where?: InputMaybe<ReservationManyWhereInput>;
@@ -3571,6 +3741,12 @@ export type MutationUpdateManyTokensConnectionArgs = {
   last?: InputMaybe<Scalars['Int']>;
   skip?: InputMaybe<Scalars['Int']>;
   where?: InputMaybe<TokenManyWhereInput>;
+};
+
+
+export type MutationUpdateRecommendationArgs = {
+  data: RecommendationUpdateInput;
+  where: RecommendationWhereUniqueInput;
 };
 
 
@@ -3613,6 +3789,12 @@ export type MutationUpsertFaqArgs = {
 export type MutationUpsertGuestArgs = {
   upsert: GuestUpsertInput;
   where: GuestWhereUniqueInput;
+};
+
+
+export type MutationUpsertRecommendationArgs = {
+  upsert: RecommendationUpsertInput;
+  where: RecommendationWhereUniqueInput;
 };
 
 
@@ -3693,6 +3875,14 @@ export type Query = {
   guestsConnection: GuestConnection;
   /** Fetches an object given its ID */
   node?: Maybe<Node>;
+  /** Retrieve a single recommendation */
+  recommendation?: Maybe<Recommendation>;
+  /** Retrieve document version */
+  recommendationVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple recommendations */
+  recommendations: Array<Recommendation>;
+  /** Retrieve multiple recommendations using the Relay connection interface */
+  recommendationsConnection: RecommendationConnection;
   /** Retrieve a single reservation */
   reservation?: Maybe<Reservation>;
   /** Retrieve document version */
@@ -3889,6 +4079,44 @@ export type QueryNodeArgs = {
 };
 
 
+export type QueryRecommendationArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: RecommendationWhereUniqueInput;
+};
+
+
+export type QueryRecommendationVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryRecommendationsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<RecommendationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<RecommendationWhereInput>;
+};
+
+
+export type QueryRecommendationsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<RecommendationOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<RecommendationWhereInput>;
+};
+
+
 export type QueryReservationArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
@@ -4078,6 +4306,544 @@ export type RgbaInput = {
   b: Scalars['RGBAHue'];
   g: Scalars['RGBAHue'];
   r: Scalars['RGBAHue'];
+};
+
+export type Recommendation = Node & {
+  __typename?: 'Recommendation';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  description?: Maybe<RichText>;
+  /** Get the document in other stages */
+  documentInStages: Array<Recommendation>;
+  /** List of Recommendation versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  link?: Maybe<Scalars['String']>;
+  /** System Locale field */
+  locale: Locale;
+  /** Get the other localizations for this document */
+  localizations: Array<Recommendation>;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  title?: Maybe<Scalars['String']>;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type RecommendationCreatedAtArgs = {
+  variation?: SystemDateTimeFieldVariation;
+};
+
+
+export type RecommendationCreatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type RecommendationDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type RecommendationHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type RecommendationLocalizationsArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  locales?: Array<Locale>;
+};
+
+
+export type RecommendationPublishedAtArgs = {
+  variation?: SystemDateTimeFieldVariation;
+};
+
+
+export type RecommendationPublishedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type RecommendationScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type RecommendationUpdatedAtArgs = {
+  variation?: SystemDateTimeFieldVariation;
+};
+
+
+export type RecommendationUpdatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type RecommendationConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: RecommendationWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type RecommendationConnection = {
+  __typename?: 'RecommendationConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<RecommendationEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type RecommendationCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** description input for default locale (en) */
+  description?: InputMaybe<Scalars['RichTextAST']>;
+  link?: InputMaybe<Scalars['String']>;
+  /** Inline mutations for managing document localizations excluding the default locale */
+  localizations?: InputMaybe<RecommendationCreateLocalizationsInput>;
+  title?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type RecommendationCreateLocalizationDataInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  description?: InputMaybe<Scalars['RichTextAST']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type RecommendationCreateLocalizationInput = {
+  /** Localization input */
+  data: RecommendationCreateLocalizationDataInput;
+  locale: Locale;
+};
+
+export type RecommendationCreateLocalizationsInput = {
+  /** Create localizations for the newly-created document */
+  create?: InputMaybe<Array<RecommendationCreateLocalizationInput>>;
+};
+
+export type RecommendationCreateManyInlineInput = {
+  /** Connect multiple existing Recommendation documents */
+  connect?: InputMaybe<Array<RecommendationWhereUniqueInput>>;
+  /** Create and connect multiple existing Recommendation documents */
+  create?: InputMaybe<Array<RecommendationCreateInput>>;
+};
+
+export type RecommendationCreateOneInlineInput = {
+  /** Connect one existing Recommendation document */
+  connect?: InputMaybe<RecommendationWhereUniqueInput>;
+  /** Create and connect one Recommendation document */
+  create?: InputMaybe<RecommendationCreateInput>;
+};
+
+/** An edge in a connection. */
+export type RecommendationEdge = {
+  __typename?: 'RecommendationEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Recommendation;
+};
+
+/** Identifies documents */
+export type RecommendationManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<RecommendationWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<RecommendationWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<RecommendationWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  link?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  link_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  link_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  link_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  link_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  link_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  link_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  link_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  link_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  link_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  title?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  title_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum RecommendationOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  LinkAsc = 'link_ASC',
+  LinkDesc = 'link_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type RecommendationUpdateInput = {
+  /** description input for default locale (en) */
+  description?: InputMaybe<Scalars['RichTextAST']>;
+  link?: InputMaybe<Scalars['String']>;
+  /** Manage document localizations */
+  localizations?: InputMaybe<RecommendationUpdateLocalizationsInput>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type RecommendationUpdateLocalizationDataInput = {
+  description?: InputMaybe<Scalars['RichTextAST']>;
+};
+
+export type RecommendationUpdateLocalizationInput = {
+  data: RecommendationUpdateLocalizationDataInput;
+  locale: Locale;
+};
+
+export type RecommendationUpdateLocalizationsInput = {
+  /** Localizations to create */
+  create?: InputMaybe<Array<RecommendationCreateLocalizationInput>>;
+  /** Localizations to delete */
+  delete?: InputMaybe<Array<Locale>>;
+  /** Localizations to update */
+  update?: InputMaybe<Array<RecommendationUpdateLocalizationInput>>;
+  upsert?: InputMaybe<Array<RecommendationUpsertLocalizationInput>>;
+};
+
+export type RecommendationUpdateManyInlineInput = {
+  /** Connect multiple existing Recommendation documents */
+  connect?: InputMaybe<Array<RecommendationConnectInput>>;
+  /** Create and connect multiple Recommendation documents */
+  create?: InputMaybe<Array<RecommendationCreateInput>>;
+  /** Delete multiple Recommendation documents */
+  delete?: InputMaybe<Array<RecommendationWhereUniqueInput>>;
+  /** Disconnect multiple Recommendation documents */
+  disconnect?: InputMaybe<Array<RecommendationWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Recommendation documents */
+  set?: InputMaybe<Array<RecommendationWhereUniqueInput>>;
+  /** Update multiple Recommendation documents */
+  update?: InputMaybe<Array<RecommendationUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Recommendation documents */
+  upsert?: InputMaybe<Array<RecommendationUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type RecommendationUpdateManyInput = {
+  /** description input for default locale (en) */
+  description?: InputMaybe<Scalars['RichTextAST']>;
+  link?: InputMaybe<Scalars['String']>;
+  /** Optional updates to localizations */
+  localizations?: InputMaybe<RecommendationUpdateManyLocalizationsInput>;
+  title?: InputMaybe<Scalars['String']>;
+};
+
+export type RecommendationUpdateManyLocalizationDataInput = {
+  description?: InputMaybe<Scalars['RichTextAST']>;
+};
+
+export type RecommendationUpdateManyLocalizationInput = {
+  data: RecommendationUpdateManyLocalizationDataInput;
+  locale: Locale;
+};
+
+export type RecommendationUpdateManyLocalizationsInput = {
+  /** Localizations to update */
+  update?: InputMaybe<Array<RecommendationUpdateManyLocalizationInput>>;
+};
+
+export type RecommendationUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: RecommendationUpdateManyInput;
+  /** Document search */
+  where: RecommendationWhereInput;
+};
+
+export type RecommendationUpdateOneInlineInput = {
+  /** Connect existing Recommendation document */
+  connect?: InputMaybe<RecommendationWhereUniqueInput>;
+  /** Create and connect one Recommendation document */
+  create?: InputMaybe<RecommendationCreateInput>;
+  /** Delete currently connected Recommendation document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Recommendation document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Recommendation document */
+  update?: InputMaybe<RecommendationUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Recommendation document */
+  upsert?: InputMaybe<RecommendationUpsertWithNestedWhereUniqueInput>;
+};
+
+export type RecommendationUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: RecommendationUpdateInput;
+  /** Unique document search */
+  where: RecommendationWhereUniqueInput;
+};
+
+export type RecommendationUpsertInput = {
+  /** Create document if it didn't exist */
+  create: RecommendationCreateInput;
+  /** Update document if it exists */
+  update: RecommendationUpdateInput;
+};
+
+export type RecommendationUpsertLocalizationInput = {
+  create: RecommendationCreateLocalizationDataInput;
+  locale: Locale;
+  update: RecommendationUpdateLocalizationDataInput;
+};
+
+export type RecommendationUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: RecommendationUpsertInput;
+  /** Unique document search */
+  where: RecommendationWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type RecommendationWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<RecommendationWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<RecommendationWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<RecommendationWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  link?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  link_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  link_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  link_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  link_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  link_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  link_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  link_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  link_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  link_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  title?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  title_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  title_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  title_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  title_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  title_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  title_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  title_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  title_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  title_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** References Recommendation record uniquely */
+export type RecommendationWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type Reservation = Node & {
@@ -4815,7 +5581,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Apartment | Asset | Faq | Guest | Reservation | Token;
+export type ScheduledOperationAffectedDocument = Apartment | Asset | Faq | Guest | Recommendation | Reservation | Token;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -6568,6 +7334,11 @@ export type GetFaqsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetFaqsQuery = { __typename?: 'Query', faqs: Array<{ __typename?: 'Faq', title?: string | null | undefined, content?: { __typename?: 'RichText', html: string } | null | undefined, media: Array<{ __typename?: 'Asset', url: string, mimeType?: string | null | undefined }> }>, apartments: Array<{ __typename?: 'Apartment', enterCode?: string | null | undefined }> };
 
+export type GetRecoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetRecoQuery = { __typename?: 'Query', recommendations: Array<{ __typename?: 'Recommendation', title?: string | null | undefined, link?: string | null | undefined, description?: { __typename?: 'RichText', html: string } | null | undefined }> };
+
 export type CreateReservationMutationVariables = Exact<{
   input: ReservationCreateInput;
 }>;
@@ -6606,6 +7377,7 @@ export type GetTokenQuery = { __typename?: 'Query', tokens: Array<{ __typename?:
 
 export const ReservationFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"Reservation"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Reservation"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"guest_name"}},{"kind":"Field","name":{"kind":"Name","value":"check_out"}},{"kind":"Field","name":{"kind":"Name","value":"check_in"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}},{"kind":"Field","name":{"kind":"Name","value":"home"}},{"kind":"Field","name":{"kind":"Name","value":"reservationStatus"}},{"kind":"Field","name":{"kind":"Name","value":"guests"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"birthDate"}},{"kind":"Field","name":{"kind":"Name","value":"documentNumber"}},{"kind":"Field","name":{"kind":"Name","value":"documentPlace"}},{"kind":"Field","name":{"kind":"Name","value":"docFile"}},{"kind":"Field","name":{"kind":"Name","value":"documentType"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"nationality"}},{"kind":"Field","name":{"kind":"Name","value":"placeOfBirth"}}]}}]}}]} as unknown as DocumentNode<ReservationFragment, unknown>;
 export const GetFaqsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getFaqs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"faqs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"html"}}]}},{"kind":"Field","name":{"kind":"Name","value":"media"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"mimeType"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"apartments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"enterCode"}}]}}]}}]} as unknown as DocumentNode<GetFaqsQuery, GetFaqsQueryVariables>;
+export const GetRecoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getReco"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"recommendations"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"html"}}]}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<GetRecoQuery, GetRecoQueryVariables>;
 export const CreateReservationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"createReservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ReservationCreateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createReservation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Reservation"}}]}}]}},...ReservationFragmentDoc.definitions]} as unknown as DocumentNode<CreateReservationMutation, CreateReservationMutationVariables>;
 export const GetReservationsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getReservations"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Date"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservations"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"check_out_gt"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"orderBy"},"value":{"kind":"EnumValue","value":"check_out_DESC"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"Reservation"}}]}},{"kind":"Field","name":{"kind":"Name","value":"apartments"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"enterCode"}}]}}]}},...ReservationFragmentDoc.definitions]} as unknown as DocumentNode<GetReservationsQuery, GetReservationsQueryVariables>;
 export const UpdateReservationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"updateReservation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ReservationWhereUniqueInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"data"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ReservationUpdateInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateReservation"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"data"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reservationStatus"}},{"kind":"Field","name":{"kind":"Name","value":"phone"}}]}}]}}]} as unknown as DocumentNode<UpdateReservationMutation, UpdateReservationMutationVariables>;

@@ -135,6 +135,7 @@ export type Query = {
   calendar?: Maybe<Array<Maybe<Calendar>>>;
   faq?: Maybe<Array<Maybe<Faq>>>;
   price?: Maybe<Scalars['Float']>;
+  reco?: Maybe<Array<Maybe<Reco>>>;
   reservation?: Maybe<Reservation>;
   reservations?: Maybe<Array<Maybe<Reservation>>>;
   reviews?: Maybe<Array<Maybe<ReviewType>>>;
@@ -171,6 +172,13 @@ export type QueryReservationsArgs = {
 
 export type QueryReviewsArgs = {
   airBnb: Scalars['String'];
+};
+
+export type Reco = {
+  __typename?: 'Reco';
+  description: Content;
+  link?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export type Reservation = {

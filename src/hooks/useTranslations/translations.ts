@@ -68,4 +68,5 @@ export const Translations = {
   SUBMIT: t("Submit", "Invia"),
   BROWSE_FILE: t("Browse file", "Sfoglia file"),
   EMAIL: t("Email", "Email"),
+  RECO: t("Recommendations", "Raccomandazioni"),
 } as const;

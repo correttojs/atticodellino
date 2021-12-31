@@ -1,4 +1,5 @@
 import { Resolvers } from "@/generated/resolvers-types";
+import { reco } from "@/graphql/_reco";
 
 import { priceResolver, reviewsResolver } from "./_airbnb";
 import { bookMutation } from "./_book";
@@ -35,5 +36,6 @@ export const resolvers: Resolvers = {
     reservations,
     reservation,
     faq,
+    reco,
   },
 };

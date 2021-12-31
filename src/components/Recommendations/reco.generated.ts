@@ -237,14 +237,10 @@ export type UserInput = {
   phone: Scalars['String'];
 };
 
-export type PriceQueryVariables = Types.Exact<{
-  from: Types.Scalars['String'];
-  to: Types.Scalars['String'];
-  airBnb: Types.Scalars['String'];
-}>;
+export type RecoQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type PriceQuery = { __typename?: 'Query', price?: number | null | undefined };
+export type RecoQuery = { __typename?: 'Query', reco?: Array<{ __typename?: 'Reco', title: string, link?: string | null | undefined, description: { __typename?: 'Content', html?: string | null | undefined } } | null | undefined> | null | undefined };
 
 
-export const PriceDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Price"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"from"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"to"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"airBnb"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"price"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"from"},"value":{"kind":"Variable","name":{"kind":"Name","value":"from"}}},{"kind":"Argument","name":{"kind":"Name","value":"to"},"value":{"kind":"Variable","name":{"kind":"Name","value":"to"}}},{"kind":"Argument","name":{"kind":"Name","value":"airBnb"},"value":{"kind":"Variable","name":{"kind":"Name","value":"airBnb"}}}]}]}}]} as unknown as DocumentNode<PriceQuery, PriceQueryVariables>;
+export const RecoDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Reco"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"reco"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"description"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"html"}}]}},{"kind":"Field","name":{"kind":"Name","value":"link"}}]}}]}}]} as unknown as DocumentNode<RecoQuery, RecoQueryVariables>;

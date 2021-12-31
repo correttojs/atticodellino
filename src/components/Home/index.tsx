@@ -1,3 +1,4 @@
+import { RecoPage } from "@/components/Recommendations/Reco";
 import { pdp_listing_detail } from "@/graphql/_airbn.types";
 import Head from "next/head";
 import React from "react";
@@ -143,6 +144,8 @@ export const Home: React.FC<pdp_listing_detail> = ({ pdp_listing_detail }) => {
                 )}
               </ul>
             </Section>
+
+            <RecoPage />
           </>
         )}
       </div>

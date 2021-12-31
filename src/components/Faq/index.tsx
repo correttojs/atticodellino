@@ -56,7 +56,7 @@ export const FaqPage: React.FC = () => {
     <>
       {(data?.faq ?? []).map((item, i) => (
         <div
-          key={"faq" + i}
+          key={"faqs" + i}
           style={
             i % 2 === 1 ? { backgroundColor: global.colors.colors.lighter } : {}
           }

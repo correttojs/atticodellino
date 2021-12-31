@@ -123,6 +123,12 @@ type Faq {
   content: Content!
   media: [Asset]
 }
+
+type Reco {
+  title: String!
+  description: Content!
+  link: String
+}
 # type Upload {
 #   uploadUrl: ID
 #   asset: UploadAsset
@@ -156,4 +162,5 @@ type Query {
   reservations(isPast: Boolean!): [Reservation]
   reservation(hash: String!): Reservation
   faq(hash: String!): [Faq]
+  reco: [Reco]
 }

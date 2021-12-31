@@ -1,7 +1,4 @@
-import {
-  GetFaqsDocument,
-  GetReservationDocument,
-} from "@/generated/graphql-graphcms";
+import { GetFaqsDocument } from "@/generated/graphql-graphcms";
 import { Faq, QueryResolvers } from "@/generated/resolvers-types";
 
 import { graphCmsRequest } from "./graphcms";
