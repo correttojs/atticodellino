@@ -31,7 +31,7 @@
     "graphql-upload": "^12.0.0",
     "ical": "^0.8.0",
     "lodash": "^4.17.21",
-    "next": "11.1.2",
+    "next": "12.1.0",
     "next-auth": "^3.27.3",
     "next-plugin-graphql": "0.0.2",
     "next-pwa": "^5.2.23",
